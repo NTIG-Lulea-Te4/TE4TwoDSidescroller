@@ -17,7 +17,7 @@ namespace TE4TwoDSidescroller
             {
 
                 return true;
-
+                
             }
             else
             {
