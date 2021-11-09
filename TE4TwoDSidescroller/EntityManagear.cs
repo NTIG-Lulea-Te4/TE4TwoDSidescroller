@@ -93,7 +93,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        //not completed
+        
         public static void RemoveAllEntity()
         {
             firstEntity = null;
