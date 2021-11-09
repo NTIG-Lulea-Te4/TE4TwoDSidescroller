@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class CollisionManager
+    public class CollisionManager
     {
-        public static bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
+        public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
         {
 
             if (firstTargetToCheck.Width + firstTargetToCheck.X >= secondTargetToCheck.X
@@ -25,5 +25,19 @@ namespace TE4TwoDSidescroller
 
             }
         }
+        
+
+        public void CheckCollisionWithThisObject()
+        {
+
+        }
+
+        public void GoThrughAllEntitiesWithCollision()
+        {
+            
+
+        }
+
+
     }
 }

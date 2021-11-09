@@ -7,6 +7,8 @@ namespace TE4TwoDSidescroller
 {
     class EntityManagear
     {
+
+        
         static Entity firstEntity;
         static Entity lastEntity;
         public static int uniqeCounter;
@@ -93,8 +95,8 @@ namespace TE4TwoDSidescroller
 
         }
 
-        //not completed
-        public static void RemoveAllEntity()
+        
+        public static void RemoveAllEntities()
         {
             firstEntity = null;
             GC.Collect();
