@@ -7,7 +7,7 @@ namespace TE4TwoDSidescroller
 {
     class CollisionManager
     {
-        public static bool CollisionChecker(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
+        public static bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
         {
 
             if (firstTargetToCheck.Width + firstTargetToCheck.X >= secondTargetToCheck.X
@@ -17,11 +17,12 @@ namespace TE4TwoDSidescroller
             {
 
                 return true;
-                
+
             }
             else
             {
                 return false;
+
             }
         }
     }
