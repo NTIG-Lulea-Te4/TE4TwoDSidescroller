@@ -12,26 +12,29 @@ namespace TE4TwoDSidescroller
 
         private Vector2 position;
 
+        private float walkSpeed;
+        private float runSpeed;
+
         protected virtual void MovementInput()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                position.Y -= 1;
+                position.Y -= walkSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                position.Y += 1;
+                position.Y += walkSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                position.X -= 1;
+                position.X -= walkSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                position.X += 1;
+                position.X += walkSpeed;
             }
         }
     }
