@@ -14,6 +14,7 @@ namespace TE4TwoDSidescroller
         public bool isActive;
 
 
+
         public Entity()
         {
 
