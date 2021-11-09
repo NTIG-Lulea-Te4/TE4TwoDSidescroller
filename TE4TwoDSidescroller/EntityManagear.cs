@@ -93,39 +93,11 @@ namespace TE4TwoDSidescroller
 
         }
 
-        //not completed
-        public static bool RemoveAllEntity(int id)
+        
+        public static void RemoveAllEntity()
         {
-
-            Entity stepEntity = firstEntity;
-            if (firstEntity.uniqeId == id)
-            {
-
-                firstEntity = firstEntity.nextEntity;
-                return true;
-
-            }
-            else
-            {
-
-                while (stepEntity.nextEntity != null || stepEntity.nextEntity.uniqeId != id)
-                {
-
-                    stepEntity = stepEntity.nextEntity;
-
-                }
-
-                if (stepEntity.nextEntity.uniqeId == id)
-                {
-
-                    stepEntity.nextEntity = stepEntity.nextEntity.nextEntity;
-                    return true;
-
-                }
-
-            }
-            return false;
-
+            firstEntity = null;
+            GC.Collect();
         }
 
         public static void Update(GameTime gameTime)
