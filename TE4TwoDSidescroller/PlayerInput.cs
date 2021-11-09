@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class CharacterInput
+    class PlayerInput : CharacterInput
     {
 
     }
