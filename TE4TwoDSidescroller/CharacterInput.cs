@@ -10,32 +10,155 @@ namespace TE4TwoDSidescroller
     class CharacterInput
     {
 
-        private Vector2 position;
+        private Vector2 characterPosition;
 
         private float walkSpeed;
         private float runSpeed;
 
-        protected virtual void MovementInput()
+        private float characterVelocity;
+
+        private float characterJumpHeight;
+
+        private Keys left;
+        private Keys right;
+        private Keys up;
+        private Keys down;
+
+        private Keys jump;
+
+        private Keys run;
+
+
+        #region Keys
+        protected virtual Keys Left
+        {
+            get
+            {
+                return left;
+            }
+            //set
+            //{
+            //    left = Keys.A;
+            //}
+        }
+
+        protected virtual Keys Right
+        {
+            get
+            {
+                return right;
+            }
+            //set
+            //{
+            //    right = Keys.D;
+            //}
+        }
+
+        protected virtual Keys Up
+        {
+            get
+            {
+                return up;
+            }
+            //set
+            //{
+            //    up = Keys.W;
+            //}
+        }
+
+        protected virtual Keys Down
+        {
+            get
+            {
+                return down;
+            }
+            //set
+            //{
+            //    down = Keys.S;
+            //}
+        }
+
+        protected virtual Keys Jump
+        {
+            get
+            {
+                return jump;
+            }
+            //set
+            //{
+            //    jump = Keys.Space;
+            //}
+        }
+
+        protected virtual Keys Run
+        {
+            get
+            {
+                return run;
+            }
+            //set
+            //{
+            //    run = Keys.LeftShift;
+            //}
+        }
+
+        //private Keys left { get; set; }
+
+        #endregion
+
+        #region CharacterMovement
+        protected virtual void CharacterUp()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                position.Y -= walkSpeed;
+                characterPosition.Y -= characterVelocity;
             }
+        }
 
+        protected virtual void CharacterDown()
+        {
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                position.Y += walkSpeed;
+                characterPosition.Y += characterVelocity;
             }
+        }
 
+        protected virtual void CharacterLeft()
+        {
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                position.X -= walkSpeed;
+                characterPosition.X -= characterVelocity;
             }
+        }
 
+        protected virtual void CharacterRight()
+        {
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                position.X += walkSpeed;
+                characterPosition.X += characterVelocity;
+            }
+        }
+
+        protected virtual void CharacterIsRunningCheck()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                characterVelocity = runSpeed;
+            }
+            else
+            {
+                characterVelocity = walkSpeed;
+            }
+        }
+
+        protected virtual void CharaterIsJumping()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                characterPosition.Y -= characterJumpHeight;
             }
         }
     }
+
+    #endregion
 }

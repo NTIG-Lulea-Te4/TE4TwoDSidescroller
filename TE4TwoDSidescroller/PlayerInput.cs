@@ -9,6 +9,17 @@ namespace TE4TwoDSidescroller
 {
     class PlayerInput : CharacterInput
     {
+        private CharacterInput characterInput;
 
+        //protected override Keys Left
+        //{
+
+        //}
+
+
+        protected override void CharacterUp()
+        {
+
+        }
     }
 }
