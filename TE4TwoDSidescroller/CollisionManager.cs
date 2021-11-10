@@ -36,7 +36,8 @@ namespace TE4TwoDSidescroller
 
         public void GoThrughAllEntitiesWithCollision(Rectangle playerHitbox)
         {
-            
+
+            Entity tempEntity = GameInfo.entityManager.firstEntity;
 
         }
 
