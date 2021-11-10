@@ -30,9 +30,11 @@ namespace TE4TwoDSidescroller
         public void CheckCollisionWithThisObject()
         {
 
+
+
         }
 
-        public void GoThrughAllEntitiesWithCollision()
+        public void GoThrughAllEntitiesWithCollision(Rectangle playerHitbox)
         {
             
 
