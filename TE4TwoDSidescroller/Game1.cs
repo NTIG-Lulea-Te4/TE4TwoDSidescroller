@@ -6,12 +6,14 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
+            GameInfo.collisionManager = new CollisionManager();
+            GameInfo.entityManager = new EntityManagear();
+            GameInfo.collisionManager = new CollisionManager();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -25,7 +27,7 @@ namespace TE4TwoDSidescroller
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            GameInfo.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -34,7 +36,7 @@ namespace TE4TwoDSidescroller
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
             // TODO: Add your update logic here
 
             base.Update(gameTime);
