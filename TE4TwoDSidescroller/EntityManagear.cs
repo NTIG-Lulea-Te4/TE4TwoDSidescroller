@@ -5,11 +5,11 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class EntityManagear
+    public class EntityManagear
     {
-        static Entity firstEntity;
-        static Entity lastEntity;
-        public static int uniqeCounter;
+        public Entity firstEntity;
+        public Entity lastEntity;
+        public int uniqeCounter;
 
 
         public EntityManagear()
@@ -20,7 +20,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public static void AddEntity(Entity addEntity)
+        public void AddEntity(Entity addEntity)
         {
 
             uniqeCounter++;
@@ -42,7 +42,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public static Entity ChoseEntity(int uniqeId)
+        public Entity ChoseEntity(int uniqeId)
         {
             Entity tempEntity = firstEntity;
             while (tempEntity != null)
@@ -59,7 +59,7 @@ namespace TE4TwoDSidescroller
             return null;
         }
 
-        public static bool RemoveEntity(int id)
+        public bool RemoveEntity(int id)
         {
 
             Entity stepEntity = firstEntity;
@@ -93,14 +93,14 @@ namespace TE4TwoDSidescroller
 
         }
 
-        
-        public static void RemoveAllEntity()
-        {
-            firstEntity = null;
-            GC.Collect();
-        }
+        //not completed
+        //public static void RemoveAllEntities()
+        //{
+        //    firstEntity = null;
+        //    GC.Collect();
+        //}
 
-        public static void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             //gå igenom varje objekt och kör update på det
             Entity tempEntity = firstEntity;
@@ -114,7 +114,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public static void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             //gå igenom varje objekt och kör update på det
             Entity tempEntity = firstEntity;
