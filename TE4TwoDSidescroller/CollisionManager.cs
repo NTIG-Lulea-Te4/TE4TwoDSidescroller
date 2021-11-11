@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 
 namespace TE4TwoDSidescroller
@@ -26,15 +26,31 @@ namespace TE4TwoDSidescroller
             }
         }
 
+        //public void ReturnCollidedObjects()
+        //{
+        //    Entity entityStepper = GameInfo.entityManager.firstEntity;
+        //    Entity firstTempEntity = GameInfo.entityManager.firstEntity;
+        //    Entity secondTempEntity = GameInfo.entityManager.firstEntity;
 
-        public void CheckCollisionWithThisObject()
-        {
+        //    while (entityStepper != null)
+        //    {
+        //        if (entityStepper.isActive)
+        //        {
+        //            firstTempEntity = entityStepper;    
 
+        //        }
 
+        //        if (entityStepper.isActive && firstTempEntity != null)
+        //        {
+        //            secondTempEntity = entityStepper;
+        //        }
+        //    }
 
-        }
+        //    firstTempEntity = null;
+        //    secondTempEntity = null;
+        //}
 
-        public void GoThrughAllEntitiesWithCollision(Entity player)
+        public Entity PlayerCollisionWithEnemy(Entity player)
         {
 
             Entity tempEntity = GameInfo.entityManager.firstEntity;
@@ -44,19 +60,19 @@ namespace TE4TwoDSidescroller
                 if (tempEntity.isActive && tempEntity != player)
                 {
                     //CollisionCheck
-                    if (tempEntity.rectangle.Width + tempEntity.rectangle.X >= player.rectangle.X
-                    && tempEntity.rectangle.Height + tempEntity.rectangle.Y >= player.rectangle.Y
-                    || tempEntity.rectangle.X < player.rectangle.X + player.rectangle.Width
-                    && tempEntity.rectangle.Y < player.rectangle.Y + player.rectangle.Height)
+                    if (CollisionRectangleCheck(player.rectangle, tempEntity.rectangle))
                     {
-
+                        //Skicka tillbaks info som säger att objekt har kråkat
+                        return tempEntity;
                     }
 
+                    return null;
                 }
-
+                
                 tempEntity = tempEntity.nextEntity;
             }
 
+            return null; 
         }
 
 
