@@ -9,6 +9,18 @@ namespace TE4TwoDSidescroller
 {
     class NPCInput : CharacterInput
     {
+        Character character;
 
+        private NPCInput(Character character) 
+            : base(character)
+        {
+
+        }
+
+
+        public override void Update(GameTime gameTime)
+        {
+
+        }
     }
 }
