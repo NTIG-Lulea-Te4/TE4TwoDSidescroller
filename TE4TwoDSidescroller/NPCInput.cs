@@ -9,6 +9,10 @@ namespace TE4TwoDSidescroller
 {
     class NPCInput : CharacterInput
     {
+        private NPCInput(Character character) 
+            : base(character)
+        {
 
+        }
     }
 }

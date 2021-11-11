@@ -1,96 +1,129 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace TE4TwoDSidescroller
 {
     class Character : Entity
     {
-        protected bool ifHit;
-       
-        protected int speed;
-        protected int manaRegenAmount;
-        public bool sprint;
-        public int staminga;
-        
-        private int tickTimer;
-        
-        Character()
+        CharacterInput characterInput;
+
+        private Vector2 characterPosition;
+
+        private float walkSpeed;
+        private float runSpeed;
+
+        private float characterVelocity;
+
+        private float characterJumpHeight;
+
+        private bool ifHit;
+        private int health;
+        private int speed;
+        public Character()
         {
-            staminga = 100;
-            tickTimer = 0;
-            sprint = false;
-    
+            characterInput = new CharacterInput(this);
         }
 
-        //Skicka in två int 
-        protected int Healing(int maxHealth, int currentHealth, int healingAmount)
+        #region Movement
+        public virtual void GoesUp()
         {
-
-            currentHealth = currentHealth + healingAmount;
-
-            if (currentHealth > maxHealth)
-            {
-                currentHealth = maxHealth;
-            }
-
-            return currentHealth;
-        }
-
-        protected int TakeDamage(int currentHEalth, int amountOfDamage)
-        {
-            currentHEalth = currentHEalth - amountOfDamage;
-
-            if (currentHEalth <= 0)
-            {
-                //destroy entity
-            }
-
-
-            return currentHEalth;
-        }
-
-       
-
-        protected bool UseMana(int manaPool, int amountOfManaUsed)
-        {
-            if (manaPool < amountOfManaUsed)
-            {
-                return false;
-            }
-
-            manaPool = manaPool - amountOfManaUsed;
-
-            if (manaPool < 100 && manaRegenAmount != 1)
-            {
-                manaRegenAmount = 1;
-            } else if (manaPool == 100)
-            {
-                manaRegenAmount = 0;
-            }
-
-            return true;
-
-            //ska vara i karaktärernas som kan använda manas update
-            /*if (tickTimer == 2)
-            {
-
-                mana += manaRegenAmount;
-                tickTimer = 0;
             
-            }
-            tickTimer++;*/
+        }
+
+        public virtual void GoesDown()
+        {
+            
+        }
+
+        public virtual void GoesLeft()
+        {
+            
+        }
+
+        public virtual void GoesRight()
+        {
+            
+        }
+
+        public virtual void Run()
+        {
+            
+        }
+
+        public virtual void Jump()
+        {
 
         }
 
-
-        protected void Invincibility()
+        public virtual void DoubleJump()
         {
 
+        }
 
-           //stopp checking collision for half a second
-            
+        public virtual void Crouch()
+        {
+
+        }
+
+        public virtual void Dash()
+        {
+
+        }
+        #endregion
+
+        #region Attacks
+
+        public virtual void LightAttack()
+        {
+
+        }
+
+        public virtual void HeavyAttack()
+        {
+
+        }
+
+        public virtual void SpecialAttack()
+        {
+
+        }
+        #endregion
+
+        #region Conditions
+
+        public virtual void Parry()
+        {
+
+        }
+
+        public virtual void Block()
+        {
+
+        }
+
+        public virtual void Dodge()
+        {
+
+        }
+
+        #endregion
+        protected void Health()
+        {
+
+        }
+
+        protected void Mana(int mana)
+        {
+            mana = 100;
+
+        //    if (/*ability use or button press*/)
+        //    {
+        //        mana = mana - 20;
+        //    }
         }
 
         protected void Speed()
@@ -98,35 +131,31 @@ namespace TE4TwoDSidescroller
             speed = 1;
         }
 
-        public override void Update(GameTime gameTime)
+        protected void Invincibility(int tmpValue)
         {
-            //gör så att när man håller ner shift så är sprint true
+            tmpValue = health;
 
-            if (sprint == false)
-            {
+            //if (health <= )
+            //{
 
-                if (tickTimer == 2 && staminga != 100)
-                {
+            //}
+        }
 
-                    staminga++;
-                    tickTimer = 0;
-            
-                }
-                tickTimer++;
+        protected void Sprint(int stamina)
+        {
+            stamina = 100;
 
-            } else if (sprint)
-            {
+            //while (/*key hold*/)
+            //{
+            //    stamina -= 1;
 
-                if (tickTimer == 2 && staminga != 0)
-                {
+            //    while (speed < 3)
+            //    {
+            //        speed = speed + 2;
+            //    }
+            //}
 
-                    staminga--;
-                    tickTimer = 0;
-
-                }
-                tickTimer++;
-
-            }
+            speed = 1;
         }
     }
 }

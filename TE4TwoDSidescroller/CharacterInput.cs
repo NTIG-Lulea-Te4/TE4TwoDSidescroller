@@ -9,33 +9,16 @@ namespace TE4TwoDSidescroller
 {
     class CharacterInput
     {
+        Character character;
 
-        private Vector2 position;
-
-        private float walkSpeed;
-        private float runSpeed;
-
-        protected virtual void MovementInput()
+        public CharacterInput(Character character)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                position.Y -= walkSpeed;
-            }
+            this.character = character;
+        }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                position.Y += walkSpeed;
-            }
+        public virtual void Update(GameTime gameTime)
+        {
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                position.X -= walkSpeed;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                position.X += walkSpeed;
-            }
         }
     }
 }

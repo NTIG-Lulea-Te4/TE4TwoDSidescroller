@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class Entity
+    public class Entity
     {
 
         //man bör göra getseters för uniqeId och isActive
@@ -13,6 +13,7 @@ namespace TE4TwoDSidescroller
         public int uniqeId;
         public bool isActive;
 
+        public Rectangle rectangle;
 
         public Entity()
         {
