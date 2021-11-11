@@ -20,43 +20,51 @@ namespace TE4TwoDSidescroller
 
         private float characterJumpHeight;
 
-        private bool ifHit;
-        private int health;
-        private int speed;
+        protected bool ifHit;
+        protected int health;
+        protected int speed;
         public Character()
         {
             characterInput = new CharacterInput(this);
+
+            characterVelocity = 1.5f;
+            runSpeed = 3f;
+
+            characterPosition.Y = 50;
+            characterPosition.X = 50;
+
+            characterJumpHeight = 3;
         }
 
         #region Movement
         public virtual void GoesUp()
         {
-            
+            characterPosition.Y -= characterVelocity;
         }
 
         public virtual void GoesDown()
         {
-            
+            characterPosition.Y += characterVelocity;
         }
 
         public virtual void GoesLeft()
         {
-            
+            characterPosition.X -= characterVelocity;
         }
 
         public virtual void GoesRight()
         {
-            
+            characterPosition.X += characterVelocity;
         }
 
         public virtual void Run()
         {
-            
+            characterVelocity = runSpeed;
         }
 
         public virtual void Jump()
         {
-
+            characterPosition.Y += characterJumpHeight;
         }
 
         public virtual void DoubleJump()
@@ -75,7 +83,7 @@ namespace TE4TwoDSidescroller
         }
         #endregion
 
-        #region Attacks
+        #region Combat
 
         public virtual void LightAttack()
         {
@@ -91,9 +99,6 @@ namespace TE4TwoDSidescroller
         {
 
         }
-        #endregion
-
-        #region Conditions
 
         public virtual void Parry()
         {
@@ -106,6 +111,50 @@ namespace TE4TwoDSidescroller
         }
 
         public virtual void Dodge()
+        {
+
+        }
+
+        #endregion
+
+        #region Conditions
+
+        public virtual void SwitchWeapon()
+        {
+
+        }
+
+        public virtual void Interact()
+        {
+
+        }
+
+        public virtual void OpenInGameMenu()
+        {
+
+        }
+
+        public virtual void OpenInventory()
+        {
+
+        }
+
+        public virtual void ConsumeHealthPotion()
+        {
+
+        }
+
+        public virtual void ConsumeManaPotion()
+        {
+
+        }
+
+        public virtual void ExitToMainMenu()
+        {
+
+        }
+
+        public virtual void ExitGame()
         {
 
         }

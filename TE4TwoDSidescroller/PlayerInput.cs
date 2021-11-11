@@ -22,6 +22,9 @@ namespace TE4TwoDSidescroller
         private Keys doubleJumpKey;
 
         private Keys crouchKey;
+        private Keys dashKey;
+
+        private Keys weaponSwitchKey;
 
         private Keys lightAttackKey;
         private Keys heavyAttackKey;
@@ -31,9 +34,24 @@ namespace TE4TwoDSidescroller
         private Keys blockKey;
         private Keys dodgeKey;
 
+        private Keys healthPotionKey;
+        private Keys manaPotionKey;
+
         private Keys interactKey;
 
         private Keys inventoryKey;
+
+        private Keys inGameMenuKey;
+
+        private Keys exitToMainMenuKey;
+
+        private Keys exitGameKey;
+
+        public enum Action
+        {
+
+        }
+
 
         private PlayerInput(Character character) 
             : base(character)
@@ -81,6 +99,7 @@ namespace TE4TwoDSidescroller
                 character.Run();
             }
 
+
             if (Keyboard.GetState().IsKeyDown(jumpKey))
             {
 
@@ -92,12 +111,17 @@ namespace TE4TwoDSidescroller
                 character.DoubleJump();
             }
 
+
             if (Keyboard.GetState().IsKeyDown(crouchKey))
             {
                character.Crouch();
             }
+            if (Keyboard.GetState().IsKeyDown(dashKey))
+            {
+                character.Dash();
+            }
 
-            //Attacks
+            //Combat
 
             if (Keyboard.GetState().IsKeyDown(lightAttackKey))
             {
@@ -114,7 +138,6 @@ namespace TE4TwoDSidescroller
                 character.SpecialAttack();
             }
 
-            //Conditions
 
             if (Keyboard.GetState().IsKeyDown(parryKey))
             {
@@ -129,6 +152,48 @@ namespace TE4TwoDSidescroller
             if (Keyboard.GetState().IsKeyDown(dodgeKey))
             {
                 character.Dodge();
+            }
+
+            //Conditions
+
+            if (Keyboard.GetState().IsKeyDown(weaponSwitchKey))
+            {
+                character.SwitchWeapon();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(interactKey))
+            {
+                character.Interact();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(inGameMenuKey))
+            {
+                character.OpenInGameMenu();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(inventoryKey))
+            {
+                character.OpenInventory();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(healthPotionKey))
+            {
+                character.ConsumeHealthPotion();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(manaPotionKey))
+            {
+                character.ConsumeManaPotion();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(exitToMainMenuKey))
+            {
+                character.ExitToMainMenu();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(exitGameKey))
+            {
+                character.ExitGame();
             }
         }
     }
