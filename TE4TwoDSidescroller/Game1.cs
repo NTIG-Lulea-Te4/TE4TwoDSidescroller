@@ -11,8 +11,11 @@ namespace TE4TwoDSidescroller
         public Texture2D rightWalk;
         Rectangle destinationRectangle;
         Rectangle sourceRectangle;
+            Floor floorTest;
+
         public Game1()
         {
+            floorTest = new Floor();
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.entityManager = new EntityManagear();
@@ -27,12 +30,15 @@ namespace TE4TwoDSidescroller
 
             graphicsDeviceManager = new GraphicsDeviceManager(game1);
             // TODO: Add your initialization logic here
+
+
+            floorTest.Initialize();
+            base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            
-            GameInfo.spriteBatch = new SpriteBatch(GraphicsDevice);
+            GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
 
             string currentPath = Path.GetDirectoryName(
           System.Reflection.Assembly.GetExecutingAssembly().Location)
@@ -59,14 +65,16 @@ namespace TE4TwoDSidescroller
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
+            GameInfo.entityManager.AddEntity(floorTest);
 
             GameInfo.spriteBatch.Begin();
 
-            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
+            GameInfo.entityManager.Draw(gameTime);
 
+            
+            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
             GameInfo.spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }

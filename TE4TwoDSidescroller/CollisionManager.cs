@@ -12,7 +12,7 @@ namespace TE4TwoDSidescroller
 
             if (firstTargetToCheck.Width + firstTargetToCheck.X >= secondTargetToCheck.X
                 && firstTargetToCheck.Height + firstTargetToCheck.Y >= secondTargetToCheck.Y
-                && firstTargetToCheck.X < secondTargetToCheck.X + secondTargetToCheck.Width
+                || firstTargetToCheck.X < secondTargetToCheck.X + secondTargetToCheck.Width
                 && firstTargetToCheck.Y < secondTargetToCheck.Y + secondTargetToCheck.Height)
             {
 
@@ -25,7 +25,7 @@ namespace TE4TwoDSidescroller
 
             }
         }
-        
+
 
         public void CheckCollisionWithThisObject()
         {
@@ -34,10 +34,28 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public void GoThrughAllEntitiesWithCollision(Rectangle playerHitbox)
+        public void GoThrughAllEntitiesWithCollision(Entity player)
         {
 
             Entity tempEntity = GameInfo.entityManager.firstEntity;
+
+            while (tempEntity != null)
+            {
+                if (tempEntity.isActive && tempEntity != player)
+                {
+                    //CollisionCheck
+                    if (tempEntity.rectangle.Width + tempEntity.rectangle.X >= player.rectangle.X
+                    && tempEntity.rectangle.Height + tempEntity.rectangle.Y >= player.rectangle.Y
+                    || tempEntity.rectangle.X < player.rectangle.X + player.rectangle.Width
+                    && tempEntity.rectangle.Y < player.rectangle.Y + player.rectangle.Height)
+                    {
+
+                    }
+
+                }
+
+                tempEntity = tempEntity.nextEntity;
+            }
 
         }
 

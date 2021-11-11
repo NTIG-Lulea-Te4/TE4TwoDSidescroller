@@ -13,13 +13,12 @@ namespace TE4TwoDSidescroller
         public int uniqeId;
         public bool isActive;
 
-
+        public Rectangle rectangle;
 
         public Entity()
         {
 
             nextEntity = null;
-
             isActive = false;
 
         }
