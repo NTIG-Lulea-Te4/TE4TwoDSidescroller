@@ -19,7 +19,6 @@ namespace TE4TwoDSidescroller
         {
 
             nextEntity = null;
-
             isActive = false;
 
         }
