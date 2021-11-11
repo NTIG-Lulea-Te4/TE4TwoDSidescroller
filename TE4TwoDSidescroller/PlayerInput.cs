@@ -47,7 +47,7 @@ namespace TE4TwoDSidescroller
 
         private Keys exitGameKey;
 
-        public enum Action
+        public enum KeyboardMap
         {
 
         }
