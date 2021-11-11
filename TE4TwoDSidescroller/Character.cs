@@ -170,7 +170,7 @@ namespace TE4TwoDSidescroller
         }
 
         #endregion
-        protected int Healing(int maxHealth, int currentHealth, int healingAmount)
+        public int Healing(int maxHealth, int currentHealth, int healingAmount)
         {
 
             currentHealth = currentHealth + healingAmount;
@@ -183,7 +183,7 @@ namespace TE4TwoDSidescroller
             return currentHealth;
         }
 
-        protected int TakeDamage(int currentHEalth, int amountOfDamage)
+        public int TakeDamage(int currentHEalth, int amountOfDamage)
         {
             currentHEalth = currentHEalth - amountOfDamage;
 
@@ -198,7 +198,7 @@ namespace TE4TwoDSidescroller
 
 
 
-        protected bool UseMana(int manaPool, int amountOfManaUsed)
+        public bool UseMana(int manaPool, int amountOfManaUsed)
         {
             if (manaPool < amountOfManaUsed)
             {
@@ -230,7 +230,7 @@ namespace TE4TwoDSidescroller
         }
 
 
-        protected void Invincibility()
+        public void Invincibility()
         {
 
             //stopp checking collision for half a second

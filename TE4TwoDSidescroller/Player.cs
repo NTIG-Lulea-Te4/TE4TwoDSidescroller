@@ -12,6 +12,7 @@ namespace TE4TwoDSidescroller
         int mana;
         int manaCheck;
         int manaTick;
+        Character character;
 
         public Player()
         {
@@ -22,6 +23,7 @@ namespace TE4TwoDSidescroller
             manaTick = 0;
         }
 
+        
         public override void Update(GameTime gameTime)
         {
             manaTick++;
@@ -30,8 +32,14 @@ namespace TE4TwoDSidescroller
                 mana++;
                 manaTick = 0;
             }
+
+            //ifall fienders vapen overlappar med kroppen så ta skada
+           /* if (true)
+            {
+                character.TakeDamage(currentHEalth, 10);
+            }*/
         }
-       
+      
 
     }
 }
