@@ -8,9 +8,9 @@ namespace TE4TwoDSidescroller
     public class Game1 : Game
     {
         public static GraphicsDeviceManager graphicsDeviceManager;
-        public static Game1 myGame;
         public Texture2D rightWalk;
-
+        Rectangle destinationRectangle;
+        Rectangle sourceRectangle;
         public Game1()
         {
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
@@ -23,13 +23,15 @@ namespace TE4TwoDSidescroller
 
         protected static void Initialize(Game1 game1)
         {
+            destinationRectangle = new Rectangle(100, 100, 32, 46);
+
             graphicsDeviceManager = new GraphicsDeviceManager(game1);
-            myGame = game1;
             // TODO: Add your initialization logic here
         }
 
         protected override void LoadContent()
         {
+            
             GameInfo.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             string currentPath = Path.GetDirectoryName(
@@ -37,7 +39,7 @@ namespace TE4TwoDSidescroller
           + "/Content/Pngs/" + "ShadowRunRight.png";
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
-                rightWalk = Texture2D.FromStream(myGame.GraphicsDevice, textureStream);
+                rightWalk = Texture2D.FromStream(GraphicsDevice, textureStream);
             }
 
             // TODO: use this.Content to load your game content here
@@ -48,6 +50,8 @@ namespace TE4TwoDSidescroller
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            sourceRectangle = new Rectangle(0, 0, 32, 46);
+            
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -59,7 +63,7 @@ namespace TE4TwoDSidescroller
 
             GameInfo.spriteBatch.Begin();
 
-            GameInfo.spriteBatch.Draw(rightWalk, new Rectangle(100, 100, 32, 26), new Rectangle(0, 0, 32, 26), Color.White);
+            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
 
             GameInfo.spriteBatch.End();
             // TODO: Add your drawing code here
