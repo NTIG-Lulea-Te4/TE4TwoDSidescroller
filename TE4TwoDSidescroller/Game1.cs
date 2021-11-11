@@ -6,10 +6,11 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-        
+            Floor floorTest;
 
         public Game1()
         {
+            floorTest = new Floor();
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.entityManager = new EntityManagear();
@@ -20,14 +21,15 @@ namespace TE4TwoDSidescroller
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
 
+
+            floorTest.Initialize();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            GameInfo.spriteBatch = new SpriteBatch(GraphicsDevice);
+            GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -44,9 +46,14 @@ namespace TE4TwoDSidescroller
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
+            GameInfo.entityManager.AddEntity(floorTest);
 
-            // TODO: Add your drawing code here
+            GameInfo.spriteBatch.Begin();
+
+            GameInfo.entityManager.Draw(gameTime);
+
+            GameInfo.spriteBatch.End();
 
             base.Draw(gameTime);
         }

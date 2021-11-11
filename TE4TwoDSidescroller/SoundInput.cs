@@ -12,7 +12,7 @@ namespace TE4TwoDSidescroller
         {
             SoundEffect effect;
 
-            effect = Content.Load<SoundEffect>("effect");
+            //effect = Content.Load<SoundEffect>("effect");
         }
 
 
