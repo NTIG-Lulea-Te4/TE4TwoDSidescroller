@@ -36,7 +36,7 @@ namespace TE4TwoDSidescroller
         //    {
         //        if (entityStepper.isActive)
         //        {
-        //            firstTempEntity = entityStepper;    
+        //            firstTempEntity = entityStepper;
 
         //        }
 
