@@ -27,8 +27,6 @@ namespace TE4TwoDSidescroller
         protected override void Initialize()
         {
             destinationRectangle = new Rectangle(100, 100, 32, 46);
-
-            
             // TODO: Add your initialization logic here
 
 
@@ -69,13 +67,13 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.AddEntity(floorTest);
 
             GameInfo.spriteBatch.Begin();
-            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
+
             //GameInfo.entityManager.Draw(gameTime);
+
             floorTest.Draw(gameTime);
-            GameInfo.spriteBatch.End();
-
-
             
+            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
+            GameInfo.spriteBatch.End();
 
             base.Draw(gameTime);
         }
