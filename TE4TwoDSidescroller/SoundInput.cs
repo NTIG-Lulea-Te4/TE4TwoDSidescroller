@@ -10,7 +10,7 @@ namespace TE4TwoDSidescroller
 
         public void PlaySound()
         {
-            SoundEffect effect;
+            //SoundEffect effect;
 
             //effect = Content.Load<SoundEffect>("effect");
         }

@@ -1,11 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
+        public static GraphicsDeviceManager graphicsDeviceManager;
+        public Texture2D rightWalk;
+        Rectangle destinationRectangle;
+        Rectangle sourceRectangle;
             Floor floorTest;
 
         public Game1()
@@ -19,8 +24,12 @@ namespace TE4TwoDSidescroller
             IsMouseVisible = true;
         }
 
-        protected override void Initialize()
+        protected static void Initialize(Game1 game1)
         {
+            destinationRectangle = new Rectangle(100, 100, 32, 46);
+
+            graphicsDeviceManager = new GraphicsDeviceManager(game1);
+            // TODO: Add your initialization logic here
 
 
             floorTest.Initialize();
@@ -31,6 +40,14 @@ namespace TE4TwoDSidescroller
         {
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
 
+            string currentPath = Path.GetDirectoryName(
+          System.Reflection.Assembly.GetExecutingAssembly().Location)
+          + "/Content/Pngs/" + "ShadowRunRight.png";
+            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            {
+                rightWalk = Texture2D.FromStream(GraphicsDevice, textureStream);
+            }
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -38,6 +55,8 @@ namespace TE4TwoDSidescroller
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            sourceRectangle = new Rectangle(0, 0, 32, 46);
             
             // TODO: Add your update logic here
 
@@ -53,6 +72,8 @@ namespace TE4TwoDSidescroller
 
             GameInfo.entityManager.Draw(gameTime);
 
+            
+            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
             GameInfo.spriteBatch.End();
 
             base.Draw(gameTime);
