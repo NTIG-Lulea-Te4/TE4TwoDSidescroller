@@ -17,33 +17,45 @@ namespace TE4TwoDSidescroller
         Rectangle myRectangle;
         public Floor()
         {
-            
-            
+
+
         }
+
+
         public void Initialize()
         {
-            myPosition = new Vector2(1, 1);
-            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y , 50, 50);
+
+            myPosition = new Vector2(0, 400);
+            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, 900, 50);
             myTexture = new Texture2D
                 (GameInfo.graphicsDevice.GraphicsDevice, myRectangle.Width, myRectangle.Height);
-            
-            
+            Color[] data = new Color[myRectangle.Width * myRectangle.Height];
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = Color.Red;
+            }
 
+            myTexture.SetData(data);
 
         }
+
+
+
+
+
         public override void Draw(GameTime gameTime)
         {
 
-            
+
             GameInfo.spriteBatch.Draw(myTexture, myRectangle, Color.Red);
-            
+
 
         }
-        public override void Update(GameTime gameTime) 
-        { 
-        
-        
-        
+        public override void Update(GameTime gameTime)
+        {
+
+
+
         }
 
 
