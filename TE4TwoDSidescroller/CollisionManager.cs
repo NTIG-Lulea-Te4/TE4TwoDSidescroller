@@ -26,29 +26,45 @@ namespace TE4TwoDSidescroller
             }
         }
 
-        //public void ReturnCollidedObjects()
-        //{
-        //    Entity entityStepper = GameInfo.entityManager.firstEntity;
-        //    Entity firstTempEntity = GameInfo.entityManager.firstEntity;
-        //    Entity secondTempEntity = GameInfo.entityManager.firstEntity;
+        public void ReturnCollidedObjects()
+        {
+            Entity entityStepper = GameInfo.entityManager.firstEntity;
+            Entity firstTempEntity = GameInfo.entityManager.firstEntity;
+            Entity secondTempEntity = GameInfo.entityManager.firstEntity;
+            bool firstFlag = false;
+            bool secondFlag = false;
 
-        //    while (entityStepper != null)
-        //    {
-        //        if (entityStepper.isActive)
-        //        {
-        //            firstTempEntity = entityStepper;
+            while (entityStepper != null)
+            {
+                //måse fixa ett sätt vart entitystepper inte sparas i samma temps
+                if (entityStepper.isActive)
+                {
+                    firstTempEntity = entityStepper;
+                    firstFlag = true;
+                }
 
-        //        }
+                if (entityStepper.isActive && firstTempEntity != null)
+                {
+                    secondTempEntity = entityStepper;
+                    secondFlag = true;
+                }
 
-        //        if (entityStepper.isActive && firstTempEntity != null)
-        //        {
-        //            secondTempEntity = entityStepper;
-        //        }
-        //    }
+                if (firstFlag && secondFlag)
+                {
+                    //Skickatillbaks kollision info
 
-        //    firstTempEntity = null;
-        //    secondTempEntity = null;
-        //}
+                    firstTempEntity = null;
+                    secondTempEntity = null;
+                    firstFlag = false;
+                    secondFlag = false;
+                }
+
+                entityStepper = entityStepper.nextEntity;
+            }
+
+            firstTempEntity = null;
+            secondTempEntity = null;
+        }
 
         public Entity PlayerCollisionWithEnemy(Entity player)
         {
