@@ -24,6 +24,11 @@ namespace TE4TwoDSidescroller
                 return false;
 
             }
+
+            //if (Rectangle.Intersect(firstTargetToCheck.rectangle, tempEntity.rectangle);)
+            //{
+
+            //}
         }
 
         public void ReturnCollidedObjects()
@@ -34,41 +39,42 @@ namespace TE4TwoDSidescroller
             bool firstFlag = false;
             bool secondFlag = false;
 
-            while (entityStepper != null)
-            {
-                //måse fixa ett sätt vart entitystepper inte sparas i samma temps
-                if (entityStepper.isActive)
-                {
-                    firstTempEntity = entityStepper;
-                    firstFlag = true;
-                }
+        //    while (entityStepper != null)
+        //    {
+        //        //måse fixa ett sätt vart entitystepper inte sparas i samma temps
+        //        if (entityStepper.isActive)
+        //        {
+        //            firstTempEntity = entityStepper;
+        //            firstFlag = true;
+        //        }
 
-                if (entityStepper.isActive && firstTempEntity != null)
-                {
-                    secondTempEntity = entityStepper;
-                    secondFlag = true;
-                }
+        //        if (entityStepper.isActive && firstTempEntity != null)
+        //        {
+        //            secondTempEntity = entityStepper;
+        //            secondFlag = true;
+        //        }
 
-                if (firstFlag && secondFlag)
-                {
+        //        if (firstFlag && secondFlag)
+        //        {
 
-                    CollisionRectangleCheck(firstTempEntity.rectangle, secondTempEntity.rectangle);
+        //            CollisionRectangleCheck(firstTempEntity.rectangle, secondTempEntity.rectangle);
 
-                    //Skickatillbaks kollision info
+        //            //Skickatillbaks kollision info
 
-                    firstTempEntity = null;
-                    secondTempEntity = null;
-                    firstFlag = false;
-                    secondFlag = false;
-                }
+        //            firstTempEntity = null;
+        //            secondTempEntity = null;
+        //            firstFlag = false;
+        //            secondFlag = false;
+        //        }
 
-                entityStepper = entityStepper.nextEntity;
-            }
+        //        entityStepper = entityStepper.nextEntity;
+        //    }
 
-            firstTempEntity = null;
-            secondTempEntity = null;
+        //    firstTempEntity = null;
+        //    secondTempEntity = null;
         }
 
+        //Byt namn
         public Entity PlayerCollisionWithEnemy(Entity player)
         {
 
@@ -78,9 +84,16 @@ namespace TE4TwoDSidescroller
             {
                 if (tempEntity.isActive && tempEntity != player)
                 {
+
+                    
+
                     //CollisionCheck
                     if (CollisionRectangleCheck(player.rectangle, tempEntity.rectangle))
                     {
+
+                        player.HasCollidedWith(tempEntity);
+                        tempEntity.HasCollidedWith(player);
+
                         //Skicka tillbaks info som säger att objekt har kråkat
                         return tempEntity;
                     }

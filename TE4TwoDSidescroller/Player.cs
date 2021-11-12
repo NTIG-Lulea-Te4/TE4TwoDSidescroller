@@ -12,7 +12,7 @@ namespace TE4TwoDSidescroller
         int mana;
         int manaCheck;
         int manaTick;
-        Character character;
+        CharacterInput characterInput;
 
         public Player()
         {

@@ -103,6 +103,12 @@ namespace TE4TwoDSidescroller
             if (currentKeyboardState.IsKeyDown(upKey) /*&& oldKeyboardState.IsKeyUp(upKey)*/)
             {
                 character.GoesUp();
+
+                //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                //{
+
+                //}
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(downKey))
