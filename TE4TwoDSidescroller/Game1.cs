@@ -24,11 +24,9 @@ namespace TE4TwoDSidescroller
             IsMouseVisible = true;
         }
 
-        protected static void Initialize(Game1 game1)
+        protected override void Initialize()
         {
             destinationRectangle = new Rectangle(100, 100, 32, 46);
-
-            graphicsDeviceManager = new GraphicsDeviceManager(game1);
             // TODO: Add your initialization logic here
 
 
@@ -70,8 +68,9 @@ namespace TE4TwoDSidescroller
 
             GameInfo.spriteBatch.Begin();
 
-            GameInfo.entityManager.Draw(gameTime);
+            //GameInfo.entityManager.Draw(gameTime);
 
+            floorTest.Draw(gameTime);
             
             GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
             GameInfo.spriteBatch.End();

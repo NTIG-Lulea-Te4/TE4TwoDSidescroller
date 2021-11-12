@@ -32,12 +32,16 @@ namespace TE4TwoDSidescroller
                 mana++;
                 manaTick = 0;
             }
+            
+            //gör en bool som checkar ifall du kan checka enemy collision
+            //så när du blir skadad slår du av den för 0.5 sek
 
             //ifall fienders vapen overlappar med kroppen så ta skada
            /* if (true)
             {
                 character.TakeDamage(currentHEalth, 10);
             }*/
+
         }
       
 

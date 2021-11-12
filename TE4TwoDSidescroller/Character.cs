@@ -206,7 +206,9 @@ namespace TE4TwoDSidescroller
             }
 
             manaPool = manaPool - amountOfManaUsed;
-
+            
+            //detta behövs inte men ifall man senare vill ha ett item som ökar ens manaregen så kan detta 
+            //var ett bra sätt att göra det men det kan också bero på ifall det skulle vara ett permanent eller temporärt item
             if (manaPool < 100 && manaRegenAmount != 1)
             {
                 manaRegenAmount = 1;

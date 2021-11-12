@@ -11,6 +11,15 @@ namespace TE4TwoDSidescroller
     {
         Character character;
 
+        KeyboardState currentKeyboardState;
+        KeyboardState previousKeyboardState;
+
+        MouseState currentMouseState;
+        MouseState previousMouseState;
+
+        private Keys[] keys;
+
+        #region Keys
         private Keys upKey;
         private Keys downKey;
         private Keys leftKey;
@@ -47,20 +56,41 @@ namespace TE4TwoDSidescroller
 
         private Keys exitGameKey;
 
+        #endregion
+
         public enum KeyboardMap
         {
 
         }
 
-
         private PlayerInput(Character character) 
             : base(character)
         {
+            currentKeyboardState = Keyboard.GetState();
 
-            leftKey = Keys.A;
-            rightKey = Keys.D;
+            currentMouseState = Mouse.GetState();
+
+            keys = new Keys[] 
+            { 
+                Keys.W,
+                Keys.S,
+                Keys.A,
+                Keys.D,
+
+                Keys.LeftShift,
+
+                Keys.Space,
+
+                Keys.C,
+                Keys.LeftAlt,
+
+                Keys.T,
+            };
+
             upKey = Keys.W;
             downKey = Keys.S;
+            leftKey = Keys.A;
+            rightKey = Keys.D;
 
             jumpKey = Keys.Space;
             runKey = Keys.LeftShift;
@@ -70,7 +100,7 @@ namespace TE4TwoDSidescroller
         {
             //Movements
 
-            if (Keyboard.GetState().IsKeyDown(upKey))
+            if (currentKeyboardState.IsKeyDown(upKey) /*&& oldKeyboardState.IsKeyUp(upKey)*/)
             {
                 character.GoesUp();
             }
@@ -195,6 +225,11 @@ namespace TE4TwoDSidescroller
             {
                 character.ExitGame();
             }
+
+            previousKeyboardState = currentKeyboardState;
+            previousMouseState = currentMouseState;
+
+            base.Update(gameTime);
         }
     }
 }
