@@ -51,6 +51,9 @@ namespace TE4TwoDSidescroller
 
                 if (firstFlag && secondFlag)
                 {
+
+                    CollisionRectangleCheck(firstTempEntity.rectangle, secondTempEntity.rectangle);
+
                     //Skickatillbaks kollision info
 
                     firstTempEntity = null;
