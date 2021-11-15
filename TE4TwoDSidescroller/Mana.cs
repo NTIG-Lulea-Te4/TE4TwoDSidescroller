@@ -8,18 +8,32 @@ namespace TE4TwoDSidescroller
     class Mana 
     {
         int manaRegenAmount;
-        public bool UseMana(int manaPool, int amountOfManaUsed)
+        public int UseMana(int manaPool, int amountOfManaUsed)
         {
-            if (manaPool < amountOfManaUsed)
+         
+
+            if (CanYouUseMana(manaPool, amountOfManaUsed))
+            {
+
+                manaPool = manaPool - amountOfManaUsed;
+           
+                return manaPool;
+
+            }
+
+            return manaPool;
+
+        }
+
+        public bool CanYouUseMana(int currentMana, int manaUsage)
+        {
+
+            if (currentMana < manaUsage)
             {
                 return false;
             }
 
-            manaPool = manaPool - amountOfManaUsed;
-           
             return true;
-
-
         }
 
             //detta behövs inte men ifall man senare vill ha ett item som ökar ens manaregen så kan detta 
