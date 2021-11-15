@@ -5,6 +5,13 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
+
+    //if (Rectangle.Intersect(firstTargetToCheck.rectangle, tempEntity.rectangle);)
+    //{
+
+    //}
+
+
     public class CollisionManager
     {
         public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
@@ -24,57 +31,75 @@ namespace TE4TwoDSidescroller
                 return false;
 
             }
+
+
         }
 
-        //public void ReturnCollidedObjects()
-        //{
-        //    Entity entityStepper = GameInfo.entityManager.firstEntity;
-        //    Entity firstTempEntity = GameInfo.entityManager.firstEntity;
-        //    Entity secondTempEntity = GameInfo.entityManager.firstEntity;
-
-        //    while (entityStepper != null)
-        //    {
-        //        if (entityStepper.isActive)
-        //        {
-        //            firstTempEntity = entityStepper;
-
-        //        }
-
-        //        if (entityStepper.isActive && firstTempEntity != null)
-        //        {
-        //            secondTempEntity = entityStepper;
-        //        }
-        //    }
-
-        //    firstTempEntity = null;
-        //    secondTempEntity = null;
-        //}
-
-        public Entity PlayerCollisionWithEnemy(Entity player)
+        public void PlayerCollisionWithEnemy(Entity firstCollision, Entity secondCollision)
         {
 
-            Entity tempEntity = GameInfo.entityManager.firstEntity;
-
-            while (tempEntity != null)
+            //CollisionCheck
+            if (CollisionRectangleCheck(firstCollision.rectangle, secondCollision.rectangle))
             {
-                if (tempEntity.isActive && tempEntity != player)
-                {
-                    //CollisionCheck
-                    if (CollisionRectangleCheck(player.rectangle, tempEntity.rectangle))
-                    {
-                        //Skicka tillbaks info som säger att objekt har kråkat
-                        return tempEntity;
-                    }
 
-                    return null;
-                }
-                
-                tempEntity = tempEntity.nextEntity;
+                //Skicka tillbaks info som säger att objekt har kråkat
+
+                firstCollision.HasCollidedWith(secondCollision);
+                secondCollision.HasCollidedWith(firstCollision);
+
+
             }
 
-            return null; 
+
         }
 
 
     }
+
+
+    //public void ReturnCollidedObjects()
+    //{
+    //    Entity entityStepper = GameInfo.entityManager.firstEntity;
+    //    Entity firstTempEntity = GameInfo.entityManager.firstEntity;
+    //    Entity secondTempEntity = GameInfo.entityManager.firstEntity;
+    //    bool firstFlag = false;
+    //    bool secondFlag = false;
+
+    //    while (entityStepper != null)
+    //    {
+    //        //måse fixa ett sätt vart entitystepper inte sparas i samma temps
+    //        if (entityStepper.isActive)
+    //        {
+    //            firstTempEntity = entityStepper;
+    //            firstFlag = true;
+    //        }
+
+    //        if (entityStepper.isActive && firstTempEntity != null)
+    //        {
+    //            secondTempEntity = entityStepper;
+    //            secondFlag = true;
+    //        }
+
+    //        if (firstFlag && secondFlag)
+    //        {
+
+    //            CollisionRectangleCheck(firstTempEntity.rectangle, secondTempEntity.rectangle);
+
+    //            //Skickatillbaks kollision info
+
+    //            firstTempEntity = null;
+    //            secondTempEntity = null;
+    //            firstFlag = false;
+    //            secondFlag = false;
+    //        }
+
+    //        entityStepper = entityStepper.nextEntity;
+    //    }
+
+    //    firstTempEntity = null;
+    //    secondTempEntity = null;
+    //}
+
+    //Byt namn
 }
+

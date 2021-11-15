@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
@@ -53,10 +53,17 @@ namespace TE4TwoDSidescroller
 
         protected override void Draw(GameTime gameTime)
         {
+            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
+            GameInfo.entityManager.AddEntity(floorTest);
 
-            
+            GameInfo.spriteBatch.Begin();
 
+            //GameInfo.entityManager.Draw(gameTime);
+
+            floorTest.Draw(gameTime);
             
+            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
+            GameInfo.spriteBatch.End();
 
             base.Draw(gameTime);
         }

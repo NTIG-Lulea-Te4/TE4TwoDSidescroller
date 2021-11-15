@@ -84,6 +84,10 @@ namespace TE4TwoDSidescroller
                 {
 
                     stepEntity.nextEntity = stepEntity.nextEntity.nextEntity;
+                    if (stepEntity.nextEntity == null)
+                    {
+                        lastEntity = stepEntity;
+                    }
                     return true;
 
                 }

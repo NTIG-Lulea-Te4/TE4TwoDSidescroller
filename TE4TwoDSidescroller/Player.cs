@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ namespace TE4TwoDSidescroller
         int maxHealth;
         int manaTick;
         int mana;
+        CharacterInput characterInput;
 
         public Player()
         {
@@ -51,13 +52,15 @@ namespace TE4TwoDSidescroller
                 mana++;
                 manaTick = 0;
             }
+            
+            //gör en bool som checkar ifall du kan checka enemy collision
+            //så när du blir skadad slår du av den för 0.5 sek
 
             //ifall fienders vapen overlappar med kroppen så ta skada
-            /* if (true)
-             {
-                 character.TakeDamage(currentHEalth, 10);
-             }*/
-
+           /* if (true)
+            {
+                character.TakeDamage(currentHEalth, 10);
+            }*/
             sourceRectangle = new Rectangle(0, 0, 32, 46);
         }
         protected void Initialize()

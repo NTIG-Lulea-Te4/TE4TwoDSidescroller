@@ -12,6 +12,7 @@ namespace TE4TwoDSidescroller
         public Entity nextEntity;
         public int uniqeId;
         public bool isActive;
+        public bool hasCollider;
 
         public Rectangle rectangle;
 
@@ -19,7 +20,8 @@ namespace TE4TwoDSidescroller
         {
 
             nextEntity = null;
-            isActive = false;
+            isActive = true;
+            hasCollider = false;
 
         }
 
@@ -30,6 +32,11 @@ namespace TE4TwoDSidescroller
         }
 
         public virtual void Draw(GameTime gameTime)
+        {
+
+        }
+
+        public virtual void HasCollidedWith(Entity collider)
         {
 
         }
