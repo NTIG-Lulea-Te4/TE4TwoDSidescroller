@@ -24,7 +24,7 @@ namespace TE4TwoDSidescroller
         private int health;
         private int speed;
 
-        protected int manaRegenAmount;
+        
         public bool sprint;
         public int staminga;
 
@@ -47,22 +47,22 @@ namespace TE4TwoDSidescroller
         }
 
         #region Movement
-        public virtual void GoesUp()
+        public virtual void MoveUp()
         {
             characterPosition.Y -= characterVelocity;
         }
 
-        public virtual void GoesDown()
+        public virtual void MoveDown()
         {
             characterPosition.Y += characterVelocity;
         }
 
-        public virtual void GoesLeft()
+        public virtual void MoveLeft()
         {
             characterPosition.X -= characterVelocity;
         }
 
-        public virtual void GoesRight()
+        public virtual void MoveRight()
         {
             characterPosition.X += characterVelocity;
         }
@@ -95,17 +95,17 @@ namespace TE4TwoDSidescroller
 
         #region Combat
 
-        public virtual void LightAttack()
+        public virtual void Attack1()
         {
 
         }
 
-        public virtual void HeavyAttack()
+        public virtual void Attack2()
         {
 
         }
 
-        public virtual void SpecialAttack()
+        public virtual void Attack3()
         {
 
         }
@@ -170,68 +170,10 @@ namespace TE4TwoDSidescroller
         }
 
         #endregion
-        public int Healing(int maxHealth, int currentHealth, int healingAmount)
-        {
-
-            currentHealth = currentHealth + healingAmount;
-
-            if (currentHealth > maxHealth)
-            {
-                currentHealth = maxHealth;
-            }
-
-            return currentHealth;
-        }
-
-        public int TakeDamage(int currentHEalth, int amountOfDamage)
-        {
-            currentHEalth = currentHEalth - amountOfDamage;
-
-            if (currentHEalth <= 0)
-            {
-                //destroy entity
-            }
+        
 
 
-            return currentHEalth;
-        }
-
-
-
-        public bool UseMana(int manaPool, int amountOfManaUsed)
-        {
-            if (manaPool < amountOfManaUsed)
-            {
-                return false;
-            }
-
-            manaPool = manaPool - amountOfManaUsed;
-            
-            //detta behövs inte men ifall man senare vill ha ett item som ökar ens manaregen så kan detta 
-            //var ett bra sätt att göra det men det kan också bero på ifall det skulle vara ett permanent eller temporärt item
-            if (manaPool < 100 && manaRegenAmount != 1)
-            {
-                manaRegenAmount = 1;
-            }
-            else if (manaPool == 100)
-            {
-                manaRegenAmount = 0;
-            }
-
-            return true;
-
-            //ska vara i karaktärernas som kan använda manas update
-            /*if (tickTimer == 2)
-            {
-                mana += manaRegenAmount;
-                tickTimer = 0;
-            
-            }
-            tickTimer++;*/
-
-        }
-
-
+       // ska sättas vars man checkar ifall man blir träffad
         public void Invincibility()
         {
 
