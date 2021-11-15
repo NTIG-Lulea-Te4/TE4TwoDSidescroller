@@ -25,7 +25,7 @@ namespace TE4TwoDSidescroller
         public Player()
         {
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
-            destinationRectangle = new Rectangle(100, 100, 32, 46);
+            destinationRectangle = new Rectangle(100, 100, 32, 48);
             floorTest = new Floor();
             maxHealth = 150;
             currentHEalth = maxHealth;
@@ -61,7 +61,8 @@ namespace TE4TwoDSidescroller
             {
                 character.TakeDamage(currentHEalth, 10);
             }*/
-            sourceRectangle = new Rectangle(0, 0, 32, 46);
+
+            sourceRectangle = new Rectangle(0, 0, 32, 48);
         }
         protected void Initialize()
         {

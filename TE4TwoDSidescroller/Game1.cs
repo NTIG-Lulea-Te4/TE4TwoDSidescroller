@@ -11,7 +11,7 @@ namespace TE4TwoDSidescroller
 
         public Game1()
         {
-            
+            SpriteBatch spriteBatch;
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.entityManager = new EntityManagear();
@@ -44,8 +44,9 @@ namespace TE4TwoDSidescroller
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
-            
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -53,17 +54,7 @@ namespace TE4TwoDSidescroller
 
         protected override void Draw(GameTime gameTime)
         {
-            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
-            GameInfo.entityManager.AddEntity(floorTest);
-
-            GameInfo.spriteBatch.Begin();
-
-            //GameInfo.entityManager.Draw(gameTime);
-
-            floorTest.Draw(gameTime);
-            
-            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
-            GameInfo.spriteBatch.End();
+            GameInfo.spriteBatch.Draw(Player);
 
             base.Draw(gameTime);
         }
