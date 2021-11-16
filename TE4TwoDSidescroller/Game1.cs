@@ -17,6 +17,7 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager = new EntityManagear();
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.creationManager = new CreationManager();
+            GameInfo.screenManager = new ScreenManager();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -32,7 +33,7 @@ namespace TE4TwoDSidescroller
             // TODO: Add your initialization logic here
 
 
-
+            GameInfo.creationManager.Initialize();
             
             base.Initialize();
         }
