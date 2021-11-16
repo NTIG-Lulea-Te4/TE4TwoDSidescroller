@@ -7,10 +7,9 @@ namespace TE4TwoDSidescroller
 {
     class Mana 
     {
-        int manaRegenAmount;
+       
         public int UseMana(int manaPool, int amountOfManaUsed)
         {
-         
 
             if (CanYouUseMana(manaPool, amountOfManaUsed))
             {
@@ -22,7 +21,6 @@ namespace TE4TwoDSidescroller
             }
 
             return manaPool;
-
         }
 
         public bool CanYouUseMana(int currentMana, int manaUsage)
