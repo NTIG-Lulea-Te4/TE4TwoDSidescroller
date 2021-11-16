@@ -8,15 +8,8 @@ namespace TE4TwoDSidescroller
     public class Game1 : Game
     {
             
-        Rectangle testRectangle;
-        Rectangle testRectangle2;
-        MouseState mouseState;
-        bool testBool;
         public Game1()
         {
-            testRectangle = new Rectangle(0, 0, 5, 5);
-            testRectangle2 = new Rectangle(0, 0, 500, 500);
-            mouseState = new MouseState();
 
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
@@ -55,13 +48,6 @@ namespace TE4TwoDSidescroller
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
-            }
-
-            testRectangle.Location = mouseState.Position;
-
-            if (GameInfo.collisionManager.CollisionRectangleCheck(testRectangle, testRectangle2))
-            {
-                GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.Red);
             }
 
             // TODO: Add your update logic here
