@@ -20,15 +20,7 @@ namespace TE4TwoDSidescroller
 
         private float characterJumpHeight;
 
-        private bool ifHit;
-        private int health;
-        private int speed;
-
         
-        public bool sprint;
-        public int staminga;
-
-        private int tickTimer;
         public Character()
         {
             characterInput = new CharacterInput(this);
@@ -41,9 +33,7 @@ namespace TE4TwoDSidescroller
 
             characterJumpHeight = 3;
 
-            staminga = 100;
-            tickTimer = 0;
-            sprint = false;
+            
         }
 
         #region Movement
@@ -184,34 +174,7 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            //gör så att när man håller ner shift så är sprint true
-
-            if (sprint == false)
-            {
-
-                if (tickTimer == 2 && staminga != 100)
-                {
-
-                    staminga++;
-                    tickTimer = 0;
-
-                }
-                tickTimer++;
-
-            }
-            else if (sprint)
-            {
-
-                if (tickTimer == 2 && staminga != 0)
-                {
-
-                    staminga--;
-                    tickTimer = 0;
-
-                }
-                tickTimer++;
-
-            }
+            
         }
     }
 }
