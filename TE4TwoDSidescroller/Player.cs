@@ -9,23 +9,21 @@ namespace TE4TwoDSidescroller
 {
     class Player : Character
     {
-        public static GraphicsDeviceManager graphicsDeviceManager;
         public Texture2D rightWalk;
         Rectangle destinationRectangle;
         Rectangle sourceRectangle;
-        Character character;
         Floor floorTest;
         int currentHEalth;
         int manaCheck;
         int maxHealth;
         int manaTick;
         int mana;
-        CharacterInput characterInput;
+        
 
         public Player()
         {
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
-            destinationRectangle = new Rectangle(100, 100, 32, 46);
+            destinationRectangle = new Rectangle(100, 100, 32, 48);
             floorTest = new Floor();
             maxHealth = 150;
             currentHEalth = maxHealth;
@@ -44,6 +42,18 @@ namespace TE4TwoDSidescroller
         }
 
 
+        public void Initialize()
+        {
+
+
+
+            // TODO: Add your initialization logic here
+
+
+            floorTest.Initialize();
+            
+        }
+
         public override void Update(GameTime gameTime)
         {
             manaTick++;
@@ -61,29 +71,18 @@ namespace TE4TwoDSidescroller
             {
                 character.TakeDamage(currentHEalth, 10);
             }*/
-            sourceRectangle = new Rectangle(0, 0, 32, 46);
+
+            sourceRectangle = new Rectangle(0, 0, 32, 48);
         }
-        protected void Initialize()
-        {
 
 
-
-            // TODO: Add your initialization logic here
-
-
-            floorTest.Initialize();
-            
-        }
         public override void Draw(GameTime gameTime)
         {
-            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
-            GameInfo.entityManager.AddEntity(floorTest);
-
-            GameInfo.spriteBatch.Begin();
+            
             GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
             //GameInfo.entityManager.Draw(gameTime);
-            floorTest.Draw(gameTime);
-            GameInfo.spriteBatch.End();
+            //floorTest.Draw(gameTime);
+            
 
         }
     }
