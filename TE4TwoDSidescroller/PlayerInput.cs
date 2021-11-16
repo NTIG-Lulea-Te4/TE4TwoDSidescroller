@@ -102,7 +102,7 @@ namespace TE4TwoDSidescroller
 
             if (currentKeyboardState.IsKeyDown(upKey) /*&& oldKeyboardState.IsKeyUp(upKey)*/)
             {
-                character.GoesUp();
+                character.MoveUp();
 
                 //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                 //{
@@ -114,19 +114,19 @@ namespace TE4TwoDSidescroller
             if (Keyboard.GetState().IsKeyDown(downKey))
             {
 
-                character.GoesDown();
+                character.MoveDown();
             }
 
             if (Keyboard.GetState().IsKeyDown(leftKey))
             {
 
-                character.GoesLeft();
+                character.MoveLeft();
             }
 
             if (Keyboard.GetState().IsKeyDown(rightKey))
             {
 
-                character.GoesRight();
+                character.MoveRight();
             }
 
 
@@ -161,17 +161,17 @@ namespace TE4TwoDSidescroller
 
             if (Keyboard.GetState().IsKeyDown(lightAttackKey))
             {
-                character.LightAttack();
+                character.Attack1();
             }
 
             if (Keyboard.GetState().IsKeyDown(heavyAttackKey))
             {
-                character.HeavyAttack();
+                character.Attack2();
             }
 
             if (Keyboard.GetState().IsKeyDown(specialAttackKey))
             {
-                character.SpecialAttack();
+                character.Attack3();
             }
 
 

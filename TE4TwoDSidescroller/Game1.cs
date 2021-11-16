@@ -8,7 +8,7 @@ namespace TE4TwoDSidescroller
     public class Game1 : Game
     {
         bool isDrawing;
-
+        
         public Game1()
         {
             
@@ -27,19 +27,18 @@ namespace TE4TwoDSidescroller
         protected override void Initialize()
         {
 
-
+        
 
             // TODO: Add your initialization logic here
 
 
 
-            
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-
 
 
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
@@ -75,6 +74,7 @@ namespace TE4TwoDSidescroller
 
             GameInfo.spriteBatch.End();
 
+           
             base.Draw(gameTime);
         }
     }

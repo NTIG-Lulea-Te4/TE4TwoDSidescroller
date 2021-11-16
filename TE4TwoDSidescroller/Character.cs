@@ -20,10 +20,6 @@ namespace TE4TwoDSidescroller
 
         private float characterJumpHeight;
 
-        private bool ifHit;
-        private int health;
-        private int speed;
-
         
         public Character()
         {
