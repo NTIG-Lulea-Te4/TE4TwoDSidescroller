@@ -63,14 +63,46 @@ namespace TE4TwoDSidescroller
         public void ReturnCollidedObjects()
         {
             Entity stepEntity = GameInfo.entityManager.firstEntity;
-            Entity tempEntity;
-
+            Entity secondStepEntity = GameInfo.entityManager.firstEntity;
+            //Entity tempEntity;
 
             while (stepEntity != null)
             {
 
+                if (stepEntity.isActive)
+                {
 
+                    if (stepEntity.hasCollider)
+                    {
 
+                        while (secondStepEntity != null)
+                        {
+                            if (secondStepEntity.isActive)
+                            {
+                                if (secondStepEntity.hasCollider)
+                                {
+                                    if (stepEntity != secondStepEntity)
+                                    {
+                                        if (CollisionRectangleCheck(stepEntity.rectangle, secondStepEntity.rectangle))
+                                        {
+                                            stepEntity.HasCollidedWith(secondStepEntity);
+                                            secondStepEntity.HasCollidedWith(stepEntity);
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            secondStepEntity = secondStepEntity.nextEntity;
+
+                        }
+
+                    }
+
+                }
+
+                stepEntity = stepEntity.nextEntity;
+                secondStepEntity = GameInfo.entityManager.firstEntity;
 
             }
 
