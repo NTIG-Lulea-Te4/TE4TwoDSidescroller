@@ -7,7 +7,6 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-        bool isDrawing;
 
         public Game1()
         {
@@ -22,7 +21,6 @@ namespace TE4TwoDSidescroller
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            isDrawing = true;
         }
 
         protected override void Initialize()
@@ -40,7 +38,6 @@ namespace TE4TwoDSidescroller
 
         protected override void LoadContent()
         {
-
 
 
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
@@ -66,13 +63,7 @@ namespace TE4TwoDSidescroller
 
             GameInfo.spriteBatch.Begin();
 
-            if (isDrawing)
-            {
-                 GameInfo.entityManager.Draw(gameTime);
-                 
-            }
-
-            
+            GameInfo.entityManager.Draw(gameTime);
 
             GameInfo.spriteBatch.End();
 
