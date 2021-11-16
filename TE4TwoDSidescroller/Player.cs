@@ -9,10 +9,13 @@ namespace TE4TwoDSidescroller
 {
     class Player : Character
     {
-        public Texture2D rightWalk;
-        Rectangle destinationRectangle;
-        Rectangle sourceRectangle;
+
+        static Texture2D rightWalk;
+
+        Rectangle playerRectangle;
+
         Floor floorTest;
+
         int currentHEalth;
         int manaCheck;
         int maxHealth;
@@ -22,16 +25,22 @@ namespace TE4TwoDSidescroller
 
         public Player()
         {
-            GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
-            destinationRectangle = new Rectangle(100, 100, 32, 48);
+
+            playerRectangle = new Rectangle(10, 10, 500, 500);
+
             floorTest = new Floor();
+
             maxHealth = 150;
             currentHEalth = maxHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
-            
 
+            LoadPlayerTexture2D();
+        }
+
+        public void LoadPlayerTexture2D()
+        {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
              + "/Content/Pngs/" + "ShadowRunRight.png";
@@ -39,19 +48,7 @@ namespace TE4TwoDSidescroller
             {
                 rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
-        }
 
-
-        public void Initialize()
-        {
-
-
-
-            // TODO: Add your initialization logic here
-
-
-            floorTest.Initialize();
-            
         }
 
         public override void Update(GameTime gameTime)
@@ -72,14 +69,14 @@ namespace TE4TwoDSidescroller
                 character.TakeDamage(currentHEalth, 10);
             }*/
 
-            sourceRectangle = new Rectangle(0, 0, 32, 48);
+            //sourceRectangle = new Rectangle(0, 0, 32, 48);
         }
 
 
         public override void Draw(GameTime gameTime)
         {
             
-            GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(rightWalk, playerRectangle, Color.White);
             //GameInfo.entityManager.Draw(gameTime);
             //floorTest.Draw(gameTime);
             

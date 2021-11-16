@@ -12,15 +12,21 @@ namespace TE4TwoDSidescroller
     //}
 
 
+    //if (firstTargetToCheck.Width + firstTargetToCheck.X >= secondTargetToCheck.X
+    //  && firstTargetToCheck.Height + firstTargetToCheck.Y >= secondTargetToCheck.Y
+    //  || firstTargetToCheck.X < secondTargetToCheck.X + secondTargetToCheck.Width
+    //  && firstTargetToCheck.Y < secondTargetToCheck.Y + secondTargetToCheck.Height)
+    //{
+
     public class CollisionManager
     {
         public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
         {
 
-            if (firstTargetToCheck.Width + firstTargetToCheck.X >= secondTargetToCheck.X
-                && firstTargetToCheck.Height + firstTargetToCheck.Y >= secondTargetToCheck.Y
-                || firstTargetToCheck.X < secondTargetToCheck.X + secondTargetToCheck.Width
-                && firstTargetToCheck.Y < secondTargetToCheck.Y + secondTargetToCheck.Height)
+            if (firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.X
+                && firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.Y
+                && firstTargetToCheck.X < secondTargetToCheck.Width + secondTargetToCheck.Height
+                && firstTargetToCheck.Y < secondTargetToCheck.Width + secondTargetToCheck.Height)
             {
 
                 return true;
@@ -35,7 +41,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public void PlayerCollisionWithEnemy(Entity firstCollision, Entity secondCollision)
+        public void Collision(Entity firstCollision, Entity secondCollision)
         {
 
             //CollisionCheck
@@ -47,59 +53,62 @@ namespace TE4TwoDSidescroller
                 firstCollision.HasCollidedWith(secondCollision);
                 secondCollision.HasCollidedWith(firstCollision);
 
-
             }
 
 
         }
 
 
+
+        public void ReturnCollidedObjects()
+        {
+            Entity stepEntity = GameInfo.entityManager.firstEntity;
+            Entity secondStepEntity = GameInfo.entityManager.firstEntity;
+            //Entity tempEntity;
+
+            while (stepEntity != null)
+            {
+
+                if (stepEntity.isActive)
+                {
+
+                    if (stepEntity.hasCollider)
+                    {
+
+                        while (secondStepEntity != null)
+                        {
+                            if (secondStepEntity.isActive)
+                            {
+                                if (secondStepEntity.hasCollider)
+                                {
+                                    if (stepEntity != secondStepEntity)
+                                    {
+                                        if (CollisionRectangleCheck(stepEntity.rectangle, secondStepEntity.rectangle))
+                                        {
+                                            stepEntity.HasCollidedWith(secondStepEntity);
+                                            secondStepEntity.HasCollidedWith(stepEntity);
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            secondStepEntity = secondStepEntity.nextEntity;
+
+                        }
+
+                    }
+
+                }
+
+                stepEntity = stepEntity.nextEntity;
+                secondStepEntity = GameInfo.entityManager.firstEntity;
+
+            }
+
+        }
+
     }
 
-
-    //public void ReturnCollidedObjects()
-    //{
-    //    Entity entityStepper = GameInfo.entityManager.firstEntity;
-    //    Entity firstTempEntity = GameInfo.entityManager.firstEntity;
-    //    Entity secondTempEntity = GameInfo.entityManager.firstEntity;
-    //    bool firstFlag = false;
-    //    bool secondFlag = false;
-
-    //    while (entityStepper != null)
-    //    {
-    //        //måse fixa ett sätt vart entitystepper inte sparas i samma temps
-    //        if (entityStepper.isActive)
-    //        {
-    //            firstTempEntity = entityStepper;
-    //            firstFlag = true;
-    //        }
-
-    //        if (entityStepper.isActive && firstTempEntity != null)
-    //        {
-    //            secondTempEntity = entityStepper;
-    //            secondFlag = true;
-    //        }
-
-    //        if (firstFlag && secondFlag)
-    //        {
-
-    //            CollisionRectangleCheck(firstTempEntity.rectangle, secondTempEntity.rectangle);
-
-    //            //Skickatillbaks kollision info
-
-    //            firstTempEntity = null;
-    //            secondTempEntity = null;
-    //            firstFlag = false;
-    //            secondFlag = false;
-    //        }
-
-    //        entityStepper = entityStepper.nextEntity;
-    //    }
-
-    //    firstTempEntity = null;
-    //    secondTempEntity = null;
-    //}
-
-    //Byt namn
 }
 

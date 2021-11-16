@@ -18,7 +18,10 @@ namespace TE4TwoDSidescroller
         static public SpriteBatch spriteBatch;
         static public CollisionManager collisionManager;
         static public EntityManagear entityManager;
+        static public ScreenManager screenManager;
         static public CreationManager creationManager;
+        
+        
 
         #region kommentar
         /*        static public void Initialize()
