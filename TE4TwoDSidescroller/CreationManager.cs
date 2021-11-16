@@ -1,25 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace TE4TwoDSidescroller
 {
     public class CreationManager
     {
-        Floor floorTest;
-        Player myPlayer;
+        public GameTime spawnTimer;
 
-        public void Initialize()
+        public CreationManager()
+        {
+
+            
+
+        }
+
+        void Initialize()
         {
 
 
 
-            // TODO: Add your initialization logic here
-
-
-            floorTest.Initialize();
-            myPlayer.Initialize();
         }
 
+        void CreationCycle()
+        {
+
+
+
+        }
+
+
+        //säger när allt ska skapas, intialize, skaffa tillgång till bilden?, 
     }
 }
