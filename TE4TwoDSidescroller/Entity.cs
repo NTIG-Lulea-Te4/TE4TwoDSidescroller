@@ -14,6 +14,10 @@ namespace TE4TwoDSidescroller
         public bool isActive;
         public bool hasCollider;
 
+        public float rotation;
+        public float scale;
+        public Vector2 position;
+
         public Rectangle rectangle;
 
         public Entity()

@@ -15,18 +15,19 @@ namespace TE4TwoDSidescroller
         public CreationManager()
         {
 
-            
+
 
         }
 
-        void Initialize()
+        public void Initialize()
         {
-
-
+            Entity tempEntity = new Player();
+            GameInfo.entityManager.AddEntity(tempEntity);
+           
 
         }
 
-        void CreationCycle()
+        public void CreationCycle()
         {
 
 
