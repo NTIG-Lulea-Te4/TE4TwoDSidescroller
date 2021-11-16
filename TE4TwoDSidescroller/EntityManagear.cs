@@ -120,6 +120,8 @@ namespace TE4TwoDSidescroller
 
         public void Draw(GameTime gameTime)
         {
+
+
             //gå igenom varje objekt och kör update på det
             Entity tempEntity = firstEntity;
             while (tempEntity != null)
