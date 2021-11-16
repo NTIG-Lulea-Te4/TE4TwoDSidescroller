@@ -25,13 +25,7 @@ namespace TE4TwoDSidescroller
         protected override void Initialize()
         {
 
-            
-
-            // TODO: Add your initialization logic here
-
-
-
-            
+            GameInfo.creationManager.Initialize();
             base.Initialize();
         }
 
@@ -40,19 +34,20 @@ namespace TE4TwoDSidescroller
             
 
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
-            // TODO: use this.Content to load your game content here
+            GameInfo.creationManager.Initialize();
+
         }
 
         protected override void Update(GameTime gameTime)
         {
+
+            GameInfo.entityManager.Update(gameTime);
+
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-
-            // TODO: Add your update logic here
-
-            GameInfo.entityManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -61,13 +56,11 @@ namespace TE4TwoDSidescroller
         {
 
             GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
-
             GameInfo.spriteBatch.Begin();
 
             GameInfo.entityManager.Draw(gameTime);
 
             GameInfo.spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }
