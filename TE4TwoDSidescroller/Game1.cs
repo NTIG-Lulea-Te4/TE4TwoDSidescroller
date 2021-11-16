@@ -7,25 +7,30 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-
+        bool isDrawing;
 
         public Game1()
         {
-            SpriteBatch spriteBatch;
+            
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.entityManager = new EntityManagear();
             GameInfo.collisionManager = new CollisionManager();
+            GameInfo.creationManager = new CreationManager();
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            isDrawing = true;
         }
 
         protected override void Initialize()
         {
-            
 
-            
+
+
             // TODO: Add your initialization logic here
+
 
 
             
@@ -34,10 +39,10 @@ namespace TE4TwoDSidescroller
 
         protected override void LoadContent()
         {
-            
 
-            
 
+
+            GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
 
@@ -49,12 +54,26 @@ namespace TE4TwoDSidescroller
             }
             // TODO: Add your update logic here
 
+            GameInfo.entityManager.Update(gameTime);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GameInfo.spriteBatch.Draw(Player);
+            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            GameInfo.spriteBatch.Begin();
+
+            if (isDrawing)
+            {
+                 GameInfo.entityManager.Draw(gameTime);
+                 
+            }
+
+            
+
+            GameInfo.spriteBatch.End();
 
             base.Draw(gameTime);
         }
