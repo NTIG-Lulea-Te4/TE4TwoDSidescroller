@@ -13,6 +13,7 @@ namespace TE4TwoDSidescroller
         static Texture2D rightWalk;
 
         Rectangle playerRectangle;
+        Rectangle sizeRectangle;
 
         Floor floorTest;
 
@@ -25,8 +26,7 @@ namespace TE4TwoDSidescroller
 
         public Player()
         {
-
-            playerRectangle = new Rectangle(10, 10, 500, 500);
+            playerRectangle = new Rectangle(100, 100, 64, 96);
 
             floorTest = new Floor();
 
@@ -69,14 +69,14 @@ namespace TE4TwoDSidescroller
                 character.TakeDamage(currentHEalth, 10);
             }*/
 
-            //sourceRectangle = new Rectangle(0, 0, 32, 48);
+            sizeRectangle = new Rectangle(0, 0, 64, 96);
         }
 
 
         public override void Draw(GameTime gameTime)
         {
             
-            GameInfo.spriteBatch.Draw(rightWalk, playerRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(rightWalk, playerRectangle, sizeRectangle, Color.White);
             //GameInfo.entityManager.Draw(gameTime);
             //floorTest.Draw(gameTime);
             
