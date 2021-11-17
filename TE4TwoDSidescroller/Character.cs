@@ -7,18 +7,20 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TE4TwoDSidescroller
 {
-    class Character : Entity
+    public class Character : Entity
     {
-        CharacterInput characterInput;
+        public CharacterInput characterInput;
 
         private Vector2 characterPosition;
 
-        private float walkSpeed;
-        private float runSpeed;
+        private int runSpeed;
+        private int walkSpeed;
 
-        private float characterVelocity;
+        private int characterVelocity;
 
-        private float characterJumpHeight;
+        private int characterJumpHeight;
+
+        private bool isRunning;
 
         private bool ifHit;
         private int health;
@@ -31,50 +33,113 @@ namespace TE4TwoDSidescroller
         private int tickTimer;
         public Character()
         {
-            characterInput = new CharacterInput(this);
-
-            characterVelocity = 1.5f;
-            runSpeed = 3f;
 
             characterPosition.Y = 50;
             characterPosition.X = 50;
-
-            characterJumpHeight = 3;
 
             staminga = 100;
             tickTimer = 0;
             sprint = false;
         }
 
+        #region Properties
+
+        public int CharacterVelocity
+        {
+            get
+            {
+                return characterVelocity;
+            }
+
+            set
+            {
+                characterVelocity = value;
+            }
+        }
+
+        public int RunSpeed
+        {
+            get
+            {
+                return runSpeed;
+            }
+            set
+            {
+                runSpeed = value;
+            }
+        }
+
+        public int WalkSpeed
+        {
+            get
+            {
+                return walkSpeed;
+            }
+            set
+            {
+                walkSpeed = value;
+            }
+        }
+
+        public bool IsRunning
+        {
+            get
+            {
+                return isRunning;
+            }
+            set
+            {
+                isRunning = value;
+            }
+        }
+        public int CharacterJumpHeight
+        {
+            get
+            {
+                return characterJumpHeight;
+            }
+            set
+            {
+                characterJumpHeight = value;
+            }
+        }
+
+        #endregion
+
         #region Movement
         public virtual void MoveUp()
         {
-            characterPosition.Y -= characterVelocity;
+            
         }
 
         public virtual void MoveDown()
         {
-            characterPosition.Y += characterVelocity;
+            
         }
 
         public virtual void MoveLeft()
         {
-            characterPosition.X -= characterVelocity;
+            
         }
 
         public virtual void MoveRight()
         {
-            characterPosition.X += characterVelocity;
+            
         }
 
         public virtual void Run()
         {
-            characterVelocity = runSpeed;
+            
+        }
+
+        public virtual void DontRun()
+        {
+
         }
 
         public virtual void Jump()
         {
-            characterPosition.Y += characterJumpHeight;
+           
         }
 
         public virtual void DoubleJump()

@@ -10,21 +10,19 @@ namespace TE4TwoDSidescroller
 {
     public class CreationManager
     {
-        public GameTime spawnTimer;
 
+        public GameTime spawnTimer;
+        
         public CreationManager()
         {
-
-
 
         }
 
         public void Initialize()
         {
-            Entity tempEntity = new Player();
-            GameInfo.entityManager.AddEntity(tempEntity);
+            Entity playerEntity = new Player();
+            GameInfo.entityManager.AddEntity(playerEntity);
            
-
         }
 
         public void CreationCycle()

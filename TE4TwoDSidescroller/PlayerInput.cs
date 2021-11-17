@@ -9,7 +9,8 @@ namespace TE4TwoDSidescroller
 {
     class PlayerInput : CharacterInput
     {
-        Character character;
+
+
 
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
@@ -63,15 +64,16 @@ namespace TE4TwoDSidescroller
 
         }
 
-        private PlayerInput(Character character) 
+        public PlayerInput(Character character)
             : base(character)
         {
+
             currentKeyboardState = Keyboard.GetState();
 
             currentMouseState = Mouse.GetState();
 
-            keys = new Keys[] 
-            { 
+            keys = new Keys[]
+            {
                 Keys.W,
                 Keys.S,
                 Keys.A,
@@ -94,22 +96,28 @@ namespace TE4TwoDSidescroller
 
             jumpKey = Keys.Space;
             runKey = Keys.LeftShift;
+            doubleJumpKey = Keys.Space;
         }
+
 
         public override void Update(GameTime gameTime)
         {
-            //Movements
+            #region Movements
 
-            if (currentKeyboardState.IsKeyDown(upKey) /*&& oldKeyboardState.IsKeyUp(upKey)*/)
+            if (Keyboard.GetState().IsKeyDown(upKey))
             {
+
                 character.MoveUp();
-
-                //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-                //{
-
-                //}
-                
             }
+
+            //if(currentKeyboardState.IsKeyDown(upKey) && previousKeyboardState.IsKeyDown(upKey))
+            //{
+            //    character.MoveUp();
+            ////    //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            ////    //{
+
+            ////    //}
+            //}
 
             if (Keyboard.GetState().IsKeyDown(downKey))
             {
@@ -135,6 +143,10 @@ namespace TE4TwoDSidescroller
                 character.Run();
             }
 
+            if (Keyboard.GetState().IsKeyUp(runKey))
+            {
+                character.DontRun();
+            }
 
             if (Keyboard.GetState().IsKeyDown(jumpKey))
             {
@@ -150,14 +162,16 @@ namespace TE4TwoDSidescroller
 
             if (Keyboard.GetState().IsKeyDown(crouchKey))
             {
-               character.Crouch();
+                character.Crouch();
             }
             if (Keyboard.GetState().IsKeyDown(dashKey))
             {
                 character.Dash();
             }
 
-            //Combat
+            #endregion
+
+            #region Combat
 
             if (Keyboard.GetState().IsKeyDown(lightAttackKey))
             {
@@ -190,7 +204,9 @@ namespace TE4TwoDSidescroller
                 character.Dodge();
             }
 
-            //Conditions
+            #endregion
+
+            #region Conditions
 
             if (Keyboard.GetState().IsKeyDown(weaponSwitchKey))
             {
@@ -232,8 +248,10 @@ namespace TE4TwoDSidescroller
                 character.ExitGame();
             }
 
-            previousKeyboardState = currentKeyboardState;
-            previousMouseState = currentMouseState;
+            #endregion
+
+            //previousKeyboardState = currentKeyboardState;
+            //previousMouseState = currentMouseState;
 
             base.Update(gameTime);
         }
