@@ -26,6 +26,10 @@ namespace TE4TwoDSidescroller
 
             Entity knight = new Knight();
             GameInfo.entityManager.AddEntity(knight);
+
+            Entity playerTest = new PlayerTest();
+            GameInfo.entityManager.AddEntity(playerTest);
+
         }
 
         public void CreationCycle()
