@@ -12,7 +12,15 @@ namespace TE4TwoDSidescroller
     {
         static Texture2D rightWalk;
 
-        private Rectangle playerRectangle;
+        private Rectangle playerSourceRectangle;
+        private Vector2 playerPosition;
+        private Vector2 playerVelocity;
+
+        private float jumpTimer;
+
+        //private Vector2 playerScale;
+        //private float playerRotation;
+        //private Vector2 playerOrigin;
 
         Floor floorTest;
 
@@ -31,9 +39,26 @@ namespace TE4TwoDSidescroller
         {
             characterInput = new PlayerInput(this);
 
-            playerRectangle = new Rectangle(10, 10, 200, 200);
+            playerSourceRectangle = new Rectangle(0, 0, 150, 150); //Need to find how to scale the picture.
 
-            floorTest = new Floor();
+            playerVelocity = new Vector2(2.5f, 2.5f);
+
+            jumpTimer = 0.05f;
+
+            //playerScale = new Vector2(3, 3);
+            //playerRotation = 0;
+            //playerOrigin = new Vector2(100, 100);
+
+            playerPosition.X = 100;
+            playerPosition.Y = 100;
+
+            WalkSpeed = 2.5f;
+            RunSpeed = 5.5f;
+
+            CharacterJumpHeight = 0.45f; //With each -0.1 you lose 2 pixel heights
+            HasJumped = false;
+
+            LoadPlayerTexture2D();
 
             maxHealth = 150;
             currentHEalth = maxHealth;
@@ -41,40 +66,28 @@ namespace TE4TwoDSidescroller
             manaCheck = mana;
             manaTick = 0;
 
-            CharacterVelocity = 2;
-
-            RunSpeed = 4;
-
-            WalkSpeed = 2;
-
-
-
-            CharacterJumpHeight = 3;
-
-
-            LoadPlayerTexture2D();
+            floorTest = new Floor();
         }
-
 
 
         public override void MoveUp()
         {
-            playerRectangle.Y -= CharacterVelocity;
+            playerPosition.Y -= playerVelocity.Y;
         }
 
         public override void MoveDown()
         {
-            playerRectangle.Y += CharacterVelocity;
+            playerPosition.Y += playerVelocity.Y;
         }
 
         public override void MoveLeft()
         {
-            playerRectangle.X -= CharacterVelocity;
+            playerPosition.X -= playerVelocity.X;
         }
 
         public override void MoveRight()
         {
-            playerRectangle.X += CharacterVelocity;
+            playerPosition.X += playerVelocity.X;
         }
 
         public override void Run()
@@ -91,16 +104,15 @@ namespace TE4TwoDSidescroller
             //    }
             //}
 
-            IsRunning = false;
-            while (IsRunning == false)
+            HasRunned = false;
+            while (!HasRunned )
             {
-                CharacterVelocity = RunSpeed;
-                if(CharacterVelocity == RunSpeed)
+                playerVelocity.X = RunSpeed;
+                if(playerVelocity.X == RunSpeed)
                 {
-                    IsRunning = true;
+                    HasRunned = true;
                 }
             }
-
 
             //if (IsRunning == true)
             //{
@@ -115,20 +127,71 @@ namespace TE4TwoDSidescroller
 
         public override void DontRun()
         {
-            IsRunning = true;
-            while (IsRunning == true)
+            HasRunned = true;
+            while (HasRunned == true)
             {
-                CharacterVelocity = WalkSpeed;
-                if (CharacterVelocity == WalkSpeed)
+                playerVelocity.X = WalkSpeed;
+                if (playerVelocity.X == WalkSpeed)
                 {
-                    IsRunning = false;
+                    HasRunned = false;
                 }
             }
         }
 
-        public override void Jump()
+        public override void Jump(GameTime gameTime)
         {
-            playerRectangle.Y -= CharacterJumpHeight;
+            //float beforeJumpPlayerPosition = playerPosition.Y;
+            playerPosition.Y -= (float)(CharacterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
+
+
+            //HasJumped = true;
+
+            //    float afterJumpPlayerPosition = playerPosition.Y;
+            //    playerPosition.Y += (float)(CharacterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
+
+            //    if (afterJumpPlayerPosition >= beforeJumpPlayerPosition)
+            //    {
+            //        playerPosition.Y = beforeJumpPlayerPosition;
+            //        HasJumped = false;
+            //    }
+            
+
+            //playerVelocity.Y = -5f;
+            //HasJumped = true;
+
+            //if(HasJumped == true)
+            //{
+            //    float i = 1;
+            //    playerVelocity.Y += 0.15f * i;
+            //}
+
+            //if(playerPosition.Y + Floor.Height >= 20) //Ground check?!
+            //{
+            //    HasJumped = false;
+            //}
+
+            //if(HasJumped == false)
+            //{
+            //    playerVelocity.Y = 0f;
+            //}
+        }
+
+        public override void DontJump()
+        {
+            //playerPosition.Y -= CharacterJumpHeight;
+
+            //HasJumped = true;
+            //while (HasJumped == true)
+            //{
+            //    float i = 1;
+            //    playerPosition.Y += 10f * i;
+
+            //    if (playerPosition.Y >= 300)
+            //    {
+            //        HasJumped = false;
+            //        playerPosition.Y = 0;
+            //    }
+            //}
         }
 
         public override void DoubleJump()
@@ -178,7 +241,9 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(rightWalk, playerRectangle, Color.White);
+            //GameInfo.spriteBatch.Draw(rightWalk, playerSourceRectangle, Color.White);
+
+            GameInfo.spriteBatch.Draw(rightWalk, playerPosition, playerSourceRectangle, Color.White);
 
             //floorTest.Draw(gameTime);
 

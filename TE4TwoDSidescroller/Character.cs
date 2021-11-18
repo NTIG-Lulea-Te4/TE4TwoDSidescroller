@@ -11,17 +11,16 @@ namespace TE4TwoDSidescroller
     {
         public CharacterInput characterInput;
 
-        //private Vector2 characterPosition;
+        //private Vector2 characterVelocity;
+        //private int characterVelocity;
 
-        private int runSpeed;
-        private int walkSpeed;
+        private float runSpeed;
+        private float walkSpeed;
 
-        private int characterVelocity;
+        private float characterJumpHeight;
 
-        private int characterJumpHeight;
-
-        private bool isRunning;
-
+        private bool hasRunned;
+        private bool hasJumped;
         
         public Character()
         {
@@ -30,20 +29,32 @@ namespace TE4TwoDSidescroller
 
         #region Properties
 
-        public int CharacterVelocity
-        {
-            get
-            {
-                return characterVelocity;
-            }
+        //public int CharacterVelocity
+        //{
+        //    get
+        //    {
+        //        return characterVelocity;
+        //    }
 
-            set
-            {
-                characterVelocity = value;
-            }
-        }
+        //    set
+        //    {
+        //        characterVelocity = value;
+        //    }
+        //}
 
-        public int RunSpeed
+        //public Vector2 CharacterVelocity
+        //{
+        //    get
+        //    {
+        //        return characterVelocity;
+        //    }
+        //    set
+        //    {
+        //        characterVelocity = value;
+        //    }
+        //}
+
+        public float RunSpeed
         {
             get
             {
@@ -55,7 +66,7 @@ namespace TE4TwoDSidescroller
             }
         }
 
-        public int WalkSpeed
+        public float WalkSpeed
         {
             get
             {
@@ -67,18 +78,19 @@ namespace TE4TwoDSidescroller
             }
         }
 
-        public bool IsRunning
+        public bool HasRunned
         {
             get
             {
-                return isRunning;
+                return hasRunned;
             }
             set
             {
-                isRunning = value;
+                hasRunned = value;
             }
         }
-        public int CharacterJumpHeight
+
+        public float CharacterJumpHeight
         {
             get
             {
@@ -87,6 +99,18 @@ namespace TE4TwoDSidescroller
             set
             {
                 characterJumpHeight = value;
+            }
+        }
+
+        public bool HasJumped
+        {
+            get
+            {
+                return hasJumped;
+            }
+            set
+            {
+                hasJumped = value;
             }
         }
 
@@ -123,9 +147,14 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public virtual void Jump()
+        public virtual void Jump(GameTime gameTime)
         {
            
+        }
+
+        public virtual void DontJump()
+        {
+
         }
 
         public virtual void DoubleJump()

@@ -10,8 +10,6 @@ namespace TE4TwoDSidescroller
     class PlayerInput : CharacterInput
     {
 
-
-
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
 
@@ -96,7 +94,7 @@ namespace TE4TwoDSidescroller
 
             jumpKey = Keys.Space;
             runKey = Keys.LeftShift;
-            doubleJumpKey = Keys.Space;
+            //doubleJumpKey = Keys.Space;
         }
 
 
@@ -138,9 +136,11 @@ namespace TE4TwoDSidescroller
             }
 
 
-            if (Keyboard.GetState().IsKeyDown(runKey))
+            if (Keyboard.GetState().IsKeyDown(runKey) /*&& character.HasRunned == false*/)
             {
                 character.Run();
+                //character.HasRunned = true;
+
             }
 
             if (Keyboard.GetState().IsKeyUp(runKey))
@@ -148,11 +148,18 @@ namespace TE4TwoDSidescroller
                 character.DontRun();
             }
 
-            if (Keyboard.GetState().IsKeyDown(jumpKey))
+            if (Keyboard.GetState().IsKeyDown(jumpKey) && character.HasJumped == false)
             {
 
-                character.Jump();
+                character.Jump(gameTime);
+                //character.HasJumped = true;
             }
+
+            //if (Keyboard.GetState().IsKeyUp(jumpKey) && character.HasJumped == true)
+            //{
+
+            //    character.Jump();
+            //}
 
             if (Keyboard.GetState().IsKeyDown(doubleJumpKey))
             {
