@@ -48,7 +48,7 @@ namespace TE4TwoDSidescroller
             {
                 rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
-
+            
         }
 
         public override void Update(GameTime gameTime)

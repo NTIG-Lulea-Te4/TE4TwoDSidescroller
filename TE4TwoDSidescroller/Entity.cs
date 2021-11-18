@@ -13,6 +13,7 @@ namespace TE4TwoDSidescroller
         public int uniqeId;
         public bool isActive;
         public bool hasCollider;
+        public bool isPlayer;
 
         public float rotation;
         public float scale;

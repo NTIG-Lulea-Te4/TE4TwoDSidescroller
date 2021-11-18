@@ -24,11 +24,8 @@ namespace TE4TwoDSidescroller
         public Knight()
         {
             health = new Health();
-            detectionHitbox = new Rectangle(posistionX, posistionY, 150, 150);
-            knightRectangle = new Rectangle(posistionX, posistionY, 101, 101);
-            posistionX = 0;
-            posistionY = 0;
-
+            detectionHitbox = new Rectangle(0, 0, 150, 150);
+            knightRectangle = new Rectangle(0, 0, 101, 101);
 
             LoadTexture2D();
         }
@@ -50,8 +47,37 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
+            #region Controls for testing
+            //if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            //{
+            //    knightRectangle.X -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
 
-            
+            //if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            //{
+            //    knightRectangle.X += (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            //{
+            //    knightRectangle.Y += (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            //{
+            //    knightRectangle.Y -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            //{
+            //    knightRectangle.Y = 0;
+            //    knightRectangle.X = 0;
+
+            //}
+            #endregion
+
+
+
 
             base.Update(gameTime);
         }

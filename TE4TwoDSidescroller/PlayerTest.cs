@@ -43,6 +43,8 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
 
+            #region Controls for testing
+
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 testRectangle.X -= (1 * gameTime.ElapsedGameTime.Milliseconds);
@@ -62,6 +64,10 @@ namespace TE4TwoDSidescroller
             {
                 testRectangle.Y -= (1 * gameTime.ElapsedGameTime.Milliseconds);
             }
+
+            #endregion
+
+
 
             base.Update(gameTime);
         }
