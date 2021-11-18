@@ -6,109 +6,106 @@ using System.Text;
 namespace TE4TwoDSidescroller
 {
 
-    //if (Rectangle.Intersect(firstTargetToCheck.rectangle, tempEntity.rectangle);)
-    //{
+//if (firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.X
+//    && firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.Y
+//    && firstTargetToCheck.X < secondTargetToCheck.Width + secondTargetToCheck.Height
+//    && firstTargetToCheck.Y < secondTargetToCheck.Width + secondTargetToCheck.Height)
+//{
+//
+//
+//}
 
-    //}
-
-
-    //if (firstTargetToCheck.Width + firstTargetToCheck.X >= secondTargetToCheck.X
-    //  && firstTargetToCheck.Height + firstTargetToCheck.Y >= secondTargetToCheck.Y
-    //  || firstTargetToCheck.X < secondTargetToCheck.X + secondTargetToCheck.Width
-    //  && firstTargetToCheck.Y < secondTargetToCheck.Y + secondTargetToCheck.Height)
-    //{
-
-    public class CollisionManager
+public class CollisionManager
+{
+    public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
     {
-        public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
+
+        if (firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.X
+            && firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.Y
+            && firstTargetToCheck.X < secondTargetToCheck.Width + secondTargetToCheck.Height
+            && firstTargetToCheck.Y < secondTargetToCheck.Width + secondTargetToCheck.Height)
         {
 
-            if (firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.X
-                && firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.Y
-                && firstTargetToCheck.X < secondTargetToCheck.Width + secondTargetToCheck.Height
-                && firstTargetToCheck.Y < secondTargetToCheck.Width + secondTargetToCheck.Height)
-            {
-
-                return true;
-
-            }
-            else
-            {
-                return false;
-
-            }
-
+            return true;
 
         }
-
-        public void Collision(Entity firstCollision, Entity secondCollision)
+        else
         {
-
-            //CollisionCheck
-            if (CollisionRectangleCheck(firstCollision.rectangle, secondCollision.rectangle))
-            {
-
-                //Skicka tillbaks info som säger att objekt har kråkat
-
-                firstCollision.HasCollidedWith(secondCollision);
-                secondCollision.HasCollidedWith(firstCollision);
-
-            }
-
+            return false;
 
         }
 
 
+    }
 
-        public void ReturnCollidedObjects()
+    public void Collision(Entity firstCollision, Entity secondCollision)
+    {
+
+        //CollisionCheck
+        if (CollisionRectangleCheck(firstCollision.rectangle, secondCollision.rectangle))
         {
-            Entity stepEntity = GameInfo.entityManager.firstEntity;
-            Entity secondStepEntity = GameInfo.entityManager.firstEntity;
-            //Entity tempEntity;
 
-            while (stepEntity != null)
+            //Skicka tillbaks info som säger att objekt har kråkat
+
+            firstCollision.HasCollidedWith(secondCollision);
+            secondCollision.HasCollidedWith(firstCollision);
+
+        }
+
+
+    }
+
+
+
+    public void ReturnCollidedObjects()
+    {
+        Entity stepEntity = GameInfo.entityManager.firstEntity;
+        Entity secondStepEntity = GameInfo.entityManager.firstEntity;
+        //Entity tempEntity;
+
+        while (stepEntity != null)
+        {
+
+            if (stepEntity.isActive)
             {
 
-                if (stepEntity.isActive)
+                if (stepEntity.hasCollider)
                 {
 
-                    if (stepEntity.hasCollider)
+                    while (secondStepEntity != null)
                     {
-
-                        while (secondStepEntity != null)
+                        if (secondStepEntity.isActive)
                         {
-                            if (secondStepEntity.isActive)
+                            if (secondStepEntity.hasCollider)
                             {
-                                if (secondStepEntity.hasCollider)
+                                if (stepEntity != secondStepEntity)
                                 {
-                                    if (stepEntity != secondStepEntity)
+                                    if (CollisionRectangleCheck(stepEntity.rectangle, secondStepEntity.rectangle))
                                     {
-                                        if (CollisionRectangleCheck(stepEntity.rectangle, secondStepEntity.rectangle))
-                                        {
-                                            stepEntity.HasCollidedWith(secondStepEntity);
-                                            secondStepEntity.HasCollidedWith(stepEntity);
-                                        }
-
+                                        stepEntity.HasCollidedWith(secondStepEntity);
+                                        secondStepEntity.HasCollidedWith(stepEntity);
                                     }
+
                                 }
                             }
-
-                            secondStepEntity = secondStepEntity.nextEntity;
-
                         }
+
+                        secondStepEntity = secondStepEntity.nextEntity;
 
                     }
 
                 }
 
-                stepEntity = stepEntity.nextEntity;
-                secondStepEntity = GameInfo.entityManager.firstEntity;
-
             }
+
+            stepEntity = stepEntity.nextEntity;
+            secondStepEntity = GameInfo.entityManager.firstEntity;
 
         }
 
     }
+
+}
 
 }
 
