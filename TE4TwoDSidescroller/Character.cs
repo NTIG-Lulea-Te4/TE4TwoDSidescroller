@@ -11,7 +11,7 @@ namespace TE4TwoDSidescroller
     {
         public CharacterInput characterInput;
 
-        private Vector2 characterPosition;
+        //private Vector2 characterPosition;
 
         private int runSpeed;
         private int walkSpeed;
@@ -25,14 +25,6 @@ namespace TE4TwoDSidescroller
         
         public Character()
         {
-
-            characterPosition.Y = 50;
-            characterPosition.X = 50;
-
-            staminga = 100;
-            tickTimer = 0;
-            sprint = false;
-            characterJumpHeight = 3;
 
         }
 
