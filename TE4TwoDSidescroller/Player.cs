@@ -18,9 +18,9 @@ namespace TE4TwoDSidescroller
 
         private float jumpTimer;
 
-        //private Vector2 playerScale;
-        //private float playerRotation;
-        //private Vector2 playerOrigin;
+        private Vector2 playerScale;
+        private float playerRotation;
+        private Vector2 playerOrigin;
 
         Floor floorTest;
 
@@ -39,15 +39,15 @@ namespace TE4TwoDSidescroller
         {
             characterInput = new PlayerInput(this);
 
-            playerSourceRectangle = new Rectangle(0, 0, 150, 150); //Need to find how to scale the picture.
+            playerSourceRectangle = new Rectangle(0, 0, 32, 48); //Need to find how to scale the picture.
 
             playerVelocity = new Vector2(2.5f, 2.5f);
 
             jumpTimer = 0.05f;
 
-            //playerScale = new Vector2(3, 3);
-            //playerRotation = 0;
-            //playerOrigin = new Vector2(100, 100);
+            playerScale = new Vector2(3, 3);
+            playerRotation = 0;
+            playerOrigin = new Vector2(0, 0);
 
             playerPosition.X = 100;
             playerPosition.Y = 100;
@@ -154,7 +154,7 @@ namespace TE4TwoDSidescroller
             //        playerPosition.Y = beforeJumpPlayerPosition;
             //        HasJumped = false;
             //    }
-            
+
 
             //playerVelocity.Y = -5f;
             //HasJumped = true;
@@ -165,7 +165,7 @@ namespace TE4TwoDSidescroller
             //    playerVelocity.Y += 0.15f * i;
             //}
 
-            //if(playerPosition.Y + Floor.Height >= 20) //Ground check?!
+            //if (playerPosition.Y + Floor.Height >= 20) //Ground check?!
             //{
             //    HasJumped = false;
             //}
@@ -214,6 +214,13 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
+            //Make varible null or change them here before up
+            //gravity, position, jump fall and such
+
+
+
+
+
             characterInput.Update(gameTime);
 
             manaTick++;
@@ -243,7 +250,7 @@ namespace TE4TwoDSidescroller
 
             //GameInfo.spriteBatch.Draw(rightWalk, playerSourceRectangle, Color.White);
 
-            GameInfo.spriteBatch.Draw(rightWalk, playerPosition, playerSourceRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(rightWalk, playerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
 
             //floorTest.Draw(gameTime);
 
