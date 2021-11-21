@@ -14,18 +14,27 @@ namespace TE4TwoDSidescroller
         Texture2D testTexture;
         Rectangle detectionHitbox;
         Rectangle knightRectangle;
+        Rectangle sourceRectangle;
+        Vector2 movementDirection;
+        Vector2 knightPosition;
         int posistionX;
         int posistionY;
 
         Health health;
         int maxHealth;
         int currentHealth;
-
+        float speed;
         public Knight()
         {
+
+            speed = 0.2f;
+
             health = new Health();
-            detectionHitbox = new Rectangle(0, 0, 150, 150);
+            detectionHitbox = new Rectangle(0, 0, 500, 500);
             knightRectangle = new Rectangle(0, 0, 101, 101);
+            sourceRectangle = new Rectangle(0, 0, 101, 101);
+            knightPosition = new Vector2();
+            movementDirection = new Vector2();
 
             LoadTexture2D();
         }
@@ -76,15 +85,28 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
+            movementDirection = PlayerTest.playerPosition - knightPosition;
+            movementDirection.Normalize();
 
 
+            if (GameInfo.collisionManager.CollisionRectangleCheck(detectionHitbox, PlayerTest.testRectangle))
+            {
+
+                knightPosition += movementDirection * speed * gameTime.ElapsedGameTime.Milliseconds;
+
+            }
+
+            detectionHitbox.X = (int)knightPosition.X;
+            detectionHitbox.Y = (int)knightPosition.Y;
+            knightRectangle.X = (int)knightPosition.X;
+            knightRectangle.Y = (int)knightPosition.Y;
 
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (GameInfo.collisionManager.CollisionRectangleCheck(knightRectangle, PlayerTest.testRectangle))
+            if (GameInfo.collisionManager.CollisionRectangleCheck(detectionHitbox, PlayerTest.testRectangle))
             {
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.Pink);
             }
@@ -93,7 +115,7 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            GameInfo.spriteBatch.Draw(testTexture, knightRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(testTexture, knightPosition, sourceRectangle, Color.White);
 
             // base.Draw(gameTime);
         }
