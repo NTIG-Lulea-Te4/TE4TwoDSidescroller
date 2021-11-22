@@ -121,7 +121,7 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White);
+            //GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White);
 
             // base.Draw(gameTime);
         }

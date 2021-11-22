@@ -19,6 +19,7 @@ namespace TE4TwoDSidescroller
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Window.AllowUserResizing = true;
 
         }
 

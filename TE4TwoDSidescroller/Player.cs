@@ -14,7 +14,7 @@ namespace TE4TwoDSidescroller
 
         private Rectangle playerSourceRectangle;
         private Vector2 playerPosition;
-        public Vector2 playerVelocity;
+        private Vector2 playerVelocity;
 
         private Rectangle playerHitBox;
 
@@ -49,7 +49,7 @@ namespace TE4TwoDSidescroller
             walkSpeed = 2;
             runSpeed = 4;
 
-            gravity = 0.4f;
+            gravity = 0.15f;
 
 
             playerScale = new Vector2(3, 3);
@@ -60,7 +60,7 @@ namespace TE4TwoDSidescroller
             playerPosition.Y = 100;
 
 
-            characterJumpHeight = 0.2f; //With each -0.1 you lose 2 pixel heights
+            characterJumpHeight = 8.5f; //With each -0.1 you lose 2 pixel heights
 
             isGrounded = true;
 
@@ -75,6 +75,17 @@ namespace TE4TwoDSidescroller
             floorTest = new Floor();
         }
 
+        public void LoadPlayerTexture2D()
+        {
+            string currentPath = Path.GetDirectoryName(
+             System.Reflection.Assembly.GetExecutingAssembly().Location)
+             + "/Content/Pngs/" + "ShadowRunRight.png";
+            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            {
+                rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+            
+        }
 
         public override void MoveUp()
         {
@@ -109,10 +120,9 @@ namespace TE4TwoDSidescroller
         public override void Jump(GameTime gameTime)
         {
             //Is on the ground and the velocity.Y is zero
-            if (isGrounded && playerVelocity.Y == 0)
+            if (GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle) && playerVelocity.Y == 0)
             {
                 playerVelocity.Y -= (float)(characterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
-
             }
         }
 
@@ -122,24 +132,12 @@ namespace TE4TwoDSidescroller
             //Use the flag for IsGrounded to nullify gravity and let another Jump runs
         }
 
-        public void LoadPlayerTexture2D()
-        {
-            string currentPath = Path.GetDirectoryName(
-             System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "ShadowRunRight.png";
-            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
-            {
-                rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
-            
-        }
 
         public override void Update(GameTime gameTime)
         {
             //Make varible null or change them here before up
             //gravity, position, jump fall and such
             //movement.Normelize();
-
 
             characterInput.Update(gameTime);
 
@@ -149,18 +147,24 @@ namespace TE4TwoDSidescroller
             //}
 
             /// <summary>
-            ///  Check if the Player is grounded, if it is the velocity in Y-axel will be zero. If not the Player will fall down until the flag is true.
+            ///  Check if the Player is grounded, if it is the velocity in Y-axel will be zero. 
+            ///  If not the Player will fall down until the flag is true.
             /// </summary>
+            if (!GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle))
+            {
+                playerVelocity.Y += (float)(gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
+            }
 
-            //if (GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle))
-            //{
-            //    playerVelocity.Y += (float)(gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
-            //}
+
 
 
             playerPosition += playerVelocity;
 
+            playerHitBox.X = (int)playerPosition.X;
+            playerHitBox.Y = (int)playerPosition.Y;
+
             playerVelocity = Vector2.Zero;
+
 
 
             manaTick++;
@@ -183,12 +187,9 @@ namespace TE4TwoDSidescroller
 
         }
 
-
         public override void Draw(GameTime gameTime)
         {
-
             GameInfo.spriteBatch.Draw(rightWalk, playerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
-
         }
     }
 }
