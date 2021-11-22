@@ -12,13 +12,22 @@ namespace TE4TwoDSidescroller
     {
 
         Texture2D playerTestTexture;
+        public static Vector2 playerPosition;
         public static Rectangle testRectangle;
+        int positionX;
+        int positionY;
 
 
         public PlayerTest()
         {
 
-            testRectangle = new Rectangle(500, 0, 101, 101);
+            positionX = 500;
+            positionY = 0;
+
+            playerPosition = new Vector2(positionX, positionY);
+
+            isPlayer = true;
+            testRectangle = new Rectangle(positionX, positionY, 101, 101);
 
             LoadTexture2D();
 
@@ -35,7 +44,7 @@ namespace TE4TwoDSidescroller
             {
                 playerTestTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
-
+            
         }
 
 
@@ -43,25 +52,34 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
 
+            #region Controls for testing
+
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                testRectangle.X -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionX -= (1 * gameTime.ElapsedGameTime.Milliseconds);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                testRectangle.X += (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionX += (1 * gameTime.ElapsedGameTime.Milliseconds);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                testRectangle.Y += (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionY += (1 * gameTime.ElapsedGameTime.Milliseconds);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                testRectangle.Y -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionY -= (1 * gameTime.ElapsedGameTime.Milliseconds);
             }
+
+            playerPosition.X = positionX;
+            playerPosition.Y = positionY;
+            testRectangle.X = positionX;
+            testRectangle.Y = positionY;
+            #endregion
+
 
             base.Update(gameTime);
         }

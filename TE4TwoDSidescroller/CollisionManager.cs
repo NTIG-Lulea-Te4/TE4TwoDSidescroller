@@ -15,16 +15,23 @@ namespace TE4TwoDSidescroller
 //
 //}
 
+    //firstTargetToCheck.Width > secondTargetToCheck.X
+    //&& firstTargetToCheck.Height > secondTargetToCheck.Y
+    //&& firstTargetToCheck.X<secondTargetToCheck.Width
+    //&& firstTargetToCheck.Y<secondTargetToCheck.Height
+
+
+
 public class CollisionManager
 {
     public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
     {
 
-        if (firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.X
-            && firstTargetToCheck.Width + firstTargetToCheck.Height > secondTargetToCheck.Y
-            && firstTargetToCheck.X < secondTargetToCheck.Width + secondTargetToCheck.Height
-            && firstTargetToCheck.Y < secondTargetToCheck.Width + secondTargetToCheck.Height)
-        {
+        if (firstTargetToCheck.X < secondTargetToCheck.X + secondTargetToCheck.Width
+            && firstTargetToCheck.Y < secondTargetToCheck.Y + secondTargetToCheck.Height
+            && firstTargetToCheck.X + firstTargetToCheck.Width > secondTargetToCheck.X
+            && firstTargetToCheck.Y + firstTargetToCheck.Height > secondTargetToCheck.Y) 
+            { 
 
             return true;
 

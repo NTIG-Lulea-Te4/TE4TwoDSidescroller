@@ -14,21 +14,27 @@ namespace TE4TwoDSidescroller
         Texture2D testTexture;
         Rectangle detectionHitbox;
         Rectangle knightRectangle;
+        Rectangle sourceRectangle;
+        Vector2 movementDirection;
+        Vector2 knightPosition;
         int posistionX;
         int posistionY;
 
         Health health;
         int maxHealth;
         int currentHealth;
-
+        float speed;
         public Knight()
         {
-            health = new Health();
-            detectionHitbox = new Rectangle(posistionX, posistionY, 150, 150);
-            knightRectangle = new Rectangle(posistionX, posistionY, 101, 101);
-            posistionX = 0;
-            posistionY = 0;
 
+            speed = 0.2f;
+
+            health = new Health();
+            detectionHitbox = new Rectangle(0, 0, 500, 500);
+            knightRectangle = new Rectangle(0, 0, 101, 101);
+            sourceRectangle = new Rectangle(0, 0, 101, 101);
+            knightPosition = new Vector2();
+            movementDirection = new Vector2();
 
             LoadTexture2D();
         }
@@ -50,15 +56,57 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
+            #region Controls for testing
+            //if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            //{
+            //    knightRectangle.X -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
 
-            
+            //if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            //{
+            //    knightRectangle.X += (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            //{
+            //    knightRectangle.Y += (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            //{
+            //    knightRectangle.Y -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+            //}
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            //{
+            //    knightRectangle.Y = 0;
+            //    knightRectangle.X = 0;
+
+            //}
+            #endregion
+
+            movementDirection = PlayerTest.playerPosition - knightPosition;
+            movementDirection.Normalize();
+
+
+            if (GameInfo.collisionManager.CollisionRectangleCheck(detectionHitbox, PlayerTest.testRectangle))
+            {
+
+                knightPosition += movementDirection * speed * gameTime.ElapsedGameTime.Milliseconds;
+
+            }
+
+            detectionHitbox.X = (int)knightPosition.X;
+            detectionHitbox.Y = (int)knightPosition.Y;
+            knightRectangle.X = (int)knightPosition.X;
+            knightRectangle.Y = (int)knightPosition.Y;
 
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (GameInfo.collisionManager.CollisionRectangleCheck(knightRectangle, PlayerTest.testRectangle))
+            if (GameInfo.collisionManager.CollisionRectangleCheck(detectionHitbox, PlayerTest.testRectangle))
             {
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.Pink);
             }
