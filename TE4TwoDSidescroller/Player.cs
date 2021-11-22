@@ -16,7 +16,7 @@ namespace TE4TwoDSidescroller
         private Vector2 playerPosition;
         public Vector2 playerVelocity;
 
-
+        private Rectangle playerHitBox;
 
         private Vector2 playerScale;
         private float playerRotation;
@@ -42,6 +42,8 @@ namespace TE4TwoDSidescroller
             characterInput = new PlayerInput(this);
             playerSourceRectangle = new Rectangle(0, 0, 32, 48); //Need to find how to scale the picture.
             playerVelocity = new Vector2(0, 0);
+
+            playerHitBox = new Rectangle(0, 0, 32, 48);
 
             moveSpeed = 2;
             walkSpeed = 2;
@@ -150,10 +152,10 @@ namespace TE4TwoDSidescroller
             ///  Check if the Player is grounded, if it is the velocity in Y-axel will be zero. If not the Player will fall down until the flag is true.
             /// </summary>
 
-            if (!isGrounded)
-            {
-                playerVelocity.Y += (float)(gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
-            }
+            //if (GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle))
+            //{
+            //    playerVelocity.Y += (float)(gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
+            //}
 
 
             playerPosition += playerVelocity;

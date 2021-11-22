@@ -14,7 +14,7 @@ namespace TE4TwoDSidescroller
     {
         Texture2D myTexture;
         Vector2 myPosition;
-        Rectangle myRectangle;
+        public Rectangle myRectangle;
         public Floor()
         {
 
