@@ -12,6 +12,7 @@ namespace TE4TwoDSidescroller
     {
 
         Texture2D playerTestTexture;
+        public static Color[] colorData;
         public static Vector2 playerPosition;
         public static Rectangle testRectangle;
         int positionX;
@@ -31,6 +32,7 @@ namespace TE4TwoDSidescroller
 
             LoadTexture2D();
 
+            colorData = new Color[playerTestTexture.Width * playerTestTexture.Height];
         }
 
 
