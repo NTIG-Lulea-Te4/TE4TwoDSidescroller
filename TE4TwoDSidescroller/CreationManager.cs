@@ -29,6 +29,9 @@ namespace TE4TwoDSidescroller
             Entity playerTest = new PlayerTest();
             GameInfo.entityManager.AddEntity(playerTest);
 
+            Entity firstFloor = new Floor();
+            GameInfo.entityManager.AddEntity(firstFloor);
+
         }
 
         public void CreationCycle()

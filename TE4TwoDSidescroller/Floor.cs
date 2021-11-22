@@ -18,11 +18,11 @@ namespace TE4TwoDSidescroller
         public Floor()
         {
 
-
+            PixelDraw();
         }
 
 
-        public void Initialize()
+        public void PixelDraw()
         {
 
             myPosition = new Vector2(0, 400);

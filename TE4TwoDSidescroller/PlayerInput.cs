@@ -65,7 +65,6 @@ namespace TE4TwoDSidescroller
         public PlayerInput(Character character)
             : base(character)
         {
-
             currentKeyboardState = Keyboard.GetState();
 
             currentMouseState = Mouse.GetState();
@@ -97,9 +96,27 @@ namespace TE4TwoDSidescroller
             //doubleJumpKey = Keys.Space;
         }
 
+        //public static KeyboardState GetThisState()
+        //{
+        //    previousKeyboardState = currentKeyboardState;
+        //    currentKeyboardState = Keyboard.GetState();
+        //    return currentKeyboardState;
+        //}
+
+        //public static bool IsPressed(Keys key)
+        //{
+        //    return currentKeyboardState.IsKeyDown(key);
+        //}
+
+        //public static bool HasBeenPressed(Keys key)
+        //{
+        //    return currentKeyboardState.IsKeyDown(key) && !previousKeyboardState.IsKeyDown(key);
+        //}
 
         public override void Update(GameTime gameTime)
         {
+            //GetThisState();
+
             #region Movements
 
             if (Keyboard.GetState().IsKeyDown(upKey))
@@ -107,15 +124,6 @@ namespace TE4TwoDSidescroller
 
                 character.MoveUp();
             }
-
-            //if(currentKeyboardState.IsKeyDown(upKey) && previousKeyboardState.IsKeyDown(upKey))
-            //{
-            //    character.MoveUp();
-            ////    //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            ////    //{
-
-            ////    //}
-            //}
 
             if (Keyboard.GetState().IsKeyDown(downKey))
             {
@@ -125,40 +133,37 @@ namespace TE4TwoDSidescroller
 
             if (Keyboard.GetState().IsKeyDown(leftKey))
             {
-
                 character.MoveLeft();
             }
 
             if (Keyboard.GetState().IsKeyDown(rightKey))
             {
-
                 character.MoveRight();
             }
 
 
-            if (Keyboard.GetState().IsKeyDown(runKey) /*&& character.HasRunned == false*/)
+            if (Keyboard.GetState().IsKeyDown(runKey))
             {
                 character.Run();
-                //character.HasRunned = true;
-
+            }
+            else
+            {
+                character.DoNotRun();
             }
 
-            if (Keyboard.GetState().IsKeyUp(runKey))
+            if (Keyboard.GetState().IsKeyDown(jumpKey))
             {
-                character.DontRun();
-            }
-
-            if (Keyboard.GetState().IsKeyDown(jumpKey) && character.HasJumped == false)
-            {
-
                 character.Jump(gameTime);
-                //character.HasJumped = true;
             }
 
-            //if (Keyboard.GetState().IsKeyUp(jumpKey) && character.HasJumped == true)
+            //if(currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
             //{
+            //    character.Jump(gameTime);
+            //}
 
-            //    character.Jump();
+            //if (HasBeenPressed(jumpKey))
+            //{
+            //    character.Jump(gameTime);
             //}
 
             if (Keyboard.GetState().IsKeyDown(doubleJumpKey))

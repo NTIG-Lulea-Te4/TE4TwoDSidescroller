@@ -14,13 +14,15 @@ namespace TE4TwoDSidescroller
 
         private Rectangle playerSourceRectangle;
         private Vector2 playerPosition;
-        private Vector2 playerVelocity;
+        public Vector2 playerVelocity;
 
-        private float jumpTimer;
+
 
         private Vector2 playerScale;
         private float playerRotation;
         private Vector2 playerOrigin;
+
+        private float acceleration;
 
         Floor floorTest;
 
@@ -38,12 +40,15 @@ namespace TE4TwoDSidescroller
         public Player()
         {
             characterInput = new PlayerInput(this);
-
             playerSourceRectangle = new Rectangle(0, 0, 32, 48); //Need to find how to scale the picture.
+            playerVelocity = new Vector2(0, 0);
 
-            playerVelocity = new Vector2(2.5f, 2.5f);
+            moveSpeed = 2;
+            walkSpeed = 2;
+            runSpeed = 4;
 
-            jumpTimer = 0.05f;
+            gravity = 0.4f;
+
 
             playerScale = new Vector2(3, 3);
             playerRotation = 0;
@@ -52,11 +57,10 @@ namespace TE4TwoDSidescroller
             playerPosition.X = 100;
             playerPosition.Y = 100;
 
-            WalkSpeed = 2.5f;
-            RunSpeed = 5.5f;
 
-            CharacterJumpHeight = 0.45f; //With each -0.1 you lose 2 pixel heights
-            HasJumped = false;
+            characterJumpHeight = 0.2f; //With each -0.1 you lose 2 pixel heights
+
+            isGrounded = true;
 
             LoadPlayerTexture2D();
 
@@ -72,126 +76,42 @@ namespace TE4TwoDSidescroller
 
         public override void MoveUp()
         {
-            playerPosition.Y -= playerVelocity.Y;
+            playerVelocity.Y -= moveSpeed;
         }
 
         public override void MoveDown()
         {
-            playerPosition.Y += playerVelocity.Y;
+            playerVelocity.Y += moveSpeed;
         }
 
         public override void MoveLeft()
         {
-            playerPosition.X -= playerVelocity.X;
+            playerVelocity.X -= moveSpeed;
         }
 
         public override void MoveRight()
         {
-            playerPosition.X += playerVelocity.X;
+            playerVelocity.X += moveSpeed;
         }
 
         public override void Run()
         {
-            //for (int Timer = 0; Timer < 180; Timer++)
-            //{
-            //    if (Timer == 0)
-            //    {
-            //        CharacterVelocity = RunSpeed;
-            //    }
-            //    else if (Timer == 179)
-            //    {
-            //        CharacterVelocity = WalkSpeed;
-            //    }
-            //}
-
-            HasRunned = false;
-            while (!HasRunned )
-            {
-                playerVelocity.X = RunSpeed;
-                if(playerVelocity.X == RunSpeed)
-                {
-                    HasRunned = true;
-                }
-            }
-
-            //if (IsRunning == true)
-            //{
-            //    CharacterVelocity = RunSpeed;
-            //}
-            //else
-            //{
-            //    IsRunning = false;
-            //    CharacterVelocity = WalkSpeed;
-            //}
+            moveSpeed = runSpeed;
         }
 
-        public override void DontRun()
+        public override void DoNotRun()
         {
-            HasRunned = true;
-            while (HasRunned == true)
-            {
-                playerVelocity.X = WalkSpeed;
-                if (playerVelocity.X == WalkSpeed)
-                {
-                    HasRunned = false;
-                }
-            }
+            moveSpeed = walkSpeed;
         }
 
         public override void Jump(GameTime gameTime)
         {
-            //float beforeJumpPlayerPosition = playerPosition.Y;
-            playerPosition.Y -= (float)(CharacterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
+            //Is on the ground and the velocity.Y is zero
+            if (isGrounded && playerVelocity.Y == 0)
+            {
+                playerVelocity.Y -= (float)(characterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
 
-
-            //HasJumped = true;
-
-            //    float afterJumpPlayerPosition = playerPosition.Y;
-            //    playerPosition.Y += (float)(CharacterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
-
-            //    if (afterJumpPlayerPosition >= beforeJumpPlayerPosition)
-            //    {
-            //        playerPosition.Y = beforeJumpPlayerPosition;
-            //        HasJumped = false;
-            //    }
-
-
-            //playerVelocity.Y = -5f;
-            //HasJumped = true;
-
-            //if(HasJumped == true)
-            //{
-            //    float i = 1;
-            //    playerVelocity.Y += 0.15f * i;
-            //}
-
-            //if (playerPosition.Y + Floor.Height >= 20) //Ground check?!
-            //{
-            //    HasJumped = false;
-            //}
-
-            //if(HasJumped == false)
-            //{
-            //    playerVelocity.Y = 0f;
-            //}
-        }
-
-        public override void DontJump()
-        {
-            //playerPosition.Y -= CharacterJumpHeight;
-
-            //HasJumped = true;
-            //while (HasJumped == true)
-            //{
-            //    float i = 1;
-            //    playerPosition.Y += 10f * i;
-
-            //    if (playerPosition.Y >= 300)
-            //    {
-            //        HasJumped = false;
-            //        playerPosition.Y = 0;
-            //    }
-            //}
+            }
         }
 
         public override void DoubleJump()
@@ -216,12 +136,30 @@ namespace TE4TwoDSidescroller
         {
             //Make varible null or change them here before up
             //gravity, position, jump fall and such
-
-
-
+            //movement.Normelize();
 
 
             characterInput.Update(gameTime);
+
+            //if (playerVelocity != Vector2.Zero)
+            //{
+            //    playerVelocity.Normalize();
+            //}
+
+            /// <summary>
+            ///  Check if the Player is grounded, if it is the velocity in Y-axel will be zero. If not the Player will fall down until the flag is true.
+            /// </summary>
+
+            if (!isGrounded)
+            {
+                playerVelocity.Y += (float)(gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
+            }
+
+
+            playerPosition += playerVelocity;
+
+            playerVelocity = Vector2.Zero;
+
 
             manaTick++;
             if (mana < manaCheck && manaTick == 15)
@@ -241,18 +179,13 @@ namespace TE4TwoDSidescroller
 
             //sourceRectangle = new Rectangle(0, 0, 32, 48);
 
-
         }
 
 
         public override void Draw(GameTime gameTime)
         {
 
-            //GameInfo.spriteBatch.Draw(rightWalk, playerSourceRectangle, Color.White);
-
             GameInfo.spriteBatch.Draw(rightWalk, playerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
-
-            //floorTest.Draw(gameTime);
 
         }
     }
