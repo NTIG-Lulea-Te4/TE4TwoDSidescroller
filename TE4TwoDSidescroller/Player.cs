@@ -12,7 +12,6 @@ namespace TE4TwoDSidescroller
         public Texture2D rightWalk;
         Rectangle destinationRectangle;
         Rectangle sourceRectangle;
-        Floor floorTest;
         int currentHEalth;
         int manaCheck;
         int maxHealth;
@@ -21,10 +20,8 @@ namespace TE4TwoDSidescroller
         
 
         public Player()
-        {
-            GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
+        { 
             destinationRectangle = new Rectangle(100, 100, 32, 48);
-            floorTest = new Floor();
             maxHealth = 150;
             currentHEalth = maxHealth;
             mana = 100;
@@ -46,12 +43,8 @@ namespace TE4TwoDSidescroller
         {
 
 
-
             // TODO: Add your initialization logic here
 
-
-            floorTest.Initialize();
-            
         }
 
         public override void Update(GameTime gameTime)
@@ -80,8 +73,6 @@ namespace TE4TwoDSidescroller
         {
             
             GameInfo.spriteBatch.Draw(rightWalk, destinationRectangle, sourceRectangle, Color.White);
-            //GameInfo.entityManager.Draw(gameTime);
-            //floorTest.Draw(gameTime);
             
 
         }

@@ -39,7 +39,7 @@ namespace TE4TwoDSidescroller
         protected override void LoadContent()
         {
 
-
+            GameInfo.creationManager.LoadEntities();
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
