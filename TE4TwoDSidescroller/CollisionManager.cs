@@ -27,6 +27,7 @@ namespace TE4TwoDSidescroller
 
 
 
+    // :D
     public class CollisionManager
     {
         public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
