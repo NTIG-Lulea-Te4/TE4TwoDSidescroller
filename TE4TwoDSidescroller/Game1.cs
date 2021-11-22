@@ -7,16 +7,15 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-
+            
         public Game1()
         {
-            
+
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.entityManager = new EntityManagear();
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.creationManager = new CreationManager();
-            GameInfo.screenManager = new ScreenManager();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -26,47 +25,42 @@ namespace TE4TwoDSidescroller
         protected override void Initialize()
         {
 
-
-
-            // TODO: Add your initialization logic here
-
-
             GameInfo.creationManager.Initialize();
-            
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            
 
-            GameInfo.creationManager.LoadEntities();
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
-            // TODO: use this.Content to load your game content here
+            GameInfo.creationManager.Initialize();
+
         }
 
         protected override void Update(GameTime gameTime)
         {
+
+            GameInfo.entityManager.Update(gameTime);
+
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-            // TODO: Add your update logic here
-
-            GameInfo.entityManager.Update(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             GameInfo.spriteBatch.Begin();
 
             GameInfo.entityManager.Draw(gameTime);
 
             GameInfo.spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

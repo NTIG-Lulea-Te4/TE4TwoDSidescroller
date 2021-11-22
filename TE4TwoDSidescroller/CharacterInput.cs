@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TE4TwoDSidescroller
 {
-    class CharacterInput
+    public class CharacterInput
     {
-        Character character;
+        public Character character;
 
         public CharacterInput(Character character)
         {
