@@ -38,18 +38,9 @@ namespace TE4TwoDSidescroller
         {
             characterInput = new PlayerInput(this);
             playerSourceRectangle = new Rectangle(0, 0, 32, 48); //Need to find how to scale the picture.
-            movementVelocity = new Vector2(0, 0);
-
             playerHitBox = new Rectangle(0, 0, 32, 48);
-            playerRectangle = new Rectangle(10, 10, 200, 200);
 
-            floorTest = new Floor();
-
-            maxHealth = 150;
-            currentHealth = maxHealth;
-            mana = 100;
-            manaCheck = mana;
-            manaTick = 0;
+            movementVelocity = new Vector2(0, 0);
 
             moveSpeed = 2;
             walkSpeed = 2;
@@ -70,7 +61,7 @@ namespace TE4TwoDSidescroller
             LoadPlayerTexture2D();
 
             maxHealth = 150;
-            currentHEalth = maxHealth;
+            currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
@@ -124,7 +115,7 @@ namespace TE4TwoDSidescroller
         public override void Jump(GameTime gameTime)
         {
             //Is on the ground and the velocity.Y is zero
-            if (GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle) && movementVelocity.Y == 0)
+            if (GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && movementVelocity.Y == 0)
             {
                 movementVelocity.Y -= (float)(characterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
             }
@@ -149,7 +140,7 @@ namespace TE4TwoDSidescroller
             characterInput.Update(gameTime);
 
 
-            if (!GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+            if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
             {
                increasingGravity += (float)(GameInfo.gameInformationSystem.gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
             }
