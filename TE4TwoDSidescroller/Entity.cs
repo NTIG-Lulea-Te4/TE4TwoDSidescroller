@@ -15,6 +15,16 @@ namespace TE4TwoDSidescroller
         public bool hasCollider;
         public bool isPlayer;
 
+        protected int currentHealth;
+        protected int manaCheck;
+        protected int maxHealth;
+        protected int manaTick;
+        protected int mana;
+        protected int movementSpeed;
+        protected int jumpHeight;
+
+
+
         public float rotation;
         public float scale;
         public Vector2 position;

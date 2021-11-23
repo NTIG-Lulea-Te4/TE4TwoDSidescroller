@@ -29,8 +29,6 @@ namespace TE4TwoDSidescroller
         private Color[] colorData;
 
         private Health health;
-        private int maxHealth;
-        private int currentHealth;
         private float speed;
 
         bool hasCollided;
