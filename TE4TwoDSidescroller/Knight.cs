@@ -11,6 +11,12 @@ namespace TE4TwoDSidescroller
     class Knight : Character
     {
 
+        //int gravity; - Game info
+        //int currentYAxis; - Entity
+        //int currentGravity; - Entity
+        //int multiplier;
+        //isGrounded - Entity
+
         private Texture2D knightTexture;
         private Rectangle detectionHitbox;
         private Rectangle knightRectangle;
@@ -124,7 +130,7 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, knightRectangle, Color.White);
 
             // base.Draw(gameTime);
         }
