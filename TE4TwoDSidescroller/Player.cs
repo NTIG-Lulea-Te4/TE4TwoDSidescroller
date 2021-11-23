@@ -137,7 +137,7 @@ namespace TE4TwoDSidescroller
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "ShadowRunRight.png";
+             + "/Content/Pngs/MainCharacters/" + "ShadowRunRight.png";
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
                 rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
