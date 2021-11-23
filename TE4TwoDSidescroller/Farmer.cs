@@ -68,7 +68,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public override void Jump()
+        public override void Jump(GameTime gameTimes)
         {
 
             myPosition.Y = myPosition.Y + jumpHeight * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;

@@ -162,7 +162,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public static void SoundPlayerPlayer(SoundPlayer playingFile)
+        public static void PlaySound(SoundPlayer playingFile)
         {
 
             playingFile.PlaySync();

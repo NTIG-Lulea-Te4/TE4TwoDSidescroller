@@ -11,6 +11,18 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp3.1\Content\obj\Windows\Content\Song.wav" />
+    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\Box.png" />
+    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\MainCharacters\ShadowRunRight.png" />
+    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\MainCharacters\SlimeIdleAnim.png" />
+    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\PurpleBox.png" />
+    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\ShadowIdleAnim.png" />
+    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\ShadowRunRight.png" />
+    <Content Include="bin\Debug\netcoreapp3.1\Content\Sound\Song.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
