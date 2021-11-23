@@ -12,20 +12,22 @@ namespace TE4TwoDSidescroller
     class FarmerInput : CharacterInput
     {
 
-        public FarmerInput(Character character) : base (character)
-        {  
-
-
-
-        }
-    
-    
-        public override void Update(GameTime gameTime)
+        public FarmerInput(Farmer character) : base(character)
         {
 
 
 
         }
-    
+
+
+        public override void Update(GameTime gameTime)
+        {
+
+            
+
+        }
+
+
+
     }
 }

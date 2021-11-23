@@ -21,8 +21,6 @@ namespace TE4TwoDSidescroller
         int posistionY;
 
         Health health;
-        int maxHealth;
-        int currentHealth;
         float speed;
         public Knight()
         {

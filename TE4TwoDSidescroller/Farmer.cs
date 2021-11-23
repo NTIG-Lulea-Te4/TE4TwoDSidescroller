@@ -13,13 +13,7 @@ namespace TE4TwoDSidescroller
     class Farmer : Character
     {
 
-        int currentHealth;
-        int manaCheck;
-        int maxHealth;
-        int manaTick;
-        int mana;
-        int movementSpeed;
-        int jumpHeight;
+
 
         Texture2D myTexture;
         Vector2 myPosition;
@@ -39,6 +33,8 @@ namespace TE4TwoDSidescroller
             movementSpeed = 5;
             jumpHeight = 3;
             frames = 0;
+
+            
 
             myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
             sourceRectangle = new Rectangle(32 * frames, 0, 32, 48);
@@ -61,21 +57,21 @@ namespace TE4TwoDSidescroller
         public override void MoveRight()
         {
 
-            myPosition.X = myPosition.X + movementSpeed;
+            myPosition.X = myPosition.X + movementSpeed * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
 
         public override void MoveLeft()
         {
 
-            myPosition.X = myPosition.X - movementSpeed;
+            myPosition.X = myPosition.X - movementSpeed * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
 
         public override void Jump()
         {
 
-            myPosition.Y = myPosition.Y + jumpHeight;
+            myPosition.Y = myPosition.Y + jumpHeight * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
 

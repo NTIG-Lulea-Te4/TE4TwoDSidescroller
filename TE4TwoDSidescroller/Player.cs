@@ -16,11 +16,7 @@ namespace TE4TwoDSidescroller
 
         Floor floorTest;
 
-        private int currentHEalth;
-        private int manaCheck;
-        private int maxHealth;
-        private int manaTick;
-        private int mana;
+
 
         private int currentFrame;
         private int frameCounter;
@@ -36,7 +32,7 @@ namespace TE4TwoDSidescroller
             floorTest = new Floor();
 
             maxHealth = 150;
-            currentHEalth = maxHealth;
+            currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
