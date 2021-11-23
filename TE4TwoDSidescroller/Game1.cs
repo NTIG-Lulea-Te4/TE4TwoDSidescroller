@@ -7,10 +7,10 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-            
+        //SoundInput soundInput;
         public Game1()
         {
-
+            //soundInput = new SoundInput();
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.entityManager = new EntityManagear();
@@ -42,9 +42,10 @@ namespace TE4TwoDSidescroller
 
         protected override void Update(GameTime gameTime)
         {
-
+            //soundInput.PlaySound();
             GameInfo.entityManager.Update(gameTime);
 
+            GameInfo.collisionManager.CollisionUpdate();
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {

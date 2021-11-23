@@ -112,6 +112,7 @@ namespace TE4TwoDSidescroller
             {
 
                 tempEntity.Update(gameTime);
+                
                 tempEntity = tempEntity.nextEntity;
 
             }

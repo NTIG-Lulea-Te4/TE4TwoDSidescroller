@@ -21,6 +21,12 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
 
+            do
+            {
+                Console.WriteLine("yey");
+            } while (1 > 0);
+
+
         }
 
 

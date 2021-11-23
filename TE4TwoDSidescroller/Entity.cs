@@ -19,6 +19,16 @@ namespace TE4TwoDSidescroller
         public float increasingGravity;
         public float amplifiedYForce;
 
+        protected int currentHealth;
+        protected int manaCheck;
+        protected int maxHealth;
+        protected int manaTick;
+        protected int mana;
+        protected float movementSpeed;
+        protected int jumpHeight;
+
+
+
         public float rotation;
         public float scale;
         public Vector2 position;

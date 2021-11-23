@@ -21,6 +21,9 @@ namespace TE4TwoDSidescroller
         static public ScreenManager screenManager;
         static public CreationManager creationManager;
         static public GameInformationSystem gameInformationSystem; 
+        static public GameTime gameTime;
+        
+        
 
         #region kommentar
         /*        static public void Initialize()

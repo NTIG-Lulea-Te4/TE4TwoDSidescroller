@@ -24,11 +24,7 @@ namespace TE4TwoDSidescroller
 
         Floor floorTest;
 
-        private int currentHEalth;
-        private int manaCheck;
-        private int maxHealth;
-        private int manaTick;
-        private int mana;
+
 
         private int currentFrame;
         private int frameCounter;
@@ -45,6 +41,15 @@ namespace TE4TwoDSidescroller
             movementVelocity = new Vector2(0, 0);
 
             playerHitBox = new Rectangle(0, 0, 32, 48);
+            playerRectangle = new Rectangle(10, 10, 200, 200);
+
+            floorTest = new Floor();
+
+            maxHealth = 150;
+            currentHealth = maxHealth;
+            mana = 100;
+            manaCheck = mana;
+            manaTick = 0;
 
             moveSpeed = 2;
             walkSpeed = 2;

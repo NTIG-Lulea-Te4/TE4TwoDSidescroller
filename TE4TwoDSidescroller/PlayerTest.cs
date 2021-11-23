@@ -33,6 +33,8 @@ namespace TE4TwoDSidescroller
             LoadTexture2D();
 
             colorData = new Color[playerTestTexture.Width * playerTestTexture.Height];
+            playerTestTexture.GetData(colorData);
+
         }
 
 
