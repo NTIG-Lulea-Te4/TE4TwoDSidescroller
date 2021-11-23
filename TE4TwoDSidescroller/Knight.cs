@@ -11,44 +11,47 @@ namespace TE4TwoDSidescroller
     class Knight : Character
     {
 
-        Texture2D knightTexture;
-        Rectangle detectionHitbox;
-        Rectangle knightRectangle;
-        Rectangle sourceRectangle;
-        Vector2 movementDirection;
-        Vector2 knightPosition;
-        int posistionX;
-        int posistionY;
-        Color[] colorData;
+        private Texture2D knightTexture;
+        private Rectangle detectionHitbox;
+        private Rectangle knightRectangle;
+        private Rectangle sourceRectangle;
+        private Vector2 movementDirection;
+        private Vector2 knightPosition;
+        private Vector2 knightOrigin;
+        private int posistionX;
+        private int posistionY;
+        private Color[] colorData;
 
-        Health health;
-        int maxHealth;
-        int currentHealth;
-        float speed;
+        private Health health;
+        private int maxHealth;
+        private int currentHealth;
+        private float speed;
 
 
         public Knight()
         {
 
-            speed = 0.2f;
+            speed = 0.1f;
 
             health = new Health();
             detectionHitbox = new Rectangle(0, 0, 500, 500);
-            knightRectangle = new Rectangle(0, 0, 101, 101);
-            sourceRectangle = new Rectangle(0, 0, 101, 101);
+            knightRectangle = new Rectangle(0, 0, 32, 46);
+            sourceRectangle = new Rectangle(0, 0, 32, 24);
             knightPosition = new Vector2();
             movementDirection = new Vector2();
+            knightOrigin = new Vector2(0, 0);
 
             LoadTexture2D();
 
             colorData = new Color[knightTexture.Width * knightTexture.Height];
+            knightTexture.GetData(colorData);
         }
 
         public void LoadTexture2D()
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "Box.png";
+             + "/Content/Pngs/" + "ShadowIdleAnim.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -64,22 +67,22 @@ namespace TE4TwoDSidescroller
             #region Controls for testing
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                knightPosition.X -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+                knightPosition.X -= (speed * gameTime.ElapsedGameTime.Milliseconds);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                knightPosition.X += (1 * gameTime.ElapsedGameTime.Milliseconds);
+                knightPosition.X += (speed * gameTime.ElapsedGameTime.Milliseconds);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                knightPosition.Y += (1 * gameTime.ElapsedGameTime.Milliseconds);
+                knightPosition.Y += (speed * gameTime.ElapsedGameTime.Milliseconds);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                knightPosition.Y -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+                knightPosition.Y -= (speed * gameTime.ElapsedGameTime.Milliseconds);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
@@ -121,7 +124,8 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White, 
+                0, knightOrigin, 4, SpriteEffects.None, 0);
 
             // base.Draw(gameTime);
         }

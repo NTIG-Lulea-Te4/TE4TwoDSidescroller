@@ -30,6 +30,9 @@
     <None Update="Content\Pngs\ShadowRunRight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Pngs\Star.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Content\ShadowRunRight.png">
       <CustomToolNamespace>ShadowRunRight</CustomToolNamespace>
     </None>

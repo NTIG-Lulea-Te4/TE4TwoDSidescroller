@@ -25,12 +25,10 @@ namespace TE4TwoDSidescroller
     //Pixelperfect
     //Distance
 
-
-
     // :D
     public class CollisionManager
     {
-        public bool CollisionRectangleCheck(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
+        public bool RectangleCollision(Rectangle firstTargetToCheck, Rectangle secondTargetToCheck)
         {
 
             if (firstTargetToCheck.X < secondTargetToCheck.X + secondTargetToCheck.Width
@@ -113,7 +111,7 @@ namespace TE4TwoDSidescroller
                         if (secondStepEntity.isActive && secondStepEntity.hasCollider)
                         {
 
-                            if (CollisionRectangleCheck(stepEntity.rectangle, secondStepEntity.rectangle))
+                            if (RectangleCollision(stepEntity.rectangle, secondStepEntity.rectangle))
                             {
                                 stepEntity.HasCollidedWith(secondStepEntity);
                                 secondStepEntity.HasCollidedWith(stepEntity);
