@@ -20,8 +20,7 @@ namespace TE4TwoDSidescroller
         static public EntityManagear entityManager;
         static public ScreenManager screenManager;
         static public CreationManager creationManager;
-        
-        
+        static public GameInformationSystem gameInformationSystem; 
 
         #region kommentar
         /*        static public void Initialize()

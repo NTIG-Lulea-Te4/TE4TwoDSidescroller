@@ -14,15 +14,13 @@ namespace TE4TwoDSidescroller
 
         private Rectangle playerSourceRectangle;
         private Vector2 playerPosition;
-        private Vector2 playerVelocity;
+        private Vector2 movementVelocity;
 
         private Rectangle playerHitBox;
 
         private Vector2 playerScale;
         private float playerRotation;
         private Vector2 playerOrigin;
-
-        private float acceleration;
 
         Floor floorTest;
 
@@ -37,20 +35,20 @@ namespace TE4TwoDSidescroller
 
         private Texture2D currentTexture;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public Player()
         {
             characterInput = new PlayerInput(this);
             playerSourceRectangle = new Rectangle(0, 0, 32, 48); //Need to find how to scale the picture.
-            playerVelocity = new Vector2(0, 0);
+            movementVelocity = new Vector2(0, 0);
 
             playerHitBox = new Rectangle(0, 0, 32, 48);
 
             moveSpeed = 2;
             walkSpeed = 2;
             runSpeed = 4;
-
-            gravity = 0.15f;
-
 
             playerScale = new Vector2(3, 3);
             playerRotation = 0;
@@ -62,8 +60,8 @@ namespace TE4TwoDSidescroller
 
             characterJumpHeight = 8.5f; //With each -0.1 you lose 2 pixel heights
 
-            isGrounded = true;
-
+            IsGrounded = false;
+            
             LoadPlayerTexture2D();
 
             maxHealth = 150;
@@ -89,22 +87,23 @@ namespace TE4TwoDSidescroller
 
         public override void MoveUp()
         {
-            playerVelocity.Y -= moveSpeed;
+            movementVector.Y -= moveSpeed;
+            
         }
 
         public override void MoveDown()
         {
-            playerVelocity.Y += moveSpeed;
+            movementVector.Y += moveSpeed;
         }
 
         public override void MoveLeft()
         {
-            playerVelocity.X -= moveSpeed;
+            movementVector.X -= moveSpeed;
         }
 
         public override void MoveRight()
         {
-            playerVelocity.X += moveSpeed;
+            movementVector.X += moveSpeed;
         }
 
         public override void Run()
@@ -120,9 +119,9 @@ namespace TE4TwoDSidescroller
         public override void Jump(GameTime gameTime)
         {
             //Is on the ground and the velocity.Y is zero
-            if (GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle) && playerVelocity.Y == 0)
+            if (GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle) && movementVelocity.Y == 0)
             {
-                playerVelocity.Y -= (float)(characterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
+                movementVelocity.Y -= (float)(characterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
             }
         }
 
@@ -135,36 +134,27 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            //Make varible null or change them here before up
-            //gravity, position, jump fall and such
-            //movement.Normelize();
+
+            //movementVector.Normelize();
+            //if (playerVelocity != Vector2.Zero)
+            //{
+            //    movementVector.Normalize();
+            //}
 
             characterInput.Update(gameTime);
 
-            //if (playerVelocity != Vector2.Zero)
-            //{
-            //    playerVelocity.Normalize();
-            //}
 
-            /// <summary>
-            ///  Check if the Player is grounded, if it is the velocity in Y-axel will be zero. 
-            ///  If not the Player will fall down until the flag is true.
-            /// </summary>
-            if (!GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle))
+            if (!GameInfo.collisionManager.CollisionRectangleCheck(playerHitBox, floorTest.myRectangle) && !IsGrounded)
             {
-                playerVelocity.Y += (float)(gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
+               increasingGravity += (float)(GameInfo.gameInformationSystem.gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
             }
+       
+            
 
-
-
-
-            playerPosition += playerVelocity;
+            playerPosition += movementVector;
 
             playerHitBox.X = (int)playerPosition.X;
             playerHitBox.Y = (int)playerPosition.Y;
-
-            playerVelocity = Vector2.Zero;
-
 
 
             manaTick++;
@@ -185,6 +175,7 @@ namespace TE4TwoDSidescroller
 
             //sourceRectangle = new Rectangle(0, 0, 32, 48);
 
+            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)

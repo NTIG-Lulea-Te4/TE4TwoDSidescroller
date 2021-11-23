@@ -13,8 +13,6 @@ namespace TE4TwoDSidescroller
 
         public float moveSpeed;
 
-        public float gravity;
-
         public float runSpeed;
         public float walkSpeed;
 
@@ -22,7 +20,6 @@ namespace TE4TwoDSidescroller
 
         public bool isRunning;
         public bool hasJumped;
-        public  bool isGrounded;
         
         public Character()
         {
@@ -173,7 +170,7 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            
+            movementVector = Vector2.Zero;
         }
     }
 }

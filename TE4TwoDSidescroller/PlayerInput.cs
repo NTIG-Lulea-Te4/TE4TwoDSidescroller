@@ -169,6 +169,7 @@ namespace TE4TwoDSidescroller
             if (Keyboard.GetState().IsKeyDown(doubleJumpKey))
             {
                 character.DoubleJump();
+                
             }
 
 
@@ -265,7 +266,7 @@ namespace TE4TwoDSidescroller
             //previousKeyboardState = currentKeyboardState;
             //previousMouseState = currentMouseState;
 
-            base.Update(gameTime);
+          
         }
     }
 }

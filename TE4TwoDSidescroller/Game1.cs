@@ -16,6 +16,7 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager = new EntityManagear();
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.creationManager = new CreationManager();
+            GameInfo.gameInformationSystem = new GameInformationSystem();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
