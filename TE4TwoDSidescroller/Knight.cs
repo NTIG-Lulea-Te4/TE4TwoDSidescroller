@@ -35,8 +35,8 @@ namespace TE4TwoDSidescroller
 
             health = new Health();
             detectionHitbox = new Rectangle(0, 0, 500, 500);
-            knightRectangle = new Rectangle(0, 0, 32, 46);
-            sourceRectangle = new Rectangle(0, 0, 32, 24);
+            knightRectangle = new Rectangle(0, 0, 101, 101);
+            sourceRectangle = new Rectangle(0, 0, 0, 0);
             knightPosition = new Vector2();
             movementDirection = new Vector2();
             knightOrigin = new Vector2(0, 0);
@@ -51,7 +51,7 @@ namespace TE4TwoDSidescroller
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "ShadowIdleAnim.png";
+             + "/Content/Pngs/" + "Box.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -124,8 +124,7 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White, 
-                0, knightOrigin, 4, SpriteEffects.None, 0);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White);
 
             // base.Draw(gameTime);
         }

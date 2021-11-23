@@ -92,7 +92,7 @@ namespace TE4TwoDSidescroller
 
 
 
-        public void ReturnCollidedObjects()
+        public void CollisionUpdate()
         {
             Entity stepEntity = GameInfo.entityManager.firstEntity;
             Entity secondStepEntity = null;
