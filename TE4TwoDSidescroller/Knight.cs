@@ -29,7 +29,7 @@ namespace TE4TwoDSidescroller
         private Color[] colorData;
 
         private Health health;
-        private float speed;
+
 
         bool hasCollided;
 
@@ -38,7 +38,7 @@ namespace TE4TwoDSidescroller
 
             hasCollided = false;
 
-            speed = 0.1f;
+            movementSpeed = 0.1f;
 
             health = new Health();
             detectionHitbox = new Rectangle(0, 0, 500, 500);
@@ -112,7 +112,7 @@ namespace TE4TwoDSidescroller
             if (GameInfo.collisionManager.RectangleCollision(detectionHitbox, PlayerTest.testRectangle))
             {
 
-                knightPosition += movementDirection * speed * gameTime.ElapsedGameTime.Milliseconds;
+                knightPosition += movementDirection * movementSpeed * gameTime.ElapsedGameTime.Milliseconds;
 
             }
 

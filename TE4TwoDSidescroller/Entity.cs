@@ -20,7 +20,7 @@ namespace TE4TwoDSidescroller
         protected int maxHealth;
         protected int manaTick;
         protected int mana;
-        protected int movementSpeed;
+        protected float movementSpeed;
         protected int jumpHeight;
 
 
