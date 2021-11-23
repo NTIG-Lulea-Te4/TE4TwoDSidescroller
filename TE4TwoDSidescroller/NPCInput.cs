@@ -11,11 +11,13 @@ namespace TE4TwoDSidescroller
     {
         Character character;
 
-        public Vector2 startPoint = new Vector2(100, 450);
+        static Vector2 startPoint;
         public bool moveRight = true;
-        public int pointA = 100;
-        public int pointB = 200;
-        public float npcSpeed = 0.2f;
+        static int pointA = 100;
+        //static Vector2 pointB = character.position.X;
+        //public Vector2 character.position.X = startP;
+        //public float npcSpeed = 0.2f;
+        //character.position.X = new Vector2 st
 
         private NPCInput(Character character) 
             : base(character)
@@ -36,10 +38,16 @@ namespace TE4TwoDSidescroller
                 //startPoint.X -= npcSpeed * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
                 character.MoveLeft();
             }
-            //if (startPoint.X > pointB || startPoint.X < pointA)
+
+            //if (character.position.X > pointB || character.position.X < pointA)
             //{
             //    moveRight = !moveRight;
-            //}
+            //} 
+            if (character.position.X > pointB || character.position.X < pointA)
+            {
+                moveRight = !moveRight;
+            }
+            character.position
 
             do
             {
