@@ -11,14 +11,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\netcoreapp3.1\Content\obj\Windows\Content\Song.wav" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\ShadowIdleAnim.png" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\ShadowRunRight.png" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Sound\Song.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
@@ -26,7 +18,16 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\obj\Windows\Content\Song.wav">
+    <None Update="Content\Pngs\Box.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Pngs\MainCharacters\ShadowRunRight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Pngs\MainCharacters\SlimeIdleAnim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Pngs\PurpleBox.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Content\Pngs\ShadowIdleAnim.png">
@@ -35,8 +36,14 @@
     <None Update="Content\Pngs\ShadowRunRight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Pngs\Star.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Content\ShadowRunRight.png">
       <CustomToolNamespace>ShadowRunRight</CustomToolNamespace>
+    </None>
+    <None Update="Content\sound.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

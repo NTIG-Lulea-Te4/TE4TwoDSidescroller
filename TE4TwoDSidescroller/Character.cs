@@ -7,64 +7,60 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TE4TwoDSidescroller
 {
-    class Character : Entity
+    public class Character : Entity
     {
-        CharacterInput characterInput;
+        public CharacterInput characterInput;
 
-        private Vector2 characterPosition;
+        public float moveSpeed;
 
-        private float walkSpeed;
-        private float runSpeed;
+        public float runSpeed;
+        public float walkSpeed;
 
-        private float characterVelocity;
+        public float characterJumpHeight;
 
-        private float characterJumpHeight;
-
+        public bool isRunning;
+        public bool hasJumped;
         
         public Character()
         {
-            characterInput = new CharacterInput(this);
 
-            characterVelocity = 1.5f;
-            runSpeed = 3f;
-
-            characterPosition.Y = 50;
-            characterPosition.X = 50;
-
-            characterJumpHeight = 3;
-
-            
         }
+
 
         #region Movement
         public virtual void MoveUp()
         {
-            characterPosition.Y -= characterVelocity;
+            
         }
 
         public virtual void MoveDown()
         {
-            characterPosition.Y += characterVelocity;
+            
         }
 
         public virtual void MoveLeft()
         {
-            characterPosition.X -= characterVelocity;
+            
         }
 
         public virtual void MoveRight()
         {
-            characterPosition.X += characterVelocity;
+            
         }
 
         public virtual void Run()
         {
-            characterVelocity = runSpeed;
+            
         }
 
-        public virtual void Jump()
+        public virtual void DoNotRun()
         {
-            characterPosition.Y += characterJumpHeight;
+
+        }
+
+        public virtual void Jump(GameTime gameTime)
+        {
+           
         }
 
         public virtual void DoubleJump()
@@ -174,7 +170,7 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            
+            movementVector = Vector2.Zero;
         }
     }
 }
