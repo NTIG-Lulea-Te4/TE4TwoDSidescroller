@@ -48,7 +48,7 @@ namespace TE4TwoDSidescroller
             {
                 Exit();
             }
-
+            SoundInput.SoundPlayerPlayer(SoundInput.attack1);
             base.Update(gameTime);
         }
 

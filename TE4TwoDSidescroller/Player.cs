@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Media;
 
 namespace TE4TwoDSidescroller
 {
@@ -21,6 +22,7 @@ namespace TE4TwoDSidescroller
         int maxHealth;
         int manaTick;
         int mana;
+
         
 
         public Player()
@@ -35,7 +37,7 @@ namespace TE4TwoDSidescroller
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
-
+        
             LoadPlayerTexture2D();
         }
 
