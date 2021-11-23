@@ -3,29 +3,37 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
+using Microsoft.Xna.Framework.Media;
 
 namespace TE4TwoDSidescroller
 {
     class SoundInput: Game1
     {
+        Song song;
 
-        SoundEffect aboba;
+
 
         public SoundInput()
         {
 
-            aboba = Content.Load<SoundEffect>("sound");
+            
+            
 
         }
         public void PlaySound()
         {
-            //SoundEffect effect;
-            aboba.Play();
 
-            //effect = Content.Load<SoundEffect>("effect");
+
+            using (song = Content.Load<Song>("sound.mp3"))
+            {
+                MediaPlayer.Play(song);
+                MediaPlayer.IsRepeating = true;
+            }
+
         }
 
-        
+
 
     }
 }

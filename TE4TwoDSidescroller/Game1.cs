@@ -7,10 +7,10 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-            
+        SoundInput soundInput;
         public Game1()
         {
-
+            soundInput = new SoundInput();
             GameInfo.graphicsDevice = new GraphicsDeviceManager(this);
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.entityManager = new EntityManagear();
@@ -40,7 +40,7 @@ namespace TE4TwoDSidescroller
 
         protected override void Update(GameTime gameTime)
         {
-
+            soundInput.PlaySound();
             GameInfo.entityManager.Update(gameTime);
 
 
