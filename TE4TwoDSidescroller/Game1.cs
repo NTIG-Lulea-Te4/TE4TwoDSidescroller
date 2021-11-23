@@ -17,6 +17,7 @@ namespace TE4TwoDSidescroller
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.creationManager = new CreationManager();
             GameInfo.gameInformationSystem = new GameInformationSystem();
+            GameInfo.screenManager = new ScreenManager();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -26,7 +27,7 @@ namespace TE4TwoDSidescroller
 
         protected override void Initialize()
         {
-
+            GameInfo.screenManager.Resolution(1);
             GameInfo.creationManager.Initialize();
             base.Initialize();
         }
