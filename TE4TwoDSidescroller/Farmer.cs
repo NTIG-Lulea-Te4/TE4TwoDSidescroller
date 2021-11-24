@@ -36,10 +36,9 @@ namespace TE4TwoDSidescroller
 
             
 
-            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
             sourceRectangle = new Rectangle(32 * frames, 0, 32, 48);
             string currentPath = 
-            Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+ "/Farmer.png";
+            Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+ "/Content/Pngs/Enemies" + "/FarmerIdlePic.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -48,6 +47,7 @@ namespace TE4TwoDSidescroller
 
             }
 
+            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
             
         }
 

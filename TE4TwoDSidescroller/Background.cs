@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using MonoGame;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace TE4TwoDSidescroller
 {
@@ -12,13 +13,23 @@ namespace TE4TwoDSidescroller
     {
         Texture2D myTexture;
         Rectangle myRectangle;
-
+        Rectangle sourceRectangle;
+        Vector3 scrollSpeed;
+        float layer;
+        float rotation;
+        
+        
 
         public Background()
         {
-
+            layer = 0.0f;
+            rotation = 0f;
+            scrollSpeed = new Vector3();
+            myRectangle = new Rectangle(0, 0, 1280, 720);
+            sourceRectangle = new Rectangle(0, 0, 320, 180);
+            
             string currentPath =
-           Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Background.png";
+           Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/" + "Background.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -31,13 +42,17 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            
+            
+
+
         }
 
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(myTexture, myRectangle);
+            GameInfo.spriteBatch.Draw
+                (myTexture, myRectangle, myRectangle, Color.White, rotation, position, SpriteEffects.None, layer);
 
 
         }
