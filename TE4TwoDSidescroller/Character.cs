@@ -11,6 +11,10 @@ namespace TE4TwoDSidescroller
     {
         public CharacterInput characterInput;
 
+        public AnimationManager animationManager;
+
+        public Dictionary<string, Animation> animationDictionary;
+
         public float moveSpeed;
 
         public float runSpeed;
@@ -26,6 +30,10 @@ namespace TE4TwoDSidescroller
 
         }
 
+        public Character(Dictionary<string, Animation> animationDictionary)
+        {
+            
+        }
 
         #region Movement
         public virtual void MoveUp()

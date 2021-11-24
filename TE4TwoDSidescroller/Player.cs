@@ -68,6 +68,23 @@ namespace TE4TwoDSidescroller
             floorTest = new Floor();
         }
 
+        public Vector2 PlayerPosition
+        {
+            get
+            {
+                return playerPosition;
+            }
+            set
+            {
+                playerPosition = value;
+
+                if(animationManager != null)
+                {
+                    animationManager.Position = playerPosition;
+                }
+            }
+        }
+
         public void LoadPlayerTexture2D()
         {
             string currentPath = Path.GetDirectoryName(
