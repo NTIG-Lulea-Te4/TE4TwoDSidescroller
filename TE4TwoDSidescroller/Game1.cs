@@ -52,7 +52,6 @@ namespace TE4TwoDSidescroller
             {
                 Exit();
             }
-
             base.Update(gameTime);
         }
 
