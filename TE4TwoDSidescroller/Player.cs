@@ -51,10 +51,9 @@ namespace TE4TwoDSidescroller
             playerRotation = 0;
             playerOrigin = new Vector2(0, 0);
 
-            playerPosition.X = 100;
-            playerPosition.Y = 100;
+            playerPosition = new Vector2(0, 0);
 
-            characterJumpHeight = 0.5f; //With each -0.1 you lose 2 pixel heights
+            characterJumpHeight = 0.0f; //With each -0.1 you lose 2 pixel heights
 
             IsGrounded = false;
             
@@ -115,13 +114,11 @@ namespace TE4TwoDSidescroller
 
         public override void Jump(GameTime gameTime)
         {
-            characterJumpHeight += (float)(0.5 * gameTime.ElapsedGameTime.TotalMilliseconds);
 
-            //Is on the ground and the velocity.Y is zero
-            //if (GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && playerVelocity.Y == 0)
-            //{
-            //    playerPosition.Y -= (float)(characterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
-            //}
+            if(IsGrounded && playerVelocity.Y == 0)
+            {
+                characterJumpHeight += (float)(0.6f * (gameTime.ElapsedGameTime.TotalMilliseconds));
+            }
         }
 
         public override void DoubleJump()
@@ -133,27 +130,36 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            moveSpeed = 1; //null the multiplier
+            //moveSpeed = 1; //null the multiplier
+            playerVelocity = new Vector2 (0, 0);
+            characterJumpHeight = 0;
+            playerPosition += movementVector;
+
+            base.Update(gameTime);
 
             characterInput.Update(gameTime);
 
-            if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+            //if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+            //{
+            //    increasingGravity += (float)(/*GameInfo.gameInformationSystem.gravity*/ 0f * gameTime.ElapsedGameTime.TotalMilliseconds);
+            //}
+
+            if (playerPosition.Y > 500)
             {
-                increasingGravity += (float)(/*GameInfo.gameInformationSystem.gravity*/ 0f * gameTime.ElapsedGameTime.TotalMilliseconds);
+                IsGrounded = true;
+            }
+            else if(playerPosition.Y > 10 || playerPosition.Y < 0)
+            {
+                increasingGravity += (/*((float)GameInfo.gameInformationSystem.gravity / 2450f)*/ 0.004f * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             }
 
-            playerHitBox.X = (int)playerPosition.X;
-            playerHitBox.Y = (int)playerPosition.Y;
+            //playerHitBox.X = (int)playerPosition.X; 
+            //playerHitBox.Y = (int)playerPosition.Y;
 
-            playerVelocity.Y += increasingGravity;
-
-            //playerVelocity.Y -= characterJumpHeight;
+            playerVelocity.Y += increasingGravity - characterJumpHeight;
 
             movementVector += playerVelocity;
 
-            playerPosition += movementVector;
-
-            playerVelocity.Y = 0;
 
             manaTick++;
             if (mana < manaCheck && manaTick == 15)
@@ -171,7 +177,6 @@ namespace TE4TwoDSidescroller
                  character.TakeDamage(currentHEalth, 10);
              }*/
 
-            base.Update(gameTime);
         }
 
         //public void MovementUpdate(GameTime gameTime)
