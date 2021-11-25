@@ -97,7 +97,7 @@ namespace TE4TwoDSidescroller
                 leftWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
         }
-
+        AssemblyLoadEventArgs;
 
 
         public override void MoveUp()
