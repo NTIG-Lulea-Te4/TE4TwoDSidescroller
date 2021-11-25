@@ -14,19 +14,20 @@ namespace TE4TwoDSidescroller
         Texture2D myTexture;
         Rectangle myRectangle;
         Rectangle sourceRectangle;
-        Vector3 scrollSpeed;
         float layer;
         float rotation;
-        
+        Vector3 playerPosition;
+        Vector3 backgroundPosition;
         
 
         public Background()
         {
             layer = 0.0f;
             rotation = 0f;
-            scrollSpeed = new Vector3();
-            myRectangle = new Rectangle(0, 0, 1280, 720);
-            sourceRectangle = new Rectangle(0, 0, 320, 180);
+            playerPosition = new Vector3();
+            backgroundPosition = playerPosition;
+            myRectangle = new Rectangle(backgroundPosition.X, backgroundPosition.Y, 1280, 720);
+            
             
             string currentPath =
            Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/" + "Background.png";
@@ -42,8 +43,8 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            
-            
+
+            sourceRectangle = new Rectangle();
 
 
         }
