@@ -14,13 +14,17 @@ namespace TE4TwoDSidescroller
         public bool isActive;
         public bool hasCollider;
         public bool isPlayer;
+        private bool isGrounded;
+
+        public float increasingGravity;
+        public float amplifiedYForce;
 
         protected int currentHealth;
         protected int manaCheck;
         protected int maxHealth;
         protected int manaTick;
         protected int mana;
-        protected int movementSpeed;
+        protected float movementSpeed;
         protected int jumpHeight;
 
 
@@ -29,15 +33,34 @@ namespace TE4TwoDSidescroller
         public float scale;
         public Vector2 position;
 
+        public Vector2 movementVector;
+
         public Rectangle rectangle;
 
         public Entity()
         {
-
+            increasingGravity = 0;
             nextEntity = null;
             isActive = true;
             hasCollider = false;
+            //isGrounded = false;  //Can have it On incase we want that every Entity falls down unless it's grounded.
 
+        }
+
+        public bool IsGrounded
+        {
+            get
+            {
+                return isGrounded;
+            }
+            set
+            {
+                isGrounded = value;
+                if (isGrounded)
+                {
+                    increasingGravity = 0;
+                }
+            }
         }
 
         //update och draw

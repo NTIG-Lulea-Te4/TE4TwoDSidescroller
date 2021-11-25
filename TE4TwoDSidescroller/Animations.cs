@@ -4,7 +4,8 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class Animations
+    public class Animations
     {
+
     }
 }

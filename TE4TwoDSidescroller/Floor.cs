@@ -14,15 +14,15 @@ namespace TE4TwoDSidescroller
     {
         Texture2D myTexture;
         Vector2 myPosition;
-        Rectangle myRectangle;
+        public Rectangle myRectangle;
         public Floor()
         {
 
-
+            PixelDraw();
         }
 
 
-        public void Initialize()
+        public void PixelDraw()
         {
 
             myPosition = new Vector2(0, 400);

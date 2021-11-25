@@ -11,86 +11,21 @@ namespace TE4TwoDSidescroller
     {
         public CharacterInput characterInput;
 
-        //private Vector2 characterPosition;
+        public float moveSpeed;
 
-        private int runSpeed;
-        private int walkSpeed;
+        public float runSpeed;
+        public float walkSpeed;
 
-        private int characterVelocity;
+        public float characterJumpHeight;
 
-        private int characterJumpHeight;
-
-        private bool isRunning;
-
+        public bool isRunning;
+        public bool hasJumped;
         
         public Character()
         {
 
         }
 
-        #region Properties
-
-        public int CharacterVelocity
-        {
-            get
-            {
-                return characterVelocity;
-            }
-
-            set
-            {
-                characterVelocity = value;
-            }
-        }
-
-        public int RunSpeed
-        {
-            get
-            {
-                return runSpeed;
-            }
-            set
-            {
-                runSpeed = value;
-            }
-        }
-
-        public int WalkSpeed
-        {
-            get
-            {
-                return walkSpeed;
-            }
-            set
-            {
-                walkSpeed = value;
-            }
-        }
-
-        public bool IsRunning
-        {
-            get
-            {
-                return isRunning;
-            }
-            set
-            {
-                isRunning = value;
-            }
-        }
-        public int CharacterJumpHeight
-        {
-            get
-            {
-                return characterJumpHeight;
-            }
-            set
-            {
-                characterJumpHeight = value;
-            }
-        }
-
-        #endregion
 
         #region Movement
         public virtual void MoveUp()
@@ -118,12 +53,12 @@ namespace TE4TwoDSidescroller
             
         }
 
-        public virtual void DontRun()
+        public virtual void DoNotRun()
         {
 
         }
 
-        public virtual void Jump()
+        public virtual void Jump(GameTime gameTime)
         {
            
         }
@@ -235,7 +170,7 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            
+            movementVector = Vector2.Zero;
         }
     }
 }

@@ -68,12 +68,12 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public override void Jump()
-        {
+        //public override void Jump()
+        //{
 
-            myPosition.Y = myPosition.Y + jumpHeight * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
+        //    myPosition.Y = myPosition.Y + jumpHeight * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
 
-        }
+        //}
 
         public override void Attack1()
         {

@@ -20,9 +20,6 @@ namespace TE4TwoDSidescroller
 
         public void Initialize()
         {
-            Entity background = new Background();
-            GameInfo.entityManager.AddEntity(background);
-            
             Entity playerEntity = new Player();
             GameInfo.entityManager.AddEntity(playerEntity);
            
@@ -32,8 +29,9 @@ namespace TE4TwoDSidescroller
             Entity playerTest = new PlayerTest();
             GameInfo.entityManager.AddEntity(playerTest);
 
-            Entity farmerOne = new Farmer();
-            GameInfo.entityManager.AddEntity(farmerOne);
+            Entity firstFloor = new Floor();
+            GameInfo.entityManager.AddEntity(firstFloor);
+
         }
 
         public void CreationCycle()

@@ -16,16 +16,17 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager = new EntityManagear();
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.creationManager = new CreationManager();
+            GameInfo.gameInformationSystem = new GameInformationSystem();
             GameInfo.screenManager = new ScreenManager();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Window.AllowUserResizing = true;
 
         }
 
         protected override void Initialize()
         {
-
             GameInfo.screenManager.Resolution(1);
             GameInfo.creationManager.Initialize();
             base.Initialize();
@@ -51,7 +52,6 @@ namespace TE4TwoDSidescroller
             {
                 Exit();
             }
-
             base.Update(gameTime);
         }
 

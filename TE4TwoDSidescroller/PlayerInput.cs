@@ -10,8 +10,6 @@ namespace TE4TwoDSidescroller
     class PlayerInput : CharacterInput
     {
 
-
-
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
 
@@ -67,7 +65,6 @@ namespace TE4TwoDSidescroller
         public PlayerInput(Character character)
             : base(character)
         {
-
             currentKeyboardState = Keyboard.GetState();
 
             currentMouseState = Mouse.GetState();
@@ -96,12 +93,30 @@ namespace TE4TwoDSidescroller
 
             jumpKey = Keys.Space;
             runKey = Keys.LeftShift;
-            doubleJumpKey = Keys.Space;
+            //doubleJumpKey = Keys.Space;
         }
 
+        //public static KeyboardState GetThisState()
+        //{
+        //    previousKeyboardState = currentKeyboardState;
+        //    currentKeyboardState = Keyboard.GetState();
+        //    return currentKeyboardState;
+        //}
+
+        //public static bool IsPressed(Keys key)
+        //{
+        //    return currentKeyboardState.IsKeyDown(key);
+        //}
+
+        //public static bool HasBeenPressed(Keys key)
+        //{
+        //    return currentKeyboardState.IsKeyDown(key) && !previousKeyboardState.IsKeyDown(key);
+        //}
 
         public override void Update(GameTime gameTime)
         {
+            //GetThisState();
+
             #region Movements
 
             if (Keyboard.GetState().IsKeyDown(upKey))
@@ -109,15 +124,6 @@ namespace TE4TwoDSidescroller
 
                 character.MoveUp();
             }
-
-            //if(currentKeyboardState.IsKeyDown(upKey) && previousKeyboardState.IsKeyDown(upKey))
-            //{
-            //    character.MoveUp();
-            ////    //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            ////    //{
-
-            ////    //}
-            //}
 
             if (Keyboard.GetState().IsKeyDown(downKey))
             {
@@ -127,13 +133,11 @@ namespace TE4TwoDSidescroller
 
             if (Keyboard.GetState().IsKeyDown(leftKey))
             {
-
                 character.MoveLeft();
             }
 
             if (Keyboard.GetState().IsKeyDown(rightKey))
             {
-
                 character.MoveRight();
             }
 
@@ -142,21 +146,30 @@ namespace TE4TwoDSidescroller
             {
                 character.Run();
             }
-
-            if (Keyboard.GetState().IsKeyUp(runKey))
+            else
             {
-                character.DontRun();
+                character.DoNotRun();
             }
 
             if (Keyboard.GetState().IsKeyDown(jumpKey))
             {
-
-                character.Jump();
+                character.Jump(gameTime);
             }
+
+            //if(currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
+            //{
+            //    character.Jump(gameTime);
+            //}
+
+            //if (HasBeenPressed(jumpKey))
+            //{
+            //    character.Jump(gameTime);
+            //}
 
             if (Keyboard.GetState().IsKeyDown(doubleJumpKey))
             {
                 character.DoubleJump();
+                
             }
 
 
@@ -253,7 +266,7 @@ namespace TE4TwoDSidescroller
             //previousKeyboardState = currentKeyboardState;
             //previousMouseState = currentMouseState;
 
-            base.Update(gameTime);
+          
         }
     }
 }
