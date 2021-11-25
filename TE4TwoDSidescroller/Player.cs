@@ -11,6 +11,7 @@ namespace TE4TwoDSidescroller
     class Player : Character
     {
         static Texture2D rightWalk;
+        static Texture2D leftWalk;
 
         private Rectangle playerSourceRectangle;
         private Vector2 playerPosition;
@@ -22,22 +23,20 @@ namespace TE4TwoDSidescroller
         private float playerRotation;
         private Vector2 playerOrigin;
 
+        private float moveSpeed;
+        private float runSpeed;
+        private float walkSpeed;
+
+        private float playerJumpHeight;
+
         Floor floorTest;
-
-
-
-        private int currentFrame;
-        private int frameCounter;
 
         private Texture2D currentTexture;
 
-        /// <summary>
-        /// constructor
-        /// </summary>
         public Player()
         {
             characterInput = new PlayerInput(this);
-            playerSourceRectangle = new Rectangle(0, 0, 65, 106); //Need to find how to scale the picture.
+            playerSourceRectangle = new Rectangle(0, 0, 65, 106); //Need to find picture.
             playerHitBox = new Rectangle(0, 0, 32, 48);
 
             playerVelocity = new Vector2(0, 0);
@@ -53,10 +52,10 @@ namespace TE4TwoDSidescroller
 
             playerPosition = new Vector2(0, 0);
 
-            characterJumpHeight = 0.0f; //With each -0.1 you lose 2 pixel heights
+            playerJumpHeight = 0.0f; 
 
             IsGrounded = false;
-            
+
             LoadPlayerTexture2D();
 
             maxHealth = 150;
@@ -77,11 +76,6 @@ namespace TE4TwoDSidescroller
             set
             {
                 playerPosition = value;
-
-                if(animationManager != null)
-                {
-                    animationManager.Position = playerPosition;
-                }
             }
         }
 
@@ -94,8 +88,17 @@ namespace TE4TwoDSidescroller
             {
                 rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
-            
+
+            string path2 = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
+            using (Stream textureStream = new FileStream(path2, FileMode.Open))
+            {
+                leftWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
         }
+
+
 
         public override void MoveUp()
         {
@@ -119,22 +122,22 @@ namespace TE4TwoDSidescroller
 
         public override void Run()
         {
-            
+
             moveSpeed = runSpeed;
         }
 
         public override void DoNotRun()
         {
-            
+
             moveSpeed = walkSpeed;
         }
 
         public override void Jump(GameTime gameTime)
         {
 
-            if(IsGrounded && playerVelocity.Y == 0)
+            if (IsGrounded && playerVelocity.Y == 0)
             {
-                characterJumpHeight += (float)(0.6f * (gameTime.ElapsedGameTime.TotalMilliseconds));
+                playerJumpHeight += (float)(0.6f * (gameTime.ElapsedGameTime.TotalMilliseconds));
             }
         }
 
@@ -148,8 +151,8 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
             //moveSpeed = 1; //null the multiplier
-            playerVelocity = new Vector2 (0, 0);
-            characterJumpHeight = 0;
+            playerVelocity = new Vector2(0, 0);
+            playerJumpHeight = 0;
             playerPosition += movementVector;
 
             base.Update(gameTime);
@@ -165,7 +168,7 @@ namespace TE4TwoDSidescroller
             {
                 IsGrounded = true;
             }
-            else if(playerPosition.Y > 10 || playerPosition.Y < 0)
+            else if (playerPosition.Y > 10 || playerPosition.Y < 0)
             {
                 increasingGravity += (/*((float)GameInfo.gameInformationSystem.gravity / 2450f)*/ 0.004f * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             }
@@ -173,7 +176,9 @@ namespace TE4TwoDSidescroller
             //playerHitBox.X = (int)playerPosition.X; 
             //playerHitBox.Y = (int)playerPosition.Y;
 
-            playerVelocity.Y += increasingGravity - characterJumpHeight;
+            playerVelocity.Y += increasingGravity - playerJumpHeight;
+
+            SetPlayerAnimation();
 
             movementVector += playerVelocity;
 

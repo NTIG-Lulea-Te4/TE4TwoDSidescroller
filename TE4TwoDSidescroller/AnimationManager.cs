@@ -8,7 +8,7 @@ namespace TE4TwoDSidescroller
 {
     public class AnimationManager
     {
-        private Animation animation;
+        public Animation animation;
 
         private float timer;
 

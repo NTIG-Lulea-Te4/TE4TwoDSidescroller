@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,52 +14,89 @@ namespace TE4TwoDSidescroller
 
         public AnimationManager animationManager;
 
-        public Dictionary<string, Animation> animationDictionary;
+        public Dictionary<string, Animation> animations;
 
-        public float moveSpeed;
+        public List<Character> sprites;
 
-        public float runSpeed;
-        public float walkSpeed;
+        public Vector2 characterPosition;
 
-        public float characterJumpHeight;
+        public Texture2D characterTexture;
 
-        public bool isRunning;
-        public bool hasJumped;
-        
         public Character()
         {
 
         }
 
-        public Character(Dictionary<string, Animation> animationDictionary)
+        public Vector2 CharacterPosition
         {
-            
+            get
+            {
+                return characterPosition;
+            }
+            set
+            {
+                characterPosition = value;
+
+                if (animationManager != null)
+                {
+                    animationManager.Position = characterPosition;
+                }
+            }
+        }
+
+        public Character(Dictionary<string, Animation> newAnimations)
+        {
+            animations = newAnimations;
+            animationManager = new AnimationManager(animations.First().Value); //first animation to pass will be the First/default one
+        }
+
+        public virtual void SetPlayerAnimation()
+        {
+            if (movementVector.X > 0)
+            {
+                animationManager.Play(animations["RunRight"]);
+            }
+
+            else if (movementVector.X < 0)
+            {
+                animationManager.Play(animations["RunLeft"]);
+            }
+
+            else if (movementVector.Y > 0)
+            {
+                animationManager.Play(animations["RunDown"]);
+            }
+
+            else if (movementVector.Y < 0)
+            {
+                animationManager.Play(animations["RunUp"]);
+            }
         }
 
         #region Movement
         public virtual void MoveUp()
         {
-            
+
         }
 
         public virtual void MoveDown()
         {
-            
+
         }
 
         public virtual void MoveLeft()
         {
-            
+
         }
 
         public virtual void MoveRight()
         {
-            
+
         }
 
         public virtual void Run()
         {
-            
+
         }
 
         public virtual void DoNotRun()
@@ -68,7 +106,7 @@ namespace TE4TwoDSidescroller
 
         public virtual void Jump(GameTime gameTime)
         {
-           
+
         }
 
         public virtual void DoubleJump()
@@ -164,10 +202,9 @@ namespace TE4TwoDSidescroller
         }
 
         #endregion
-        
 
 
-       // ska sättas vars man checkar ifall man blir träffad
+        // ska sättas vars man checkar ifall man blir träffad
         public void Invincibility()
         {
 
@@ -175,9 +212,22 @@ namespace TE4TwoDSidescroller
 
         }
 
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            if (characterTexture != null)
+            {
+                spriteBatch.Draw(characterTexture, characterPosition, Color.White);
+            }
+            else if (animationManager != null)
+            {
+                animationManager.Draw(spriteBatch);
+            }
+            else throw new Exception("You got Fed!");
+        }
 
         public override void Update(GameTime gameTime)
         {
+            SetPlayerAnimation();
             movementVector = Vector2.Zero;
         }
     }

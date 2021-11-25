@@ -15,7 +15,7 @@ namespace TE4TwoDSidescroller
 
         public float FrameSpeed { get; set; }
 
-        public int FrameWidth { get { return Texture.Width / FrameCount; } }
+        public int FrameWidth { get { return (Texture.Width / FrameCount); } }
 
         public bool IsLooping { get; set; }
 
