@@ -13,8 +13,8 @@ namespace TE4TwoDSidescroller
         static Texture2D rightWalk;
 
         private Rectangle playerSourceRectangle;
-        public Vector2 playerPosition;
-        private Vector2 movementVelocity;
+        private Vector2 playerPosition;
+        private Vector2 playerVelocity;
 
         private Rectangle playerHitBox;
 
@@ -37,24 +37,23 @@ namespace TE4TwoDSidescroller
         public Player()
         {
             characterInput = new PlayerInput(this);
-            playerSourceRectangle = new Rectangle(0, 0, 32, 48); //Need to find how to scale the picture.
+            playerSourceRectangle = new Rectangle(0, 0, 65, 106); //Need to find how to scale the picture.
             playerHitBox = new Rectangle(0, 0, 32, 48);
 
-            movementVelocity = new Vector2(0, 0);
+            playerVelocity = new Vector2(0, 0);
+            movementVector = new Vector2(0, 0);
 
             moveSpeed = 2;
             walkSpeed = 2;
             runSpeed = 4;
 
-            playerScale = new Vector2(3, 3);
+            playerScale = new Vector2(1, 1);
             playerRotation = 0;
             playerOrigin = new Vector2(0, 0);
 
-            playerPosition.X = 100;
-            playerPosition.Y = 100;
+            playerPosition = new Vector2(0, 0);
 
-
-            characterJumpHeight = 8.5f; //With each -0.1 you lose 2 pixel heights
+            characterJumpHeight = 0.0f; //With each -0.1 you lose 2 pixel heights
 
             IsGrounded = false;
             
@@ -83,8 +82,7 @@ namespace TE4TwoDSidescroller
 
         public override void MoveUp()
         {
-            movementVector.Y -= moveSpeed;
-            
+            movementVector.Y -= moveSpeed; //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
         }
 
         public override void MoveDown()
@@ -104,20 +102,22 @@ namespace TE4TwoDSidescroller
 
         public override void Run()
         {
+            
             moveSpeed = runSpeed;
         }
 
         public override void DoNotRun()
         {
+            
             moveSpeed = walkSpeed;
         }
 
         public override void Jump(GameTime gameTime)
         {
-            //Is on the ground and the velocity.Y is zero
-            if (GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && movementVelocity.Y == 0)
+
+            if(IsGrounded && playerVelocity.Y == 0)
             {
-                movementVelocity.Y -= (float)(characterJumpHeight * gameTime.ElapsedGameTime.TotalMilliseconds);
+                characterJumpHeight += (float)(0.6f * (gameTime.ElapsedGameTime.TotalMilliseconds));
             }
         }
 
@@ -130,27 +130,35 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
+            //moveSpeed = 1; //null the multiplier
+            playerVelocity = new Vector2 (0, 0);
+            characterJumpHeight = 0;
+            playerPosition += movementVector;
 
-            //movementVector.Normelize();
-            //if (playerVelocity != Vector2.Zero)
-            //{
-            //    movementVector.Normalize();
-            //}
+            base.Update(gameTime);
 
             characterInput.Update(gameTime);
 
+            //if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+            //{
+            //    increasingGravity += (float)(/*GameInfo.gameInformationSystem.gravity*/ 0f * gameTime.ElapsedGameTime.TotalMilliseconds);
+            //}
 
-            if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+            if (playerPosition.Y > 500)
             {
-               increasingGravity += (float)(GameInfo.gameInformationSystem.gravity * gameTime.ElapsedGameTime.TotalMilliseconds);
+                IsGrounded = true;
             }
-       
-            
+            else if(playerPosition.Y > 10 || playerPosition.Y < 0)
+            {
+                increasingGravity += (/*((float)GameInfo.gameInformationSystem.gravity / 2450f)*/ 0.004f * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            }
 
-            playerPosition += movementVector;
+            //playerHitBox.X = (int)playerPosition.X; 
+            //playerHitBox.Y = (int)playerPosition.Y;
 
-            playerHitBox.X = (int)playerPosition.X;
-            playerHitBox.Y = (int)playerPosition.Y;
+            playerVelocity.Y += increasingGravity - characterJumpHeight;
+
+            movementVector += playerVelocity;
 
 
             manaTick++;
@@ -169,10 +177,38 @@ namespace TE4TwoDSidescroller
                  character.TakeDamage(currentHEalth, 10);
              }*/
 
-            //sourceRectangle = new Rectangle(0, 0, 32, 48);
-
-            base.Update(gameTime);
         }
+
+        //public void MovementUpdate(GameTime gameTime)
+        //{
+
+        //    movementVector.Normalize();
+        //    if (playerVelocity != Vector2.Zero)
+        //    {
+        //        movementVector.Normalize();
+        //    }
+
+        //    characterInput.Update(gameTime);
+        //    playerPosition += movementVector;
+
+        //    if (!IsGrounded)
+        //    {
+        //        increasingGravity += (float)(0.5f * gameTime.ElapsedGameTime.TotalMilliseconds);
+        //    }
+
+        //    if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+        //    {
+        //        increasingGravity += (float)(0.5f * gameTime.ElapsedGameTime.TotalMilliseconds);
+        //    }
+        //    playerVelocity.Y += increasingGravity;
+        //    movementVector += playerVelocity;
+
+
+        //    playerHitBox.X = (int)playerPosition.X;
+        //    playerHitBox.Y = (int)playerPosition.Y;
+
+
+        //}
 
         public override void Draw(GameTime gameTime)
         {

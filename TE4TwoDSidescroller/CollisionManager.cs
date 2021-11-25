@@ -111,7 +111,7 @@ namespace TE4TwoDSidescroller
                         if (secondStepEntity.isActive && secondStepEntity.hasCollider)
                         {
 
-                            if (RectangleCollision(stepEntity.rectangle, secondStepEntity.rectangle))
+                            if (RectangleCollision(stepEntity.collisionBox, secondStepEntity.collisionBox))
                             {
                                 stepEntity.HasCollidedWith(secondStepEntity);
                                 secondStepEntity.HasCollidedWith(stepEntity);

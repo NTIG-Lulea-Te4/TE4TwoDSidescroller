@@ -7,8 +7,6 @@ namespace TE4TwoDSidescroller
 {
     public class Game1 : Game
     {
-        Player player;
-        Camera camera;
         //SoundInput soundInput;
         public Game1()
         {
@@ -19,18 +17,17 @@ namespace TE4TwoDSidescroller
             GameInfo.collisionManager = new CollisionManager();
             GameInfo.creationManager = new CreationManager();
             GameInfo.gameInformationSystem = new GameInformationSystem();
-            camera = new Camera();
-            player = new Player();
+            GameInfo.screenManager = new ScreenManager();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             Window.AllowUserResizing = true;
 
         }
- 
+
         protected override void Initialize()
         {
-
+            GameInfo.screenManager.Resolution(1);
             GameInfo.creationManager.Initialize();
             base.Initialize();
         }
@@ -50,7 +47,7 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.Update(gameTime);
 
             GameInfo.collisionManager.CollisionUpdate();
-            camera.ScreenFolow(player.playerPosition);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
@@ -62,8 +59,7 @@ namespace TE4TwoDSidescroller
         {
 
             GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
-            GameInfo.spriteBatch.Begin(SpriteSortMode.Deferred, blendState: BlendState.AlphaBlend, samplerState: null, depthStencilState: null, null, null, camera.Camerafollow);
-           
+            GameInfo.spriteBatch.Begin();
 
             GameInfo.entityManager.Draw(gameTime);
 
