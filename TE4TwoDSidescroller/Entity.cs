@@ -15,6 +15,7 @@ namespace TE4TwoDSidescroller
         public bool hasCollider;
         public bool isPlayer;
         private bool isGrounded;
+        public bool isFloor;
 
         public float increasingGravity;
         public float amplifiedYForce;
