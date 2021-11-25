@@ -29,7 +29,7 @@ namespace TE4TwoDSidescroller
         public float scale;
         public Vector2 position;
 
-        public Rectangle rectangle;
+        public Rectangle collisionBox;
 
         public Entity()
         {
