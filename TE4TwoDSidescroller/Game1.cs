@@ -8,6 +8,10 @@ namespace TE4TwoDSidescroller
     public class Game1 : Game
     {
         //SoundInput soundInput;
+
+        Camera camera;
+        Player player;
+
         public Game1()
         {
             //soundInput = new SoundInput();
@@ -18,6 +22,8 @@ namespace TE4TwoDSidescroller
             GameInfo.creationManager = new CreationManager();
             GameInfo.gameInformationSystem = new GameInformationSystem();
             GameInfo.screenManager = new ScreenManager();
+            camera = new Camera();
+            player = new Player();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -47,7 +53,7 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.Update(gameTime);
 
             GameInfo.collisionManager.CollisionUpdate();
-
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();

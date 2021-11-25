@@ -13,7 +13,7 @@ namespace TE4TwoDSidescroller
         static Texture2D rightWalk;
 
         private Rectangle playerSourceRectangle;
-        private Vector2 playerPosition;
+        public Vector2 playerPosition;
         private Vector2 playerVelocity;
 
         private Rectangle playerHitBox;
@@ -177,6 +177,7 @@ namespace TE4TwoDSidescroller
                  character.TakeDamage(currentHEalth, 10);
              }*/
 
+            
         }
 
         //public void MovementUpdate(GameTime gameTime)
