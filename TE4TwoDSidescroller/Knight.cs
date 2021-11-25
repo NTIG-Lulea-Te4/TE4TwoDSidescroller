@@ -17,18 +17,19 @@ namespace TE4TwoDSidescroller
         //int multiplier;
         //isGrounded - Entity
 
+        PlayerTest playerTest;
+
         private Texture2D knightTexture;
         private Rectangle detectionHitbox;
-        private Rectangle knightRectangle;
         private Rectangle sourceRectangle;
         private Vector2 movementDirection;
+        private Vector2 distance;
         private Vector2 knightPosition;
         private Vector2 knightOrigin;
-        private int posistionX;
-        private int posistionY;
         private Color[] colorData;
 
         private Health health;
+
 
 
         bool hasCollided;
@@ -36,17 +37,30 @@ namespace TE4TwoDSidescroller
         public Knight()
         {
 
+            isActive = true;
+            hasCollider = true;
+
             hasCollided = false;
 
             movementSpeed = 0.1f;
-
+            maxHealth = 150;
+            currentHealth = maxHealth;
+            mana = 100;
+            manaCheck = mana;
+            manaTick = 0;
             health = new Health();
+
+            playerTest = new PlayerTest();
+
             detectionHitbox = new Rectangle(0, 0, 500, 500);
-            knightRectangle = new Rectangle(0, 0, 101, 101);
             sourceRectangle = new Rectangle(0, 0, 0, 0);
             knightPosition = new Vector2();
             movementDirection = new Vector2();
+            distance = new Vector2(100, 100);
             knightOrigin = new Vector2(0, 0);
+
+            collisionBox = new Rectangle(0, 0, 101, 101);
+
 
             LoadTexture2D();
 
@@ -69,8 +83,16 @@ namespace TE4TwoDSidescroller
 
         public override void HasCollidedWith(Entity collider)
         {
-            
+            if (collider.isPlayer)
+            {
+                hasCollided = true;
+            }
+            else
+            {
+                hasCollided = false;
+            }
         }
+
 
 
         public override void Update(GameTime gameTime)
@@ -78,22 +100,22 @@ namespace TE4TwoDSidescroller
             #region Controls for testing
             //if (Keyboard.GetState().IsKeyDown(Keys.Left))
             //{
-            //    knightPosition.X -= (speed * gameTime.ElapsedGameTime.Milliseconds);
+            //    knightPosition.X -= (movementSpeed * gameTime.ElapsedGameTime.Milliseconds);
             //}
 
             //if (Keyboard.GetState().IsKeyDown(Keys.Right))
             //{
-            //    knightPosition.X += (speed * gameTime.ElapsedGameTime.Milliseconds);
+            //    knightPosition.X += (movementSpeed * gameTime.ElapsedGameTime.Milliseconds);
             //}
 
             //if (Keyboard.GetState().IsKeyDown(Keys.Down))
             //{
-            //    knightPosition.Y += (speed * gameTime.ElapsedGameTime.Milliseconds);
+            //    knightPosition.Y += (movementSpeed * gameTime.ElapsedGameTime.Milliseconds);
             //}
 
             //if (Keyboard.GetState().IsKeyDown(Keys.Up))
             //{
-            //    knightPosition.Y -= (speed * gameTime.ElapsedGameTime.Milliseconds);
+            //    knightPosition.Y -= (movementSpeed * gameTime.ElapsedGameTime.Milliseconds);
             //}
 
             //if (Keyboard.GetState().IsKeyDown(Keys.Space))
@@ -104,24 +126,22 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
-
             movementDirection = PlayerTest.playerPosition - knightPosition;
             movementDirection.Normalize();
 
-
-            if (GameInfo.collisionManager.RectangleCollision(detectionHitbox, PlayerTest.testRectangle))
+            if (movementDirection.Length() < distance.Length())
             {
-
                 knightPosition += movementDirection * movementSpeed * gameTime.ElapsedGameTime.Milliseconds;
 
             }
 
+
             detectionHitbox.X = (int)knightPosition.X;
             detectionHitbox.Y = (int)knightPosition.Y;
-            knightRectangle.X = (int)knightPosition.X;
-            knightRectangle.Y = (int)knightPosition.Y;
+            collisionBox.X = (int)knightPosition.X;
+            collisionBox.Y = (int)knightPosition.Y;
 
-            base.Update(gameTime);
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -135,7 +155,7 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            //GameInfo.spriteBatch.Draw(knightTexture, knightPosition, knightRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, collisionBox, Color.White);
 
             // base.Draw(gameTime);
         }

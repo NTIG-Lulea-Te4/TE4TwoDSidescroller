@@ -14,21 +14,26 @@ namespace TE4TwoDSidescroller
         Texture2D playerTestTexture;
         public static Color[] colorData;
         public static Vector2 playerPosition;
-        public static Rectangle testRectangle;
+        
         int positionX;
         int positionY;
 
 
         public PlayerTest()
         {
+            collisionBox = new Rectangle(positionX, positionY, 101, 101);
+
+
+            isActive = true;
+            hasCollider = true;
+            isPlayer = true;
 
             positionX = 500;
             positionY = 0;
 
             playerPosition = new Vector2(positionX, positionY);
 
-            isPlayer = true;
-            testRectangle = new Rectangle(positionX, positionY, 101, 101);
+
 
             LoadTexture2D();
 
@@ -60,32 +65,32 @@ namespace TE4TwoDSidescroller
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                positionX -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionX -= 1 * gameTime.ElapsedGameTime.Milliseconds;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                positionX += (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionX += 1 * gameTime.ElapsedGameTime.Milliseconds;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                positionY += (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionY += 1 * gameTime.ElapsedGameTime.Milliseconds;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                positionY -= (1 * gameTime.ElapsedGameTime.Milliseconds);
+                positionY -= 1 * gameTime.ElapsedGameTime.Milliseconds;
             }
 
             playerPosition.X = positionX;
             playerPosition.Y = positionY;
-            testRectangle.X = positionX;
-            testRectangle.Y = positionY;
+            collisionBox.X = positionX;
+            collisionBox.Y = positionY;
             #endregion
 
 
-            base.Update(gameTime);
+           
         }
 
         public override void Draw(GameTime gameTime)
