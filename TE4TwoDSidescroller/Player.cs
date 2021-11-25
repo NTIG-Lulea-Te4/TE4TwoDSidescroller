@@ -12,7 +12,15 @@ namespace TE4TwoDSidescroller
     {
         static Texture2D rightWalk;
 
-        private Rectangle playerRectangle;
+        private Rectangle playerSourceRectangle;
+        private Vector2 playerPosition;
+        private Vector2 playerVelocity;
+
+        private Rectangle playerHitBox;
+
+        private Vector2 playerScale;
+        private float playerRotation;
+        private Vector2 playerOrigin;
 
         Floor floorTest;
 
@@ -23,13 +31,33 @@ namespace TE4TwoDSidescroller
 
         private Texture2D currentTexture;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public Player()
         {
             characterInput = new PlayerInput(this);
+            playerSourceRectangle = new Rectangle(0, 0, 65, 106); //Need to find how to scale the picture.
+            playerHitBox = new Rectangle(0, 0, 32, 48);
 
-            playerRectangle = new Rectangle(10, 10, 200, 200);
+            playerVelocity = new Vector2(0, 0);
+            movementVector = new Vector2(0, 0);
 
-            floorTest = new Floor();
+            moveSpeed = 2;
+            walkSpeed = 2;
+            runSpeed = 4;
+
+            playerScale = new Vector2(1, 1);
+            playerRotation = 0;
+            playerOrigin = new Vector2(0, 0);
+
+            playerPosition = new Vector2(0, 0);
+
+            characterJumpHeight = 0.0f; //With each -0.1 you lose 2 pixel heights
+
+            IsGrounded = false;
+            
+            LoadPlayerTexture2D();
 
             maxHealth = 150;
             currentHealth = maxHealth;
@@ -37,100 +65,7 @@ namespace TE4TwoDSidescroller
             manaCheck = mana;
             manaTick = 0;
 
-            CharacterVelocity = 2;
-
-            RunSpeed = 4;
-
-            WalkSpeed = 2;
-
-
-
-            CharacterJumpHeight = 3;
-
-
-            LoadPlayerTexture2D();
-        }
-
-
-
-        public override void MoveUp()
-        {
-            playerRectangle.Y -= CharacterVelocity;
-        }
-
-        public override void MoveDown()
-        {
-            playerRectangle.Y += CharacterVelocity;
-        }
-
-        public override void MoveLeft()
-        {
-            playerRectangle.X -= CharacterVelocity;
-        }
-
-        public override void MoveRight()
-        {
-            playerRectangle.X += CharacterVelocity;
-        }
-
-        public override void Run()
-        {
-            //for (int Timer = 0; Timer < 180; Timer++)
-            //{
-            //    if (Timer == 0)
-            //    {
-            //        CharacterVelocity = RunSpeed;
-            //    }
-            //    else if (Timer == 179)
-            //    {
-            //        CharacterVelocity = WalkSpeed;
-            //    }
-            //}
-
-            IsRunning = false;
-            while (IsRunning == false)
-            {
-                CharacterVelocity = RunSpeed;
-                if(CharacterVelocity == RunSpeed)
-                {
-                    IsRunning = true;
-                }
-            }
-
-
-            //if (IsRunning == true)
-            //{
-            //    CharacterVelocity = RunSpeed;
-            //}
-            //else
-            //{
-            //    IsRunning = false;
-            //    CharacterVelocity = WalkSpeed;
-            //}
-        }
-
-        public override void DontRun()
-        {
-            IsRunning = true;
-            while (IsRunning == true)
-            {
-                CharacterVelocity = WalkSpeed;
-                if (CharacterVelocity == WalkSpeed)
-                {
-                    IsRunning = false;
-                }
-            }
-        }
-
-        public override void Jump()
-        {
-            playerRectangle.Y -= CharacterJumpHeight;
-        }
-
-        public override void DoubleJump()
-        {
-
-            //Use the flag for IsGrounded to nullify gravity and let another Jump runs
+            floorTest = new Floor();
         }
 
         public void LoadPlayerTexture2D()
@@ -145,9 +80,86 @@ namespace TE4TwoDSidescroller
             
         }
 
+        public override void MoveUp()
+        {
+            movementVector.Y -= moveSpeed; //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+        }
+
+        public override void MoveDown()
+        {
+            movementVector.Y += moveSpeed;
+        }
+
+        public override void MoveLeft()
+        {
+            movementVector.X -= moveSpeed;
+        }
+
+        public override void MoveRight()
+        {
+            movementVector.X += moveSpeed;
+        }
+
+        public override void Run()
+        {
+            
+            moveSpeed = runSpeed;
+        }
+
+        public override void DoNotRun()
+        {
+            
+            moveSpeed = walkSpeed;
+        }
+
+        public override void Jump(GameTime gameTime)
+        {
+
+            if(IsGrounded && playerVelocity.Y == 0)
+            {
+                characterJumpHeight += (float)(0.6f * (gameTime.ElapsedGameTime.TotalMilliseconds));
+            }
+        }
+
+        public override void DoubleJump()
+        {
+
+            //Use the flag for IsGrounded to nullify gravity and let another Jump runs
+        }
+
+
         public override void Update(GameTime gameTime)
         {
+            //moveSpeed = 1; //null the multiplier
+            playerVelocity = new Vector2 (0, 0);
+            characterJumpHeight = 0;
+            playerPosition += movementVector;
+
+            base.Update(gameTime);
+
             characterInput.Update(gameTime);
+
+            //if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+            //{
+            //    increasingGravity += (float)(/*GameInfo.gameInformationSystem.gravity*/ 0f * gameTime.ElapsedGameTime.TotalMilliseconds);
+            //}
+
+            if (playerPosition.Y > 500)
+            {
+                IsGrounded = true;
+            }
+            else if(playerPosition.Y > 10 || playerPosition.Y < 0)
+            {
+                increasingGravity += (/*((float)GameInfo.gameInformationSystem.gravity / 2450f)*/ 0.004f * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            }
+
+            //playerHitBox.X = (int)playerPosition.X; 
+            //playerHitBox.Y = (int)playerPosition.Y;
+
+            playerVelocity.Y += increasingGravity - characterJumpHeight;
+
+            movementVector += playerVelocity;
+
 
             manaTick++;
             if (mana < manaCheck && manaTick == 15)
@@ -165,19 +177,42 @@ namespace TE4TwoDSidescroller
                  character.TakeDamage(currentHEalth, 10);
              }*/
 
-            //sourceRectangle = new Rectangle(0, 0, 32, 48);
-
-
         }
 
+        //public void MovementUpdate(GameTime gameTime)
+        //{
+
+        //    movementVector.Normalize();
+        //    if (playerVelocity != Vector2.Zero)
+        //    {
+        //        movementVector.Normalize();
+        //    }
+
+        //    characterInput.Update(gameTime);
+        //    playerPosition += movementVector;
+
+        //    if (!IsGrounded)
+        //    {
+        //        increasingGravity += (float)(0.5f * gameTime.ElapsedGameTime.TotalMilliseconds);
+        //    }
+
+        //    if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
+        //    {
+        //        increasingGravity += (float)(0.5f * gameTime.ElapsedGameTime.TotalMilliseconds);
+        //    }
+        //    playerVelocity.Y += increasingGravity;
+        //    movementVector += playerVelocity;
+
+
+        //    playerHitBox.X = (int)playerPosition.X;
+        //    playerHitBox.Y = (int)playerPosition.Y;
+
+
+        //}
 
         public override void Draw(GameTime gameTime)
         {
-
-            GameInfo.spriteBatch.Draw(rightWalk, playerRectangle, Color.White);
-
-            //floorTest.Draw(gameTime);
-
+            GameInfo.spriteBatch.Draw(rightWalk, playerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
         }
     }
 }

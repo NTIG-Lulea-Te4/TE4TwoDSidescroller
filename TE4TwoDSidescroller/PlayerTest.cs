@@ -96,7 +96,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(playerTestTexture, playerPosition, collisionBox, Color.White);
+            //GameInfo.spriteBatch.Draw(playerTestTexture, testRectangle, Color.White);
 
         }
 
