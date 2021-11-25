@@ -17,7 +17,7 @@ namespace TE4TwoDSidescroller
         
         int positionX;
         int positionY;
-
+        
 
         public PlayerTest()
         {
@@ -29,11 +29,11 @@ namespace TE4TwoDSidescroller
             isPlayer = true;
 
             positionX = 500;
-            positionY = 0;
+            positionY = 0; 
 
             playerPosition = new Vector2(positionX, positionY);
 
-
+            movementSpeed = 3;
 
             LoadTexture2D();
 
@@ -65,22 +65,22 @@ namespace TE4TwoDSidescroller
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                positionX -= 1 * gameTime.ElapsedGameTime.Milliseconds;
+                positionX -= (int)movementSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                positionX += 1 * gameTime.ElapsedGameTime.Milliseconds;
+                positionX += (int)movementSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                positionY += 1 * gameTime.ElapsedGameTime.Milliseconds;
+                positionY += (int)movementSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                positionY -= 1 * gameTime.ElapsedGameTime.Milliseconds;
+                positionY -= (int)movementSpeed;
             }
 
             playerPosition.X = positionX;
@@ -96,7 +96,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            //GameInfo.spriteBatch.Draw(playerTestTexture, testRectangle, Color.White);
+           GameInfo.spriteBatch.Draw(playerTestTexture, collisionBox, Color.White);
 
         }
 

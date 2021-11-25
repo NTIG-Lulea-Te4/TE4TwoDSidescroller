@@ -17,6 +17,7 @@ namespace TE4TwoDSidescroller
         //int multiplier;
         //isGrounded - Entity
 
+        GameInformationSystem gameInfoSystem;
         PlayerTest playerTest;
 
         private Texture2D knightTexture;
@@ -26,23 +27,27 @@ namespace TE4TwoDSidescroller
         private Vector2 distance;
         private Vector2 knightPosition;
         private Vector2 knightOrigin;
+        private Vector2 knightVelocity;
+        private Vector2 knightScale;
+        private float knightRotation;
         private Color[] colorData;
 
         private Health health;
 
+        float currentGravity;
 
-
+        bool isGrounded;
         bool hasCollided;
 
         public Knight()
         {
 
+            isGrounded = false;
             isActive = true;
             hasCollider = true;
-
             hasCollided = false;
 
-            movementSpeed = 0.1f;
+            movementSpeed = 2f;
             maxHealth = 150;
             currentHealth = maxHealth;
             mana = 100;
@@ -53,14 +58,17 @@ namespace TE4TwoDSidescroller
             playerTest = new PlayerTest();
 
             detectionHitbox = new Rectangle(0, 0, 500, 500);
-            sourceRectangle = new Rectangle(0, 0, 0, 0);
+            sourceRectangle = new Rectangle(0, 0, 65, 106);
             knightPosition = new Vector2();
             movementDirection = new Vector2();
-            distance = new Vector2(100, 100);
+            knightVelocity = new Vector2(0, 0);
+            distance = new Vector2(300, 300);
             knightOrigin = new Vector2(0, 0);
+            knightScale = new Vector2(1, 1);
+            knightRotation = 0;
 
-            collisionBox = new Rectangle(0, 0, 101, 101);
-
+            collisionBox = new Rectangle(0, 0, sourceRectangle.Width, sourceRectangle.Height);
+            gameInfoSystem = new GameInformationSystem();
 
             LoadTexture2D();
 
@@ -72,7 +80,7 @@ namespace TE4TwoDSidescroller
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "Box.png";
+             + "/Content/Pngs/Enemies/" + "KnightIdlePic.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -83,7 +91,7 @@ namespace TE4TwoDSidescroller
 
         public override void HasCollidedWith(Entity collider)
         {
-            if (collider.isPlayer)
+            if (collider.isPlayer || collider.isFloor /*collider == playerTest*/)
             {
                 hasCollided = true;
             }
@@ -91,6 +99,12 @@ namespace TE4TwoDSidescroller
             {
                 hasCollided = false;
             }
+
+            if (collider.isFloor)
+            {
+                isGrounded = true;
+            }
+
         }
 
 
@@ -127,13 +141,14 @@ namespace TE4TwoDSidescroller
             #endregion
 
             movementDirection = PlayerTest.playerPosition - knightPosition;
-            movementDirection.Normalize();
 
             if (movementDirection.Length() < distance.Length())
             {
-                knightPosition += movementDirection * movementSpeed * gameTime.ElapsedGameTime.Milliseconds;
+                movementDirection.Normalize();
+                knightPosition += movementDirection * movementSpeed/* * gameTime.ElapsedGameTime.Milliseconds*/;
 
             }
+
 
 
             detectionHitbox.X = (int)knightPosition.X;
@@ -155,7 +170,7 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, collisionBox, Color.White);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White, knightRotation, knightOrigin, knightScale, SpriteEffects.None, 0.0f);
 
             // base.Draw(gameTime);
         }
