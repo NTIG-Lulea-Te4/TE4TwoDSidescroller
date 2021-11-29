@@ -22,10 +22,12 @@ namespace TE4TwoDSidescroller
 
         //public Texture2D characterTexture;
 
+
         public Character()
         {
-
+            
         }
+
 
         //public Vector2 CharacterPosition
         //{
