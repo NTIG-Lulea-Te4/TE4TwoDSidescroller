@@ -24,6 +24,7 @@ namespace TE4TwoDSidescroller
 
                 GameInfo.graphicsDevice.PreferredBackBufferWidth = 1024;
                 GameInfo.graphicsDevice.PreferredBackBufferHeight = 576;
+                GameInfo.graphicsDevice.ApplyChanges();
 
             }
 
