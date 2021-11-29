@@ -39,7 +39,7 @@ namespace TE4TwoDSidescroller
 
         float currentGravity;
 
-       
+
         bool hasCollided;
 
         Texture2D[] Sprites;
@@ -106,10 +106,10 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public void PixelCollision() 
+        public void PixelCollision()
         {
 
-           // GameInfo.collisionManager.PixelPerfectCollision();
+            // GameInfo.collisionManager.PixelPerfectCollision();
 
 
         }
@@ -131,21 +131,15 @@ namespace TE4TwoDSidescroller
 
         public override void MoveRight()
         {
-
-            movementDirection.X = PlayerTest.playerPosition.X - knightPosition.X;
-
-            if (movementDirection.Length() <= distance.Length())
-            {
-                movementDirection.Normalize();
-                knightPosition += movementDirection * movementSpeed;
-
-            }
+            
+            movementDirection.Normalize();
+            knightPosition.X += movementDirection.X * movementSpeed;
 
         }
 
         public override void MoveLeft()
         {
-            
+
 
 
         }
@@ -181,12 +175,14 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
+            movementDirection.X = PlayerTest.playerPosition.X - knightPosition.X;
+
             knightVelocity = new Vector2(0, 0);
             knightJumpHeight = 0;
-            
 
-            movementDirection.X = PlayerTest.playerPosition.X - knightPosition.X;           
-          
+
+            movementDirection.X = PlayerTest.playerPosition.X - knightPosition.X;
+
 
             if (!IsGrounded)
             {
@@ -235,7 +231,7 @@ namespace TE4TwoDSidescroller
             //}
 
             #endregion
-           
+
         }
 
         public override void Draw(GameTime gameTime)
