@@ -19,11 +19,11 @@ namespace TE4TwoDSidescroller
         #region FilePaths
 
         public static string songPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Sound" + "/Song.wav";
-       
+
         #endregion
 
         #region SoundPlayers
-
+        static SoundEffect soundHolder;
         public static SoundPlayer attack1;
         public static SoundPlayer attack2;
         public static SoundPlayer attack3;
@@ -168,6 +168,7 @@ namespace TE4TwoDSidescroller
             playingFile.PlaySync();
              
         }
+
 
         public void MusicPlayer(SoundPlayer playingMusicFile)
         {

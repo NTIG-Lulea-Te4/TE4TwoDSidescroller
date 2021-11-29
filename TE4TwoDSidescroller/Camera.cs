@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,7 @@ namespace TE4TwoDSidescroller
 {
     class Camera
     {
+        #region Failed Text
         // pain in my asss
         //Matrix camerafollow; 
         //Vector2 position;
@@ -86,7 +88,14 @@ namespace TE4TwoDSidescroller
         //    viewMatrix = Matrix.CreateTranslation(new Vector3(-position, 0));
 
         //}
+        #endregion
 
+        //Player player;
+        //Viewport viewport;
+        //public void a()
+        //{
+        //    viewport.
+        //}
 
     }
 }

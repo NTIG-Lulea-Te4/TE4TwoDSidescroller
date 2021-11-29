@@ -33,6 +33,7 @@ namespace TE4TwoDSidescroller
 
         private Texture2D currentTexture;
 
+
         public Player()
         {
             characterInput = new PlayerInput(this);
