@@ -21,7 +21,7 @@ namespace TE4TwoDSidescroller
         public void Initialize()
         {
             LevelTutorial levelTutorial = new LevelTutorial();
-            
+            GameInfo.entityManager.AddEntity(levelTutorial);
 
 
 
