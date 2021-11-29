@@ -22,6 +22,7 @@ namespace TE4TwoDSidescroller
         static public CreationManager creationManager;
         static public GameInformationSystem gameInformationSystem; 
         static public GameTime gameTime;
+        static public Vector2 player1Position;
         
         
 

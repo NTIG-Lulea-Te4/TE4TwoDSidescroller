@@ -12,25 +12,16 @@ namespace TE4TwoDSidescroller
     {
 
         public GameTime spawnTimer;
-        
         public CreationManager()
         {
+            
 
         }
 
         public void Initialize()
         {
-            Entity background = new Background();
-            GameInfo.entityManager.AddEntity(background);
-
-            Entity playerEntity = new Player();
-            GameInfo.entityManager.AddEntity(playerEntity);
-           
-            Entity knight = new Knight();
-            GameInfo.entityManager.AddEntity(knight);
-
-            Entity playerTest = new PlayerTest();
-            GameInfo.entityManager.AddEntity(playerTest);
+            LevelTutorial levelTutorial = new LevelTutorial();
+            
 
 
 

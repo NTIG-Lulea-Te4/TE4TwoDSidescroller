@@ -5,29 +5,33 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using MonoGame;
-using Vector2 = Microsoft.Xna.Framework.Vector2;
+
 
 namespace TE4TwoDSidescroller
 {
-    class Background : LevelTutorial
+    class Background : Entity
     {
         Texture2D myTexture;
-        Rectangle myRectangle;
         Rectangle sourceRectangle;
+        int playerCoordinatesX;
+        int playerCoordinatesY;
         float layer;
+        float scale;
         float rotation;
-        Vector3 backgroundPosition;
+        float backgroundSpeed;
+        Vector2 backgroundPosition;
         
 
         
 
         public Background()
         {
-            
+            backgroundSpeed = 0.01f;
+            scale = 1.1f;
             layer = 0.0f;
             rotation = 0f;
-            myRectangle = new Rectangle(0, 0 , 1280 * 2, 720 * 2);
-            
+            playerCoordinatesX = (int)GameInfo.player1Position.X;
+            playerCoordinatesY = (int)GameInfo.player1Position.Y;
             
             string currentPath =
            Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/" + "Background.png";
@@ -38,14 +42,15 @@ namespace TE4TwoDSidescroller
                 myTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
 
             }
-
+            
+            sourceRectangle = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
+            
         }
 
         public override void Update(GameTime gameTime)
         {
-
-            sourceRectangle = new Rectangle();
-
+            //sourceRectangle.X = playerCoordinatesX * (int)backgroundSpeed * (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            //sourceRectangle.Y = playerCoordinatesY * (int)backgroundSpeed * (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
 
@@ -53,7 +58,7 @@ namespace TE4TwoDSidescroller
         {
 
             GameInfo.spriteBatch.Draw
-                (myTexture, myRectangle, myRectangle, Color.White, rotation, position, SpriteEffects.None, layer);
+                (myTexture, backgroundPosition, sourceRectangle, Color.White, rotation, position, scale, SpriteEffects.None, layer);
 
 
         }
