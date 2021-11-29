@@ -29,11 +29,12 @@ namespace TE4TwoDSidescroller
         protected int jumpHeight;
 
 
-
         public float rotation;
         public float scale;
         public Vector2 position;
 
+
+        public Color[] colorData;
         public Rectangle collisionBox;
         public Vector2 movementVector;
 

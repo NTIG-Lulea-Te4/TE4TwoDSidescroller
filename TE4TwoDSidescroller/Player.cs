@@ -155,6 +155,7 @@ namespace TE4TwoDSidescroller
             playerJumpHeight = 0;
             playerPosition += movementVector;
 
+
             base.Update(gameTime);
 
             characterInput.Update(gameTime);
@@ -178,7 +179,7 @@ namespace TE4TwoDSidescroller
 
             playerVelocity.Y += increasingGravity - playerJumpHeight;
 
-            SetPlayerAnimation();
+            //SetPlayerAnimation();
 
             movementVector += playerVelocity;
 

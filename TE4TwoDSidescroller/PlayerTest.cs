@@ -12,7 +12,6 @@ namespace TE4TwoDSidescroller
     {
 
         Texture2D playerTestTexture;
-        public static Color[] colorData;
         public static Vector2 playerPosition;
         
         int positionX;

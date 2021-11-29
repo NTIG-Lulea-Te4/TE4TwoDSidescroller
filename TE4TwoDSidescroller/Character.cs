@@ -50,28 +50,28 @@ namespace TE4TwoDSidescroller
             animationManager = new AnimationManager(animations.First().Value); //first animation to pass will be the First/default one
         }
 
-        public virtual void SetPlayerAnimation()
-        {
-            if (movementVector.X > 0)
-            {
-                animationManager.Play(animations["RunRight"]);
-            }
+        //public virtual void SetPlayerAnimation()
+        //{
+        //    if (movementVector.X > 0)
+        //    {
+        //        animationManager.Play(animations["RunRight"]);
+        //    }
 
-            else if (movementVector.X < 0)
-            {
-                animationManager.Play(animations["RunLeft"]);
-            }
+        //    else if (movementVector.X < 0)
+        //    {
+        //        animationManager.Play(animations["RunLeft"]);
+        //    }
 
-            else if (movementVector.Y > 0)
-            {
-                animationManager.Play(animations["RunDown"]);
-            }
+        //    else if (movementVector.Y > 0)
+        //    {
+        //        animationManager.Play(animations["RunDown"]);
+        //    }
 
-            else if (movementVector.Y < 0)
-            {
-                animationManager.Play(animations["RunUp"]);
-            }
-        }
+        //    else if (movementVector.Y < 0)
+        //    {
+        //        animationManager.Play(animations["RunUp"]);
+        //    }
+        //}
 
         #region Movement
         public virtual void MoveUp()
@@ -227,7 +227,7 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            SetPlayerAnimation();
+            //SetPlayerAnimation();
             movementVector = Vector2.Zero;
         }
     }
