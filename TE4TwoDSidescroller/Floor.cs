@@ -25,14 +25,27 @@ namespace TE4TwoDSidescroller
         public void PixelDraw()
         {
 
-            myPosition = new Vector2(0, 400);
-            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, 900, 50);
+            myPosition = new Vector2(0, 700);
+            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, 1280, 20);
             myTexture = new Texture2D
                 (GameInfo.graphicsDevice.GraphicsDevice, myRectangle.Width, myRectangle.Height);
             Color[] data = new Color[myRectangle.Width * myRectangle.Height];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = Color.Red;
+                if (i < data.Length / 3)
+                {
+
+                    data[i] = Color.OrangeRed;
+
+                }
+
+                if (i > data.Length / 3)
+                { 
+
+                    data[i] = Color.Black;
+                
+                }
+
             }
 
             myTexture.SetData(data);
@@ -47,7 +60,7 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(myTexture, myRectangle, Color.Red);
+            GameInfo.spriteBatch.Draw(myTexture, myRectangle, Color.White);
 
 
         }

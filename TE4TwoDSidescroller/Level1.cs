@@ -1,16 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class LevelTutorial : Entity
+    class Level1
     {
 
-
-
-        public LevelTutorial()
+        public Level1()
         {
 
 
@@ -19,9 +16,11 @@ namespace TE4TwoDSidescroller
 
         public static void LoadContent()
         {
+
             Entity background;
             Entity playerEntity;
             Entity floor;
+            Entity farmer;
 
 
             background = new Background();
@@ -33,19 +32,8 @@ namespace TE4TwoDSidescroller
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
 
-            
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-
-
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            
-
+            farmer = new Farmer(700, 650);
+            GameInfo.entityManager.AddEntity(farmer);
 
         }
 

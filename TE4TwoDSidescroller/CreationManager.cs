@@ -14,14 +14,12 @@ namespace TE4TwoDSidescroller
         public GameTime spawnTimer;
         public CreationManager()
         {
-            
+
 
         }
 
         public void Initialize()
         {
-            LevelTutorial levelTutorial = new LevelTutorial();
-            GameInfo.entityManager.AddEntity(levelTutorial);
 
 
 
@@ -34,6 +32,20 @@ namespace TE4TwoDSidescroller
 
         }
 
+        public void StartLevel()
+        {
+
+
+            LevelTutorial.LoadContent();
+
+            Level1.LoadContent();
+
+            Level2.LoadContent();
+
+            Level3.LoadContent();
+
+
+        }
 
         //säger när allt ska skapas, intialize, skaffa tillgång till bilden?, 
     }

@@ -1,28 +1,26 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class LevelTutorial : Entity
+    class Level3
     {
 
-
-
-        public LevelTutorial()
+        public Level3()
         {
+
 
 
         }
 
-
         public static void LoadContent()
         {
+
             Entity background;
             Entity playerEntity;
             Entity floor;
-
+            Entity knight;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -33,18 +31,8 @@ namespace TE4TwoDSidescroller
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
 
-            
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-
-
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            
+            knight = new Knight();
+            GameInfo.entityManager.AddEntity(knight);
 
 
         }
