@@ -20,25 +20,25 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public void AddEntity(Entity addEntity)
+        public void AddEntity(Entity entityToAdd)
         {
 
             uniqeCounter++;
-            addEntity.uniqeId = uniqeCounter;
+            entityToAdd.uniqeId = uniqeCounter;
 
 
             if (firstEntity != null)
             {
 
-                lastEntity.nextEntity = addEntity;
+                lastEntity.nextEntity = entityToAdd;
 
             }
             else
             {
-                firstEntity = addEntity;
+                firstEntity = entityToAdd;
             }
 
-            lastEntity = addEntity;
+            lastEntity = entityToAdd;
 
         }
 

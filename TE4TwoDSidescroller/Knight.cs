@@ -17,6 +17,7 @@ namespace TE4TwoDSidescroller
         //int multiplier;
         //isGrounded - Entity
 
+        GameInformationSystem gameInfoSystem;
         PlayerTest playerTest;
 
         private Texture2D knightTexture;
@@ -26,23 +27,43 @@ namespace TE4TwoDSidescroller
         private Vector2 distance;
         private Vector2 knightPosition;
         private Vector2 knightOrigin;
+        private Vector2 knightVelocity;
+        private Vector2 knightScale;
+        private float knightRotation;
+        private float knightJumpHeight;
+
         private Color[] colorData;
+
 
         private Health health;
 
+        float currentGravity;
 
 
         bool hasCollided;
 
+        Texture2D[] Sprites;
+        int frameWidth;
+        int frameHeight;
+        int currentFrame;
+
+
         public Knight()
         {
 
+            characterInput = new CharacterInput(this);
+
+            frameWidth = 64;
+            currentFrame = frameWidth;
+            frameHeight = 96;
+
+
+            IsGrounded = false;
             isActive = true;
             hasCollider = true;
-
             hasCollided = false;
 
-            movementSpeed = 0.1f;
+            movementSpeed = 2f;
             maxHealth = 150;
             currentHealth = maxHealth;
             mana = 100;
@@ -53,14 +74,18 @@ namespace TE4TwoDSidescroller
             playerTest = new PlayerTest();
 
             detectionHitbox = new Rectangle(0, 0, 500, 500);
-            sourceRectangle = new Rectangle(0, 0, 0, 0);
+            sourceRectangle = new Rectangle(0, 0, 64, 96);
             knightPosition = new Vector2();
             movementDirection = new Vector2();
-            distance = new Vector2(100, 100);
+            knightVelocity = new Vector2(0, 0);
+            distance = new Vector2(300, 300);
             knightOrigin = new Vector2(0, 0);
+            knightScale = new Vector2(1, 1);
+            movementVector = new Vector2();
+            knightRotation = 0;
 
-            collisionBox = new Rectangle(0, 0, 101, 101);
-
+            collisionBox = new Rectangle(0, 0, sourceRectangle.Width, sourceRectangle.Height);
+            gameInfoSystem = new GameInformationSystem();
 
             LoadTexture2D();
 
@@ -72,7 +97,7 @@ namespace TE4TwoDSidescroller
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "Box.png";
+             + "/Content/Pngs/Enemies/" + "KnightWalkAnim.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -81,19 +106,43 @@ namespace TE4TwoDSidescroller
 
         }
 
+        public void PixelCollision()
+        {
+
+            // GameInfo.collisionManager.PixelPerfectCollision();
+
+
+        }
+
         public override void HasCollidedWith(Entity collider)
         {
-            if (collider.isPlayer)
+
+            if (collider.isFloor)
             {
-                hasCollided = true;
+                IsGrounded = true;
             }
             else
             {
-                hasCollided = false;
+                IsGrounded = false;
             }
+
         }
 
 
+        public override void MoveRight()
+        {
+            
+            movementDirection.Normalize();
+            knightPosition.X += movementDirection.X * movementSpeed;
+
+        }
+
+        public override void MoveLeft()
+        {
+
+
+
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -126,21 +175,62 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
-            movementDirection = PlayerTest.playerPosition - knightPosition;
-            movementDirection.Normalize();
+            movementDirection.X = PlayerTest.playerPosition.X - knightPosition.X;
 
-            if (movementDirection.Length() < distance.Length())
+            knightVelocity = new Vector2(0, 0);
+            knightJumpHeight = 0;
+
+
+            movementDirection.X = PlayerTest.playerPosition.X - knightPosition.X;
+
+
+            if (!IsGrounded)
             {
-                knightPosition += movementDirection * movementSpeed * gameTime.ElapsedGameTime.Milliseconds;
+
+                increasingGravity += 0.004f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             }
 
+            knightVelocity.Y += increasingGravity /*- knightJumpHeight*/;
+
+            knightPosition += knightVelocity;
 
             detectionHitbox.X = (int)knightPosition.X;
             detectionHitbox.Y = (int)knightPosition.Y;
             collisionBox.X = (int)knightPosition.X;
             collisionBox.Y = (int)knightPosition.Y;
 
+            #region Animation Stuff
+
+            //if (frameTimer >= frameThreshHold)
+            //{
+
+            //    frameCounter++;
+            //    currentFrame = frameCounter * frameWidth;
+
+            //    sourceRectangle.Width = currentFrame;
+
+            //    frameTimer = 0;
+
+            //    if (frameCounter == 4)
+            //    {
+            //        frameCounter = 1;
+            //    }
+
+            //}
+
+            //frameTimer += gameTime.ElapsedGameTime.Milliseconds;
+
+            //if (movementDirection.X > 0.1f)
+            //{
+
+            //}
+            //else if (movementDirection.X < 0.1f)
+            //{
+            //    knightScale.X *= -1;
+            //}
+
+            #endregion
 
         }
 
@@ -155,7 +245,7 @@ namespace TE4TwoDSidescroller
                 GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
 
-            //GameInfo.spriteBatch.Draw(knightTexture, knightPosition, collisionBox, Color.White);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White, knightRotation, knightOrigin, knightScale, SpriteEffects.None, 0.0f);
 
             // base.Draw(gameTime);
         }

@@ -264,6 +264,7 @@ namespace TE4TwoDSidescroller
             playerPosition += movementVector;
             animation.Update(gameTime);
 
+
             base.Update(gameTime);
 
             
