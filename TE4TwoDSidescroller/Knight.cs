@@ -140,7 +140,8 @@ namespace TE4TwoDSidescroller
         public override void MoveLeft()
         {
 
-
+            movementDirection.Normalize();
+            knightPosition.X += movementDirection.X * movementSpeed;
 
         }
 

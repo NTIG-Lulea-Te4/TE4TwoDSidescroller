@@ -24,9 +24,16 @@ namespace TE4TwoDSidescroller
             if (Knight.movementDirection.Length() <= distance.Length())
             {
 
+                character.MoveRight();
+
             }
 
+            if (Knight.movementDirection.Length() <= distance.Length())
+            {
 
+                character.MoveLeft();
+
+            }
 
 
 
