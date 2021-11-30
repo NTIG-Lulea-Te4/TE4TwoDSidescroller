@@ -67,8 +67,19 @@ namespace TE4TwoDSidescroller
                 }
             }
         }
-
         
+        public void Animate(Texture2D texture, int frames)
+        {
+            CurrentTexture = texture;
+            int frameWidth = texture.Width / frames;
+            sourceRectangles = new Rectangle[frames];
+
+            for (int currentFrame = 0; currentFrame < frames; currentFrame++)
+            {
+                sourceRectangles[currentFrame] = new Rectangle(
+                    currentFrame * frameWidth, 0, frameWidth, texture.Height);
+            }
+        }
 
         public void Draw(Texture2D currentTexture, Vector2 position, Rectangle sourceRectangle, 
             Color color, float rotation, Vector2 origin, float scale, SpriteEffects spriteEffects, float layerDepth)
@@ -76,7 +87,7 @@ namespace TE4TwoDSidescroller
             position.X -= screenPosition.X;
             position.Y -= screenPosition.Y;
 
-            GameInfo.spriteBatch.Draw(currentTexture, position, sourceRectangle, 
+            GameInfo.spriteBatch.Draw(currentTexture, position, sourceRectangles[frameIndex], 
                 color, rotation, origin, scale, spriteEffects, layerDepth);
         }
 

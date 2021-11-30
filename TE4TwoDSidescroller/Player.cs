@@ -77,6 +77,8 @@ namespace TE4TwoDSidescroller
 
             floorTest = new Floor();
 
+            //visionManager 
+
             animation = new Animation(currentTexture, 4);
             animation.isLooping = true;
             animation.FramePerSecond = 5;
@@ -260,11 +262,11 @@ namespace TE4TwoDSidescroller
             //playerOrigin = new Vector2(playerSourceRectangle.Width / 2, playerSourceRectangle.Height / 2);
 
             playerPosition += movementVector;
+            animation.Update(gameTime);
 
             base.Update(gameTime);
 
-            characterInput.Update(gameTime);
-            animation.Update(gameTime);
+            
 
             //if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
             //{
@@ -277,7 +279,7 @@ namespace TE4TwoDSidescroller
             }
             else if (playerPosition.Y > 10 || playerPosition.Y < 0)
             {
-                increasingGravity += (/*((float)GameInfo.gameInformationSystem.gravity / 2450f)*/ 0.004f * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+                increasingGravity += ((float)GameInfo.gameInformationSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             }
 
             //playerHitBox.X = (int)playerPosition.X; 

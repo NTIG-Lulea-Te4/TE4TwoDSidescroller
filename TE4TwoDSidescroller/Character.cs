@@ -14,6 +14,8 @@ namespace TE4TwoDSidescroller
 
         public Animation animation;
 
+        public VisionManager visionManager;
+
         //public AnimationManager animationManager;
 
         //public Dictionary<string, Animation> animations;
@@ -234,6 +236,7 @@ namespace TE4TwoDSidescroller
             //animationManager.Update(gameTime);
 
             movementVector = Vector2.Zero;
+            characterInput.Update(gameTime);
         }
     }
 }
