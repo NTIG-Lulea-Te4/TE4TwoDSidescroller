@@ -64,6 +64,7 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
             hasCollider = true;
             isActive = true;
+            isPlayer = true;
 
             detectionHitBox = new Rectangle(0, 0, 500, 500);
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
