@@ -20,25 +20,25 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public void AddEntity(Entity addEntity)
+        public void AddEntity(Entity entityToAdd)
         {
 
             uniqeCounter++;
-            addEntity.uniqeId = uniqeCounter;
+            entityToAdd.uniqeId = uniqeCounter;
 
 
             if (firstEntity != null)
             {
 
-                lastEntity.nextEntity = addEntity;
+                lastEntity.nextEntity = entityToAdd;
 
             }
             else
             {
-                firstEntity = addEntity;
+                firstEntity = entityToAdd;
             }
 
-            lastEntity = addEntity;
+            lastEntity = entityToAdd;
 
         }
 
@@ -112,10 +112,14 @@ namespace TE4TwoDSidescroller
             Entity tempEntity = firstEntity;
             while (tempEntity != null)
             {
+                if (tempEntity.isActive)
+                {
 
-                tempEntity.Update(gameTime);
-                
-                tempEntity = tempEntity.nextEntity;
+                    tempEntity.Update(gameTime);
+
+                    tempEntity = tempEntity.nextEntity;
+
+                }
 
             }
 
@@ -129,9 +133,14 @@ namespace TE4TwoDSidescroller
             Entity tempEntity = firstEntity;
             while (tempEntity != null)
             {
+                if (tempEntity.isActive)
+                {
 
-                tempEntity.Draw(gameTime);
-                tempEntity = tempEntity.nextEntity;
+                    tempEntity.Draw(gameTime);
+
+                    tempEntity = tempEntity.nextEntity;
+
+                }
 
             }
         }

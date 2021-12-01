@@ -139,6 +139,7 @@ namespace TE4TwoDSidescroller
             if (Keyboard.GetState().IsKeyDown(rightKey))
             {
                 character.MoveRight();
+
             }
 
 
@@ -249,6 +250,7 @@ namespace TE4TwoDSidescroller
             if (Keyboard.GetState().IsKeyDown(manaPotionKey))
             {
                 character.ConsumeManaPotion();
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(exitToMainMenuKey))

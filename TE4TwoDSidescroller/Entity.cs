@@ -15,6 +15,7 @@ namespace TE4TwoDSidescroller
         public bool hasCollider;
         public bool isPlayer;
         private bool isGrounded;
+        public bool isFloor;
 
         public float increasingGravity;
         public float amplifiedYForce;
@@ -28,12 +29,14 @@ namespace TE4TwoDSidescroller
         protected int jumpHeight;
 
 
-
         public float rotation;
         public float scale;
         public Vector2 position;
 
+
+        public Color[] colorData;
         public Rectangle collisionBox;
+        public Rectangle weaponCollsion;
         public Vector2 movementVector;
 
 

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame;
 using System;
@@ -13,11 +13,14 @@ namespace TE4TwoDSidescroller
     class Floor : LevelTutorial
     {
         Texture2D myTexture;
-        Vector2 myPosition;
-        public Rectangle myRectangle;
+        Vector2 floorPosition;
+
         public Floor()
         {
-
+            isActive = true;
+            hasCollider = true;
+            isFloor = true;
+            collisionBox = new Rectangle();
             PixelDraw();
         }
 
@@ -25,11 +28,11 @@ namespace TE4TwoDSidescroller
         public void PixelDraw()
         {
 
-            myPosition = new Vector2(0, 700);
-            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, 1280, 20);
+            floorPosition = new Vector2(0, 700);
+            collisionBox = new Rectangle((int)floorPosition.X, (int)floorPosition.Y, 1280, 20);
             myTexture = new Texture2D
-                (GameInfo.graphicsDevice.GraphicsDevice, myRectangle.Width, myRectangle.Height);
-            Color[] data = new Color[myRectangle.Width * myRectangle.Height];
+                (GameInfo.graphicsDevice.GraphicsDevice, collisionBox.Width, collisionBox.Height);
+            Color[] data = new Color[collisionBox.Width * collisionBox.Height];
             for (int i = 0; i < data.Length; i++)
             {
                 if (i < data.Length / 3)
@@ -60,7 +63,7 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(myTexture, myRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(myTexture, collisionBox, Color.White);
 
 
         }

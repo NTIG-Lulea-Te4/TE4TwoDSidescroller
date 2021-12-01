@@ -12,7 +12,7 @@ namespace TE4TwoDSidescroller
 
         public GameInformationSystem()
         {
-            gravity = 9.8f;
+            gravity = 0.004f;
         }
     }
 }
