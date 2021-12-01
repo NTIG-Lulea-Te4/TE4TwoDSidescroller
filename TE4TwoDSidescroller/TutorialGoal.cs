@@ -20,6 +20,8 @@ namespace TE4TwoDSidescroller
             isActive = true;
             hasCollider = true;
 
+
+
             myPosition = new Vector2(1220, 720-150);
             myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, 50, 50);
             myTexture = new Texture2D
