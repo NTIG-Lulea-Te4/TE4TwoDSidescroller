@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -20,10 +20,11 @@ namespace TE4TwoDSidescroller
         static public EntityManagear entityManager;
         static public ScreenManager screenManager;
         static public CreationManager creationManager;
+        static public Vector2 player1Position;
+        static public VisionManager visionManager;
         static public GameInformationSystem gameInformationSystem; 
         static public GameTime gameTime;
-        static public VisionManager visionManager;
-        
+
         
 
         #region kommentar
