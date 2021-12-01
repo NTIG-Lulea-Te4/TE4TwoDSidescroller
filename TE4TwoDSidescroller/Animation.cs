@@ -149,7 +149,6 @@ namespace TE4TwoDSidescroller
             }
         }
 
-
         #endregion
     }
 }
