@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    public class Animation : AnimationManager
+    public class Animation
     {
         #region Old Code
         //public int CurrentFrame { get; set; }
@@ -86,7 +86,7 @@ namespace TE4TwoDSidescroller
 
         #endregion
 
-        #region new new code
+        #region newer code
 
         public float timeElapsed;
         public bool isLooping;
@@ -100,9 +100,35 @@ namespace TE4TwoDSidescroller
             }
         }
 
-        public Animation(Texture2D texture, int frames) : base (texture, frames)
-        {
+        protected Texture2D currentTexture;
+        public Vector2 position;
+        public Vector2 origin;
+        public float rotation;
+        public float scale;
+        protected Rectangle[] rectangles;
+        protected int frameIndex;
 
+        public Animation(Texture2D Texture, int frames)
+        {
+            currentTexture = Texture;
+            int width = Texture.Width / frames;
+            rectangles = new Rectangle[frames];
+
+            for (int currentFrame = 0; currentFrame < frames; currentFrame++)
+            {
+                rectangles[currentFrame] = new Rectangle(
+                    currentFrame * width, 0, width, Texture.Height);
+            }
+
+            position = Vector2.Zero;
+            rotation = 0.0f;
+            scale = 1f;
+            frameIndex = 0;
+        }
+
+        public void Draw(GameTime gameTime)
+        {
+            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, SpriteEffects.None, 0f);
         }
 
         public void Update(GameTime gameTime)
