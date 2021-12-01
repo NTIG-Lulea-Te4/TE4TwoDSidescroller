@@ -16,33 +16,46 @@ namespace TE4TwoDSidescroller
         {
 
 
+
         }
 
         public void Initialize()
         {
 
-
-
-        }
-
-        public void CreationCycle()
-        {
-
-
-
-        }
-
-        public void StartLevel()
-        {
-
-
             LevelTutorial.LoadContent();
 
-            Level1.LoadContent();
+        }
 
-            Level2.LoadContent();
+        public void StartLevel(int level)
+        {
 
-            Level3.LoadContent();
+            if (level == 0)
+            {
+
+                LevelTutorial.LoadContent();
+
+            }
+
+            if (level == 1)
+            {
+
+                Level1.LoadContent();
+
+            }
+
+            if (level == 2)
+            {
+
+                Level2.LoadContent();
+
+            }
+
+            if (level == 3)
+            {
+
+                Level3.LoadContent();
+
+            }
 
 
         }

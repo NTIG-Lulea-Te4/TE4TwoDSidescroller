@@ -103,6 +103,8 @@ namespace TE4TwoDSidescroller
         public override void MoveUp()
         {
             movementVector.Y -= moveSpeed; //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+
+
         }
 
         public override void MoveDown()
@@ -118,6 +120,8 @@ namespace TE4TwoDSidescroller
         public override void MoveRight()
         {
             movementVector.X += moveSpeed;
+
+            
         }
 
         public override void Run()

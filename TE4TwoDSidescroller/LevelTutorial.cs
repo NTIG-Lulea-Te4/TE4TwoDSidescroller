@@ -20,18 +20,21 @@ namespace TE4TwoDSidescroller
         public static void LoadContent()
         {
             Entity background;
-            Entity playerEntity;
             Entity floor;
+            Entity TutorialGoal;
 
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
 
-            playerEntity = new Player();
+            Entity playerEntity = new Player();
             GameInfo.entityManager.AddEntity(playerEntity);
 
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
+
+            TutorialGoal = new TutorialGoal();
+            GameInfo.entityManager.AddEntity(TutorialGoal);
 
             
         }
