@@ -35,6 +35,7 @@ namespace TE4TwoDSidescroller
 
         public Color[] colorData;
         public Rectangle collisionBox;
+        public Rectangle weaponCollsion;
         public Vector2 movementVector;
 
 
