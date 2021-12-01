@@ -97,12 +97,14 @@ namespace TE4TwoDSidescroller
 
         }
 
-        
-        //public static void RemoveAllEntities()
-        //{
-        //    firstEntity = null;
-        //    GC.Collect();
-        //}
+        public void RemoveAllEntities()
+        {
+
+            firstEntity = null;
+            lastEntity = null;
+
+            GC.Collect();
+        }
 
         public void Update(GameTime gameTime)
         {

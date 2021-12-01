@@ -12,39 +12,53 @@ namespace TE4TwoDSidescroller
     {
 
         public GameTime spawnTimer;
-        
         public CreationManager()
         {
+
+
 
         }
 
         public void Initialize()
         {
-            Entity background = new Background();
-            GameInfo.entityManager.AddEntity(background);
 
-            Entity playerEntity = new Player();
-            GameInfo.entityManager.AddEntity(playerEntity);
-           
-            Entity knight = new Knight();
-            GameInfo.entityManager.AddEntity(knight);
-
-            Entity playerTest = new PlayerTest();
-            GameInfo.entityManager.AddEntity(playerTest);
-
-            Entity tempFloor = new Floor();
-            GameInfo.entityManager.AddEntity(tempFloor);
-
+            LevelTutorial.LoadContent();
 
         }
 
-        public void CreationCycle()
+        public void StartLevel(int level)
         {
 
+            if (level == 0)
+            {
+
+                LevelTutorial.LoadContent();
+
+            }
+
+            if (level == 1)
+            {
+
+                Level1.LoadContent();
+
+            }
+
+            if (level == 2)
+            {
+
+                Level2.LoadContent();
+
+            }
+
+            if (level == 3)
+            {
+
+                Level3.LoadContent();
+
+            }
 
 
         }
-
 
         //säger när allt ska skapas, intialize, skaffa tillgång till bilden?, 
     }
