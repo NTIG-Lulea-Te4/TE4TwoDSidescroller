@@ -52,8 +52,8 @@ namespace TE4TwoDSidescroller
 
         //Kopierad kod
         //Problem att förstå matten bakom for-looparna
-        public bool PixelPerfectCollision(Rectangle firstTargetRectangle, Rectangle secondTargetRectangle,
-                                          Color[] firstTargetColorData, Color[] secondTargetColorData)
+        public bool PixelPerfectCollision(Rectangle firstTargetRectangle, Color[] firstTargetColorData,
+                                          Rectangle secondTargetRectangle, Color[] secondTargetColorData)
         {
             int top = Math.Max(firstTargetRectangle.Top, secondTargetRectangle.Top);
             int bottom = Math.Min(firstTargetRectangle.Bottom, secondTargetRectangle.Bottom);
@@ -68,10 +68,10 @@ namespace TE4TwoDSidescroller
                 {
 
                     Color firstColor = firstTargetColorData[(j - firstTargetRectangle.Left) + 
-                        (i - firstTargetRectangle.Top) * firstTargetRectangle.Width];
+                        (i - firstTargetRectangle.Top)/* * firstTargetRectangle.Width*/];
 
                     Color secondColor = secondTargetColorData[(j - secondTargetRectangle.Left) +
-                        (i - secondTargetRectangle.Top) * secondTargetRectangle.Width];
+                        (i - secondTargetRectangle.Top)/* * secondTargetRectangle.Width*/];
 
 
                     if (firstColor.A != 0 && secondColor.A != 0)

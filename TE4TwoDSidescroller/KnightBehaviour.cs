@@ -35,9 +35,20 @@ namespace TE4TwoDSidescroller
 
             }
 
+            if (Knight.movementDirection.Length() <= distance.Length() && 
+                Knight.knightPosition.Y - 30 > PlayerTest.playerPosition.Y)
+            {
 
+                character.Jump(gameTime);
 
+            }
 
+            if (Knight.movementDirection.Length() <= distance.Length() - 250)
+            {
+
+                character.Attack1();
+
+            }
 
         }
 
