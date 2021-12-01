@@ -18,7 +18,7 @@ namespace TE4TwoDSidescroller
 
         //public AnimationManager animationManager;
 
-        //public Dictionary<string, Animation> animations;
+        public Dictionary<string, EntityAnimation> entityAnimation;
 
         //public Vector2 characterPosition;
 

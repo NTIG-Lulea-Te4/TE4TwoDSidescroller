@@ -10,6 +10,9 @@ namespace TE4TwoDSidescroller
 
         //man bör göra getseters för uniqeId och isActive
         public Entity nextEntity;
+
+        public EntityAnimation entityAnimation;
+
         public int uniqeId;
         public bool isActive;
         public bool hasCollider;
@@ -28,11 +31,7 @@ namespace TE4TwoDSidescroller
         protected float movementSpeed;
         protected int jumpHeight;
 
-
-        public float rotation;
-        public float scale;
         public Vector2 position;
-
 
         public Color[] colorData;
         public Rectangle collisionBox;
