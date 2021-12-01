@@ -10,9 +10,6 @@ namespace TE4TwoDSidescroller
 
         //man bör göra getseters för uniqeId och isActive
         public Entity nextEntity;
-
-        public EntityAnimation entityAnimation;
-
         public int uniqeId;
         public bool isActive;
         public bool hasCollider;

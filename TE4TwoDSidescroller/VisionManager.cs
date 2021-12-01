@@ -57,7 +57,7 @@ namespace TE4TwoDSidescroller
             {
                 timeElapsed -= timeToUpdate;
 
-                if (frameIndex < sourceRectangles.Length - 1) //find what 1 does
+                if ( frameIndex < sourceRectangles.Length - 1) //find what 1 does
                 {
                     frameIndex++;
                 }
@@ -68,7 +68,7 @@ namespace TE4TwoDSidescroller
             }
         }
         
-        public bool Animate(Texture2D texture, int frames)
+        public void Animate(Texture2D texture, int frames)
         {
             CurrentTexture = texture;
             int frameWidth = texture.Width / frames;
@@ -79,7 +79,6 @@ namespace TE4TwoDSidescroller
                 sourceRectangles[currentFrame] = new Rectangle(
                     currentFrame * frameWidth, 0, frameWidth, texture.Height);
             }
-            return isLooping;
         }
 
         public void Draw(Texture2D currentTexture, Vector2 position, Rectangle sourceRectangle, 

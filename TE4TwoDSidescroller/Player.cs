@@ -77,9 +77,33 @@ namespace TE4TwoDSidescroller
 
             floorTest = new Floor();
 
+            //visionManager 
 
-            AnimateRight();
+            animation = new Animation(currentTexture, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 5;
+            animation.position = playerPosition;
 
+            //frameHeight = 96;
+            //frameWidth = 256;
+
+            //timer = 0;
+
+            //frameSpeed = 250f;
+
+            //sourceRectangles = new Rectangle[4];
+
+            //sourceRectangles[0] = new Rectangle(0, 0, 64, 96);
+
+            //sourceRectangles[1] = new Rectangle(0, 0, 128, 96);
+
+            //sourceRectangles[2] = new Rectangle(0, 0, 192, 96);
+
+            //sourceRectangles[3] = new Rectangle(0, 0, 256, 96);
+
+            //previousAnimationIndex = 3;
+
+            //currentAnimationIndex = 0;
 
         }
 
@@ -105,14 +129,6 @@ namespace TE4TwoDSidescroller
             {
                 currentTexture = value;
             }
-        }
-
-        public void AnimateRight()
-        {
-            animation = new Animation(currentTexture, 4);
-            animation.isLooping = true;
-            animation.FramePerSecond = 5;
-            animation.position = playerPosition;
         }
 
         //public int FrameHeight { get; set; }
@@ -248,15 +264,17 @@ namespace TE4TwoDSidescroller
             playerPosition += movementVector;
             animation.Update(gameTime);
 
+
             base.Update(gameTime);
 
+            
 
             //if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
             //{
-            //    increasingGravity += (float)(GameInfo.gameInformationSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            //    increasingGravity += (float)((GameInfo.gameInformationSystem.gravity / 2450f) * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             //}
 
-            if (playerPosition.Y > 620)
+            if (playerPosition.Y > 500)
             {
                 IsGrounded = true;
             }
