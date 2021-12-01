@@ -166,10 +166,10 @@ namespace TE4TwoDSidescroller
             //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
         }
 
-        //public override void MoveDown()
-        //{
-        //    movementVector.Y += moveSpeed;
-        //}
+        public override void MoveDown()
+        {
+            movementVector.Y += moveSpeed;
+        }
 
         public override void MoveLeft()
         {
@@ -195,7 +195,7 @@ namespace TE4TwoDSidescroller
         {
             if (IsGrounded/* && playerVelocity.Y == 0*/)
             {
-                playerJumpHeight.Y += (float)(5f * (gameTime.ElapsedGameTime.TotalMilliseconds));                
+                playerJumpHeight.Y += 5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;                
             }
         }
 
@@ -219,7 +219,7 @@ namespace TE4TwoDSidescroller
 
             if (!IsGrounded)
             {
-                increasingGravity += (float)(GameInfo.gameInformationSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+                increasingGravity += GameInfo.gameInformationSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
 
             detectionHitBox.X = (int)PlayerPosition.X;
