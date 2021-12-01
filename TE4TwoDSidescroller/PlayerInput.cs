@@ -9,16 +9,13 @@ namespace TE4TwoDSidescroller
 {
     class PlayerInput : CharacterInput
     {
-
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
 
         MouseState currentMouseState;
-        MouseState previousMouseState;
+        MouseState previousMouseState;  
 
-        private Keys[] keys;
-
-        #region Keys
+        #region Keys & Buttons
         private Keys upKey;
         private Keys downKey;
         private Keys leftKey;
@@ -35,6 +32,7 @@ namespace TE4TwoDSidescroller
         private Keys weaponSwitchKey;
 
         private Keys lightAttackKey;
+
         private Keys heavyAttackKey;
         private Keys specialAttackKey;
 
@@ -57,34 +55,9 @@ namespace TE4TwoDSidescroller
 
         #endregion
 
-        public enum KeyboardMap
-        {
-
-        }
-
         public PlayerInput(Character character)
             : base(character)
         {
-            currentKeyboardState = Keyboard.GetState();
-
-            currentMouseState = Mouse.GetState();
-
-            keys = new Keys[]
-            {
-                Keys.W,
-                Keys.S,
-                Keys.A,
-                Keys.D,
-
-                Keys.LeftShift,
-
-                Keys.Space,
-
-                Keys.C,
-                Keys.LeftAlt,
-
-                Keys.T,
-            };
 
             upKey = Keys.W;
             downKey = Keys.S;
@@ -94,55 +67,40 @@ namespace TE4TwoDSidescroller
             jumpKey = Keys.Space;
             runKey = Keys.LeftShift;
             //doubleJumpKey = Keys.Space;
+
         }
-
-        //public static KeyboardState GetThisState()
-        //{
-        //    previousKeyboardState = currentKeyboardState;
-        //    currentKeyboardState = Keyboard.GetState();
-        //    return currentKeyboardState;
-        //}
-
-        //public static bool IsPressed(Keys key)
-        //{
-        //    return currentKeyboardState.IsKeyDown(key);
-        //}
-
-        //public static bool HasBeenPressed(Keys key)
-        //{
-        //    return currentKeyboardState.IsKeyDown(key) && !previousKeyboardState.IsKeyDown(key);
-        //}
 
         public override void Update(GameTime gameTime)
         {
-            //GetThisState();
+            previousMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
+
+            previousKeyboardState = currentKeyboardState;
+            currentKeyboardState = Keyboard.GetState();
 
             #region Movements
 
-            if (Keyboard.GetState().IsKeyDown(upKey))
+            if (currentKeyboardState.IsKeyDown(upKey))
             {
-
                 character.MoveUp();
             }
 
-            if (Keyboard.GetState().IsKeyDown(downKey))
+            if (currentKeyboardState.IsKeyDown(downKey))
             {
-
                 character.MoveDown();
             }
 
-            if (Keyboard.GetState().IsKeyDown(leftKey))
+            if (currentKeyboardState.IsKeyDown(leftKey))
             {
                 character.MoveLeft();
             }
 
-            if (Keyboard.GetState().IsKeyDown(rightKey))
+            if (currentKeyboardState.IsKeyDown(rightKey))
             {
                 character.MoveRight();
             }
 
-
-            if (Keyboard.GetState().IsKeyDown(runKey))
+            if (currentKeyboardState.IsKeyDown(runKey))
             {
                 character.Run();
             }
@@ -151,25 +109,14 @@ namespace TE4TwoDSidescroller
                 character.DoNotRun();
             }
 
-            if (Keyboard.GetState().IsKeyDown(jumpKey))
+            if (currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
             {
                 character.Jump(gameTime);
             }
 
-            //if(currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
-            //{
-            //    character.Jump(gameTime);
-            //}
-
-            //if (HasBeenPressed(jumpKey))
-            //{
-            //    character.Jump(gameTime);
-            //}
-
             if (Keyboard.GetState().IsKeyDown(doubleJumpKey))
             {
-                character.DoubleJump();
-                
+                character.DoubleJump();                
             }
 
 
@@ -186,17 +133,29 @@ namespace TE4TwoDSidescroller
 
             #region Combat
 
-            if (Keyboard.GetState().IsKeyDown(lightAttackKey))
+            #region Unused mousestates for attacks
+            //if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            //{
+            //    character.Attack1();
+            //}
+
+            //if (currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released)
+            //{
+            //    character.Attack2();
+            //}
+            #endregion
+
+            if (currentKeyboardState.IsKeyDown(lightAttackKey) && !previousKeyboardState.IsKeyDown(lightAttackKey))
             {
                 character.Attack1();
             }
 
-            if (Keyboard.GetState().IsKeyDown(heavyAttackKey))
+            if (currentKeyboardState.IsKeyDown(heavyAttackKey) && !previousKeyboardState.IsKeyDown(heavyAttackKey))
             {
                 character.Attack2();
             }
 
-            if (Keyboard.GetState().IsKeyDown(specialAttackKey))
+            if (currentKeyboardState.IsKeyDown(specialAttackKey) && !previousKeyboardState.IsKeyDown(specialAttackKey))
             {
                 character.Attack3();
             }
@@ -249,6 +208,7 @@ namespace TE4TwoDSidescroller
             if (Keyboard.GetState().IsKeyDown(manaPotionKey))
             {
                 character.ConsumeManaPotion();
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(exitToMainMenuKey))
@@ -263,10 +223,6 @@ namespace TE4TwoDSidescroller
 
             #endregion
 
-            //previousKeyboardState = currentKeyboardState;
-            //previousMouseState = currentMouseState;
-
-          
         }
     }
 }

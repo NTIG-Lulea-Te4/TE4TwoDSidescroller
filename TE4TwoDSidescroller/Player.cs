@@ -10,6 +10,7 @@ namespace TE4TwoDSidescroller
 {
     class Player : Character
     {
+        public  Texture2D currentTexture;
         static Texture2D rightWalk;
         static Texture2D leftWalk;
 
@@ -17,7 +18,7 @@ namespace TE4TwoDSidescroller
         private Vector2 playerPosition;
         private Vector2 playerVelocity;
 
-        private Rectangle playerHitBox;
+        private Rectangle detectionHitBox;
 
         private Vector2 playerScale;
         private float playerRotation;
@@ -27,24 +28,26 @@ namespace TE4TwoDSidescroller
         private float runSpeed;
         private float walkSpeed;
 
-        private float playerJumpHeight;
+        private Vector2 playerJumpHeight;
+
+        float timer;
+        float frameSpeed; //An int that is the threhold for timer.
+
+        Rectangle[] sourceRectangles;
+
+        int previousAnimationIndex;
+        int currentAnimationIndex;
 
         Floor floorTest;
-
-        private Texture2D currentTexture;
 
         public Player()
         {
             characterInput = new PlayerInput(this);
-            playerSourceRectangle = new Rectangle(0, 0, 65, 106); //Need to find picture.
-            playerHitBox = new Rectangle(0, 0, 32, 48);
 
+            playerSourceRectangle = new Rectangle(0, 0, 64, 96); // 256 * 96 - 64
+          
             playerVelocity = new Vector2(0, 0);
             movementVector = new Vector2(0, 0);
-
-            moveSpeed = 2;
-            walkSpeed = 2;
-            runSpeed = 4;
 
             playerScale = new Vector2(1, 1);
             playerRotation = 0;
@@ -52,9 +55,18 @@ namespace TE4TwoDSidescroller
 
             playerPosition = new Vector2(0, 0);
 
-            playerJumpHeight = 0.0f; 
+            playerJumpHeight = new Vector2(); 
+
+            moveSpeed = 2;
+            walkSpeed = 2;
+            runSpeed = 4;
 
             IsGrounded = false;
+            hasCollider = true;
+            isActive = true;
+
+            detectionHitBox = new Rectangle(0, 0, 500, 500);
+            collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
 
             LoadPlayerTexture2D();
 
@@ -65,6 +77,24 @@ namespace TE4TwoDSidescroller
             manaTick = 0;
 
             floorTest = new Floor();
+
+            //visionManager 
+
+            entityAnimation = new Dictionary<string, EntityAnimation>();
+            EntityAnimation RunRight = new EntityAnimation(rightWalk, 0, 4, playerOrigin, PlayerPosition, playerSourceRectangle, 
+                playerScale, 0, SpriteEffects.None, 0);
+
+            entityAnimation.Add("RunRight", RunRight);
+
+            animation = new Animation(rightWalk, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 5;
+            animation.position = PlayerPosition;
+
+            //previousAnimationIndex = 3;
+
+            //currentAnimationIndex = 0;
+
         }
 
         public Vector2 PlayerPosition
@@ -76,6 +106,18 @@ namespace TE4TwoDSidescroller
             set
             {
                 playerPosition = value;
+            }
+        }
+
+        public Texture2D CurrentTexture
+        {
+            get
+            {
+                return currentTexture;
+            }
+            set
+            {
+                currentTexture = value;
             }
         }
 
@@ -98,11 +140,12 @@ namespace TE4TwoDSidescroller
             }
         }
 
-
+        #region Input
 
         public override void MoveUp()
         {
-            movementVector.Y -= moveSpeed; //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+            movementVector.Y -= moveSpeed; 
+            //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
         }
 
         public override void MoveDown()
@@ -122,67 +165,66 @@ namespace TE4TwoDSidescroller
 
         public override void Run()
         {
-
             moveSpeed = runSpeed;
         }
 
         public override void DoNotRun()
         {
-
             moveSpeed = walkSpeed;
         }
 
         public override void Jump(GameTime gameTime)
         {
-
             if (IsGrounded && playerVelocity.Y == 0)
             {
-                playerJumpHeight += (float)(0.6f * (gameTime.ElapsedGameTime.TotalMilliseconds));
+                playerJumpHeight.Y += (float)(2.4f * (gameTime.ElapsedGameTime.TotalMilliseconds) );
             }
         }
 
         public override void DoubleJump()
         {
-
             //Use the flag for IsGrounded to nullify gravity and let another Jump runs
         }
 
+        #endregion
 
-        public override void Update(GameTime gameTime)
+        public override void HasCollidedWith(Entity collider)
         {
-            //moveSpeed = 1; //null the multiplier
-            playerVelocity = new Vector2(0, 0);
-            playerJumpHeight = 0;
-            playerPosition += movementVector;
-
-            base.Update(gameTime);
-
-            characterInput.Update(gameTime);
-
-            //if (!GameInfo.collisionManager.RectangleCollision(playerHitBox, floorTest.myRectangle) && !IsGrounded)
-            //{
-            //    increasingGravity += (float)(/*GameInfo.gameInformationSystem.gravity*/ 0f * gameTime.ElapsedGameTime.TotalMilliseconds);
-            //}
-
-            if (playerPosition.Y > 500)
+            if (collider.isFloor)
             {
                 IsGrounded = true;
             }
-            else if (playerPosition.Y > 10 || playerPosition.Y < 0)
+            else
             {
-                increasingGravity += (/*((float)GameInfo.gameInformationSystem.gravity / 2450f)*/ 0.004f * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+                IsGrounded = false;
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {            
+            playerVelocity = new Vector2(0, 0);
+            playerJumpHeight = new Vector2(0, 0);
+
+            PlayerPosition += movementVector;
+            animation.Update(gameTime);
+
+            base.Update(gameTime);
+
+            if (!IsGrounded)
+            {
+                increasingGravity += (float)(GameInfo.gameInformationSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             }
 
-            //playerHitBox.X = (int)playerPosition.X; 
-            //playerHitBox.Y = (int)playerPosition.Y;
+            detectionHitBox.X = (int)PlayerPosition.X;
+            detectionHitBox.Y = (int)PlayerPosition.Y;
+            collisionBox.X = (int)PlayerPosition.X;
+            collisionBox.Y = (int)PlayerPosition.Y;
 
-            playerVelocity.Y += increasingGravity - playerJumpHeight;
-
-            SetPlayerAnimation();
+            playerVelocity.Y += increasingGravity - playerJumpHeight.Y;
 
             movementVector += playerVelocity;
 
-
+            #region Harry's Code
             manaTick++;
             if (mana < manaCheck && manaTick == 15)
             {
@@ -199,6 +241,7 @@ namespace TE4TwoDSidescroller
                  character.TakeDamage(currentHEalth, 10);
              }*/
 
+            #endregion
         }
 
         //public void MovementUpdate(GameTime gameTime)
@@ -234,7 +277,8 @@ namespace TE4TwoDSidescroller
 
         public override void Draw(GameTime gameTime)
         {
-            GameInfo.spriteBatch.Draw(rightWalk, playerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
+            GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle/*[currentAnimationIndex]*/, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
+            animation.Draw(gameTime);
         }
     }
 }
