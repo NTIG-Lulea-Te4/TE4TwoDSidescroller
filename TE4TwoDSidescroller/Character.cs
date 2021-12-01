@@ -12,66 +12,70 @@ namespace TE4TwoDSidescroller
     {
         public CharacterInput characterInput;
 
-        public AnimationManager animationManager;
+        public Animation animation;
 
-        public Dictionary<string, Animation> animations;
+        public VisionManager visionManager;
 
-        public List<Character> sprites;
+        //public AnimationManager animationManager;
 
-        public Vector2 characterPosition;
+        //public Dictionary<string, Animation> animations;
 
-        public Texture2D characterTexture;
+        //public Vector2 characterPosition;
+
+        //public Texture2D characterTexture;
+
 
         public Character()
         {
-
+            
         }
 
-        public Vector2 CharacterPosition
-        {
-            get
-            {
-                return characterPosition;
-            }
-            set
-            {
-                characterPosition = value;
 
-                if (animationManager != null)
-                {
-                    animationManager.Position = characterPosition;
-                }
-            }
-        }
+        //public Vector2 CharacterPosition
+        //{
+        //    get
+        //    {
+        //        return characterPosition;
+        //    }
+        //    set
+        //    {
+        //        characterPosition = value;
 
-        public Character(Dictionary<string, Animation> newAnimations)
-        {
-            animations = newAnimations;
-            animationManager = new AnimationManager(animations.First().Value); //first animation to pass will be the First/default one
-        }
+        //        if (animationManager != null)
+        //        {
+        //            animationManager.Position = characterPosition;
+        //        }
+        //    }
+        //}
 
-        public virtual void SetPlayerAnimation()
-        {
-            if (movementVector.X > 0)
-            {
-                animationManager.Play(animations["RunRight"]);
-            }
+        //public Character(Dictionary<string, Animation> newAnimations)
+        //{
+        //    animations = newAnimations;
+        //    animationManager = new AnimationManager(animations.First().Value); //first animation to pass will be the First/default one
+        //}
 
-            else if (movementVector.X < 0)
-            {
-                animationManager.Play(animations["RunLeft"]);
-            }
+        //public virtual void SetPlayerAnimation()
+        //{
+        //    if (movementVector.X > 0)
+        //    {
+        //        animationManager.Play(animations["RunRight"]);
+        //    }
 
-            else if (movementVector.Y > 0)
-            {
-                animationManager.Play(animations["RunDown"]);
-            }
+        //    else if (movementVector.X < 0)
+        //    {
+        //        animationManager.Play(animations["RunLeft"]);
+        //    }
 
-            else if (movementVector.Y < 0)
-            {
-                animationManager.Play(animations["RunUp"]);
-            }
-        }
+        //    else if (movementVector.Y > 0)
+        //    {
+        //        animationManager.Play(animations["RunDown"]);
+        //    }
+
+        //    else if (movementVector.Y < 0)
+        //    {
+        //        animationManager.Play(animations["RunUp"]);
+        //    }
+        //}
 
         #region Movement
         public virtual void MoveUp()
@@ -212,23 +216,27 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            if (characterTexture != null)
-            {
-                spriteBatch.Draw(characterTexture, characterPosition, Color.White);
-            }
-            else if (animationManager != null)
-            {
-                animationManager.Draw(spriteBatch);
-            }
-            else throw new Exception("You got Fed!");
-        }
+        //public virtual void Draw(SpriteBatch spriteBatch)
+        //{
+        //    if (characterTexture != null)
+        //    {
+        //        spriteBatch.Draw(characterTexture, characterPosition, Color.White);
+        //    }
+        //    else if (animationManager != null)
+        //    {
+        //        animationManager.Draw(spriteBatch);
+        //    }
+        //    else throw new Exception("You got Fed!");
+        //}
 
         public override void Update(GameTime gameTime)
         {
-            SetPlayerAnimation();
+            //SetPlayerAnimation();
+
+            //animationManager.Update(gameTime);
+
             movementVector = Vector2.Zero;
+            characterInput.Update(gameTime);
         }
     }
 }
