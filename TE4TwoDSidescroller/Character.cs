@@ -78,6 +78,12 @@ namespace TE4TwoDSidescroller
         //}
 
         #region Movement
+
+        public virtual void Reset()
+        {
+
+        }
+
         public virtual void MoveUp()
         {
 

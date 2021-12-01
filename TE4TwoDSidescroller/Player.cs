@@ -139,8 +139,25 @@ namespace TE4TwoDSidescroller
                 leftWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
         }
+        public override void HasCollidedWith(Entity collider)
+        {
+            if (collider.isFloor)
+            {
+                IsGrounded = true;
+            }
+            else
+            {
+                IsGrounded = false;
+            }
+        }
 
         #region Input
+
+        public override void Reset()
+        {
+            playerPosition = new Vector2(10, 50);
+            IsGrounded = false;
+        }
 
         public override void MoveUp()
         {
@@ -148,10 +165,10 @@ namespace TE4TwoDSidescroller
             //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
         }
 
-        public override void MoveDown()
-        {
-            movementVector.Y += moveSpeed;
-        }
+        //public override void MoveDown()
+        //{
+        //    movementVector.Y += moveSpeed;
+        //}
 
         public override void MoveLeft()
         {
@@ -175,9 +192,9 @@ namespace TE4TwoDSidescroller
 
         public override void Jump(GameTime gameTime)
         {
-            if (IsGrounded && playerVelocity.Y == 0)
+            if (IsGrounded/* && playerVelocity.Y == 0*/)
             {
-                playerJumpHeight.Y += (float)(2.4f * (gameTime.ElapsedGameTime.TotalMilliseconds) );
+                playerJumpHeight.Y += (float)(5f * (gameTime.ElapsedGameTime.TotalMilliseconds));                
             }
         }
 
@@ -188,17 +205,6 @@ namespace TE4TwoDSidescroller
 
         #endregion
 
-        public override void HasCollidedWith(Entity collider)
-        {
-            if (collider.isFloor)
-            {
-                IsGrounded = true;
-            }
-            else
-            {
-                IsGrounded = false;
-            }
-        }
 
         public override void Update(GameTime gameTime)
         {            
