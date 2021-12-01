@@ -9,8 +9,13 @@ namespace TE4TwoDSidescroller
     {
         //SoundInput soundInput;
 
-        Camera camera;
-        Player player;
+        private States currentState;
+        private States nextState;
+
+        public void ChangeState(States state)
+        {
+            nextState = currentState;
+        }
 
         public Game1()
         {
@@ -22,8 +27,7 @@ namespace TE4TwoDSidescroller
             GameInfo.creationManager = new CreationManager();
             GameInfo.gameInformationSystem = new GameInformationSystem();
             GameInfo.screenManager = new ScreenManager();
-            camera = new Camera();
-            player = new Player();
+            
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -33,6 +37,8 @@ namespace TE4TwoDSidescroller
 
         protected override void Initialize()
         {
+            IsMouseVisible = true;
+
             GameInfo.screenManager.Resolution(1);
             GameInfo.creationManager.Initialize();
             base.Initialize();
@@ -45,6 +51,9 @@ namespace TE4TwoDSidescroller
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
             GameInfo.creationManager.Initialize();
 
+            //ej rätt GraphicsDevice ska vara graphics.GraphicsDevice
+            currentState = new MenuState(this, GraphicsDevice ,Content);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -53,6 +62,16 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.Update(gameTime);
 
             GameInfo.collisionManager.CollisionUpdate();
+
+            if (nextState != null)
+            {
+                currentState = nextState;
+
+                nextState = null;
+            }
+
+            currentState.Update(gameTime);
+            currentState.PostUpdate(gameTime);
             
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
@@ -68,6 +87,7 @@ namespace TE4TwoDSidescroller
             GameInfo.spriteBatch.Begin();
 
             GameInfo.entityManager.Draw(gameTime);
+            currentState.Draw(gameTime, GameInfo.spriteBatch);
 
             GameInfo.spriteBatch.End();
             base.Draw(gameTime);

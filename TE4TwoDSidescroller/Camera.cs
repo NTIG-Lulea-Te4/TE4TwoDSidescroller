@@ -89,13 +89,14 @@ namespace TE4TwoDSidescroller
 
         //}
         #endregion
-
-        //Player player;
-        //Viewport viewport;
-        //public void a()
-        //{
-        //    viewport.
-        //}
+        
+        Player player;
+        Viewport viewport;
+        public void Update(GameTime gameTime)
+        {
+            viewport.X = (int)player.playerPosition.X;
+            viewport.Y = (int)player.playerPosition.Y;
+        }
 
     }
 }

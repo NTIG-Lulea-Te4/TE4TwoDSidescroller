@@ -7,6 +7,7 @@ using System.Media;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace TE4TwoDSidescroller
 {
@@ -21,6 +22,22 @@ namespace TE4TwoDSidescroller
         public static string songPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Sound" + "/Song.wav";
 
         #endregion
+
+        public void Load(ContentManager content)
+        {
+            content.Load<SoundEffect>("Song.wav");
+        }
+
+        //public static Camera Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new Camera();
+        //        }
+        //        return instance;
+        //    }
 
         #region SoundPlayers
         static SoundEffect soundHolder;
