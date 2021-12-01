@@ -18,6 +18,7 @@ namespace TE4TwoDSidescroller
             GameInfo.creationManager = new CreationManager();
             GameInfo.gameInformationSystem = new GameInformationSystem();
             GameInfo.screenManager = new ScreenManager();
+            GameInfo.characterInput = new CharacterInput();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -47,6 +48,8 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.Update(gameTime);
 
             GameInfo.collisionManager.CollisionUpdate();
+
+            GameInfo.characterInput.Update(gameTime);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {

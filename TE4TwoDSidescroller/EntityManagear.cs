@@ -97,7 +97,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        //not completed
+        
         //public static void RemoveAllEntities()
         //{
         //    firstEntity = null;
@@ -110,10 +110,14 @@ namespace TE4TwoDSidescroller
             Entity tempEntity = firstEntity;
             while (tempEntity != null)
             {
+                if (tempEntity.isActive)
+                {
 
-                tempEntity.Update(gameTime);
-                
-                tempEntity = tempEntity.nextEntity;
+                    tempEntity.Update(gameTime);
+
+                    tempEntity = tempEntity.nextEntity;
+
+                }
 
             }
 
@@ -127,9 +131,14 @@ namespace TE4TwoDSidescroller
             Entity tempEntity = firstEntity;
             while (tempEntity != null)
             {
+                if (tempEntity.isActive)
+                {
 
-                tempEntity.Draw(gameTime);
-                tempEntity = tempEntity.nextEntity;
+                    tempEntity.Draw(gameTime);
+
+                    tempEntity = tempEntity.nextEntity;
+
+                }
 
             }
         }
