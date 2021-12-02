@@ -34,6 +34,8 @@ namespace TE4TwoDSidescroller
             jumpHeight = 3;
             frames = 0;
 
+            hasCollider = true;
+
             myPosition = new Vector2(myPosition1, myPosition2);
 
             string currentPath = 
@@ -46,9 +48,10 @@ namespace TE4TwoDSidescroller
 
             }
 
-            sourceRectangle = new Rectangle(32 * frames, 0, myTexture.Width, myTexture.Height);
+            sourceRectangle = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
             myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
             
+            collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
         }
 
 

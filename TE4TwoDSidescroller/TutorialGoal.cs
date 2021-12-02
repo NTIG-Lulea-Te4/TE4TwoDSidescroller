@@ -129,7 +129,7 @@ namespace TE4TwoDSidescroller
             if (tutorialFinished == true)
             {
                 LevelTutorial.RemoveContent();
-                Level1.LoadContent();
+                Level3.LoadContent();
             }
 
         }
