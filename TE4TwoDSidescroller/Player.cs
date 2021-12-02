@@ -10,7 +10,8 @@ namespace TE4TwoDSidescroller
 {
     class Player : Character
     {
-        public  Texture2D currentTexture;
+        #region
+        public Texture2D currentTexture;
         static Texture2D rightWalk;
         static Texture2D leftWalk;
 
@@ -39,14 +40,16 @@ namespace TE4TwoDSidescroller
         int currentAnimationIndex;
 
         Floor floorTest;
-
+        #endregion
         float deltaTime;
         float deltaTimeSquaredDividedByTwo;
         Vector2 acceleration;
         Vector2 velocity;
-
+        Vector2 pPosition;
+        float friction;
         public Player()
         {
+            #region
             characterInput = new PlayerInput(this);
 
             playerSourceRectangle = new Rectangle(0, 0, 64, 96); // 256 * 96 - 64
@@ -100,10 +103,13 @@ namespace TE4TwoDSidescroller
             //previousAnimationIndex = 3;
 
             //currentAnimationIndex = 0;
+            #endregion
 
-            acceleration = new Vector2(0, 10);
+            //acceleration = new Vector2(100, 80);
 
-            velocity.X = 100;
+            velocity = new Vector2();
+            pPosition = new Vector2();
+            friction = 0.05f;
         }
 
         public Vector2 PlayerPosition
@@ -170,24 +176,35 @@ namespace TE4TwoDSidescroller
 
         public override void MoveUp()
         {
-            movementVector.Y -= moveSpeed; 
-            //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+            acceleration.Y -= 0.1f;
+            //movementVector.Y -= moveSpeed;
+            //playerVelocity.Y -= acceleration.X * deltaTime;
+            //movementVector.Y -= (playerVelocity.Y * deltaTime) + (acceleration.Y * deltaTimeSquaredDividedByTwo);
         }
 
         public override void MoveDown()
         {
-            movementVector.Y += moveSpeed;
+            acceleration.Y += 0.1f;
+            //movementVector.Y += moveSpeed;
+            //playerVelocity.Y += acceleration.X * deltaTime;
+            //movementVector.Y += (playerVelocity.Y * deltaTime) + (acceleration.Y * deltaTimeSquaredDividedByTwo);
         }
 
         public override void MoveLeft()
         {
+            acceleration.X -= 0.1f;
             //movementVector.X -= moveSpeed;
-            movementVector.X -= (velocity.X * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
+            //playerVelocity.X -= acceleration.X * deltaTime;
+            //movementVector.X -= (playerVelocity.X * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
         }
 
         public override void MoveRight()
         {
-            movementVector.X += moveSpeed;
+            acceleration.X += 0.1f;
+            //movementVector.X += moveSpeed;
+            //playerVelocity.X += acceleration.X * deltaTime;
+            //movementVector.X += (playerVelocity.X * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
+            
         }
 
         public override void Run()
@@ -204,13 +221,14 @@ namespace TE4TwoDSidescroller
         {
             if (IsGrounded/* && playerVelocity.Y == 0*/)
             {
-                playerPosition.Y -= 5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;                
+                playerVelocity.Y = -80;
+                //playerPosition.Y -= 5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;                
             }
         }
 
         public override void DoubleJump()
         {
-            //Use the flag for IsGrounded to nullify gravity and let another Jump runs
+            
         }
 
         #endregion
@@ -218,12 +236,20 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
 
+            if (playerVelocity.X < 0)
+            {
+                acceleration.X += friction * deltaTime;
+            }
+            else if (playerVelocity.X > 0)
+            {
+                acceleration.X -= friction * deltaTime;
+            }
 
-            playerVelocity = new Vector2(0, 0);
+            //playerVelocity = new Vector2(0, 0);
+            playerVelocity.Y = 0;
             playerJumpHeight = new Vector2(0, 0);
 
             PlayerPosition += movementVector;
@@ -241,7 +267,13 @@ namespace TE4TwoDSidescroller
             collisionBox.X = (int)PlayerPosition.X;
             collisionBox.Y = (int)PlayerPosition.Y;
 
-            playerVelocity.Y += increasingGravity - playerJumpHeight.Y;
+            movementVector.X += (playerVelocity.X * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
+            movementVector.Y += (playerVelocity.Y * deltaTime) + (acceleration.Y * deltaTimeSquaredDividedByTwo);
+
+            playerVelocity.X += acceleration.X * deltaTime;
+            playerVelocity.Y += acceleration.Y * deltaTime;
+
+            //playerVelocity.Y += increasingGravity - playerJumpHeight.Y;
 
             movementVector += playerVelocity;
 
@@ -299,7 +331,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
             GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle/*[currentAnimationIndex]*/, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
-            animation.Draw(gameTime);
+            //animation.Draw(gameTime);
         }
     }
 }
