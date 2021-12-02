@@ -83,7 +83,7 @@ namespace TE4TwoDSidescroller
 
             #region Movements
 
-            if(currentKeyboardState.IsKeyDown(Keys.R) && previousKeyboardState.IsKeyUp(Keys.R))
+            if(currentKeyboardState.IsKeyDown(resetKey) && previousKeyboardState.IsKeyUp(resetKey))
             {
                 character.Reset();
             }

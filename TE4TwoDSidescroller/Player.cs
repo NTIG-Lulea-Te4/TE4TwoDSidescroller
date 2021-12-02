@@ -40,6 +40,11 @@ namespace TE4TwoDSidescroller
 
         Floor floorTest;
 
+        float deltaTime;
+        float deltaTimeSquaredDividedByTwo;
+        Vector2 acceleration;
+        Vector2 velocity;
+
         public Player()
         {
             characterInput = new PlayerInput(this);
@@ -96,6 +101,9 @@ namespace TE4TwoDSidescroller
 
             //currentAnimationIndex = 0;
 
+            acceleration = new Vector2(0, 10);
+
+            velocity.X = 100;
         }
 
         public Vector2 PlayerPosition
@@ -173,7 +181,8 @@ namespace TE4TwoDSidescroller
 
         public override void MoveLeft()
         {
-            movementVector.X -= moveSpeed;
+            //movementVector.X -= moveSpeed;
+            movementVector.X -= (velocity.X * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
         }
 
         public override void MoveRight()
@@ -195,7 +204,7 @@ namespace TE4TwoDSidescroller
         {
             if (IsGrounded/* && playerVelocity.Y == 0*/)
             {
-                playerJumpHeight.Y += 5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;                
+                playerPosition.Y -= 5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;                
             }
         }
 
@@ -208,7 +217,12 @@ namespace TE4TwoDSidescroller
 
 
         public override void Update(GameTime gameTime)
-        {            
+        {
+
+            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
+
+
             playerVelocity = new Vector2(0, 0);
             playerJumpHeight = new Vector2(0, 0);
 
