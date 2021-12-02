@@ -40,6 +40,11 @@ namespace TE4TwoDSidescroller
 
         Floor floorTest;
 
+        float deltaTime;
+        float deltaTimeSquaredDividedByTwo;
+        Vector2 acceleration;
+        Vector2 jumpAcceleration;
+
         public Player()
         {
             characterInput = new PlayerInput(this);
@@ -195,7 +200,7 @@ namespace TE4TwoDSidescroller
         {
             if (IsGrounded/* && playerVelocity.Y == 0*/)
             {
-                playerJumpHeight.Y += 5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;                
+                acceleration.Y = 50f;              
             }
         }
 
@@ -208,7 +213,12 @@ namespace TE4TwoDSidescroller
 
 
         public override void Update(GameTime gameTime)
-        {            
+        {
+            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
+
+            jumpAcceleration -= acceleration * deltaTimeSquaredDividedByTwo;
+
             playerVelocity = new Vector2(0, 0);
             playerJumpHeight = new Vector2(0, 0);
 
@@ -226,6 +236,11 @@ namespace TE4TwoDSidescroller
             detectionHitBox.Y = (int)PlayerPosition.Y;
             collisionBox.X = (int)PlayerPosition.X;
             collisionBox.Y = (int)PlayerPosition.Y;
+
+
+            playerJumpHeight.Y += (jumpAcceleration.Y * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
+
+            jumpAcceleration += acceleration * deltaTime;
 
             playerVelocity.Y += increasingGravity - playerJumpHeight.Y;
 
