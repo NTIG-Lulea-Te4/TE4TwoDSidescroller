@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame;
 using System;
@@ -28,14 +28,27 @@ namespace TE4TwoDSidescroller
         public void PixelDraw()
         {
 
-            floorPosition = new Vector2(0, 300);
-            collisionBox = new Rectangle((int)floorPosition.X, (int)floorPosition.Y, 900, 50);
+            floorPosition = new Vector2(0, 700);
+            collisionBox = new Rectangle((int)floorPosition.X, (int)floorPosition.Y, 1280, 20);
             myTexture = new Texture2D
                 (GameInfo.graphicsDevice.GraphicsDevice, collisionBox.Width, collisionBox.Height);
             Color[] data = new Color[collisionBox.Width * collisionBox.Height];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = Color.Red;
+                if (i < data.Length / 3)
+                {
+
+                    data[i] = Color.OrangeRed;
+
+                }
+
+                if (i > data.Length / 3)
+                { 
+
+                    data[i] = Color.Black;
+                
+                }
+
             }
 
             myTexture.SetData(data);
@@ -50,7 +63,7 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(myTexture, collisionBox, Color.Red);
+            GameInfo.spriteBatch.Draw(myTexture, collisionBox, Color.White);
 
 
         }
