@@ -41,12 +41,15 @@ namespace TE4TwoDSidescroller
 
         Floor floorTest;
         #endregion
+
+        float time;
         float deltaTime;
         float deltaTimeSquaredDividedByTwo;
         Vector2 acceleration;
         Vector2 velocity;
         Vector2 pPosition;
         float friction;
+
         public Player()
         {
             #region
@@ -237,6 +240,7 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
 
             if (playerVelocity.X < 0)
