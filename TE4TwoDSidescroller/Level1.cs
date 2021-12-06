@@ -32,7 +32,7 @@ namespace TE4TwoDSidescroller
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
 
-            farmer = new Farmer(700, 650);
+            farmer = new Farmer(700, 620);
             GameInfo.entityManager.AddEntity(farmer);
 
         }
