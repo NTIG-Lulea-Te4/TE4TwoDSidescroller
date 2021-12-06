@@ -42,11 +42,7 @@ namespace TE4TwoDSidescroller
 
         float deltaTime;
         float deltaTimeSquaredDividedByTwo;
-        Vector2 acceleration;
-        Vector2 jumpAcceleration;
-
         float time;
-        float jumpForce;
 
         public Player()
         {
@@ -62,8 +58,6 @@ namespace TE4TwoDSidescroller
             playerOrigin = new Vector2(0, 0);
 
             playerPosition = new Vector2(0, 0);
-
-            playerJumpHeight = new Vector2(); 
 
             moveSpeed = 2;
             walkSpeed = 2;
@@ -87,7 +81,6 @@ namespace TE4TwoDSidescroller
 
             floorTest = new Floor();
 
-            jumpForce = 8;
             
             entityAnimation = new Dictionary<string, EntityAnimation>();
             EntityAnimation RunRight = new EntityAnimation(rightWalk, 0, 4, playerOrigin, PlayerPosition, playerSourceRectangle, 
@@ -201,13 +194,7 @@ namespace TE4TwoDSidescroller
 
         public override void Jump(GameTime gameTime)
         {
-            movementVector.Y -= moveSpeed;
-            //if (IsGrounded/* && playerVelocity.Y == 0*/)
-            //{
-            //    //acceleration.Y = 50f;
-            //    jumpAcceleration.Y = -jumpForce;                
-            //    //playerJumpHeight.Y += time * jumpForce;
-            //}
+            movementVector.Y -= moveSpeed + 1;
         }
 
         public override void DoubleJump()
@@ -224,11 +211,7 @@ namespace TE4TwoDSidescroller
             time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
 
-            
-            //jumpAcceleration -= acceleration * deltaTimeSquaredDividedByTwo;
-
             playerVelocity = new Vector2(0, 0);
-            //playerJumpHeight = new Vector2(0, 0);
 
             PlayerPosition += movementVector * time / 15;
             animation.Update(gameTime);
@@ -244,12 +227,8 @@ namespace TE4TwoDSidescroller
             detectionHitBox.Y = (int)PlayerPosition.Y;
             collisionBox.X = (int)PlayerPosition.X;
             collisionBox.Y = (int)PlayerPosition.Y;
-                        
-            //playerJumpHeight.Y += (jumpAcceleration.Y * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
 
-            //jumpAcceleration += acceleration * deltaTime;
-
-            playerVelocity.Y += increasingGravity - playerJumpHeight.Y;
+            playerVelocity.Y += increasingGravity;
 
             movementVector += playerVelocity;
 
