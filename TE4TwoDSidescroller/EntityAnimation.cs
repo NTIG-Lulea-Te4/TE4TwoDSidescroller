@@ -12,7 +12,7 @@ namespace TE4TwoDSidescroller
         protected Texture2D currentTexture;
         protected Vector2 currentOrigin;
         protected Rectangle sourceRectangle;
-        protected Vector2 currentPosition;
+        protected Vector2 currentPosition; 
         protected Vector2 scale;
         protected SpriteEffects spriteEffects;
         protected int currentFrame;

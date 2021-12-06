@@ -117,8 +117,13 @@ namespace TE4TwoDSidescroller
                 character.DoNotRun();
             }
 
-            if (currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
-            {                
+            //if (currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
+            //{                
+            //    character.Jump(gameTime);
+            //}
+
+            if (currentKeyboardState.IsKeyDown(jumpKey))
+            {
                 character.Jump(gameTime);
             }
 

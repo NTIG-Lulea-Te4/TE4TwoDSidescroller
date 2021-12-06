@@ -45,6 +45,9 @@ namespace TE4TwoDSidescroller
         Vector2 acceleration;
         Vector2 jumpAcceleration;
 
+        float time;
+        float jumpForce;
+
         public Player()
         {
             characterInput = new PlayerInput(this);
@@ -84,8 +87,8 @@ namespace TE4TwoDSidescroller
 
             floorTest = new Floor();
 
-            //visionManager 
-
+            jumpForce = 8;
+            
             entityAnimation = new Dictionary<string, EntityAnimation>();
             EntityAnimation RunRight = new EntityAnimation(rightWalk, 0, 4, playerOrigin, PlayerPosition, playerSourceRectangle, 
                 playerScale, 0, SpriteEffects.None, 0);
@@ -161,20 +164,20 @@ namespace TE4TwoDSidescroller
 
         public override void Reset()
         {
-            playerPosition = new Vector2(10, 50);
+            playerPosition = new Vector2(200,50);
             IsGrounded = false;
         }
 
-        public override void MoveUp()
-        {
-            movementVector.Y -= moveSpeed; 
-            //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
-        }
+        //public override void MoveUp()
+        //{
+        //    movementVector.Y -= moveSpeed; 
+        //    //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+        //}
 
-        public override void MoveDown()
-        {
-            movementVector.Y += moveSpeed;
-        }
+        //public override void MoveDown()
+        //{
+        //    movementVector.Y += moveSpeed;
+        //}
 
         public override void MoveLeft()
         {
@@ -198,10 +201,13 @@ namespace TE4TwoDSidescroller
 
         public override void Jump(GameTime gameTime)
         {
-            if (IsGrounded/* && playerVelocity.Y == 0*/)
-            {
-                acceleration.Y = 50f;              
-            }
+            movementVector.Y -= moveSpeed;
+            //if (IsGrounded/* && playerVelocity.Y == 0*/)
+            //{
+            //    //acceleration.Y = 50f;
+            //    jumpAcceleration.Y = -jumpForce;                
+            //    //playerJumpHeight.Y += time * jumpForce;
+            //}
         }
 
         public override void DoubleJump()
@@ -215,14 +221,16 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
 
-            jumpAcceleration -= acceleration * deltaTimeSquaredDividedByTwo;
+            
+            //jumpAcceleration -= acceleration * deltaTimeSquaredDividedByTwo;
 
             playerVelocity = new Vector2(0, 0);
-            playerJumpHeight = new Vector2(0, 0);
+            //playerJumpHeight = new Vector2(0, 0);
 
-            PlayerPosition += movementVector;
+            PlayerPosition += movementVector * time / 15;
             animation.Update(gameTime);
 
             base.Update(gameTime);
@@ -236,11 +244,10 @@ namespace TE4TwoDSidescroller
             detectionHitBox.Y = (int)PlayerPosition.Y;
             collisionBox.X = (int)PlayerPosition.X;
             collisionBox.Y = (int)PlayerPosition.Y;
+                        
+            //playerJumpHeight.Y += (jumpAcceleration.Y * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
 
-
-            playerJumpHeight.Y += (jumpAcceleration.Y * deltaTime) + (acceleration.X * deltaTimeSquaredDividedByTwo);
-
-            jumpAcceleration += acceleration * deltaTime;
+            //jumpAcceleration += acceleration * deltaTime;
 
             playerVelocity.Y += increasingGravity - playerJumpHeight.Y;
 
