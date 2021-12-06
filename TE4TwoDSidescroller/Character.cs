@@ -18,7 +18,7 @@ namespace TE4TwoDSidescroller
 
         //public AnimationManager animationManager;
 
-        //public Dictionary<string, Animation> animations;
+        public Dictionary<string, EntityAnimation> entityAnimation;
 
         //public Vector2 characterPosition;
 
@@ -78,6 +78,12 @@ namespace TE4TwoDSidescroller
         //}
 
         #region Movement
+
+        public virtual void Reset()
+        {
+
+        }
+
         public virtual void MoveUp()
         {
 
@@ -131,7 +137,7 @@ namespace TE4TwoDSidescroller
 
         #region Combat
 
-        public virtual void Attack1()
+        public virtual void Attack1(GameTime gameTime)
         {
 
         }

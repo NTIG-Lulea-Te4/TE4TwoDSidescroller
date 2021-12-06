@@ -11,22 +11,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\netcoreapp3.1\Content\obj\Windows\Content\Song.wav" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\Box.png" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\MainCharacters\ShadowRunRight.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\MainCharacters\SlimeIdleAnim.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\PurpleBox.png" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\ShadowIdleAnim.png" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Pngs\ShadowRunRight.png" />
-    <Content Include="bin\Debug\netcoreapp3.1\Content\Sound\Song.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
@@ -34,9 +18,6 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\Content.mgcb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Content\Pngs\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -67,9 +48,6 @@
     <None Update="Content\Pngs\Farmer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\Pngs\healthBar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Content\Pngs\MainCharacters\ShadowIdleAnim.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -89,9 +67,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Content\Pngs\MainCharacters\UnknownWalkAnim.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Content\Pngs\Menu\ButtonFont.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Content\Pngs\PurpleBox.png">

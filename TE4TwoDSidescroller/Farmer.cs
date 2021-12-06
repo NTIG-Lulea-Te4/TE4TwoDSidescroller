@@ -23,7 +23,7 @@ namespace TE4TwoDSidescroller
         
 
 
-        public Farmer()
+        public Farmer(int myPosition1, int myPosition2)
         {
             maxHealth = 50;
             currentHealth = maxHealth;
@@ -34,9 +34,10 @@ namespace TE4TwoDSidescroller
             jumpHeight = 3;
             frames = 0;
 
-            
+            hasCollider = true;
 
-            sourceRectangle = new Rectangle(32 * frames, 0, 32, 48);
+            myPosition = new Vector2(myPosition1, myPosition2);
+
             string currentPath = 
             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+ "/Content/Pngs/Enemies" + "/FarmerIdlePic.png";
 
@@ -47,8 +48,10 @@ namespace TE4TwoDSidescroller
 
             }
 
+            sourceRectangle = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
             myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
             
+            collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
         }
 
 
@@ -75,7 +78,7 @@ namespace TE4TwoDSidescroller
 
         //}
 
-        public override void Attack1()
+        public override void Attack1(GameTime gameTime)
         {
 
 
