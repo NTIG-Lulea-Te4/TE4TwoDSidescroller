@@ -24,6 +24,7 @@ namespace TE4TwoDSidescroller
 
         //public Texture2D characterTexture;
 
+        
 
         public Character()
         {
@@ -237,6 +238,10 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
+
+
+
+
             //SetPlayerAnimation();
 
             //animationManager.Update(gameTime);

@@ -147,10 +147,7 @@ namespace TE4TwoDSidescroller
             {
                 IsGrounded = true;
             }
-            else
-            {
-                IsGrounded = false;
-            }
+
         }
 
         #region Input
@@ -194,7 +191,8 @@ namespace TE4TwoDSidescroller
 
         public override void Jump(GameTime gameTime)
         {
-            movementVector.Y -= moveSpeed + 1; 
+            movementVector.Y -= moveSpeed + 1;
+            IsGrounded = false;
         }
 
         public override void DoubleJump()
@@ -215,7 +213,7 @@ namespace TE4TwoDSidescroller
            
             PlayerPosition += movementVector * time / 15;
             GameInfo.player1Position = playerPosition;
-            animation.Update(gameTime);
+            //animation.Update(gameTime);
 
             base.Update(gameTime);
 
@@ -287,7 +285,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
             GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle/*[currentAnimationIndex]*/, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
-            animation.Draw(gameTime);
+            //animation.Draw(gameTime);
         }
     }
 }

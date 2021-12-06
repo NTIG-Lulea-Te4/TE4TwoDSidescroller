@@ -38,6 +38,9 @@ namespace TE4TwoDSidescroller
             Entity knight = new Knight();
             GameInfo.entityManager.AddEntity(knight);
 
+            Entity melee = new MeleeAttack();
+            GameInfo.entityManager.AddEntity(melee);
+
         }
 
         public override void Update(GameTime gameTime)
