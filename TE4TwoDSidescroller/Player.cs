@@ -10,7 +10,7 @@ namespace TE4TwoDSidescroller
 {
     class Player : Character
     {
-        public  Texture2D currentTexture;
+        public Texture2D currentTexture;
         static Texture2D rightWalk;
         static Texture2D leftWalk;
 
@@ -28,21 +28,13 @@ namespace TE4TwoDSidescroller
         private float runSpeed;
         private float walkSpeed;
 
-        private Vector2 playerJumpHeight;
-
-        float timer;
-        float frameSpeed; //An int that is the threhold for timer.
-
-        Rectangle[] sourceRectangles;
-
-        int previousAnimationIndex;
-        int currentAnimationIndex;
-
-        Floor floorTest;
-
         float deltaTime;
         float deltaTimeSquaredDividedByTwo;
         float time;
+
+        bool isWalkingRight;
+        bool isWalkingLeft;
+        bool isJumping;
 
         public Player()
         {
@@ -73,24 +65,22 @@ namespace TE4TwoDSidescroller
 
             LoadPlayerTexture2D();
 
+            //Animate();
+            Anime();
+
             maxHealth = 150;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
-
-            floorTest = new Floor();
-
             
-            entityAnimation = new Dictionary<string, EntityAnimation>();
-            EntityAnimation RunRight = new EntityAnimation(rightWalk, 0, 4, playerOrigin, PlayerPosition, playerSourceRectangle, 
-                playerScale, 0, SpriteEffects.None, 0);
+            //entityAnimation = new Dictionary<string, EntityAnimation>();
+            //EntityAnimation RunRight = new EntityAnimation(rightWalk, 0, 4, playerOrigin, PlayerPosition, playerSourceRectangle, 
+            //    playerScale, 0, SpriteEffects.None, 0);
 
-            entityAnimation.Add("RunRight", RunRight);
+            //entityAnimation.Add("RunRight", RunRight);
 
-            //animation = new Animation(rightWalk, 4);
-            //animation.isLooping = true;
-            //animation.FramePerSecond = 5;
+
             //animation.position = PlayerPosition;
 
             //previousAnimationIndex = 3;
@@ -133,14 +123,47 @@ namespace TE4TwoDSidescroller
                 rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
 
-            string path2 = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
-            using (Stream textureStream = new FileStream(path2, FileMode.Open))
-            {
-                leftWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
+            //string path2 = Path.GetDirectoryName(
+            //    System.Reflection.Assembly.GetExecutingAssembly().Location)
+            //    + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
+            //using (Stream textureStream = new FileStream(path2, FileMode.Open))
+            //{
+            //    leftWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            //}
         }
+
+        //public void Animate()
+        //{
+        //    if (isWalkingRight)
+        //    {
+        //        animation = new Animation(rightWalk, 4);
+        //        animation.isLooping = true;
+        //        animation.FramePerSecond = 5;
+        //        animation.position = PlayerPosition;
+        //        isWalkingRight = false;
+        //    }
+        //    else if (isWalkingLeft)
+        //    {
+        //        animation = new Animation(leftWalk, 4);
+        //        animation.isLooping = true;
+        //        animation.FramePerSecond = 5;
+        //        animation.position = PlayerPosition;
+        //        isWalkingLeft = false;
+        //    }
+        //    else if (isJumping)
+        //    {
+
+        //    }
+
+        //}
+
+        public void Anime()
+        {
+            animation = new Animation(rightWalk, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 5;
+        }
+
         public override void HasCollidedWith(Entity collider)
         {
             if (collider.isFloor)
@@ -158,25 +181,27 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
         }
 
-        //public override void MoveUp()
-        //{
-        //    movementVector.Y -= moveSpeed; 
-        //    //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
-        //}
+        public override void MoveUp()
+        {
+            movementVector.Y -= moveSpeed;
+            //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+        }
 
-        //public override void MoveDown()
-        //{
-        //    movementVector.Y += moveSpeed;
-        //}
+        public override void MoveDown()
+        {
+            movementVector.Y += moveSpeed;
+        }
 
         public override void MoveLeft()
         {
             movementVector.X -= moveSpeed;
+            isWalkingLeft = true;
         }
 
         public override void MoveRight()
         {
             movementVector.X += moveSpeed;
+            isWalkingRight = true;
         }
 
         public override void Run()
@@ -208,12 +233,19 @@ namespace TE4TwoDSidescroller
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
-
+                        
             playerVelocity = new Vector2(0, 0);
            
             PlayerPosition += movementVector * time / 15;
+
+            animation.position = PlayerPosition;
+
             GameInfo.player1Position = playerPosition;
             //animation.Update(gameTime);
+
+            GameInfo.player1Position = playerPosition;
+            //animation.Update(gameTime);
+            GameInfo.Player1TextureSize = playerSourceRectangle;
 
             base.Update(gameTime);
 
@@ -286,6 +318,8 @@ namespace TE4TwoDSidescroller
         {
             GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle/*[currentAnimationIndex]*/, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
             //animation.Draw(gameTime);
+            //GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
+            animation.Draw(gameTime);
         }
     }
 }
