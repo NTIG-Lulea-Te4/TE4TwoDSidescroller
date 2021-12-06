@@ -194,7 +194,7 @@ namespace TE4TwoDSidescroller
 
         public override void Jump(GameTime gameTime)
         {
-            movementVector.Y -= moveSpeed + 1;
+            movementVector.Y -= moveSpeed + 1; 
         }
 
         public override void DoubleJump()
