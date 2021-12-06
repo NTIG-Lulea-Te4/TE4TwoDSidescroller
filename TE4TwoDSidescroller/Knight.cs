@@ -18,11 +18,11 @@ namespace TE4TwoDSidescroller
         //isGrounded - Entity
 
         GameInformationSystem gameInfoSystem;
-        PlayerTest playerTest;
 
         private Texture2D knightTexture;
         private Rectangle sourceRectangle;
         static public Vector2 movementDirection;
+        static public Vector2 movementDirectionOnXAxis;
         static public Vector2 knightPosition;
         private Vector2 knightOrigin;
         private Vector2 knightVelocity;
@@ -33,15 +33,11 @@ namespace TE4TwoDSidescroller
 
         private Health health;
 
-        float currentGravity;
-
-
         bool hasCollided;
 
         Texture2D[] Sprites;
-        int frameWidth;
-        int frameHeight;
-        int currentFrame;
+
+
 
 
         public Knight()
@@ -49,14 +45,11 @@ namespace TE4TwoDSidescroller
 
             characterInput = new KnightBehaviour(this);
 
-            frameWidth = 64;
-            currentFrame = frameWidth;
-            frameHeight = 96;
-
 
             IsGrounded = false;
             isActive = true;
             hasCollider = true;
+
             hasCollided = false;
 
             movementSpeed = 0.3f;
@@ -67,21 +60,21 @@ namespace TE4TwoDSidescroller
             manaTick = 0;
             health = new Health();
 
-            playerTest = new PlayerTest();
+            gameInfoSystem = new GameInformationSystem();
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
-            knightPosition = new Vector2();
+            knightPosition = new Vector2(500, 0);
             movementDirection = new Vector2();
+            //movementDirectionOnXAxis = new Vector2();
             knightVelocity = new Vector2(0, 0);
             
             knightOrigin = new Vector2(0, 0);
             knightScale = new Vector2(1, 1);
-            movementVector = new Vector2();
+            movementVector = new Vector2(0, 0);
             knightRotation = 0;
 
             collisionBox = new Rectangle(0, 0, 64, 96);
             //weaponCollsion = new Rectangle();
-            gameInfoSystem = new GameInformationSystem();
 
             LoadTexture2D();
 
@@ -111,18 +104,8 @@ namespace TE4TwoDSidescroller
                 IsGrounded = true;
                 
             }
-            else
-            {
-                IsGrounded = false;
-            }
-            if (collider.isPlayer)
-            {
-                hasCollided = true;
-            }
-            else
-            {
-                hasCollided = false;
-            }
+            
+
         }
 
         #region Behaviour
@@ -130,16 +113,16 @@ namespace TE4TwoDSidescroller
         public override void MoveRight()
         {
 
-            movementDirection.Normalize();
-            movementVector.X += movementDirection.X * movementSpeed;
+            //movementDirectionOnXAxis.Normalize();
+            //movementVector.X += movementDirectionOnXAxis.X * movementSpeed;
+            movementVector.X += movementSpeed;
 
         }
 
         public override void MoveLeft()
         {
-
-            movementDirection.Normalize();
-            movementVector.X += movementDirection.X * movementSpeed;
+            
+            movementVector.X -= movementSpeed;
 
         }
 
@@ -148,6 +131,7 @@ namespace TE4TwoDSidescroller
 
             if (IsGrounded)
             {
+               IsGrounded = false;
                knightJumpHeight += (float)(2f * (gameTime.ElapsedGameTime.TotalMilliseconds));
 
             }
@@ -165,7 +149,8 @@ namespace TE4TwoDSidescroller
 
             if (weaponCollsion.Y > collisionBox.Y)
             {
-                //remove i guess
+                weaponCollsion = new Rectangle(collisionBox.X + collisionBox.Width,
+                collisionBox.Y + collisionBox.Width, 0, 0);
             }
 
         }
@@ -203,7 +188,7 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
-            movementDirection.X = (PlayerTest.playerPosition.X) - knightPosition.X;
+            movementDirection = GameInfo.player1Position - knightPosition;
 
             knightVelocity = new Vector2(0, 0);
             knightJumpHeight = 0;
@@ -226,11 +211,7 @@ namespace TE4TwoDSidescroller
 
             movementVector += knightVelocity;
 
-            if (hasCollided)
-            {
-                movementVector.X = 0;
-                movementVector.Y = 0;
-            }
+
 
 
             #region Animation Stuff
@@ -271,7 +252,9 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, Color.White, knightRotation, knightOrigin, knightScale, SpriteEffects.None, 0.0f);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
+                Color.White, knightRotation, knightOrigin, knightScale, 
+                SpriteEffects.None, 0f);
 
             // base.Draw(gameTime);
         }

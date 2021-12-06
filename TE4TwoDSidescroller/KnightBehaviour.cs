@@ -9,6 +9,7 @@ namespace TE4TwoDSidescroller
     {
 
         private Vector2 distance;
+
         float attackTimer;
         float jumpTimer;
 
@@ -19,31 +20,33 @@ namespace TE4TwoDSidescroller
 
             attackTimer = 0;
             jumpTimer = 0;
-
         }
-
+        
         public override void Update(GameTime gameTime)
         {
+
 
             attackTimer += gameTime.ElapsedGameTime.Milliseconds;
             jumpTimer += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (Knight.movementDirection.Length() <= distance.Length())
+            if (Knight.movementDirection.Length() <= distance.Length() &&
+                Knight.knightPosition.X < GameInfo.player1Position.X)
             {
 
                 character.MoveRight();
 
             }
 
-            if (Knight.movementDirection.Length() <= distance.Length())
+            if (Knight.movementDirection.Length() <= distance.Length() &&
+                Knight.knightPosition.X > GameInfo.player1Position.X)
             {
 
                 character.MoveLeft();
 
             }
 
-            if (Knight.knightPosition.Y > PlayerTest.playerPosition.Y
-                && jumpTimer > 3000)
+            if (Knight.knightPosition.Y > GameInfo.player1Position.Y
+                && jumpTimer > 1500)
             {
 
                 character.Jump(gameTime);

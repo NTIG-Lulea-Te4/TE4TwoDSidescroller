@@ -231,12 +231,16 @@ namespace TE4TwoDSidescroller
             
 
             playerVelocity = new Vector2(0, 0);
-
+           
             PlayerPosition += movementVector * time / 15;
 
             animation.position = PlayerPosition;
 
+            GameInfo.player1Position = playerPosition;
             animation.Update(gameTime);
+
+            GameInfo.player1Position = playerPosition;
+            GameInfo.Player1TextureSize = playerSourceRectangle;
 
             base.Update(gameTime);
 
