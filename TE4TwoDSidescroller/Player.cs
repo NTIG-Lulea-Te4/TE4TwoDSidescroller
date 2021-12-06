@@ -133,13 +133,13 @@ namespace TE4TwoDSidescroller
                 rightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
 
-            string path2 = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
-            using (Stream textureStream = new FileStream(path2, FileMode.Open))
-            {
-                leftWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
+            //string path2 = Path.GetDirectoryName(
+            //    System.Reflection.Assembly.GetExecutingAssembly().Location)
+            //    + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
+            //using (Stream textureStream = new FileStream(path2, FileMode.Open))
+            //{
+            //    leftWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            //}
         }
         public override void HasCollidedWith(Entity collider)
         {

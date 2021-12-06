@@ -23,7 +23,6 @@ namespace TE4TwoDSidescroller
             Entity floor;
             Entity TutorialGoal;
             Entity knight;
-            Entity playerTest;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -40,8 +39,6 @@ namespace TE4TwoDSidescroller
             knight = new Knight();
             GameInfo.entityManager.AddEntity(knight);
 
-            playerTest = new PlayerTest();
-            GameInfo.entityManager.AddEntity(playerTest);
         }
 
         public override void Update(GameTime gameTime)
