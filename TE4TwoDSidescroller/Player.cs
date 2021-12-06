@@ -207,6 +207,7 @@ namespace TE4TwoDSidescroller
             playerJumpHeight = new Vector2(0, 0);
 
             PlayerPosition += movementVector;
+            GameInfo.player1Position = playerPosition;
             animation.Update(gameTime);
 
             base.Update(gameTime);

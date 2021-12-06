@@ -65,7 +65,7 @@ namespace TE4TwoDSidescroller
             sourceRectangle = new Rectangle(0, 0, 64, 96);
             knightPosition = new Vector2(500, 0);
             movementDirection = new Vector2();
-            movementDirectionOnXAxis = new Vector2();
+            //movementDirectionOnXAxis = new Vector2();
             knightVelocity = new Vector2(0, 0);
             
             knightOrigin = new Vector2(0, 0);
@@ -114,10 +114,17 @@ namespace TE4TwoDSidescroller
         {
 
             //movementDirectionOnXAxis.Normalize();
-            movementVector.X += movementDirectionOnXAxis.X * movementSpeed;
+            //movementVector.X += movementDirectionOnXAxis.X * movementSpeed;
+            movementVector.X += movementSpeed;
 
         }
 
+        public override void MoveLeft()
+        {
+            
+            movementVector.X -= movementSpeed;
+
+        }
 
         public override void Jump(GameTime gameTime)
         {
@@ -182,7 +189,6 @@ namespace TE4TwoDSidescroller
             #endregion
 
             movementDirection = GameInfo.player1Position - knightPosition;
-            movementDirectionOnXAxis.X = (GameInfo.player1Position.X) - knightPosition.X;
 
             knightVelocity = new Vector2(0, 0);
             knightJumpHeight = 0;
