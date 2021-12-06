@@ -88,10 +88,10 @@ namespace TE4TwoDSidescroller
 
             entityAnimation.Add("RunRight", RunRight);
 
-            animation = new Animation(rightWalk, 4);
-            animation.isLooping = true;
-            animation.FramePerSecond = 5;
-            animation.position = PlayerPosition;
+            //animation = new Animation(rightWalk, 4);
+            //animation.isLooping = true;
+            //animation.FramePerSecond = 5;
+            //animation.position = PlayerPosition;
 
             //previousAnimationIndex = 3;
 

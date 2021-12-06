@@ -88,65 +88,86 @@ namespace TE4TwoDSidescroller
 
         #region newer code
 
-        public float timeElapsed;
-        public bool isLooping;
-        private float timeToUpdate; //frameSpeed
-        public int FramePerSecond
-        {
-            set
-            {
-                timeToUpdate = (1f / value);
+        //public float timeElapsed;
+        //public bool isLooping;
+        //private float timeToUpdate; //frameSpeed
+        //public int FramePerSecond
+        //{
+        //    set
+        //    {
+        //        timeToUpdate = (1f / value);
 
-            }
+        //    }
+        //}
+
+        //protected Texture2D currentTexture;
+        //public Vector2 position;
+        //public Vector2 origin;
+        //public float rotation;
+        //public float scale;
+        //protected Rectangle[] rectangles;
+        //protected int frameIndex;
+
+        //public Animation(Texture2D Texture, int frames)
+        //{
+        //    currentTexture = Texture;
+        //    int width = Texture.Width / frames;
+        //    rectangles = new Rectangle[frames];
+
+        //    for (int currentFrame = 0; currentFrame < frames; currentFrame++)
+        //    {
+        //        rectangles[currentFrame] = new Rectangle(
+        //            currentFrame * width, 0, width, Texture.Height);
+        //    }
+
+        //    position = Vector2.Zero;
+        //    rotation = 0.0f;
+        //    scale = 1f;
+        //    frameIndex = 0;
+        //}
+
+        //public void Draw(GameTime gameTime)
+        //{
+        //    GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, SpriteEffects.None, 0f);
+        //}
+
+        //public void Update(GameTime gameTime)
+        //{
+        //    timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        //    if (timeElapsed > timeToUpdate)
+        //    {
+        //        timeElapsed -= timeToUpdate;
+
+        //        if (frameIndex < rectangles.Length - 1)
+        //        {
+        //            frameIndex++;
+        //        }
+        //        else if (isLooping)
+        //        {
+        //            frameIndex = 0;
+        //        }
+        //    }
+        //}
+
+        #endregion
+
+        #region newest code
+
+        private Vector2 spritePosition;
+
+        public Animation(Vector2 position)
+        {
+            this.spritePosition = position;
         }
 
-        protected Texture2D currentTexture;
-        public Vector2 position;
-        public Vector2 origin;
-        public float rotation;
-        public float scale;
-        protected Rectangle[] rectangles;
-        protected int frameIndex;
-
-        public Animation(Texture2D Texture, int frames)
+        public  void Update(GameTime gameTime)
         {
-            currentTexture = Texture;
-            int width = Texture.Width / frames;
-            rectangles = new Rectangle[frames];
 
-            for (int currentFrame = 0; currentFrame < frames; currentFrame++)
-            {
-                rectangles[currentFrame] = new Rectangle(
-                    currentFrame * width, 0, width, Texture.Height);
-            }
-
-            position = Vector2.Zero;
-            rotation = 0.0f;
-            scale = 1f;
-            frameIndex = 0;
         }
 
-        public void Draw(GameTime gameTime)
+        public  void Draw(GameTime game)
         {
-            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, SpriteEffects.None, 0f);
-        }
 
-        public void Update(GameTime gameTime)
-        {
-            timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timeToUpdate)
-            {
-                timeElapsed -= timeToUpdate;
-
-                if (frameIndex < rectangles.Length - 1)
-                {
-                    frameIndex++;
-                }
-                else if (isLooping)
-                {
-                    frameIndex = 0;
-                }
-            }
         }
 
         #endregion
