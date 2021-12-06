@@ -1,10 +1,10 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Xna.Framework;
-using System.Drawing;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace TE4TwoDSidescroller
 {
@@ -21,6 +21,8 @@ namespace TE4TwoDSidescroller
         static public ScreenManager screenManager;
         static public CreationManager creationManager;
         static public Vector2 player1Position;
+        static public Rectangle Player1TextureSize;
+        static public Vector2 viewportPosition;
         static public VisionManager visionManager;
         static public GameInformationSystem gameInformationSystem; 
         static public GameTime gameTime;

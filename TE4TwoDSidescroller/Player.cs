@@ -209,6 +209,9 @@ namespace TE4TwoDSidescroller
             PlayerPosition += movementVector;
             animation.Update(gameTime);
 
+            GameInfo.player1Position = playerPosition;
+            GameInfo.Player1TextureSize = playerSourceRectangle;
+
             base.Update(gameTime);
 
             if (!IsGrounded)
