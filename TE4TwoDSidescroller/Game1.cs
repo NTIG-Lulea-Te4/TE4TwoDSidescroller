@@ -9,14 +9,7 @@ namespace TE4TwoDSidescroller
     {
         //SoundInput soundInput;
 
-        private States currentState;
-        private States nextState;
-
-        public void ChangeState(States state)
-        {
-            nextState = currentState;
-        }
-
+       
         public Game1()
         {
             //soundInput = new SoundInput();
@@ -52,7 +45,7 @@ namespace TE4TwoDSidescroller
             GameInfo.creationManager.Initialize();
 
             //ej rätt GraphicsDevice ska vara graphics.GraphicsDevice
-            currentState = new MenuState(this, GraphicsDevice ,Content);
+            
 
         }
 
@@ -63,16 +56,7 @@ namespace TE4TwoDSidescroller
 
             GameInfo.collisionManager.CollisionUpdate();
 
-            if (nextState != null)
-            {
-                currentState = nextState;
-
-                nextState = null;
-            }
-
-            currentState.Update(gameTime);
-            currentState.PostUpdate(gameTime);
-            
+           
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
@@ -87,7 +71,7 @@ namespace TE4TwoDSidescroller
             GameInfo.spriteBatch.Begin();
 
             GameInfo.entityManager.Draw(gameTime);
-            currentState.Draw(gameTime, GameInfo.spriteBatch);
+            
 
             GameInfo.spriteBatch.End();
             base.Draw(gameTime);

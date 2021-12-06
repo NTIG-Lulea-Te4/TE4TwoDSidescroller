@@ -30,6 +30,8 @@ namespace TE4TwoDSidescroller
 
         private float playerJumpHeight;
 
+        public int playerHealthBar;
+
         //int currentFrame;
         //int frameHeight;
         //int frameWidth;
@@ -71,6 +73,7 @@ namespace TE4TwoDSidescroller
 
             maxHealth = 150;
             currentHealth = maxHealth;
+            playerHealthBar = currentHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
@@ -257,6 +260,7 @@ namespace TE4TwoDSidescroller
             
             playerVelocity = new Vector2(0, 0);
             playerJumpHeight = 0;
+            playerHealthBar = currentHealth;
 
             //playerSourceRectangle = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
             //playerOrigin = new Vector2(playerSourceRectangle.Width / 2, playerSourceRectangle.Height / 2);

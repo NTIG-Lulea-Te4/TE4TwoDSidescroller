@@ -28,17 +28,6 @@ namespace TE4TwoDSidescroller
             content.Load<SoundEffect>("Song.wav");
         }
 
-        //public static Camera Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //        {
-        //            instance = new Camera();
-        //        }
-        //        return instance;
-        //    }
-
         #region SoundPlayers
         static SoundEffect soundHolder;
         public static SoundPlayer attack1;
@@ -185,6 +174,14 @@ namespace TE4TwoDSidescroller
             playingFile.PlaySync();
              
         }
+
+        public static void SoundEffectPlayed(SoundEffect fileBeingPlayed, float fileVolume, float filePitch, float filePan)
+        {
+
+            fileBeingPlayed.Play(volume: fileVolume, pitch: filePitch, pan: filePan);
+               
+        }
+
 
 
         public void MusicPlayer(SoundPlayer playingMusicFile)
