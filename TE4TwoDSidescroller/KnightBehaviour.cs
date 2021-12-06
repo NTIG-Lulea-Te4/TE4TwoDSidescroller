@@ -9,17 +9,24 @@ namespace TE4TwoDSidescroller
     {
 
         private Vector2 distance;
+        float attackTimer;
+        float jumpTimer;
 
         public KnightBehaviour(Character character) : base(character)
         {
 
             distance = new Vector2(300, 300);
 
+            attackTimer = 0;
+            jumpTimer = 0;
 
         }
 
         public override void Update(GameTime gameTime)
         {
+
+            attackTimer += gameTime.ElapsedGameTime.Milliseconds;
+            jumpTimer += gameTime.ElapsedGameTime.Milliseconds;
 
             if (Knight.movementDirection.Length() <= distance.Length())
             {
@@ -35,19 +42,22 @@ namespace TE4TwoDSidescroller
 
             }
 
-            if (Knight.movementDirection.Length() <= distance.Length() && 
-                Knight.knightPosition.Y - 30 > PlayerTest.playerPosition.Y)
+            if (Knight.knightPosition.Y > PlayerTest.playerPosition.Y
+                && jumpTimer > 3000)
             {
 
                 character.Jump(gameTime);
 
+                jumpTimer = 0;
             }
 
-            if (Knight.movementDirection.Length() <= distance.Length() - 250)
+            if (Knight.movementDirection.Length() <= distance.Length() - 250
+                && attackTimer > 2000)
             {
 
-                character.Attack1();
+                character.Attack1(gameTime);
 
+                attackTimer = 0;
             }
 
         }

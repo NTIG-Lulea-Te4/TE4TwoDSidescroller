@@ -160,7 +160,7 @@ namespace TE4TwoDSidescroller
 
             if (currentKeyboardState.IsKeyDown(lightAttackKey) && !previousKeyboardState.IsKeyDown(lightAttackKey))
             {
-                character.Attack1();
+                character.Attack1(gameTime);
             }
 
             if (currentKeyboardState.IsKeyDown(heavyAttackKey) && !previousKeyboardState.IsKeyDown(heavyAttackKey))
