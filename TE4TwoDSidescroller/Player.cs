@@ -215,7 +215,7 @@ namespace TE4TwoDSidescroller
            
             PlayerPosition += movementVector * time / 15;
             GameInfo.player1Position = playerPosition;
-            animation.Update(gameTime);
+            //animation.Update(gameTime);
 
             GameInfo.player1Position = playerPosition;
             GameInfo.Player1TextureSize = playerSourceRectangle;
@@ -290,7 +290,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
             GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle/*[currentAnimationIndex]*/, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
-            animation.Draw(gameTime);
+            //animation.Draw(gameTime);
         }
     }
 }
