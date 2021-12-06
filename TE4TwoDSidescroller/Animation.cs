@@ -153,23 +153,6 @@ namespace TE4TwoDSidescroller
 
         #region newest code
 
-        //private Vector2 spritePosition;
-
-        //public Animation(Vector2 position)
-        //{
-        //    this.spritePosition = position;
-        //}
-
-        //public  void Update(GameTime gameTime)
-        //{
-
-        //}
-
-        //public  void Draw(GameTime game)
-        //{
-
-        //}
-
         #endregion
     }
 }
