@@ -65,7 +65,8 @@ namespace TE4TwoDSidescroller
 
             LoadPlayerTexture2D();
 
-            Animate();
+            //Animate();
+            Anime();
 
             maxHealth = 150;
             currentHealth = maxHealth;
@@ -131,29 +132,36 @@ namespace TE4TwoDSidescroller
             }
         }
 
-        public void Animate()
+        //public void Animate()
+        //{
+        //    if (isWalkingRight)
+        //    {
+        //        animation = new Animation(rightWalk, 4);
+        //        animation.isLooping = true;
+        //        animation.FramePerSecond = 5;
+        //        animation.position = PlayerPosition;
+        //        isWalkingRight = false;
+        //    }
+        //    else if (isWalkingLeft)
+        //    {
+        //        animation = new Animation(leftWalk, 4);
+        //        animation.isLooping = true;
+        //        animation.FramePerSecond = 5;
+        //        animation.position = PlayerPosition;
+        //        isWalkingLeft = false;
+        //    }
+        //    else if (isJumping)
+        //    {
+
+        //    }
+
+        //}
+
+        public void Anime()
         {
-            if (isWalkingRight)
-            {
-                animation = new Animation(rightWalk, 4);
-                animation.isLooping = true;
-                animation.FramePerSecond = 5;
-                animation.position = PlayerPosition;
-                isWalkingRight = false;
-            }
-            else if (isWalkingLeft)
-            {
-                animation = new Animation(leftWalk, 4);
-                animation.isLooping = true;
-                animation.FramePerSecond = 5;
-                animation.position = PlayerPosition;
-                isWalkingLeft = false;
-            }
-            else if (isJumping)
-            {
-
-            }
-
+            animation = new Animation(rightWalk, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 5;
         }
 
         public override void HasCollidedWith(Entity collider)
@@ -176,16 +184,16 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
         }
 
-        //public override void MoveUp()
-        //{
-        //    movementVector.Y -= moveSpeed; 
-        //    //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
-        //}
+        public override void MoveUp()
+        {
+            movementVector.Y -= moveSpeed;
+            //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+        }
 
-        //public override void MoveDown()
-        //{
-        //    movementVector.Y += moveSpeed;
-        //}
+        public override void MoveDown()
+        {
+            movementVector.Y += moveSpeed;
+        }
 
         public override void MoveLeft()
         {
@@ -227,9 +235,7 @@ namespace TE4TwoDSidescroller
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             deltaTimeSquaredDividedByTwo = (deltaTime * deltaTime) / 2;
-
-            
-
+                        
             playerVelocity = new Vector2(0, 0);
            
             PlayerPosition += movementVector * time / 15;
@@ -311,7 +317,7 @@ namespace TE4TwoDSidescroller
 
         public override void Draw(GameTime gameTime)
         {
-            GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
+            //GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
             animation.Draw(gameTime);
         }
     }
