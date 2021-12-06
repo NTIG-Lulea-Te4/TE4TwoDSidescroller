@@ -21,7 +21,7 @@ namespace TE4TwoDSidescroller
             jumpTimer = 0;
 
         }
-
+        
         public override void Update(GameTime gameTime)
         {
 
@@ -35,15 +35,8 @@ namespace TE4TwoDSidescroller
 
             }
 
-            if (Knight.movementDirection.Length() <= distance.Length())
-            {
-
-                character.MoveLeft();
-
-            }
-
             if (Knight.knightPosition.Y > PlayerTest.playerPosition.Y
-                && jumpTimer > 3000)
+                && jumpTimer > 1500)
             {
 
                 character.Jump(gameTime);

@@ -13,6 +13,15 @@ namespace TE4TwoDSidescroller
 
         public EntityAnimation entityAnimation;
 
+        public enum Tags
+        {
+            Player,
+            Knight,
+            KnghtAttack,
+            Floor
+
+        }
+
         public int uniqeId;
         public bool isActive;
         public bool hasCollider;
