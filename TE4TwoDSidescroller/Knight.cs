@@ -52,7 +52,7 @@ namespace TE4TwoDSidescroller
 
             hasCollided = false;
 
-            movementSpeed = 0.3f;
+            movementSpeed = 0.5f;
             maxHealth = 150;
             currentHealth = maxHealth;
             mana = 100;
@@ -131,8 +131,8 @@ namespace TE4TwoDSidescroller
 
             if (IsGrounded)
             {
-               IsGrounded = false;
-               knightJumpHeight += (float)(2f * (gameTime.ElapsedGameTime.TotalMilliseconds));
+                IsGrounded = false;
+                movementVector.Y -= movementSpeed * 10;
 
             }
 

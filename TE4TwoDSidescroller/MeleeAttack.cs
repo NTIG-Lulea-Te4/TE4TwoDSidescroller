@@ -15,9 +15,8 @@ namespace TE4TwoDSidescroller
         public MeleeAttack()
         {
 
-            collisionBox = new Rectangle((int)Knight.knightPosition.X, (int)Knight.knightPosition.Y,
-                0, 0);
-
+            collisionBox = new Rectangle(0, 0, 0, 0);
+            LoadTexture2D();
         }
 
         //Grafik för att se hur stor attacken är
@@ -31,6 +30,14 @@ namespace TE4TwoDSidescroller
             {
                 attackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
+
+        }
+
+        public static void AttackCollision()
+        {
+
+
+
 
         }
 

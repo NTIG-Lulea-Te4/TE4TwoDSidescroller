@@ -194,10 +194,7 @@ namespace TE4TwoDSidescroller
             {
                 IsGrounded = true;
             }
-            else
-            {
-                IsGrounded = false;
-            }
+
         }
 
         #region Input
@@ -244,6 +241,7 @@ namespace TE4TwoDSidescroller
         public override void Jump(GameTime gameTime)
         {
             movementVector.Y -= moveSpeed + 1;
+            IsGrounded = false;
         }
 
         public override void DoubleJump()
