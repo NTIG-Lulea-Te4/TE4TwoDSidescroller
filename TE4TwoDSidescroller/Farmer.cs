@@ -25,6 +25,7 @@ namespace TE4TwoDSidescroller
 
         public Farmer(int myPosition1, int myPosition2)
         {
+            characterInput = new FarmerInput(this);
             maxHealth = 50;
             currentHealth = maxHealth;
             mana = 100;
@@ -134,7 +135,7 @@ namespace TE4TwoDSidescroller
                 mana++;
                 manaTick = 0;
             }
-
+            base.Update(gameTime);
 
 
 
