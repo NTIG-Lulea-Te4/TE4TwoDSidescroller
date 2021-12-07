@@ -66,8 +66,7 @@ namespace TE4TwoDSidescroller
 
             LoadPlayerTexture2D();
 
-            Animate();
-            //Anime();
+            Anime();
 
             maxHealth = 150;
             currentHealth = maxHealth;
@@ -75,17 +74,7 @@ namespace TE4TwoDSidescroller
             manaCheck = mana;
             manaTick = 0;
 
-            animations = new Dictionary<string, Animation>();
-
-            //entityAnimation = new Dictionary<string, EntityAnimation>();
-            //EntityAnimation RunRight = new EntityAnimation(rightWalk, 0, 4, playerOrigin, PlayerPosition, playerSourceRectangle, 
-            //    playerScale, 0, SpriteEffects.None, 0);
-
-            //entityAnimation.Add("RunRight", RunRight);
-
-
-            //animation.position = PlayerPosition;
-
+            currentTexture = playerRunRight;
         }
 
         public Vector2 PlayerPosition
@@ -114,14 +103,6 @@ namespace TE4TwoDSidescroller
 
         public void LoadPlayerTexture2D()
         {
-            string currentPath = Path.GetDirectoryName(
-             System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/MainCharacters/" + "ShadowRunRight.png";
-            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
-            {
-                playerRunRight = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
-
             string path1 = Path.GetDirectoryName(
                 System.Reflection.Assembly.GetExecutingAssembly().Location)
                 + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
@@ -140,53 +121,27 @@ namespace TE4TwoDSidescroller
 
             string path3 = Path.GetDirectoryName(
                 System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
+                + "/Content/Pngs/MainCharacters/" + "ShadowJumpAnim.png";
             using (Stream textureStream = new FileStream(path3, FileMode.Open))
             {
                 playerJump = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
+
+            string currentPath = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/MainCharacters/" + "ShadowRunRight.png";
+            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            {
+                playerRunRight = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
         }
 
-        public void Animate()
+        public void Anime()
         {
-            Animation runRight = new Animation(playerRunRight, 4);
-            animations.Add("runRight", runRight);
-
-            Animation runLeft = new Animation(playerRunLeft, 4);
-            animations.Add("runLeft", runLeft);
-
-
-
-            if (isWalkingRight)
-            {
-                animation = new Animation(playerRunRight, 4);
-                animation.isLooping = true;
-                animation.FramePerSecond = 5;
-                animation.position = PlayerPosition;
-                isWalkingRight = false;
-            }
-
-            else if (isWalkingLeft)
-            {
-                animation = new Animation(playerRunLeft, 4);
-                animation.isLooping = true;
-                animation.FramePerSecond = 5;
-                animation.position = PlayerPosition;
-                isWalkingLeft = false;
-            }
-
-            else if (isJumping)
-            {
-
-            }
+            animation = new Animation(playerRunRight, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 5;
         }
-
-        //public void Anime()
-        //{
-        //    animation = new Animation(rightWalk, 4);
-        //    animation.isLooping = true;
-        //    animation.FramePerSecond = 5;
-        //}
 
         public override void HasCollidedWith(Entity collider)
         {
@@ -251,16 +206,15 @@ namespace TE4TwoDSidescroller
 
         #endregion
 
-
         public override void Update(GameTime gameTime)
         {
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             playerVelocity = new Vector2(0, 0);
-            PlayerPosition += movementVector;
+            playerPosition += movementVector;
 
-            animation.position = PlayerPosition;
+            animation.position = playerPosition;
             animation.Update(gameTime);
 
             GameInfo.player1Position = playerPosition;
@@ -273,11 +227,11 @@ namespace TE4TwoDSidescroller
                 increasingGravity += GameInfo.gameInformationSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
 
-            detectionHitBox.X = (int)PlayerPosition.X;
-            detectionHitBox.Y = (int)PlayerPosition.Y;
-            collisionBox.X = (int)PlayerPosition.X;
-            collisionBox.Y = (int)PlayerPosition.Y;
-
+            detectionHitBox.X = (int)playerPosition.X;
+            detectionHitBox.Y = (int)playerPosition.Y;
+            collisionBox.X = (int)playerPosition.X;
+            collisionBox.Y = (int)playerPosition.Y;
+            
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
 
@@ -303,7 +257,7 @@ namespace TE4TwoDSidescroller
 
         public override void Draw(GameTime gameTime)
         {
-            //GameInfo.spriteBatch.Draw(rightWalk, PlayerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
+            //GameInfo.spriteBatch.Draw(currentTexture, playerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
             animation.Draw(gameTime);
         }
     }
