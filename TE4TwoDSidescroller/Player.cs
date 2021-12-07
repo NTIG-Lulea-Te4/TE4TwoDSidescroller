@@ -15,6 +15,7 @@ namespace TE4TwoDSidescroller
         private Texture2D playerRunLeft;
         private Texture2D playerIdle;
         private Texture2D playerJump;
+        private Texture2D playerJumpFlip;
 
         private Rectangle playerSourceRectangle;
         private Vector2 playerPosition;
@@ -65,8 +66,8 @@ namespace TE4TwoDSidescroller
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
 
             LoadPlayerTexture2D();
-
-            Anime();
+            PlayerDictionary();
+            Animate();
 
             maxHealth = 150;
             currentHealth = maxHealth;
@@ -74,7 +75,6 @@ namespace TE4TwoDSidescroller
             manaCheck = mana;
             manaTick = 0;
 
-            currentTexture = playerRunRight;
         }
 
         public Vector2 PlayerPosition
@@ -134,13 +134,93 @@ namespace TE4TwoDSidescroller
             {
                 playerRunRight = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
+
+            string Path4 = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/MainCharacters/" + "ShadowJumpAnimFlipp.png";
+            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            {
+                playerJumpFlip = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
         }
 
-        public void Anime()
+        public void PlayerDictionary()
         {
-            animation = new Animation(playerRunRight, 4);
-            animation.isLooping = true;
-            animation.FramePerSecond = 5;
+            animations = new Dictionary<string, Animation>();
+            Animation runRight = new Animation(playerRunRight, 4);
+            runRight.isLooping = true;
+            runRight.FramePerSecond = 5;
+            animations.Add("runRight", runRight);
+
+            Animation runLeft = new Animation(playerRunLeft, 4);
+            runLeft.isLooping = true;
+            runLeft.FramePerSecond = 5;
+            animations.Add("runLeft", runLeft);
+
+            Animation idle = new Animation(playerIdle, 4);
+            idle.isLooping = true;
+            idle.FramePerSecond = 5;
+            animations.Add("idle", idle);
+
+            Animation jump = new Animation(playerJump, 25);
+            jump.isLooping = true;
+            jump.FramePerSecond = 20;
+            animations.Add("jump", jump);
+
+            Animation flipJump = new Animation(playerJumpFlip, 25);
+            flipJump.isLooping = true;
+            flipJump.FramePerSecond = 15;
+            animations.Add("flipJump", flipJump);
+
+        }
+
+        public void Animate()
+        {
+            Animation tempRunRight;
+            Animation tempRunLeft;
+            Animation tempIdle;
+            Animation tempJump;
+            Animation tempFlipJump;
+
+            animations.TryGetValue("idle", out tempIdle);
+            animations.TryGetValue("jump", out tempJump);
+            animations.TryGetValue("flipJump", out tempFlipJump);
+            animations.TryGetValue("runRight", out tempRunRight);
+            animations.TryGetValue("runLeft", out tempRunLeft);
+            
+            if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
+            {
+                animation = null;
+                animation = tempIdle;
+            }
+
+            else if (!IsGrounded && (movementVector.Y != 0 || movementVector.X <= 0))
+            {
+                animation = null;
+                animation = tempJump;
+            }
+
+            else if (!IsGrounded && (movementVector.Y != 0 || movementVector.X >= 0))
+            {
+                animation = null;
+                animation = tempFlipJump;
+            }
+
+            else if (isWalkingRight && movementVector.Y == 0)
+            {
+                animation = null;
+                animation = tempRunRight;
+
+                isWalkingRight = false;
+            }
+
+            else if (isWalkingLeft && movementVector.Y == 0)
+            {
+                animation = null;
+                animation = tempRunLeft;
+
+                isWalkingLeft = false;
+            }
         }
 
         public override void HasCollidedWith(Entity collider)
@@ -213,6 +293,8 @@ namespace TE4TwoDSidescroller
 
             playerVelocity = new Vector2(0, 0);
             playerPosition += movementVector;
+
+            Animate();
 
             animation.position = playerPosition;
             animation.Update(gameTime);
