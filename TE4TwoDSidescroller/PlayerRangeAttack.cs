@@ -60,7 +60,7 @@ namespace TE4TwoDSidescroller
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "PurpleBox.png";
+             + "/Content/Pngs/MainCharacters/" + "ShadowStarAnim.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -71,20 +71,33 @@ namespace TE4TwoDSidescroller
 
         public void Animate()
         {
-
+            if (GameInfo.player1IsFacingRight)
+            {
+                animation.spriteEffects = SpriteEffects.None;
+            }
+            else
+            {
+                animation.spriteEffects = SpriteEffects.FlipHorizontally;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
 
             collisionBox.X += (int)movementSpeed;
+
+            Animate();
+
+            animation.position.X = collisionBox.X;
+            animation.position.Y = collisionBox.Y -50;
+            animation.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
-
+            //GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
+            animation.Draw(gameTime);
         }
     }
 }
