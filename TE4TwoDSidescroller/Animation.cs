@@ -105,19 +105,20 @@ namespace TE4TwoDSidescroller
         public Vector2 origin;
         public float rotation;
         public float scale;
+        public SpriteEffects spriteEffects;
         protected Rectangle[] rectangles;
-        protected int frameIndex;
+        public int frameIndex;
 
-        public Animation(Texture2D Texture, int frames)
+        public Animation(Texture2D texture, int frames)
         {
-            currentTexture = Texture;
-            int width = Texture.Width / frames;
+            currentTexture = texture;
+            int width = texture.Width / frames;
             rectangles = new Rectangle[frames];
 
             for (int currentFrame = 0; currentFrame < frames; currentFrame++)
             {
                 rectangles[currentFrame] = new Rectangle(
-                    currentFrame * width, 0, width, Texture.Height);
+                    currentFrame * width, 0, width, texture.Height);
             }
 
             position = Vector2.Zero;
@@ -128,7 +129,7 @@ namespace TE4TwoDSidescroller
 
         public void Draw(GameTime gameTime)
         {
-            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, SpriteEffects.None, 0f);
+            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, spriteEffects, 0f);
         }
 
         public void Update(GameTime gameTime)
