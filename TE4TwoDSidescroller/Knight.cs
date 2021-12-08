@@ -10,7 +10,7 @@ namespace TE4TwoDSidescroller
 {
     class Knight : Character
     {
-
+        // :D
         //int gravity; - Game info
         //int currentYAxis; - Entity
         //int currentGravity; - Entity
