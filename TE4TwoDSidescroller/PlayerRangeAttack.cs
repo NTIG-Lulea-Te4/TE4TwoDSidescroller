@@ -12,6 +12,8 @@ namespace TE4TwoDSidescroller
 
     class PlayerRangeAttack : Entity
     {
+        private Animation animation;
+
         Texture2D playerAttackTexture;
 
         int attackWidth;
@@ -48,6 +50,10 @@ namespace TE4TwoDSidescroller
 
             LoadTexture2D();
 
+            animation = new Animation(playerAttackTexture, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 5;
+
         }
 
         public void LoadTexture2D()
@@ -60,6 +66,11 @@ namespace TE4TwoDSidescroller
             {
                 playerAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
+
+        }
+
+        public void Animate()
+        {
 
         }
 
