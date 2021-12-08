@@ -20,7 +20,7 @@ namespace TE4TwoDSidescroller
             Entity background;
             Entity playerEntity;
             Entity floor;
-            Entity farmer;
+            
             Entity tutorialGoal;
            
             Entity camera;
@@ -36,9 +36,6 @@ namespace TE4TwoDSidescroller
 
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
-
-            farmer = new Farmer(1000, 630);
-            GameInfo.entityManager.AddEntity(farmer);
 
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);

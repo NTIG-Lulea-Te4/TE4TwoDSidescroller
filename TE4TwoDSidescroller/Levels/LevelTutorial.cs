@@ -22,7 +22,8 @@ namespace TE4TwoDSidescroller
             Entity background;
             Entity floor;
             Entity TutorialGoal;
-            Entity knight;
+            Entity viewport;
+            Entity farmer;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -36,8 +37,11 @@ namespace TE4TwoDSidescroller
             TutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(TutorialGoal);
 
-            knight = new Knight();
-            GameInfo.entityManager.AddEntity(knight);
+            viewport = new VisionManager();
+            GameInfo.entityManager.AddEntity(viewport);
+
+            farmer = new Farmer(100, 220);
+            GameInfo.entityManager.AddEntity(farmer);
 
         }
 

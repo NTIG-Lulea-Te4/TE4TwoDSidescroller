@@ -17,7 +17,6 @@ namespace TE4TwoDSidescroller
 
         Texture2D myTexture;
         Vector2 myPosition;
-        Rectangle myRectangle;
         Rectangle sourceRectangle;
         int frames;
         
@@ -31,7 +30,7 @@ namespace TE4TwoDSidescroller
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
-            movementSpeed = 5;
+            movementSpeed = 2;
             jumpHeight = 3;
             frames = 0;
 
@@ -50,7 +49,7 @@ namespace TE4TwoDSidescroller
             }
 
             sourceRectangle = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
-            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
+            myPosition = new Vector2(myPosition1, myPosition2);
             
             collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
         }
@@ -61,14 +60,14 @@ namespace TE4TwoDSidescroller
         public override void MoveRight()
         {
 
-            myPosition.X = myPosition.X + movementSpeed * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
+            myPosition.X += movementSpeed;
 
         }
 
         public override void MoveLeft()
         {
 
-            myPosition.X = myPosition.X - movementSpeed * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
+            myPosition.X -= movementSpeed;
 
         }
 
@@ -135,6 +134,9 @@ namespace TE4TwoDSidescroller
                 mana++;
                 manaTick = 0;
             }
+
+            myPosition += movementVector;
+
             base.Update(gameTime);
 
 
@@ -145,7 +147,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(myTexture, myRectangle, sourceRectangle , Color.White);
+            GameInfo.spriteBatch.Draw(myTexture, myPosition, sourceRectangle , Color.White);
 
         }
 
