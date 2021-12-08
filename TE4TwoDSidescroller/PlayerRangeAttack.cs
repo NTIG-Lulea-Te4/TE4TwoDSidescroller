@@ -52,7 +52,7 @@ namespace TE4TwoDSidescroller
 
             animation = new Animation(playerAttackTexture, 4);
             animation.isLooping = true;
-            animation.FramePerSecond = 5;
+            animation.FramePerSecond = 8;
 
         }
 

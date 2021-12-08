@@ -197,7 +197,7 @@ namespace TE4TwoDSidescroller
             animations.TryGetValue("runLeft", out tempRunLeft);
 
             animation = tempBase;
-            if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && !isWalkingLeft)
+            if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
@@ -205,11 +205,12 @@ namespace TE4TwoDSidescroller
 
             }
 
-            else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && !isWalkingRight)
+            else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
                 animation = tempFlipIdle;
+
 
             }
 
