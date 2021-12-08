@@ -10,6 +10,7 @@ namespace TE4TwoDSidescroller
 {
     class Player : Character
     {
+        #region Variables/Fields
         public Texture2D currentTexture;
         private Texture2D playerRunRight;
         private Texture2D playerRunLeft;
@@ -37,6 +38,8 @@ namespace TE4TwoDSidescroller
         bool isWalkingRight;
         bool isWalkingLeft;
         bool isJumping;
+
+        #endregion
 
         public Player()
         {
