@@ -160,14 +160,14 @@ namespace TE4TwoDSidescroller
             idle.FramePerSecond = 5;
             animations.Add("idle", idle);
 
-            Animation jump = new Animation(playerJump, 25);
+            Animation jump = new Animation(playerJump, 21);
             jump.isLooping = true;
-            jump.FramePerSecond = 18;
+            jump.FramePerSecond = 14;
             animations.Add("jump", jump);
 
-            Animation flipJump = new Animation(playerJump, 25);
+            Animation flipJump = new Animation(playerJump, 21);
             flipJump.isLooping = true;
-            flipJump.FramePerSecond = 17;
+            flipJump.FramePerSecond = 14;
             flipJump.spriteEffects = SpriteEffects.FlipHorizontally;
             animations.Add("flipJump", flipJump);
 
