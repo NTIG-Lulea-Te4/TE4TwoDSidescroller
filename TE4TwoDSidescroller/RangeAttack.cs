@@ -5,13 +5,28 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class NPC : Character
+    class RangeAttack : Entity
     {
+
+        public RangeAttack()
+        {
+
+        }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            
+
+
         }
+
+        public override void Draw(GameTime gameTime)
+        {
+            
+
+
+        }
+
 
     }
 }

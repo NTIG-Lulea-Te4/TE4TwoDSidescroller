@@ -10,7 +10,7 @@ namespace TE4TwoDSidescroller
 {
     class Knight : Character
     {
-
+        // :D
         //int gravity; - Game info
         //int currentYAxis; - Entity
         //int currentGravity; - Entity
@@ -45,6 +45,7 @@ namespace TE4TwoDSidescroller
 
             characterInput = new KnightBehaviour(this);
 
+            tag = Tags.Knight.ToString();
 
             IsGrounded = false;
             isActive = true;
@@ -53,7 +54,7 @@ namespace TE4TwoDSidescroller
             hasCollided = false;
 
             movementSpeed = 0.5f;
-            maxHealth = 150;
+            maxHealth = 10;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
@@ -104,8 +105,16 @@ namespace TE4TwoDSidescroller
                 IsGrounded = true;
                 
             }
-            
 
+            if (collider.tag == Tags.PlayerAttack.ToString())
+            {
+                hasCollided = true;
+                health.TakeDamage(currentHealth, Player.playerDamage, this);
+            }
+            else
+            {
+                hasCollided = false;
+            }
         }
 
         #region Behaviour
@@ -251,7 +260,14 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-
+            if (hasCollided)
+            {
+                GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.Red);
+            }
+            else
+            {
+                GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
+            }
             GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
                 Color.White, knightRotation, knightOrigin, knightScale, 
                 SpriteEffects.None, 0f);

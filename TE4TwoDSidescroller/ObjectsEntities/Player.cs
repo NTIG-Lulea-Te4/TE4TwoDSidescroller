@@ -38,8 +38,14 @@ namespace TE4TwoDSidescroller
         bool isWalkingLeft;
         bool isJumping;
 
+        MeleeAttack melee;
+        public static int playerDamage;
+
         public Player()
         {
+
+            tag = Tags.Player.ToString();
+            melee = new MeleeAttack();
             characterInput = new PlayerInput(this);
 
             playerSourceRectangle = new Rectangle(0, 0, 67, 96); // 256 * 96 - 64/67
@@ -74,6 +80,8 @@ namespace TE4TwoDSidescroller
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
+            playerDamage = 10;
+
 
         }
 
@@ -287,6 +295,13 @@ namespace TE4TwoDSidescroller
             //Use the flag for IsGrounded to nullify gravity and let another Jump runs
         }
 
+        public override void Attack1(GameTime gameTime)
+        {
+
+            GameInfo.creationManager.InitializePlayerMeleeAttack();
+
+        }
+
         #endregion
 
         public override void Update(GameTime gameTime)
@@ -304,6 +319,7 @@ namespace TE4TwoDSidescroller
 
             GameInfo.player1Position = playerPosition;
             GameInfo.Player1TextureSize = playerSourceRectangle;
+            GameInfo.player1WalkingDirection = isWalkingRight;
 
             base.Update(gameTime);
 

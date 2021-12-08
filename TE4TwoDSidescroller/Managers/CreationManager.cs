@@ -22,7 +22,7 @@ namespace TE4TwoDSidescroller
         public void Initialize()
         {
 
-            Level1.LoadContent();
+            LevelTutorial.LoadContent();
 
         }
 
@@ -59,6 +59,14 @@ namespace TE4TwoDSidescroller
 
 
         }
+
+        public void InitializePlayerMeleeAttack()
+        {
+
+            Entity attack = new PlayerMelee();
+            GameInfo.entityManager.AddEntity(attack);
+        }
+
 
         //säger när allt ska skapas, intialize, skaffa tillgång till bilden?, 
     }

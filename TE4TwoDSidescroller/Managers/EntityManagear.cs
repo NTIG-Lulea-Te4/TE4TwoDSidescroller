@@ -73,14 +73,14 @@ namespace TE4TwoDSidescroller
             else
             {
 
-                while (stepEntity.nextEntity != null || stepEntity.nextEntity.uniqeId != id)
+                while (stepEntity.nextEntity != null && stepEntity.nextEntity.uniqeId != id)
                 {
 
                     stepEntity = stepEntity.nextEntity;
 
                 }
 
-                if (stepEntity.nextEntity.uniqeId == id)
+                if (stepEntity.nextEntity != null && stepEntity.nextEntity.uniqeId == id)
                 {
 
                     stepEntity.nextEntity = stepEntity.nextEntity.nextEntity;

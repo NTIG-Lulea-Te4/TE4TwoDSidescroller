@@ -18,14 +18,18 @@ namespace TE4TwoDSidescroller
             Player,
             Knight,
             KnghtAttack,
+            PlayerAttack,
             Floor
 
         }
+
+        public string tag;
 
         public int uniqeId;
         public bool isActive;
         public bool hasCollider;
         public bool isPlayer;
+        public bool isPlayerAttack;
         private bool isGrounded;
         public bool isFloor;
 
