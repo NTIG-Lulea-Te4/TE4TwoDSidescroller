@@ -20,6 +20,8 @@ namespace TE4TwoDSidescroller
 
         public Dictionary<string, EntityAnimation> entityAnimation;
 
+        public Dictionary<string, Animation> animations;
+
         //public Vector2 characterPosition;
 
         //public Texture2D characterTexture;

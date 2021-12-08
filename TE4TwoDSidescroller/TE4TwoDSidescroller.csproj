@@ -102,6 +102,12 @@
     <None Update="Content\Pngs\MainCharacters\ShadowJumpAnim %28hold%29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Pngs\MainCharacters\ShadowJumpAnim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Pngs\MainCharacters\ShadowJumpAnimFlipp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Pngs\MainCharacters\ShadowOuchAnim.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
