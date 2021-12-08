@@ -42,6 +42,8 @@ namespace TE4TwoDSidescroller
         MeleeAttack melee;
         public static int playerDamage;
 
+        #endregion
+
         public Player()
         {
 
