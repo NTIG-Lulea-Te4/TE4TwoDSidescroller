@@ -140,7 +140,7 @@ namespace TE4TwoDSidescroller
 
         #region Combat
 
-        public virtual void Attack1(GameTime gameTime)
+        public virtual void Attack1()
         {
 
         }

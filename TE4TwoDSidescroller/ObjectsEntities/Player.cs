@@ -39,7 +39,6 @@ namespace TE4TwoDSidescroller
         bool isWalkingLeft;
         bool isJumping;
 
-        MeleeAttack melee;
         public static int playerDamage;
 
         #endregion
@@ -48,7 +47,6 @@ namespace TE4TwoDSidescroller
         {
 
             tag = Tags.Player.ToString();
-            melee = new MeleeAttack();
             characterInput = new PlayerInput(this);
 
             playerSourceRectangle = new Rectangle(0, 0, 67, 96); // 256 * 96 - 64/67
@@ -69,7 +67,7 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
             hasCollider = true;
             isActive = true;
-            isPlayer = true;
+            isFacingRight = true;
 
             detectionHitBox = new Rectangle(0, 0, 500, 500);
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
@@ -84,7 +82,6 @@ namespace TE4TwoDSidescroller
             manaCheck = mana;
             manaTick = 0;
             playerDamage = 10;
-
 
         }
 
@@ -239,7 +236,7 @@ namespace TE4TwoDSidescroller
 
         public override void HasCollidedWith(Entity collider)
         {
-            if (collider.isFloor)
+            if (collider.tag == Tags.Floor.ToString())
             {
                 IsGrounded = true;
             }
@@ -269,12 +266,14 @@ namespace TE4TwoDSidescroller
         {
             movementVector.X -= moveSpeed;
             isWalkingLeft = true;
+            isFacingRight = false;
         }
 
         public override void MoveRight()
         {
             movementVector.X += moveSpeed;
             isWalkingRight = true;
+            isFacingRight = true;
         }
 
         public override void Run()
@@ -298,11 +297,16 @@ namespace TE4TwoDSidescroller
             //Use the flag for IsGrounded to nullify gravity and let another Jump runs
         }
 
-        public override void Attack1(GameTime gameTime)
+        public override void Attack1()
         {
 
             GameInfo.creationManager.InitializePlayerMeleeAttack();
 
+        }
+
+        public override void Attack2()
+        {
+            GameInfo.creationManager.InitializePlayerRangeAttack();
         }
 
         #endregion
@@ -322,7 +326,7 @@ namespace TE4TwoDSidescroller
 
             GameInfo.player1Position = playerPosition;
             GameInfo.Player1TextureSize = playerSourceRectangle;
-            GameInfo.player1WalkingDirection = isWalkingRight;
+            GameInfo.player1IsFacingRight = isFacingRight;
 
             base.Update(gameTime);
 
