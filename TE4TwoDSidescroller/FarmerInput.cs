@@ -9,7 +9,7 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class FarmerInput : CharacterInput
+    class FarmerInput : NPCInput
     {
 
         public FarmerInput(Farmer character) : base(character)
@@ -22,12 +22,10 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-
-            
+            base.Update(gameTime);
+            Patrol();
 
         }
-
-
 
     }
 }

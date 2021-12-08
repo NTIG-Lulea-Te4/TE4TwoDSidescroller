@@ -18,8 +18,8 @@ namespace TE4TwoDSidescroller
 
         public VisionManager()
         {
-            Xsize = GameInfo.graphicsDevice.PreferredBackBufferWidth;
-            Ysize = GameInfo.graphicsDevice.PreferredBackBufferHeight;
+            Xsize = 1280;
+            Ysize = 720;
 
         }
 
@@ -41,7 +41,7 @@ namespace TE4TwoDSidescroller
         public Viewport NewViewport()
         {
 
-            //finns bättre lösning för nu.
+            //finns bättre lösning för nu. settings???
             return viewport;
 
         }

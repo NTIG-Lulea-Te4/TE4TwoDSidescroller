@@ -22,7 +22,7 @@ namespace TE4TwoDSidescroller
         public void Initialize()
         {
 
-            Level1.LoadContent();
+            LevelTutorial.LoadContent();
 
         }
 

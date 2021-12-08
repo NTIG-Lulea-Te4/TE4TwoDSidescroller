@@ -22,13 +22,11 @@ namespace TE4TwoDSidescroller
             Entity background;
             Entity floor;
             Entity TutorialGoal;
-            
+            Entity viewport;
+            Entity farmer;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
-            
-            Entity melee = new MeleeAttack();
-            GameInfo.entityManager.AddEntity(melee);
 
             Entity playerEntity = new Player();
             GameInfo.entityManager.AddEntity(playerEntity);
@@ -39,6 +37,11 @@ namespace TE4TwoDSidescroller
             TutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(TutorialGoal);
 
+            viewport = new VisionManager();
+            GameInfo.entityManager.AddEntity(viewport);
+
+            farmer = new Farmer(100, 220);
+            GameInfo.entityManager.AddEntity(farmer);
 
         }
 
