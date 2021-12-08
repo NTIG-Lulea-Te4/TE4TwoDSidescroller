@@ -22,6 +22,7 @@ namespace TE4TwoDSidescroller
         static public CreationManager creationManager;
         static public Vector2 player1Position;
         static public Rectangle Player1TextureSize;
+        static public bool player1WalkingDirection;
         static public Vector2 viewportPosition;
         static public VisionManager visionManager;
         static public GameInformationSystem gameInformationSystem; 

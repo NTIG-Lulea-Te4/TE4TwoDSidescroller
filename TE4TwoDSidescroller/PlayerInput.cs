@@ -69,6 +69,7 @@ namespace TE4TwoDSidescroller
             jumpKey = Keys.Space;
             runKey = Keys.LeftShift;
             resetKey = Keys.R;
+            lightAttackKey = Keys.Q;
             //doubleJumpKey = Keys.Space;
 
         }
