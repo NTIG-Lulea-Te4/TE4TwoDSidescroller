@@ -20,10 +20,13 @@ namespace TE4TwoDSidescroller
 
         public Dictionary<string, EntityAnimation> entityAnimation;
 
+        public Dictionary<string, Animation> animations;
+
         //public Vector2 characterPosition;
 
         //public Texture2D characterTexture;
 
+        
 
         public Character()
         {
@@ -237,6 +240,10 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
+
+
+
+
             //SetPlayerAnimation();
 
             //animationManager.Update(gameTime);

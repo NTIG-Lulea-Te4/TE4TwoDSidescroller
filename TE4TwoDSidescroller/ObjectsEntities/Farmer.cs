@@ -14,7 +14,7 @@ namespace TE4TwoDSidescroller
     {
 
 
-
+        Health health;
         Texture2D myTexture;
         Vector2 myPosition;
         Rectangle sourceRectangle;
@@ -52,8 +52,21 @@ namespace TE4TwoDSidescroller
             myPosition = new Vector2(myPosition1, myPosition2);
             
             collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
+            health = new Health();
         }
 
+
+        public override void HasCollidedWith(Entity collider)
+        {
+
+            if (collider.tag == Tags.PlayerAttack.ToString())
+            {
+                health.TakeDamage(currentHealth, Player.playerDamage, this);
+
+            }
+
+
+        }
 
         #region Actions
 
@@ -125,6 +138,7 @@ namespace TE4TwoDSidescroller
 
         #endregion
 
+        
 
         public override void Update(GameTime gameTime)
         {
@@ -138,7 +152,6 @@ namespace TE4TwoDSidescroller
             myPosition += movementVector;
 
             base.Update(gameTime);
-
 
 
 
