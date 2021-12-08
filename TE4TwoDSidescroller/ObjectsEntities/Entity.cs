@@ -19,19 +19,20 @@ namespace TE4TwoDSidescroller
             Knight,
             KnghtAttack,
             PlayerAttack,
-            Floor
+            PlayerRangeAttack,
+            Floor,
+            FinishLine
 
         }
 
         public string tag;
+        public bool isFacingRight;
 
         public int uniqeId;
         public bool isActive;
-        public bool hasCollider;
-        public bool isPlayer;
-        public bool isPlayerAttack;
+        public bool hasCollider;   
         private bool isGrounded;
-        public bool isFloor;
+
 
         public float increasingGravity;
         public float amplifiedYForce;

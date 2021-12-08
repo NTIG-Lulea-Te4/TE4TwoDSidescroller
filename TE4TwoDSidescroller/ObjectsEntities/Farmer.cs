@@ -91,7 +91,7 @@ namespace TE4TwoDSidescroller
 
         //}
 
-        public override void Attack1(GameTime gameTime)
+        public override void Attack1( )
         {
 
 

@@ -70,6 +70,7 @@ namespace TE4TwoDSidescroller
             runKey = Keys.LeftShift;
             resetKey = Keys.R;
             lightAttackKey = Keys.Q;
+            heavyAttackKey = Keys.E;
             //doubleJumpKey = Keys.Space;
 
         }
@@ -161,7 +162,7 @@ namespace TE4TwoDSidescroller
 
             if (currentKeyboardState.IsKeyDown(lightAttackKey) && !previousKeyboardState.IsKeyDown(lightAttackKey))
             {
-                character.Attack1(gameTime);
+                character.Attack1();
             }
 
             if (currentKeyboardState.IsKeyDown(heavyAttackKey) && !previousKeyboardState.IsKeyDown(heavyAttackKey))

@@ -67,6 +67,11 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.AddEntity(attack);
         }
 
+        public void InitializePlayerRangeAttack()
+        {
+            Entity rangeAttack = new PlayerRangeAttack();
+            GameInfo.entityManager.AddEntity(rangeAttack);
+        }
 
         //säger när allt ska skapas, intialize, skaffa tillgång till bilden?, 
     }
