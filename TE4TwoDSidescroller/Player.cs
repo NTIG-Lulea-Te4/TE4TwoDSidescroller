@@ -137,7 +137,7 @@ namespace TE4TwoDSidescroller
 
             string Path4 = Path.GetDirectoryName(
                 System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowJumpAnimFlipp.png";
+                + "/Content/Pngs/MainCharacters/" + "ShadowJumpAnimFlip.png";
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
                 playerJumpFlip = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
@@ -147,6 +147,11 @@ namespace TE4TwoDSidescroller
         public void PlayerDictionary()
         {
             animations = new Dictionary<string, Animation>();
+
+            Animation baseAnimation = new Animation(playerIdle, 4);
+            baseAnimation.FramePerSecond = 4;
+            animations.Add("base", baseAnimation);
+
             Animation runRight = new Animation(playerRunRight, 4);
             runRight.isLooping = true;
             runRight.FramePerSecond = 5;
@@ -164,51 +169,55 @@ namespace TE4TwoDSidescroller
 
             Animation jump = new Animation(playerJump, 25);
             jump.isLooping = true;
-            jump.FramePerSecond = 20;
+            jump.FramePerSecond = 10;
             animations.Add("jump", jump);
 
-            Animation flipJump = new Animation(playerJumpFlip, 25);
+            Animation flipJump = new Animation(playerJump, 25);
             flipJump.isLooping = true;
-            flipJump.FramePerSecond = 15;
+            flipJump.FramePerSecond = 10;
+            flipJump.spriteEffects = SpriteEffects.FlipHorizontally;
             animations.Add("flipJump", flipJump);
 
         }
 
         public void Animate()
         {
+            Animation tempBase;
             Animation tempRunRight;
             Animation tempRunLeft;
             Animation tempIdle;
             Animation tempJump;
             Animation tempFlipJump;
 
+            animations.TryGetValue("base", out tempBase);
             animations.TryGetValue("idle", out tempIdle);
             animations.TryGetValue("jump", out tempJump);
             animations.TryGetValue("flipJump", out tempFlipJump);
             animations.TryGetValue("runRight", out tempRunRight);
             animations.TryGetValue("runLeft", out tempRunLeft);
-            
+
+            animation = tempBase;
             if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
             {
-                animation = null;
+                //animation = null;
                 animation = tempIdle;
             }
 
-            else if (!IsGrounded && (movementVector.Y != 0 || movementVector.X <= 0))
+            else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
-                animation = null;
+                //animation = null;
                 animation = tempJump;
             }
 
-            else if (!IsGrounded && (movementVector.Y != 0 || movementVector.X >= 0))
+            else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X <= 0))
             {
-                animation = null;
+                //animation = null;
                 animation = tempFlipJump;
             }
 
             else if (isWalkingRight && movementVector.Y == 0)
             {
-                animation = null;
+                //animation = null;
                 animation = tempRunRight;
 
                 isWalkingRight = false;
@@ -216,7 +225,7 @@ namespace TE4TwoDSidescroller
 
             else if (isWalkingLeft && movementVector.Y == 0)
             {
-                animation = null;
+                //animation = null;
                 animation = tempRunLeft;
 
                 isWalkingLeft = false;

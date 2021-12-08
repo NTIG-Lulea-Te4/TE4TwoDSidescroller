@@ -105,6 +105,7 @@ namespace TE4TwoDSidescroller
         public Vector2 origin;
         public float rotation;
         public float scale;
+        public SpriteEffects spriteEffects;
         protected Rectangle[] rectangles;
         protected int frameIndex;
 
