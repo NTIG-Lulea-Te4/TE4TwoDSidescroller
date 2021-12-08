@@ -100,7 +100,7 @@ namespace TE4TwoDSidescroller
         public override void HasCollidedWith(Entity collider)
         {
 
-            if (collider.isFloor)
+            if (collider.tag == Tags.Floor.ToString())
             {
                 IsGrounded = true;
                 
@@ -148,19 +148,9 @@ namespace TE4TwoDSidescroller
         }
 
 
-        public override void Attack1(GameTime gameTime)
+        public override void Attack1( )
         {
 
-            weaponCollsion = new Rectangle(collisionBox.X + collisionBox.Width, 
-                collisionBox.Y + collisionBox.Width, 32, 10);
-
-            weaponCollsion.Y += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            if (weaponCollsion.Y > collisionBox.Y)
-            {
-                weaponCollsion = new Rectangle(collisionBox.X + collisionBox.Width,
-                collisionBox.Y + collisionBox.Width, 0, 0);
-            }
 
         }
 
