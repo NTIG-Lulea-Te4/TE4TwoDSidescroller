@@ -154,12 +154,12 @@ namespace TE4TwoDSidescroller
 
             Animation jump = new Animation(playerJump, 25);
             jump.isLooping = true;
-            jump.FramePerSecond = 10;
+            jump.FramePerSecond = 18;
             animations.Add("jump", jump);
 
             Animation flipJump = new Animation(playerJump, 25);
             flipJump.isLooping = true;
-            flipJump.FramePerSecond = 10;
+            flipJump.FramePerSecond = 17;
             flipJump.spriteEffects = SpriteEffects.FlipHorizontally;
             animations.Add("flipJump", flipJump);
 
@@ -185,24 +185,31 @@ namespace TE4TwoDSidescroller
             if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
             {
                 //animation = null;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
                 animation = tempIdle;
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
                 //animation = null;
+                tempFlipJump.frameIndex = 0;
                 animation = tempJump;
+
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X <= 0))
             {
                 //animation = null;
+                tempJump.frameIndex = 0;
                 animation = tempFlipJump;
             }
 
             else if (isWalkingRight && movementVector.Y == 0)
             {
                 //animation = null;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
                 animation = tempRunRight;
 
                 isWalkingRight = false;
@@ -211,6 +218,8 @@ namespace TE4TwoDSidescroller
             else if (isWalkingLeft && movementVector.Y == 0)
             {
                 //animation = null;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
                 animation = tempRunLeft;
 
                 isWalkingLeft = false;

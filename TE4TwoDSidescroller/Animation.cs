@@ -107,7 +107,7 @@ namespace TE4TwoDSidescroller
         public float scale;
         public SpriteEffects spriteEffects;
         protected Rectangle[] rectangles;
-        protected int frameIndex;
+        public int frameIndex;
 
         public Animation(Texture2D texture, int frames)
         {
