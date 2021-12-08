@@ -7,10 +7,11 @@ using System.Media;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace TE4TwoDSidescroller
 {
-    class SoundInput: Game1
+    class SoundInput : Game1
     {
         //hej där harry du ska ladda in alla filer här och sätta in dom  i sound players
         //sedan ska ddu skicak dem till en array i varje karakträ. 
@@ -19,11 +20,16 @@ namespace TE4TwoDSidescroller
         #region FilePaths
 
         public static string songPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Sound" + "/Song.wav";
-       
+
         #endregion
 
-        #region SoundPlayers
+        public void Load(ContentManager content)
+        {
+            content.Load<SoundEffect>("sound");
+        }
 
+        #region SoundPlayers
+        static SoundEffect soundHolder;
         public static SoundPlayer attack1;
         public static SoundPlayer attack2;
         public static SoundPlayer attack3;
@@ -90,7 +96,7 @@ namespace TE4TwoDSidescroller
         #endregion
 
         #endregion
-      
+
         // här ska alla ljud som ska användas laddas in först.
         //kan välja att ladda in först eller bara säga filvägen och sedan ladda in med Playsync
         //men ljud som ska loppa ska laddas in först då det inte finns PlaySyncLooping.
@@ -99,52 +105,52 @@ namespace TE4TwoDSidescroller
 
             #region MakingSoundPlayerObjects
 
-                attack1 = new SoundPlayer();
-                attack2 = new SoundPlayer();
-                attack3 = new SoundPlayer();
-                attack4 = new SoundPlayer();
+            attack1 = new SoundPlayer();
+            attack2 = new SoundPlayer();
+            attack3 = new SoundPlayer();
+            attack4 = new SoundPlayer();
 
-                playerIdle = new SoundPlayer();
-                playerWalk = new SoundPlayer();
-                playerSprint = new SoundPlayer();
-                playerJump = new SoundPlayer();
+            playerIdle = new SoundPlayer();
+            playerWalk = new SoundPlayer();
+            playerSprint = new SoundPlayer();
+            playerJump = new SoundPlayer();
 
-                enemyIdle1 = new SoundPlayer();
-                enemyWalk1 = new SoundPlayer();
-                enemySprint1 = new SoundPlayer();
-                enemyJump1 = new SoundPlayer();
+            enemyIdle1 = new SoundPlayer();
+            enemyWalk1 = new SoundPlayer();
+            enemySprint1 = new SoundPlayer();
+            enemyJump1 = new SoundPlayer();
 
-                enemyIdle2 = new SoundPlayer();
-                enemyWalk2 = new SoundPlayer();
-                enemySprint2 = new SoundPlayer();
-                enemyJump2 = new SoundPlayer();
+            enemyIdle2 = new SoundPlayer();
+            enemyWalk2 = new SoundPlayer();
+            enemySprint2 = new SoundPlayer();
+            enemyJump2 = new SoundPlayer();
 
-                enemyIdle3 = new SoundPlayer();
-                enemyWalk3 = new SoundPlayer();
-                enemySprint3 = new SoundPlayer();
-                enemyJump3 = new SoundPlayer();
+            enemyIdle3 = new SoundPlayer();
+            enemyWalk3 = new SoundPlayer();
+            enemySprint3 = new SoundPlayer();
+            enemyJump3 = new SoundPlayer();
 
-                enemyIdle4 = new SoundPlayer();
-                enemyWalk4 = new SoundPlayer();
-                enemySprint4 = new SoundPlayer();
-                enemyJump4 = new SoundPlayer();
+            enemyIdle4 = new SoundPlayer();
+            enemyWalk4 = new SoundPlayer();
+            enemySprint4 = new SoundPlayer();
+            enemyJump4 = new SoundPlayer();
 
-                enemyIdle5 = new SoundPlayer();
-                enemyWalk5 = new SoundPlayer();
-                enemySprint5 = new SoundPlayer();
-                enemyJump5 = new SoundPlayer();
+            enemyIdle5 = new SoundPlayer();
+            enemyWalk5 = new SoundPlayer();
+            enemySprint5 = new SoundPlayer();
+            enemyJump5 = new SoundPlayer();
 
-                BossDeath = new SoundPlayer();
-                BossWalk = new SoundPlayer();
-                BossAttack = new SoundPlayer();
-                BossJump = new SoundPlayer();
+            BossDeath = new SoundPlayer();
+            BossWalk = new SoundPlayer();
+            BossAttack = new SoundPlayer();
+            BossJump = new SoundPlayer();
 
-                death1 = new SoundPlayer();
-                death2 = new SoundPlayer();
-                death3 = new SoundPlayer();
-                death4 = new SoundPlayer();
+            death1 = new SoundPlayer();
+            death2 = new SoundPlayer();
+            death3 = new SoundPlayer();
+            death4 = new SoundPlayer();
 
-        #endregion
+            #endregion
 
             #region Loading
 
@@ -162,12 +168,21 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public static void SoundPlayerPlayer(SoundPlayer playingFile)
+        public static void PlaySound(SoundPlayer playingFile)
         {
 
             playingFile.PlaySync();
-             
+
         }
+
+        public static void SoundEffectPlayed(SoundEffect fileBeingPlayed, float fileVolume, float filePitch, float filePan)
+        {
+
+            fileBeingPlayed.Play(volume: fileVolume, pitch: filePitch, pan: filePan);
+
+        }
+
+
 
         public void MusicPlayer(SoundPlayer playingMusicFile)
         {
