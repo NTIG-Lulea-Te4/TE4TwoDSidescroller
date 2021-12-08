@@ -129,7 +129,7 @@ namespace TE4TwoDSidescroller
 
         public void Draw(GameTime gameTime)
         {
-            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, SpriteEffects.None, 0f);
+            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, spriteEffects, 0f);
         }
 
         public void Update(GameTime gameTime)

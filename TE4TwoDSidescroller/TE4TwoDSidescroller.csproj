@@ -84,9 +84,6 @@
     <None Update="Content\Pngs\MainCharacters\ShadowOuchAnim.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\Pngs\MainCharacters\ShadowRunLeft.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Content\Pngs\MainCharacters\ShadowRunRight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

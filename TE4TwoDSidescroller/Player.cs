@@ -103,14 +103,6 @@ namespace TE4TwoDSidescroller
 
         public void LoadPlayerTexture2D()
         {
-            string path1 = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowRunLeft.png";
-            using (Stream textureStream = new FileStream(path1, FileMode.Open))
-            {
-                playerRunLeft = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
-
             string path2 = Path.GetDirectoryName(
                 System.Reflection.Assembly.GetExecutingAssembly().Location)
                 + "/Content/Pngs/MainCharacters/" + "ShadowIdleAnim.png";
@@ -134,14 +126,6 @@ namespace TE4TwoDSidescroller
             {
                 playerRunRight = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
-
-            string Path4 = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowJumpAnimFlip.png";
-            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
-            {
-                playerJumpFlip = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
         }
 
         public void PlayerDictionary()
@@ -157,9 +141,10 @@ namespace TE4TwoDSidescroller
             runRight.FramePerSecond = 5;
             animations.Add("runRight", runRight);
 
-            Animation runLeft = new Animation(playerRunLeft, 4);
+            Animation runLeft = new Animation(playerRunRight, 4);
             runLeft.isLooping = true;
             runLeft.FramePerSecond = 5;
+            runLeft.spriteEffects = SpriteEffects.FlipHorizontally;
             animations.Add("runLeft", runLeft);
 
             Animation idle = new Animation(playerIdle, 4);
