@@ -58,7 +58,7 @@ namespace TE4TwoDSidescroller
                 && attackTimer > 2000)
             {
 
-                character.Attack1(gameTime);
+                character.Attack1();
 
                 attackTimer = 0;
             }

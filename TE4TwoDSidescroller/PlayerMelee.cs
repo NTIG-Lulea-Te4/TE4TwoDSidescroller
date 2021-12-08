@@ -7,20 +7,36 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class PlayerMelee : MeleeAttack
+    class PlayerMelee : Entity
     {
 
         Texture2D playerAttackTexture;
-
+        int attackWidth;
+        int attackHeight;
+        float attackDuration;
         public PlayerMelee()
         {
             //isPlayerAttack = true;
+            attackWidth = 40;
+            attackHeight = 20;
+
             isActive = true;
             hasCollider = true;
             tag = Tags.PlayerAttack.ToString();
+            if (GameInfo.player1IsFacingRight)
+            {
 
-            collisionBox = new Rectangle((int)GameInfo.player1Position.X, 
-                (int)GameInfo.player1Position.Y, 100, 96);
+                collisionBox = new Rectangle((int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width, 
+                    (int)GameInfo.player1Position.Y + GameInfo.Player1TextureSize.Height / 2, 
+                    attackWidth, attackHeight);
+
+            }
+            else
+            {
+                collisionBox = new Rectangle((int)GameInfo.player1Position.X - GameInfo.Player1TextureSize.Width,
+                    (int)GameInfo.player1Position.Y + GameInfo.Player1TextureSize.Height / 2,
+                    attackWidth, attackHeight);
+            }
 
             LoadTexture2D();
 
@@ -42,7 +58,13 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
 
-            base.Update(gameTime);
+            attackDuration += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (attackDuration > 250)
+            {
+                GameInfo.entityManager.RemoveEntity(this.uniqeId);
+                attackDuration = 0;
+            }
         }
 
         public override void Draw(GameTime gameTime)
