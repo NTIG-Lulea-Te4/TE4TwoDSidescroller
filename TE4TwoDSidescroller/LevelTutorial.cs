@@ -22,6 +22,7 @@ namespace TE4TwoDSidescroller
             Entity background;
             Entity floor;
             Entity TutorialGoal;
+            Entity boss;
 
 
             background = new Background();
@@ -36,7 +37,11 @@ namespace TE4TwoDSidescroller
             TutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(TutorialGoal);
 
-            
+            boss = new Boss(1100, 600);
+            GameInfo.entityManager.AddEntity(boss);
+
+
+
         }
 
         public override void Update(GameTime gameTime)

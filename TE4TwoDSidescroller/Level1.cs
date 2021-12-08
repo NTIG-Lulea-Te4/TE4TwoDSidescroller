@@ -22,6 +22,7 @@ namespace TE4TwoDSidescroller
             Entity floor;
             Entity farmer;
             Entity boss;
+            
 
 
             background = new Background();
@@ -36,7 +37,7 @@ namespace TE4TwoDSidescroller
             farmer = new Farmer(700, 650);
             GameInfo.entityManager.AddEntity(farmer);
 
-            boss = new Boss();
+            boss = new Boss(700, 600);
             GameInfo.entityManager.AddEntity(boss);
 
         }
