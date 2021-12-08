@@ -7,39 +7,41 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class MeleeAttack : Entity
+
+    public class MeleeAttack : Entity
     {
 
-        Texture attackTexture;
-
+        Texture2D attackTexture;
+        protected float attackDuration;
         public MeleeAttack()
         {
 
-            collisionBox = new Rectangle(0, 0, 0, 0);
-            LoadTexture2D();
+            collisionBox = new Rectangle();
+
         }
 
-        //Grafik för att se hur stor attacken är
-        public void LoadTexture2D()
+        public override void Update(GameTime gameTime)
         {
-            string currentPath = Path.GetDirectoryName(
-             System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "Box.png";
 
-            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            attackDuration += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (attackDuration > 250)
             {
-                attackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+                GameInfo.entityManager.RemoveEntity(this.uniqeId);
+                attackDuration = 0;
             }
 
+
+
         }
 
-        public static void AttackCollision()
+        public override void Draw(GameTime gameTime)
         {
-
-
+            
 
 
         }
 
     }
 }
+

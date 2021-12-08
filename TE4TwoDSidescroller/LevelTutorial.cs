@@ -22,10 +22,13 @@ namespace TE4TwoDSidescroller
             Entity background;
             Entity floor;
             Entity TutorialGoal;
-            Entity knight;
+            
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
+            
+            Entity melee = new MeleeAttack();
+            GameInfo.entityManager.AddEntity(melee);
 
             Entity playerEntity = new Player();
             GameInfo.entityManager.AddEntity(playerEntity);
@@ -36,11 +39,6 @@ namespace TE4TwoDSidescroller
             TutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(TutorialGoal);
 
-            knight = new Knight();
-            GameInfo.entityManager.AddEntity(knight);
-
-            Entity melee = new MeleeAttack();
-            GameInfo.entityManager.AddEntity(melee);
 
         }
 
