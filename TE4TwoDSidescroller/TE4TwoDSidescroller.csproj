@@ -126,8 +126,5 @@
     <None Update="Content\ShadowRunRight.png">
       <CustomToolNamespace>ShadowRunRight</CustomToolNamespace>
     </None>
-    <None Update="Content\sound.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>
