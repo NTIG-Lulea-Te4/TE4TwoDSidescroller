@@ -20,17 +20,17 @@ namespace TE4TwoDSidescroller
             return currentHealth;
         }
 
-        public int TakeDamage(int currentHEalth, int amountOfDamage, Entity deathToEntity)
+        public int TakeDamage(int currentHealth, int amountOfDamage, Entity deathToEntity)
         {
-            currentHEalth = currentHEalth - amountOfDamage;
+            currentHealth = currentHealth - amountOfDamage;
 
-            if (currentHEalth <= 0)
+            if (currentHealth <= 0)
             {
                 GameInfo.entityManager.RemoveEntity(deathToEntity.uniqeId);
             }
 
 
-            return currentHEalth;
+            return currentHealth;
         }
 
     }

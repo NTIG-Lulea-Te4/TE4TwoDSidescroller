@@ -21,6 +21,8 @@ namespace TE4TwoDSidescroller
         private Keys leftKey;
         private Keys rightKey;
 
+        private Keys resetKey;
+
         private Keys runKey;
 
         private Keys jumpKey;
@@ -66,6 +68,9 @@ namespace TE4TwoDSidescroller
 
             jumpKey = Keys.Space;
             runKey = Keys.LeftShift;
+            resetKey = Keys.R;
+            lightAttackKey = Keys.Q;
+            heavyAttackKey = Keys.E;
             //doubleJumpKey = Keys.Space;
 
         }
@@ -79,6 +84,11 @@ namespace TE4TwoDSidescroller
             currentKeyboardState = Keyboard.GetState();
 
             #region Movements
+
+            if(currentKeyboardState.IsKeyDown(Keys.R) && previousKeyboardState.IsKeyUp(Keys.R))
+            {
+                character.Reset();
+            }
 
             if (currentKeyboardState.IsKeyDown(upKey))
             {
@@ -109,7 +119,12 @@ namespace TE4TwoDSidescroller
                 character.DoNotRun();
             }
 
-            if (currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
+            //if (currentKeyboardState.IsKeyDown(jumpKey) && !previousKeyboardState.IsKeyDown(jumpKey))
+            //{                
+            //    character.Jump(gameTime);
+            //}
+
+            if (currentKeyboardState.IsKeyDown(jumpKey))
             {
                 character.Jump(gameTime);
             }
