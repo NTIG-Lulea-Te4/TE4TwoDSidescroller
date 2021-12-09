@@ -42,7 +42,7 @@ namespace TE4TwoDSidescroller
             farmerOne = new Farmer(500, 610);
             GameInfo.entityManager.AddEntity(farmerOne);
 
-            platform = new Platform(new Microsoft.Xna.Framework.Vector2(400, 350), 100, 40);
+            platform = new Platform(new Microsoft.Xna.Framework.Vector2(400, 350), 200, 40);
             GameInfo.entityManager.AddEntity(platform);
 
             farmerTwo = new Farmer(400, 250);
