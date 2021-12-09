@@ -26,7 +26,6 @@ namespace TE4TwoDSidescroller
 
         Texture2D buttons;
         static SpriteFont font;
-        SpriteFont check;
 
         bool isStartHovering;
         bool isQuitHovering;
@@ -101,6 +100,8 @@ namespace TE4TwoDSidescroller
                 if (currentMouse.LeftButton == ButtonState.Released && previosMouse.LeftButton == ButtonState.Pressed)
                 {
                     LevelTutorial.LoadContent();
+                    SoundInput.SongPlay(SoundInput.preBossMusic);
+                    GameInfo.entityManager.RemoveEntity(this.uniqeId);
                 }
             }
             if (GameInfo.collisionManager.RectangleCollision(mouseCheck, quitButton))

@@ -73,8 +73,8 @@ namespace TE4TwoDSidescroller
             }
             #endregion
 
-            healthBar = new Rectangle((int)healtBarPosition.X, (int)healtBarPosition.Y, player.playerHealthBar * 2 , 50);
-            healthBarFont = new Rectangle((int)healtBarFontPosition.X, (int)healtBarFontPosition.Y, player.playerHealthBar * 2 + 10, 60);
+            healthBar = new Rectangle((int)healtBarPosition.X, (int)healtBarPosition.Y, GameInfo.playerOneCurrentHealth * 2 , 50);
+            healthBarFont = new Rectangle((int)healtBarFontPosition.X, (int)healtBarFontPosition.Y, GameInfo.playerOneCurrentHealth * 2 + 10, 60);
         }
 
        
@@ -82,8 +82,8 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
 
-            healthBar.Width = player.playerHealthBar * 2; 
-
+            healthBar.Width = GameInfo.playerOneCurrentHealth * 2; 
+            
         }
 
         public override void Draw(GameTime gameTime)

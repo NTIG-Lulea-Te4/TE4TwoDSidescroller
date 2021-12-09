@@ -42,6 +42,7 @@ namespace TE4TwoDSidescroller
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
 
             Menu.ContentLoad(Content);
+            SoundInput.ContentLoad(Content);
             GameInfo.creationManager.Initialize();
             
             //ej rätt GraphicsDevice ska vara graphics.GraphicsDevice
@@ -55,7 +56,7 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.Update(gameTime);
 
             GameInfo.collisionManager.CollisionUpdate();
-
+            
            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)||Entity.wantExit)
             {
