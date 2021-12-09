@@ -16,7 +16,7 @@ namespace TE4TwoDSidescroller
 
         public static void LoadContent()
         {
-
+            HealthBar menu;
             Entity background;
             Entity playerEntity;
             Entity floor;
@@ -92,6 +92,10 @@ namespace TE4TwoDSidescroller
 
             levelGoal = new LevelGoals(1);
             GameInfo.entityManager.AddEntity(levelGoal);
+
+            menu = new HealthBar();
+            GameInfo.entityManager.AddEntity(menu);
+
         }
 
         public static void RemoveContent()

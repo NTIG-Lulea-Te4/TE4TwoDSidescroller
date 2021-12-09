@@ -23,7 +23,7 @@ namespace TE4TwoDSidescroller
 
         Texture2D healthBarFontTexture;
         Texture2D healthBarTexture;
-        ContentManager content;
+        
 
         Player player;
 
@@ -83,6 +83,7 @@ namespace TE4TwoDSidescroller
         {
 
             healthBar.Width = GameInfo.playerOneCurrentHealth * 2; 
+           
             
         }
 

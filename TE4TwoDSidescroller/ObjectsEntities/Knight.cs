@@ -58,7 +58,7 @@ namespace TE4TwoDSidescroller
 
 
             movementSpeed = 0.3f;
-            maxHealth = 1000;
+            maxHealth = 250;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;

@@ -17,6 +17,7 @@ namespace TE4TwoDSidescroller
         List<Vector2> heavyAttacks;
         double heavyAttackTimer;
         Vector2 attack1;
+        int soundCOunterTimer;
 
 
         public Boss()
@@ -30,6 +31,7 @@ namespace TE4TwoDSidescroller
             collisionBox = new Rectangle(0, 0, 64, 96);
             attack1 = new Vector2(0, 3);
             float attack1Dmg = 10f;
+            soundCOunterTimer = 0;
 
             LoadTextrue2D();
         }
@@ -88,7 +90,15 @@ namespace TE4TwoDSidescroller
                 heavyAttackTimer = 0;
                 heavyAttacks.Add(new Vector2(GameInfo.player1Position.X, 0));
             }
-            SoundInput.SoundEffectPlayed(SoundInput.knigthWalk, 0.2f, 0.1f, 0.1f);
+
+            if (soundCOunterTimer == 30)
+            {
+            
+                SoundInput.SoundEffectPlayed(SoundInput.knigthWalk, 0.2f, 0.1f, 0.1f);
+
+                soundCOunterTimer = 0;
+            }
+            soundCOunterTimer++;
         }
 
         public override void Attack2()
