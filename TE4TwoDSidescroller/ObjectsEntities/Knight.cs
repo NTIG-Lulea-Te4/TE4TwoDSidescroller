@@ -177,7 +177,7 @@ namespace TE4TwoDSidescroller
             Animation flipJump = new Animation(knightJump, 10);
             flipJump.isLooping = true;
             flipJump.FramePerSecond = 7;
-            flipJump.spriteEffects = SpriteEffects.FlipVertically;
+            flipJump.spriteEffects = SpriteEffects.FlipHorizontally;
             knightDictionary.Add("flipJump", flipJump);
 
             Animation attack = new Animation(knightAttack, 4);
@@ -198,7 +198,7 @@ namespace TE4TwoDSidescroller
             Animation flipOuch = new Animation(knightOuch, 3);
             flipOuch.isLooping = false;
             flipOuch.FramePerSecond = 10;
-            flipOuch.spriteEffects = SpriteEffects.FlipVertically;
+            flipOuch.spriteEffects = SpriteEffects.FlipHorizontally;
             knightDictionary.Add("flipOuch", flipOuch);
         }
 
@@ -222,7 +222,7 @@ namespace TE4TwoDSidescroller
             knightDictionary.TryGetValue("walkRight", out tempWalkRight);
             knightDictionary.TryGetValue("walkLeft", out tempWalkLeft);
 
-            //animation = tempBase;
+            animation = tempBase;
             if (movementVector.Y == 0 && movementVector.X >= 0)
             {
                 tempJump.frameIndex = 0;
@@ -318,7 +318,7 @@ namespace TE4TwoDSidescroller
             if (IsGrounded)
             {
                 IsGrounded = false;
-                movementVector.Y -= movementSpeed * 10;
+                movementVector.Y -= movementSpeed * 100;
 
             }
 
