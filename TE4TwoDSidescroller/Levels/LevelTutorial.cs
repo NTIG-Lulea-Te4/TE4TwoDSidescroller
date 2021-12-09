@@ -25,7 +25,6 @@ namespace TE4TwoDSidescroller
             Entity camera;
             Entity knight;
             Entity tutorialGoal;
-            Entity boss;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -45,8 +44,6 @@ namespace TE4TwoDSidescroller
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
 
-            boss = new Boss();
-            GameInfo.entityManager.AddEntity(boss);
 
         }
 
