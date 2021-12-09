@@ -23,6 +23,7 @@ namespace TE4TwoDSidescroller
             Entity playerEntity;
             Entity floor;
             Entity camera;
+            Entity knight;
             Entity tutorialGoal;
 
             background = new Background();
@@ -37,7 +38,7 @@ namespace TE4TwoDSidescroller
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
-            Entity knight = new Knight();
+            knight = new Knight();
             GameInfo.entityManager.AddEntity(knight);
 
             Entity priest = new Priest();
@@ -45,6 +46,7 @@ namespace TE4TwoDSidescroller
 
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
+
         }
 
         public override void Update(GameTime gameTime)
