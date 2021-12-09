@@ -20,6 +20,7 @@ namespace TE4TwoDSidescroller
         Rectangle sourceRectangle;
         int frames;
         
+        
 
 
         public Farmer(int myPosition1, int myPosition2)
