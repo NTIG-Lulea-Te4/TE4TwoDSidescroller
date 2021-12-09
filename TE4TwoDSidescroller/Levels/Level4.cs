@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TE4TwoDSidescroller
+namespace TE4TwoDSidescroller.Levels
 {
-    class Level1
+    class Level4
     {
 
-        public Level1()
+        public Level4()
         {
+
 
 
         }
 
-
-        public static void LoadContent()
+        public void LoadContent()
         {
 
             Entity background;
@@ -36,13 +36,11 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public static void RemoveContent()
+        public void RemoveContent()
         {
 
-            GameInfo.entityManager.RemoveAllEntities();
 
 
         }
-
     }
 }
