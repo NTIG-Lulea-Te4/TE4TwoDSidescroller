@@ -173,6 +173,7 @@ namespace TE4TwoDSidescroller
             Animation flipIdle = new Animation(playerIdle, 4);
             flipIdle.isLooping = true;
             flipIdle.FramePerSecond = 5;
+            flipIdle.spriteEffects = SpriteEffects.FlipHorizontally;
             animations.Add("flipIdle", flipIdle);
 
             Animation jump = new Animation(playerJump, 21);
@@ -187,7 +188,7 @@ namespace TE4TwoDSidescroller
             animations.Add("flipJump", flipJump);
 
             Animation ouch = new Animation(playerOuch, 3);
-            ouch.isLooping = false;
+            ouch.isLooping = true;
             ouch.FramePerSecond = 10;
             animations.Add("ouch", ouch);
 
@@ -221,7 +222,26 @@ namespace TE4TwoDSidescroller
             animations.TryGetValue("runLeft", out tempRunLeft);
 
             animation = tempBase;
-            if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && isWalkingRight)
+
+            if (hasTakenDamage && movementVector.X >= 0)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempOuch;
+                hasTakenDamage = false;
+            }
+
+            else if (hasTakenDamage && movementVector.X <= 0)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempFlipOuch;
+                hasTakenDamage = false;
+            }
+
+            else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && isWalkingRight)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
@@ -270,15 +290,6 @@ namespace TE4TwoDSidescroller
                 animation = tempRunLeft;
 
             }
-
-            else if (hasTakenDamage)
-            {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
-                animation = tempOuch;
-            }
-
         }
 
         public override void HasCollidedWith(Entity collider)
