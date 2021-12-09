@@ -9,11 +9,13 @@ namespace TE4TwoDSidescroller
 {
     class PlayerMelee : Entity
     {
+        private Animation animation;
 
         Texture2D playerAttackTexture;
         int attackWidth;
         int attackHeight;
         float attackDuration;
+
         public PlayerMelee()
         {
             //isPlayerAttack = true;
@@ -40,19 +42,45 @@ namespace TE4TwoDSidescroller
 
             LoadTexture2D();
 
+            animation = new Animation(playerAttackTexture, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 8;
+
         }
+
 
         public void LoadTexture2D()
         {
-            string currentPath = Path.GetDirectoryName(
-             System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "Box.png";
+            //string currentPath = Path.GetDirectoryName(
+            // System.Reflection.Assembly.GetExecutingAssembly().Location)
+            // + "/Content/Pngs/" + "Box.png";
 
-            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            //using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            //{
+            //    playerAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            //}
+
+            string swingPath = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/MainCharacters/" + "ShadowAttackSwing.png";
+
+            using (Stream textureStream = new FileStream(swingPath, FileMode.Open))
             {
                 playerAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
-            
+        }
+
+        public void Animate()
+        {
+
+            if (GameInfo.player1IsFacingRight)
+            {
+                animation.spriteEffects = SpriteEffects.None;
+            }
+            else
+            {
+                animation.spriteEffects = SpriteEffects.FlipHorizontally;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -65,13 +93,20 @@ namespace TE4TwoDSidescroller
                 GameInfo.entityManager.RemoveEntity(this.uniqeId);
                 attackDuration = 0;
             }
+
+            Animate();
+
+            animation.position.X = collisionBox.X;
+            animation.position.Y = collisionBox.Y -50;
+            animation.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
-
+            //GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
+            animation.Draw(gameTime);
+            
         }
     }
 }
