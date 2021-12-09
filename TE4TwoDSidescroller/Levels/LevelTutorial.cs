@@ -40,6 +40,9 @@ namespace TE4TwoDSidescroller
             Entity knight = new Knight();
             GameInfo.entityManager.AddEntity(knight);
 
+            Entity priest = new Priest();
+            GameInfo.entityManager.AddEntity(priest);
+
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
         }

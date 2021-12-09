@@ -76,15 +76,15 @@ namespace TE4TwoDSidescroller
         public void InitializeKnightAttack()
         {
 
-            //Entity knightAttack = new KnightAttack();
-            //GameInfo.entityManager.AddEntity(knightAttack);
+            Entity knightAttack = new KnightAttack();
+            GameInfo.entityManager.AddEntity(knightAttack);
 
         }
 
         public void InitializePriestAttack()
         {
-            //Entity priestAttack = new PriestAttack();
-            //GameInfo.entityManager.AddEntity(priestAttack);
+            Entity priestAttack = new PriestAttack();
+            GameInfo.entityManager.AddEntity(priestAttack);
 
         }
 

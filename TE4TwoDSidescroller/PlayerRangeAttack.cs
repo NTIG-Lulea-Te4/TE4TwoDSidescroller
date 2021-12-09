@@ -38,7 +38,7 @@ namespace TE4TwoDSidescroller
                     (int)GameInfo.player1Position.Y + GameInfo.Player1TextureSize.Height / 2,
                     attackWidth, attackHeight);
 
-                
+
             }
             else
             {
@@ -75,6 +75,7 @@ namespace TE4TwoDSidescroller
 
             GameInfo.entityManager.RemoveEntity(this.uniqeId);
 
+        }
         public void Animate()
         {
             if (GameInfo.player1IsFacingRight)
@@ -95,7 +96,7 @@ namespace TE4TwoDSidescroller
             Animate();
 
             animation.position.X = collisionBox.X;
-            animation.position.Y = collisionBox.Y -50;
+            animation.position.Y = collisionBox.Y - 50;
             animation.Update(gameTime);
         }
 

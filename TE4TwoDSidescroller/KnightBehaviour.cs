@@ -46,7 +46,7 @@ namespace TE4TwoDSidescroller
 
             }
 
-            if (Knight.knightPosition.Y > GameInfo.player1Position.Y
+            if (Knight.knightPosition.Y < GameInfo.player1Position.Y
                 )
             {
 

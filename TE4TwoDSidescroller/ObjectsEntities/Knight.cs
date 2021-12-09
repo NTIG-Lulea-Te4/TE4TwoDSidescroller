@@ -27,8 +27,8 @@ namespace TE4TwoDSidescroller
 
         private Health health;
 
-        bool hasCollided;
-
+        
+        public bool knightIsFacingRight;
 
         public Knight()
         {
@@ -40,9 +40,9 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
             isActive = true;
             hasCollider = true;
-            isFacingRight = true;
+            knightIsFacingRight = true;
 
-            hasCollided = false;
+             
 
             movementSpeed = 0.3f;
             maxHealth = 10;
@@ -55,7 +55,7 @@ namespace TE4TwoDSidescroller
             gameInfoSystem = new GameInformationSystem();
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
-            knightPosition = new Vector2(500, 0);
+            knightPosition = new Vector2(500, 500);
             movementDirection = new Vector2();
             knightVelocity = new Vector2(0, 0);
 
@@ -118,7 +118,7 @@ namespace TE4TwoDSidescroller
 
 
             movementVector.X += movementSpeed;
-            isFacingRight = true;
+            knightIsFacingRight = true;
 
 
         }
@@ -127,7 +127,7 @@ namespace TE4TwoDSidescroller
         {
 
             movementVector.X -= movementSpeed;
-            isFacingRight = false;
+            knightIsFacingRight = false;
 
 
         }

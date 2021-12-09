@@ -28,7 +28,7 @@ namespace TE4TwoDSidescroller
         }
 
         public string tag;
-        public bool isFacingRight;
+        
 
         public int uniqeId;
         public bool isActive;

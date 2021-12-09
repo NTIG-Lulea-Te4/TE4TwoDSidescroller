@@ -38,6 +38,7 @@ namespace TE4TwoDSidescroller
         bool isWalkingRight;
         bool isWalkingLeft;
         bool isJumping;
+        public bool isFacingRight;
 
         public static int playerDamage;
 
