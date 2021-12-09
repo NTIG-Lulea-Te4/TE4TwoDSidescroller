@@ -38,14 +38,12 @@ namespace TE4TwoDSidescroller
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
-            Entity knight = new Knight();
+            knight = new Knight();
             GameInfo.entityManager.AddEntity(knight);
 
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
 
-            knight = new Knight();
-            GameInfo.entityManager.AddEntity(knight);
         }
 
         public override void Update(GameTime gameTime)

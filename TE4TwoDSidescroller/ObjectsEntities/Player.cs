@@ -288,7 +288,7 @@ namespace TE4TwoDSidescroller
                 IsGrounded = true;
             }
 
-            if (collider.tag == Tags.KnghtAttack.ToString())
+            if (collider.tag == Tags.KnightAttack.ToString())
             {
                 currentHealth = health.TakeDamage(currentHealth, Knight.knightDamage, this);
                 hasTakenDamage = true;

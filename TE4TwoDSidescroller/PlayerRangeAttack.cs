@@ -74,6 +74,7 @@ namespace TE4TwoDSidescroller
         {
 
             GameInfo.entityManager.RemoveEntity(this.uniqeId);
+        }
 
         public void Animate()
         {
@@ -102,7 +103,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            //GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
+            GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
             animation.Draw(gameTime);
         }
     }

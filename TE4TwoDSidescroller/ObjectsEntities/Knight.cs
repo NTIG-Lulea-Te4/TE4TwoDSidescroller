@@ -23,20 +23,16 @@ namespace TE4TwoDSidescroller
         private Texture2D knightIdle;
         private Texture2D knightAttack;
 
-        private Rectangle sourceRectangle;
-        static public Vector2 movementDirection;
-        static public Vector2 movementDirectionOnXAxis;
-        static public Vector2 knightPosition;
         private Texture2D knightTexture;
         protected Rectangle sourceRectangle;
         public static Vector2 movementDirection;
         public static Vector2 knightPosition;
-
         private Vector2 knightOrigin;
         private Vector2 knightVelocity;
         private Vector2 knightScale;
         private float knightRotation;
         private float knightJumpHeight;
+        private Vector2 trackingDistance;
 
 
         private Health health;
@@ -191,12 +187,12 @@ namespace TE4TwoDSidescroller
             flipAttack.spriteEffects = SpriteEffects.FlipHorizontally;
 
             Animation ouch = new Animation(knightOuch, 3);
-            ouch.isLooping = false;
+            ouch.isLooping = true;
             ouch.FramePerSecond = 10;
             knightDictionary.Add("ouch", ouch);
 
             Animation flipOuch = new Animation(knightOuch, 3);
-            flipOuch.isLooping = false;
+            flipOuch.isLooping = true;
             flipOuch.FramePerSecond = 10;
             flipOuch.spriteEffects = SpriteEffects.FlipHorizontally;
             knightDictionary.Add("flipOuch", flipOuch);
@@ -223,12 +219,22 @@ namespace TE4TwoDSidescroller
             knightDictionary.TryGetValue("walkLeft", out tempWalkLeft);
 
             animation = tempBase;
-            if (hasTakenDamage)
+            if (hasTakenDamage && movementVector.X >= 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
 
                 animation = tempOuch;
+                hasTakenDamage = false;
+            }
+
+            else if (hasTakenDamage && movementVector.X <= 0)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempFlipOuch;
+                hasTakenDamage = false;
             }
 
             else if (movementVector.Y == 0 && movementVector.X >= 0)
@@ -334,12 +340,7 @@ namespace TE4TwoDSidescroller
 
         public override void Attack1()
         {
-
-
             GameInfo.creationManager.InitializeKnightAttack();
-
-
-
         }
 
         #endregion
@@ -376,7 +377,6 @@ namespace TE4TwoDSidescroller
             #endregion
 
 
-
             movementDirection = GameInfo.player1Position - knightPosition;
 
             knightVelocity = new Vector2(0, 0);
@@ -410,34 +410,12 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle,
-                Color.White, knightRotation, knightOrigin, knightScale,
-                SpriteEffects.None, 0f);
-            //if (hasCollided)
-            //{
-            //    GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.Red);
-            //}
-            //else
-            //{
-            //    GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
-            //}
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
-            //GameInfo.spriteBatch.Draw(knightWalk, knightPosition, sourceRectangle, 
-            //    Color.White, knightRotation, knightOrigin, knightScale, 
+            //GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle,
+            //    Color.White, knightRotation, knightOrigin, knightScale,
             //    SpriteEffects.None, 0f);
+
             animation.Draw(gameTime);
-                Color.White, knightRotation, knightOrigin, knightScale, 
-                SpriteEffects.None, 0f);
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
-                Color.White, knightRotation, knightOrigin, knightScale, 
-                SpriteEffects.None, 0f);
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
-                Color.White, knightRotation, knightOrigin, knightScale, 
-                SpriteEffects.None, 0f);
-            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
-            //    Color.White, knightRotation, knightOrigin, knightScale, 
-            //    SpriteEffects.None, 0f);
-            animation.Draw(gameTime);
+
             // base.Draw(gameTime);
         }
 
