@@ -17,6 +17,7 @@ namespace TE4TwoDSidescroller
         List<Vector2> heavyAttacks;
         double heavyAttackTimer;
         Vector2 attack1;
+        static float attack1Dmg;
 
 
         public Boss()
@@ -26,10 +27,12 @@ namespace TE4TwoDSidescroller
             heavyAttacks = new List<Vector2>();
             heavyAttackTimer = 0;
             health = new Health();
+            maxHealth = 2000;
+            currentHealth = maxHealth;
             tag = Tags.Boss.ToString();
             collisionBox = new Rectangle(0, 0, 64, 96);
             attack1 = new Vector2(0, 3);
-            float attack1Dmg = 10f;
+            attack1Dmg = 10f;
 
             LoadTextrue2D();
         }
@@ -74,23 +77,24 @@ namespace TE4TwoDSidescroller
 
         public override void Attack1()
         {
-            tag = Tags.BossAttack1.ToString();
-            collisionBox = new Rectangle((int) attack1.X, (int) attack1.Y, 64, 96);
-            for (int i = 0; i < heavyAttacks.Count; i++)
-            {
-                heavyAttacks[i] = heavyAttacks[i] + attack1;
-            }
+            //tag = Tags.BossAttack1.ToString();
 
             if (GameInfo.player1Position.X - GameInfo.bossPosition.X < 500 && heavyAttackTimer > 2)
             {
                 heavyAttackTimer = 0;
                 heavyAttacks.Add(new Vector2(GameInfo.player1Position.X, 0));
             }
+            for (int i = 0; i < heavyAttacks.Count; i++)
+            {
+                heavyAttacks[i] = heavyAttacks[i] + attack1;
+            }
+
+            collisionBox = new Rectangle((int)attack1.X, (int)attack1.Y, 64, 96);
         }
 
         public override void Attack2()
         {
-            tag = Tags.BossAttack2.ToString();
+            //tag = Tags.BossAttack2.ToString();
 
         }
 
