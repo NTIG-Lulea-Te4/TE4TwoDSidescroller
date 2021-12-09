@@ -315,16 +315,16 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
         }
 
-        public override void MoveUp()
-        {
-            movementVector.Y -= moveSpeed;
-            //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
-        }
+        //public override void MoveUp()
+        //{
+        //    movementVector.Y -= moveSpeed;
+        //    //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+        //}
 
-        public override void MoveDown()
-        {
-            movementVector.Y += moveSpeed;
-        }
+        //public override void MoveDown()
+        //{
+        //    movementVector.Y += moveSpeed;
+        //}
 
         public override void MoveLeft()
         {
