@@ -36,6 +36,7 @@ namespace TE4TwoDSidescroller
         public virtual void Patrol()
         {
             
+
             if (moveRight)
             {
                 //startPoint.X += npcSpeed * (float)GameInfo.gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -48,7 +49,7 @@ namespace TE4TwoDSidescroller
             }
 
 
-            if (character.position.X > startPosition + 100 || character.position.X < startPosition)
+            if (character.position.X >= startPosition + 100 || character.position.X < startPosition)
             {
                 moveRight = !moveRight;
             }

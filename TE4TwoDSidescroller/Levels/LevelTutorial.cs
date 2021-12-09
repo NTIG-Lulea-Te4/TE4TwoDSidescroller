@@ -20,32 +20,29 @@ namespace TE4TwoDSidescroller
         public static void LoadContent()
         {
             Entity background;
+            Entity playerEntity;
             Entity floor;
-            Entity TutorialGoal;
-            Entity viewport;
-            Entity farmer;
-            Entity boss;
+            Entity camera;
+            Entity knight;
+            Entity tutorialGoal;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
 
-            Entity playerEntity = new Player();
+            playerEntity = new Player();
             GameInfo.entityManager.AddEntity(playerEntity);
 
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
 
-            TutorialGoal = new TutorialGoal();
-            GameInfo.entityManager.AddEntity(TutorialGoal);
+            camera = new VisionManager();
+            GameInfo.entityManager.AddEntity(camera);
 
-            viewport = new VisionManager();
-            GameInfo.entityManager.AddEntity(viewport);
+            knight = new Knight();
+            GameInfo.entityManager.AddEntity(knight);
 
-            farmer = new Farmer(100, 220);
-            GameInfo.entityManager.AddEntity(farmer);
-
-            boss = new Boss();
-            GameInfo.entityManager.AddEntity(boss);
+            tutorialGoal = new TutorialGoal();
+            GameInfo.entityManager.AddEntity(tutorialGoal);
 
         }
 

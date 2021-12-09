@@ -4,10 +4,10 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class Level3
+    class Level4
     {
 
-        public Level3()
+        public Level4()
         {
 
 
@@ -23,6 +23,7 @@ namespace TE4TwoDSidescroller
             Entity camera;
 
             Entity levelGoal;
+            Entity knight;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -36,8 +37,12 @@ namespace TE4TwoDSidescroller
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
-            levelGoal = new LevelGoals(3);
+            levelGoal = new LevelGoals(4);
             GameInfo.entityManager.AddEntity(levelGoal);
+
+            knight = new Knight();
+            GameInfo.entityManager.AddEntity(knight);
+
         }
 
         public static void RemoveContent()
@@ -45,8 +50,6 @@ namespace TE4TwoDSidescroller
 
             GameInfo.entityManager.RemoveAllEntities();
 
-
         }
-
     }
 }
