@@ -66,6 +66,9 @@
     <None Update="Content\Pngs\Enemies\FarmerOuchAnim.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Pngs\Enemies\FarmerWalkAnim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Pngs\Enemies\GodAttackAnim.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

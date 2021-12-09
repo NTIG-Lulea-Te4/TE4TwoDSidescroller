@@ -37,10 +37,9 @@ namespace TE4TwoDSidescroller
 
         private Health health;
 
-        bool hasCollided;
         bool isWalkingRight;
         bool hasTakenDamage;
-
+        bool isAttacking;
 
         public static int knightDamage;
 
@@ -57,7 +56,6 @@ namespace TE4TwoDSidescroller
             hasCollider = true;
             isFacingRight = true;
 
-            hasCollided = false;
 
             movementSpeed = 0.3f;
             maxHealth = 1000;
@@ -183,12 +181,13 @@ namespace TE4TwoDSidescroller
 
             Animation flipAttack = new Animation(knightAttack, 4);
             flipAttack.isLooping = true;
-            flipAttack.FramePerSecond = 5;
+            flipAttack.FramePerSecond = 1;
             flipAttack.spriteEffects = SpriteEffects.FlipHorizontally;
+            knightDictionary.Add("flipAttack", flipAttack);
 
             Animation ouch = new Animation(knightOuch, 3);
             ouch.isLooping = true;
-            ouch.FramePerSecond = 10;
+            ouch.FramePerSecond = 1;
             knightDictionary.Add("ouch", ouch);
 
             Animation flipOuch = new Animation(knightOuch, 3);
@@ -208,6 +207,8 @@ namespace TE4TwoDSidescroller
             Animation tempFlipJump;
             Animation tempOuch;
             Animation tempFlipOuch;
+            Animation tempAttack;
+            Animation tempFlipAttack;
 
             knightDictionary.TryGetValue("base", out tempBase);
             knightDictionary.TryGetValue("idle", out tempIdle);
@@ -215,6 +216,8 @@ namespace TE4TwoDSidescroller
             knightDictionary.TryGetValue("ouch", out tempOuch);
             knightDictionary.TryGetValue("flipOuch", out tempFlipOuch);
             knightDictionary.TryGetValue("flipJump", out tempFlipJump);
+            knightDictionary.TryGetValue("attack", out tempAttack);
+            knightDictionary.TryGetValue("flipAttack", out tempFlipAttack);
             knightDictionary.TryGetValue("walkRight", out tempWalkRight);
             knightDictionary.TryGetValue("walkLeft", out tempWalkLeft);
 
@@ -235,6 +238,24 @@ namespace TE4TwoDSidescroller
 
                 animation = tempFlipOuch;
                 hasTakenDamage = false;
+            }
+
+            else if (isAttacking && knightPosition.X <= GameInfo.player1Position.X)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempAttack;
+                isAttacking = false;
+            }
+
+            else if (isAttacking && knightPosition.X >= GameInfo.player1Position.X)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempFlipAttack;
+                isAttacking = false;
             }
 
             else if (movementVector.Y == 0 && movementVector.X >= 0)
@@ -289,13 +310,15 @@ namespace TE4TwoDSidescroller
 
             if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
-                hasCollided = true;
+
                 hasTakenDamage = true;
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
 
             if (collider.tag == Tags.PlayerRangeAttack.ToString())
             {
+                hasTakenDamage = true;
+
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
 
@@ -305,42 +328,32 @@ namespace TE4TwoDSidescroller
 
         public override void MoveRight()
         {
-
-
-
             movementVector.X += movementSpeed;
             isWalkingRight = true;
             isFacingRight = true;
-
-
         }
 
         public override void MoveLeft()
         {
-
             movementVector.X -= movementSpeed;
             isWalkingRight = false;
             isFacingRight = false;
-
-
         }
 
         public override void Jump(GameTime gameTime)
         {
-
             if (IsGrounded)
             {
                 IsGrounded = false;
-                movementVector.Y -= movementSpeed * 100;
-
+                movementVector.Y -= movementSpeed * 50;
             }
-
         }
 
 
         public override void Attack1()
         {
             GameInfo.creationManager.InitializeKnightAttack();
+            isAttacking = true;
         }
 
         #endregion
@@ -376,7 +389,6 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
-
             movementDirection = GameInfo.player1Position - knightPosition;
 
             knightVelocity = new Vector2(0, 0);
@@ -394,21 +406,16 @@ namespace TE4TwoDSidescroller
 
             if (!IsGrounded)
             {
-
                 increasingGravity += gameInfoSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
             }
 
             knightVelocity.Y += increasingGravity - knightJumpHeight;
 
             movementVector += knightVelocity;
-
-
         }
 
         public override void Draw(GameTime gameTime)
         {
-
 
             //GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle,
             //    Color.White, knightRotation, knightOrigin, knightScale,
