@@ -23,7 +23,7 @@ namespace TE4TwoDSidescroller
             level = currentLevel;
 
 
-            myPosition = new Vector2(1220, 720 - 150);
+            myPosition = new Vector2(4000 - 150, 720 - 150);
             myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, 50, 50);
             myTexture = new Texture2D
                 (GameInfo.graphicsDevice.GraphicsDevice, myRectangle.Width, myRectangle.Height);

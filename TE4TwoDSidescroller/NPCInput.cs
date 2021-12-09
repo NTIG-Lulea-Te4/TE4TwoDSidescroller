@@ -21,8 +21,8 @@ namespace TE4TwoDSidescroller
             : base(character)
         {
             moveRight = true;
-            startPosition = character.position.X;
-            endPosition = character.position.X + 200;
+            startPosition = 0;
+            endPosition = 0;
 
         }
 
@@ -36,7 +36,14 @@ namespace TE4TwoDSidescroller
 
         public virtual void Patrol()
         {
-            
+
+            if (startPosition == 0 || endPosition == 0)
+            {
+                startPosition = character.position.X;
+                endPosition = character.position.X + 200;
+
+            }
+
 
             if (moveRight)
             {
@@ -64,3 +71,4 @@ namespace TE4TwoDSidescroller
 
     }
 }
+
