@@ -23,6 +23,7 @@ namespace TE4TwoDSidescroller
             Entity camera;
 
             Entity levelGoal;
+            Entity platform;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -35,6 +36,9 @@ namespace TE4TwoDSidescroller
 
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
+
+            platform = new Platform(new Microsoft.Xna.Framework.Vector2(300, 450), 300, 40);
+            GameInfo.entityManager.AddEntity(platform);
 
             levelGoal = new LevelGoals(3);
             GameInfo.entityManager.AddEntity(levelGoal);

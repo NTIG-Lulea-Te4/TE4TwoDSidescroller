@@ -20,7 +20,7 @@ namespace TE4TwoDSidescroller
             : base(character)
         {
             moveRight = true;
-            character.position.X = startPosition;
+            startPosition = character.position.X;
 
 
         }
@@ -49,9 +49,13 @@ namespace TE4TwoDSidescroller
             }
 
 
-            if (character.position.X >= startPosition + 100 || character.position.X < startPosition)
+            if (character.position.X > startPosition + 100 || character.position.X < startPosition)
             {
-                moveRight = !moveRight;
+                moveRight = false;
+            }
+            else
+            {
+                moveRight = true;
             }
 
 
