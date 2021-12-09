@@ -28,8 +28,9 @@ namespace TE4TwoDSidescroller
         static public GameInformationSystem gameInformationSystem; 
         static public GameTime gameTime;
         static public Vector2 bossPosition;
+        static public int playerOneCurrentHealth;
 
-        
+
 
         #region kommentar
         /*        static public void Initialize()
