@@ -59,7 +59,7 @@ namespace TE4TwoDSidescroller
         public override void HasCollidedWith(Entity collider)
         {
 
-            if (collider.tag == Tags.PlayerAttack.ToString())
+            if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
                 health.TakeDamage(currentHealth, Player.playerDamage, this);
 

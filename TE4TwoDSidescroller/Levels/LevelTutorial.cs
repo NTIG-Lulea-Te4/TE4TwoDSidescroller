@@ -43,6 +43,9 @@ namespace TE4TwoDSidescroller
             farmer = new Farmer(100, 220);
             GameInfo.entityManager.AddEntity(farmer);
 
+            Entity knight = new Knight();
+            GameInfo.entityManager.AddEntity(knight);
+
         }
 
         public override void Update(GameTime gameTime)

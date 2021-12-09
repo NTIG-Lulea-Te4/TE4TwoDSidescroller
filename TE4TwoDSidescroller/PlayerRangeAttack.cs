@@ -27,7 +27,8 @@ namespace TE4TwoDSidescroller
 
             isActive = true;
             hasCollider = true;
-            tag = Tags.PlayerAttack.ToString();
+            tag = Tags.PlayerRangeAttack.ToString();
+
             if (GameInfo.player1IsFacingRight)
             {
 
@@ -60,6 +61,13 @@ namespace TE4TwoDSidescroller
             {
                 playerAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
+
+        }
+
+        public override void HasCollidedWith(Entity collider)
+        {
+
+            GameInfo.entityManager.RemoveEntity(this.uniqeId);
 
         }
 
