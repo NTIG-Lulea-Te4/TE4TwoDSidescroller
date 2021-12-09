@@ -16,16 +16,19 @@ namespace TE4TwoDSidescroller
         Health health;
         List<Vector2> heavyAttacks;
         double heavyAttackTimer;
+        Vector2 attack1;
 
 
         public Boss()
         {
-            bossPosition = new Vector2(200, 200);
+            bossPosition = new Vector2(1150, 600);
             currentHealth = maxHealth;
             heavyAttacks = new List<Vector2>();
             heavyAttackTimer = 0;
-
-            //tag = Tags.Boss.ToString();
+            health = new Health();
+            tag = Tags.Boss.ToString();
+            collisionBox = new Rectangle(0, 0, 50, 70);
+            attack1 = new Vector2(0, 3);
 
             LoadTextrue2D();
         }
@@ -56,17 +59,25 @@ namespace TE4TwoDSidescroller
 
         public override void HasCollidedWith(Entity collider)
         {
-            if (collider.tag == Tags.PlayerAttack.ToString())
+
+            if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
-                health.TakeDamage(currentHealth, Player.playerDamage, this);
+                currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
+            }
+
+            if (collider.tag == Tags.PlayerRangeAttack.ToString())
+            {
+                currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
         }
 
         public override void Attack1()
         {
+            tag = Tags.BossAttack1.ToString();
+            collisionBox = new Rectangle((int) attack1.X, (int) attack1.Y, 50, 50);
             for (int i = 0; i < heavyAttacks.Count; i++)
             {
-                heavyAttacks[i] = heavyAttacks[i] + new Vector2(0, 2);
+                heavyAttacks[i] = heavyAttacks[i] + attack1;
             }
 
             if (GameInfo.player1Position.X - GameInfo.bossPosition.X < 500 && heavyAttackTimer > 2)
@@ -78,7 +89,8 @@ namespace TE4TwoDSidescroller
 
         public override void Attack2()
         {
-            
+            tag = Tags.BossAttack2.ToString();
+
         }
 
         //public override void Attack1() //byt till virtual i fall om det inte funkar
