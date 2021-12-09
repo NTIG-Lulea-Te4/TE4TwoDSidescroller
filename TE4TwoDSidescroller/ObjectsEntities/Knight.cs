@@ -10,12 +10,7 @@ namespace TE4TwoDSidescroller
 {
     class Knight : Character
     {
-        // :D
-        //int gravity; - Game info
-        //int currentYAxis; - Entity
-        //int currentGravity; - Entity
-        //int multiplier;
-        //isGrounded - Entity
+
 
         GameInformationSystem gameInfoSystem;
 
@@ -32,6 +27,11 @@ namespace TE4TwoDSidescroller
         static public Vector2 movementDirection;
         static public Vector2 movementDirectionOnXAxis;
         static public Vector2 knightPosition;
+        private Texture2D knightTexture;
+        protected Rectangle sourceRectangle;
+        public static Vector2 movementDirection;
+        public static Vector2 knightPosition;
+
         private Vector2 knightOrigin;
         private Vector2 knightVelocity;
         private Vector2 knightScale;
@@ -45,7 +45,6 @@ namespace TE4TwoDSidescroller
         bool isWalkingRight;
         bool hasTakenDamage;
 
-        Texture2D[] Sprites;
 
         public static int knightDamage;
 
@@ -60,10 +59,11 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
             isActive = true;
             hasCollider = true;
+            isFacingRight = true;
 
             hasCollided = false;
 
-            movementSpeed = 0.5f;
+            movementSpeed = 0.3f;
             maxHealth = 1000;
             currentHealth = maxHealth;
             mana = 100;
@@ -76,16 +76,16 @@ namespace TE4TwoDSidescroller
             sourceRectangle = new Rectangle(0, 0, 64, 96);
             knightPosition = new Vector2(500, 0);
             movementDirection = new Vector2();
-            //movementDirectionOnXAxis = new Vector2();
             knightVelocity = new Vector2(0, 0);
-            
+
             knightOrigin = new Vector2(0, 0);
             knightScale = new Vector2(1, 1);
             movementVector = new Vector2(0, 0);
             knightRotation = 0;
+            trackingDistance = new Vector2(300, 300);
+            
 
             collisionBox = new Rectangle(0, 0, 64, 96);
-            //weaponCollsion = new Rectangle();
 
             LoadTexture2D();
 
@@ -278,19 +278,21 @@ namespace TE4TwoDSidescroller
             if (collider.tag == Tags.Floor.ToString())
             {
                 IsGrounded = true;
-                
+
             }
 
-            if (collider.tag == Tags.PlayerAttack.ToString())
+            if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
                 hasCollided = true;
                 hasTakenDamage = true;
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
-            else
+
+            if (collider.tag == Tags.PlayerRangeAttack.ToString())
             {
-                hasCollided = false;
+                currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
+
         }
 
         #region Behaviour
@@ -298,18 +300,22 @@ namespace TE4TwoDSidescroller
         public override void MoveRight()
         {
 
-            //movementDirectionOnXAxis.Normalize();
-            //movementVector.X += movementDirectionOnXAxis.X * movementSpeed;
+
+
             movementVector.X += movementSpeed;
             isWalkingRight = true;
+            isFacingRight = true;
+
 
         }
 
         public override void MoveLeft()
         {
-            
+
             movementVector.X -= movementSpeed;
             isWalkingRight = false;
+            isFacingRight = false;
+
 
         }
 
@@ -326,8 +332,12 @@ namespace TE4TwoDSidescroller
         }
 
 
-        public override void Attack1( )
+        public override void Attack1()
         {
+
+
+            GameInfo.creationManager.InitializeKnightAttack();
+
 
 
         }
@@ -365,10 +375,11 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
+
+
             movementDirection = GameInfo.player1Position - knightPosition;
 
             knightVelocity = new Vector2(0, 0);
-            knightJumpHeight = 0;
 
             knightPosition += movementVector;
             KnightAnimation();
@@ -393,45 +404,15 @@ namespace TE4TwoDSidescroller
             movementVector += knightVelocity;
 
 
-
-
-            #region Animation Stuff
-
-            //if (frameTimer >= frameThreshHold)
-            //{
-
-            //    frameCounter++;
-            //    currentFrame = frameCounter * frameWidth;
-
-            //    sourceRectangle.Width = currentFrame;
-
-            //    frameTimer = 0;
-
-            //    if (frameCounter == 4)
-            //    {
-            //        frameCounter = 1;
-            //    }
-
-            //}
-
-            //frameTimer += gameTime.ElapsedGameTime.Milliseconds;
-
-            //if (movementDirection.X > 0.1f)
-            //{
-
-            //}
-            //else if (movementDirection.X < 0.1f)
-            //{
-            //    knightScale.X *= -1;
-            //}
-
-            #endregion
-
         }
 
         public override void Draw(GameTime gameTime)
         {
 
+
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle,
+                Color.White, knightRotation, knightOrigin, knightScale,
+                SpriteEffects.None, 0f);
             //if (hasCollided)
             //{
             //    GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.Red);
@@ -440,8 +421,20 @@ namespace TE4TwoDSidescroller
             //{
             //    GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
             //}
-
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
             //GameInfo.spriteBatch.Draw(knightWalk, knightPosition, sourceRectangle, 
+            //    Color.White, knightRotation, knightOrigin, knightScale, 
+            //    SpriteEffects.None, 0f);
+            animation.Draw(gameTime);
+                Color.White, knightRotation, knightOrigin, knightScale, 
+                SpriteEffects.None, 0f);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
+                Color.White, knightRotation, knightOrigin, knightScale, 
+                SpriteEffects.None, 0f);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
+                Color.White, knightRotation, knightOrigin, knightScale, 
+                SpriteEffects.None, 0f);
+            GameInfo.spriteBatch.Draw(knightTexture, knightPosition, sourceRectangle, 
             //    Color.White, knightRotation, knightOrigin, knightScale, 
             //    SpriteEffects.None, 0f);
             animation.Draw(gameTime);

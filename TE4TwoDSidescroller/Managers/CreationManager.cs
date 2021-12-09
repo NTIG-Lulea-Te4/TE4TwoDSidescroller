@@ -73,6 +73,21 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.AddEntity(rangeAttack);
         }
 
+        public void InitializeKnightAttack()
+        {
+
+            //Entity knightAttack = new KnightAttack();
+            //GameInfo.entityManager.AddEntity(knightAttack);
+
+        }
+
+        public void InitializePriestAttack()
+        {
+            //Entity priestAttack = new PriestAttack();
+            //GameInfo.entityManager.AddEntity(priestAttack);
+
+        }
+
         //säger när allt ska skapas, intialize, skaffa tillgång till bilden?, 
     }
 }

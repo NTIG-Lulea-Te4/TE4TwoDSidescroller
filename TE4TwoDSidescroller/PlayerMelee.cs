@@ -24,7 +24,7 @@ namespace TE4TwoDSidescroller
 
             isActive = true;
             hasCollider = true;
-            tag = Tags.PlayerAttack.ToString();
+            tag = Tags.PlayerMeleeAttack.ToString();
             if (GameInfo.player1IsFacingRight)
             {
 

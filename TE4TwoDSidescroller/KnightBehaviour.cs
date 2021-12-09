@@ -8,18 +8,19 @@ namespace TE4TwoDSidescroller
     class KnightBehaviour : CharacterInput
     {
 
-        private Vector2 distance;
+        private Vector2 trackingDistance;
 
+        int spacingBetweenEntities;
         float attackTimer;
         float jumpTimer;
 
         public KnightBehaviour(Character character) : base(character)
         {
 
-            distance = new Vector2(300, 300);
-
+            trackingDistance = new Vector2(300, 300);
             attackTimer = 0;
             jumpTimer = 0;
+            spacingBetweenEntities = 50;
         }
         
         public override void Update(GameTime gameTime)
@@ -29,16 +30,16 @@ namespace TE4TwoDSidescroller
             attackTimer += gameTime.ElapsedGameTime.Milliseconds;
             jumpTimer += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (Knight.movementDirection.Length() <= distance.Length() &&
-                Knight.knightPosition.X < GameInfo.player1Position.X)
+            if (Knight.movementDirection.Length() <= trackingDistance.Length() &&
+                Knight.knightPosition.X + spacingBetweenEntities < GameInfo.player1Position.X)
             {
 
                 character.MoveRight();
 
             }
 
-            if (Knight.movementDirection.Length() <= distance.Length() &&
-                Knight.knightPosition.X > GameInfo.player1Position.X)
+            if (Knight.movementDirection.Length() <= trackingDistance.Length() &&
+                Knight.knightPosition.X - spacingBetweenEntities > GameInfo.player1Position.X)
             {
 
                 character.MoveLeft();
@@ -46,7 +47,7 @@ namespace TE4TwoDSidescroller
             }
 
             if (Knight.knightPosition.Y > GameInfo.player1Position.Y
-                && jumpTimer > 1500)
+                )
             {
 
                 character.Jump(gameTime);
@@ -54,7 +55,7 @@ namespace TE4TwoDSidescroller
                 jumpTimer = 0;
             }
 
-            if (Knight.movementDirection.Length() <= distance.Length() - 250
+            if (Knight.movementDirection.Length() <= trackingDistance.Length() - 250
                 && attackTimer > 2000)
             {
 
