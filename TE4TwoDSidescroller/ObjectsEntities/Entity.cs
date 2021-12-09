@@ -37,6 +37,7 @@ namespace TE4TwoDSidescroller
         public bool isActive;
         public bool hasCollider;   
         private bool isGrounded;
+        public static bool wantExit;
 
 
         public float increasingGravity;

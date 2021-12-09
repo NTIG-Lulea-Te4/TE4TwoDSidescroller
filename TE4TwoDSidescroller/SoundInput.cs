@@ -23,13 +23,20 @@ namespace TE4TwoDSidescroller
 
         #endregion
 
-        public void Load(ContentManager content)
-        {
-            content.Load<SoundEffect>("PreBossLevelMusic");
-        }
+
+        public static SoundEffect knigthWalk;
+        public static SoundEffect mainCharacterJump;
+        public static SoundEffect swordSwoosh;
+        public static SoundEffect evilLaugh;
+        public static SoundEffect startFireBall;
+        public static SoundEffect activeFireBall;
+        public static SoundEffect knigthSwosh;
+        public static Song preBossMusic;
+        public static Song ominousMusic;
 
         #region SoundPlayers
-        static SoundEffect soundHolder;
+
+
         public static SoundPlayer attack1;
         public static SoundPlayer attack2;
         public static SoundPlayer attack3;
@@ -154,40 +161,68 @@ namespace TE4TwoDSidescroller
 
             #region Loading
 
-            LoadSound(songPath, attack1);
+            
 
             #endregion
         }
 
-        public static SoundPlayer LoadSound(string loadingSoundFile, SoundPlayer load)
+        public static void ContentLoad(ContentManager content)
         {
 
-            load.SoundLocation = loadingSoundFile;
-            load.Load();
-            return load;
+            knigthWalk = content.Load<SoundEffect>("Audio/ChainmailWalk");
+            mainCharacterJump = content.Load<SoundEffect>("Audio/ShadowJump");
+            swordSwoosh = content.Load<SoundEffect>("Audio/swoosh");
+            evilLaugh = content.Load<SoundEffect>("Audio/EvilLaugh");
+            startFireBall = content.Load<SoundEffect>("Audio/Fireball");
+            activeFireBall = content.Load<SoundEffect>("Audio/FireballFire");
+            knigthSwosh = content.Load<SoundEffect>("Audio/KnightSwordSwoosh");
+            preBossMusic = content.Load<Song>("Audio/PreBossLevelMusic");
+            ominousMusic = content.Load<Song>("Audio/CreepyBGMusic");
 
         }
 
-        public static void PlaySound(SoundPlayer playingFile)
-        {
+        //public static SoundPlayer LoadSound(string loadingSoundFile, SoundPlayer load)
+        //{
 
-            playingFile.PlaySync();
+        //    load.SoundLocation = loadingSoundFile;
+        //    load.Load();
+        //    return load;
 
-        }
+        //}
+
+        //public static void PlaySound(SoundPlayer playingFile)
+        //{
+
+        //    playingFile.PlaySync();
+
+        //}
 
         public static void SoundEffectPlayed(SoundEffect fileBeingPlayed, float fileVolume, float filePitch, float filePan)
         {
-
+     
             fileBeingPlayed.Play(volume: fileVolume, pitch: filePitch, pan: filePan);
 
         }
 
-
-
-        public void MusicPlayer(SoundPlayer playingMusicFile)
+        public static void SongPlay(Song songFileBeingPlayed)
         {
-            playingMusicFile.Stop();
-            playingMusicFile.PlayLooping();
+            MediaPlayer.Stop();
+            MediaPlayer.Play(songFileBeingPlayed);
+
+            if (MediaPlayer.IsRepeating == false)
+            {
+
+                MediaPlayer.IsRepeating = true;
+
+            }
         }
+
+
+
+        //public void MusicPlayer(SoundPlayer playingMusicFile)
+        //{
+        //    playingMusicFile.Stop();
+        //    playingMusicFile.PlayLooping();
+        //}
     }
 }
