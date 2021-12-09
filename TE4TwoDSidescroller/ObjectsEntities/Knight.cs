@@ -97,7 +97,7 @@ namespace TE4TwoDSidescroller
 
             knightDamage = 5;
 
-            knightDictionary = new Dictionary<string, Animation>();
+
         }
 
         public void LoadTexture2D()
@@ -151,6 +151,7 @@ namespace TE4TwoDSidescroller
 
         public void KnightDictionary()
         {
+            knightDictionary = new Dictionary<string, Animation>();
 
             Animation baseAnimation = new Animation(knightIdle, 1);
             baseAnimation.isLooping = true;
