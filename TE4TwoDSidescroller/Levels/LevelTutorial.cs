@@ -44,6 +44,7 @@ namespace TE4TwoDSidescroller
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
 
+
         }
 
         public override void Update(GameTime gameTime)

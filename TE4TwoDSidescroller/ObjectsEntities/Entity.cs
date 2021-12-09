@@ -23,7 +23,10 @@ namespace TE4TwoDSidescroller
             Priest,
             PriestAttack,
             Floor,
-            FinishLine
+            FinishLine,
+            Boss,
+            BossAttack1,
+            BossAttack2
 
         }
 

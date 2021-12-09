@@ -24,6 +24,7 @@ namespace TE4TwoDSidescroller
             Entity camera;
 
             Entity levelGoal;
+            Entity boss;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -39,6 +40,9 @@ namespace TE4TwoDSidescroller
 
             levelGoal = new LevelGoals(5);
             GameInfo.entityManager.AddEntity(levelGoal);
+
+            boss = new Boss();
+            GameInfo.entityManager.AddEntity(boss);
 
         }
 
