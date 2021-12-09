@@ -4,15 +4,16 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class Level3
+    class LevelBoss
     {
 
-        public Level3()
+        public LevelBoss()
         {
 
 
 
         }
+
 
         public static void LoadContent()
         {
@@ -36,17 +37,17 @@ namespace TE4TwoDSidescroller
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
-            levelGoal = new LevelGoals(3);
+            levelGoal = new LevelGoals(5);
             GameInfo.entityManager.AddEntity(levelGoal);
+
         }
+
 
         public static void RemoveContent()
         {
 
             GameInfo.entityManager.RemoveAllEntities();
 
-
         }
-
     }
 }

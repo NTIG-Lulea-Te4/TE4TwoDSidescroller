@@ -10,6 +10,7 @@ namespace TE4TwoDSidescroller
     {
         Viewport viewport;
 
+
         int Xsize;
         int Ysize;
 
@@ -28,7 +29,11 @@ namespace TE4TwoDSidescroller
 
             Xposition = (int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width / 2;
             Yposition = (int)GameInfo.player1Position.Y - GameInfo.Player1TextureSize.Height / 2;
-            viewport = new Viewport(-Xposition + Xsize / 2, -Yposition + Ysize / 2, Xsize, Ysize);
+            viewport = new Viewport
+                (-Xposition + Xsize / 2,
+                -Yposition + Ysize / 2,
+                Xposition + Xsize,
+                Yposition + Ysize);
             GameInfo.graphicsDevice.GraphicsDevice.Viewport = viewport;
             GameInfo.viewportPosition.X = -viewport.X;
             GameInfo.viewportPosition.Y = -viewport.Y;
