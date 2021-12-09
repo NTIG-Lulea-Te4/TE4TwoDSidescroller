@@ -19,8 +19,7 @@ namespace TE4TwoDSidescroller
             Entity background;
             Entity playerEntity;
             Entity floor;
-            Entity farmer;
-            Entity farmer2;
+            Entity camera;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -31,11 +30,8 @@ namespace TE4TwoDSidescroller
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
 
-            farmer = new Farmer(700, 640);
-            GameInfo.entityManager.AddEntity(farmer);
-
-            farmer2 = new Farmer(900, 640);
-            GameInfo.entityManager.AddEntity(farmer2);
+            camera = new VisionManager();
+            GameInfo.entityManager.AddEntity(camera);
 
         }
         public static void RemoveContent()

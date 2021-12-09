@@ -19,8 +19,8 @@ namespace TE4TwoDSidescroller
         {
             isActive = true;
             hasCollider = true;
-            tag = Tags.Floor.ToString();
             collisionBox = new Rectangle();
+            tag = Tags.Floor.ToString();
             PixelDraw();
         }
 
