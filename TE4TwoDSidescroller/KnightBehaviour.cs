@@ -30,7 +30,7 @@ namespace TE4TwoDSidescroller
             attackTimer += gameTime.ElapsedGameTime.Milliseconds;
             jumpTimer += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (Knight.movementDirection.Length() <= trackingDistance.Length() &&
+            if (/*Knight.movementDirection.Length() <= trackingDistance.Length() &&*/
                 Knight.knightPosition.X + spacingBetweenEntities < GameInfo.player1Position.X)
             {
 
@@ -38,7 +38,7 @@ namespace TE4TwoDSidescroller
 
             }
 
-            if (Knight.movementDirection.Length() <= trackingDistance.Length() &&
+            if (/*Knight.movementDirection.Length() <= trackingDistance.Length() &&*/
                 Knight.knightPosition.X - spacingBetweenEntities > GameInfo.player1Position.X)
             {
 
@@ -46,14 +46,13 @@ namespace TE4TwoDSidescroller
 
             }
 
-            if (Knight.knightPosition.Y > GameInfo.player1Position.Y
-                )
-            {
+            //if (Knight.knightPosition.Y > GameInfo.player1Position.Y)
+            //{
 
-                character.Jump(gameTime);
+            //    character.Jump(gameTime);
 
-                jumpTimer = 0;
-            }
+            //    jumpTimer = 0;
+            //}
 
             if (Knight.movementDirection.Length() <= trackingDistance.Length() - 250
                 && attackTimer > 2000)
