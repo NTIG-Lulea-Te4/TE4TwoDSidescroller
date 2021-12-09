@@ -36,8 +36,6 @@ namespace TE4TwoDSidescroller
         float time;
 
         bool isWalkingRight;
-        bool isWalkingLeft;
-        bool isJumping;
 
         public static int playerDamage;
 
@@ -197,26 +195,27 @@ namespace TE4TwoDSidescroller
             animations.TryGetValue("runLeft", out tempRunLeft);
 
             animation = tempBase;
-            if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
+            if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && isWalkingRight)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
+                 
                 animation = tempIdle;
 
             }
 
-            else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
+            else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && !isWalkingRight)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
+
                 animation = tempFlipIdle;
-
-
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
                 tempFlipJump.frameIndex = 0;
+
                 animation = tempJump;
 
             }
@@ -224,25 +223,26 @@ namespace TE4TwoDSidescroller
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X <= 0))
             {
                 tempJump.frameIndex = 0;
+
                 animation = tempFlipJump;
             }
 
-            else if (isWalkingRight && movementVector.Y == 0)
+            else if (movementVector.Y == 0 && movementVector.X >= 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
+
                 animation = tempRunRight;
 
-                isWalkingRight = false;
             }
 
-            else if (isWalkingLeft && movementVector.Y == 0)
+            else if (movementVector.Y == 0 && movementVector.X <= 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
+
                 animation = tempRunLeft;
 
-                isWalkingLeft = false;
             }
         }
 
@@ -277,13 +277,15 @@ namespace TE4TwoDSidescroller
         public override void MoveLeft()
         {
             movementVector.X -= moveSpeed;
-            isWalkingLeft = true;
+
+            isWalkingRight = false;
             isFacingRight = false;
         }
 
         public override void MoveRight()
         {
             movementVector.X += moveSpeed;
+
             isWalkingRight = true;
             isFacingRight = true;
         }
@@ -302,11 +304,6 @@ namespace TE4TwoDSidescroller
         {
             movementVector.Y -= moveSpeed + 1;
             IsGrounded = false;
-        }
-
-        public override void DoubleJump()
-        {
-            //Use the flag for IsGrounded to nullify gravity and let another Jump runs
         }
 
         public override void Attack1()
