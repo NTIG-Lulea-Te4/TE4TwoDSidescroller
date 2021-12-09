@@ -22,6 +22,8 @@ namespace TE4TwoDSidescroller
         bool hasTakenDamage;
         bool isAttacking;
 
+        public static int farmerDamage;
+
         public Farmer(int myPosition1, int myPosition2)
         {
             characterInput = new FarmerInput(this);
@@ -34,14 +36,15 @@ namespace TE4TwoDSidescroller
             jumpHeight = 3;
 
             hasCollider = true;
+            isActive = true;
 
             LoadFarmerTexture();
             myPosition = new Vector2(myPosition1, myPosition2);
 
-            sourceRectangle = new Rectangle(0, 0, farmerIdle.Width, farmerIdle.Height);
+            sourceRectangle = new Rectangle(0, 0, 64, 96);
             myPosition = new Vector2(myPosition1, myPosition2);
             
-            collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, farmerIdle.Width, farmerIdle.Height);
+            collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, 64, 96);
             health = new Health();
 
             FarmerDictionary();
@@ -195,6 +198,7 @@ namespace TE4TwoDSidescroller
             if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
                 hasTakenDamage = true;
+
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
 

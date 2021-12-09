@@ -37,7 +37,6 @@ namespace TE4TwoDSidescroller
 
         private Health health;
 
-        bool hasCollided;
         bool isWalkingRight;
         bool hasTakenDamage;
         bool isAttacking;
@@ -57,7 +56,6 @@ namespace TE4TwoDSidescroller
             hasCollider = true;
             isFacingRight = true;
 
-            hasCollided = false;
 
             movementSpeed = 0.3f;
             maxHealth = 1000;
@@ -312,7 +310,7 @@ namespace TE4TwoDSidescroller
 
             if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
-                hasCollided = true;
+
                 hasTakenDamage = true;
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
@@ -320,7 +318,7 @@ namespace TE4TwoDSidescroller
             if (collider.tag == Tags.PlayerRangeAttack.ToString())
             {
                 hasTakenDamage = true;
-                hasCollided = true;
+
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
 
