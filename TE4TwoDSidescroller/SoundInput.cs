@@ -1,13 +1,13 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Media;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
-using System.IO;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using System.Media;
+using System.Text;
+using System.IO;
+using System;
 
 namespace TE4TwoDSidescroller
 {
