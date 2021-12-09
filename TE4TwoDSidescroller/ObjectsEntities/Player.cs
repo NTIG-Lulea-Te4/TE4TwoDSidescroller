@@ -188,7 +188,7 @@ namespace TE4TwoDSidescroller
 
             Animation ouch = new Animation(playerOuch, 3);
             ouch.isLooping = false;
-            ouch.FramePerSecond = 8;
+            ouch.FramePerSecond = 10;
             animations.Add("ouch", ouch);
 
             Animation flipOuch = new Animation(playerOuch, 3);
