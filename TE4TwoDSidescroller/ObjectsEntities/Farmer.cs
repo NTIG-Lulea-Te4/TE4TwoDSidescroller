@@ -249,6 +249,8 @@ namespace TE4TwoDSidescroller
                 manaTick = 0;
             }
 
+
+
             myPosition += movementVector;
             FarmerDictionary();
 

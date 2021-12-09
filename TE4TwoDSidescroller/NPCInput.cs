@@ -12,6 +12,7 @@ namespace TE4TwoDSidescroller
 
         protected bool moveRight;
         protected float startPosition;
+        protected float endPosition;
         //public Vector2 startPoint (100, 200);
         //public float npcSpeed = 0.2f;
 
@@ -21,7 +22,7 @@ namespace TE4TwoDSidescroller
         {
             moveRight = true;
             startPosition = character.position.X;
-
+            endPosition = character.position.X + 200;
 
         }
 
@@ -49,15 +50,14 @@ namespace TE4TwoDSidescroller
             }
 
 
-            if (character.position.X > startPosition + 100 || character.position.X < startPosition)
+            if (character.position.X > endPosition)
             {
                 moveRight = false;
             }
-            else
+            if (character.position.X < startPosition)
             {
                 moveRight = true;
             }
-
 
         }
 
