@@ -76,7 +76,6 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.RemoveEntity(this.uniqeId);
         }
 
-        }
         public void Animate()
         {
             if (GameInfo.player1IsFacingRight)
@@ -108,4 +107,7 @@ namespace TE4TwoDSidescroller
             animation.Draw(gameTime);
         }
     }
+
 }
+
+

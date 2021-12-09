@@ -74,7 +74,6 @@ namespace TE4TwoDSidescroller
             isActive = true;
             isFacingRight = true;
 
-            detectionHitBox = new Rectangle(0, 0, 500, 500);
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
 
             LoadPlayerTexture2D();

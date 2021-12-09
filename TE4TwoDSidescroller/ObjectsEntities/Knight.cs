@@ -349,14 +349,14 @@ namespace TE4TwoDSidescroller
             
         }
 
-        public override void Jump(GameTime gameTime)
-        {
-            if (IsGrounded)
-            {
-                IsGrounded = false;
-                movementVector.Y -= movementSpeed * 50;
-            }
-        }
+        //public override void Jump(GameTime gameTime)
+        //{
+        //    if (IsGrounded)
+        //    {
+        //        IsGrounded = false;
+        //        movementVector.Y -= movementSpeed * 50;
+        //    }
+        //}
 
 
         public override void Attack1()
@@ -398,18 +398,17 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
+
             movementDirection = GameInfo.player1Position - knightPosition;
 
             knightVelocity = new Vector2(0, 0);
-
             knightPosition += movementVector;
+
             KnightAnimation();
 
             animation.position = knightPosition;
             animation.Update(gameTime);
 
-            collisionBox.X = (int)knightPosition.X;
-            collisionBox.Y = (int)knightPosition.Y;
 
             base.Update(gameTime);
 
@@ -421,6 +420,11 @@ namespace TE4TwoDSidescroller
             knightVelocity.Y += increasingGravity - knightJumpHeight;
 
             movementVector += knightVelocity;
+
+            collisionBox.X = (int)knightPosition.X;
+            collisionBox.Y = (int)knightPosition.Y;
+
+
         }
 
         public override void Draw(GameTime gameTime)
