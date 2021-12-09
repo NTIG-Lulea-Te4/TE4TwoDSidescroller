@@ -25,7 +25,7 @@ namespace TE4TwoDSidescroller
 
         public void Load(ContentManager content)
         {
-            content.Load<SoundEffect>("Song.wav");
+            content.Load<SoundEffect>("sound");
         }
 
         #region SoundPlayers

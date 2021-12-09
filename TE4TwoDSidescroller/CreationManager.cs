@@ -10,11 +10,10 @@ namespace TE4TwoDSidescroller
 {
     public class CreationManager
     {
-
+        Entity menu;
         public GameTime spawnTimer;
         public CreationManager()
         {
-
 
 
         }
@@ -22,7 +21,9 @@ namespace TE4TwoDSidescroller
         public void Initialize()
         {
 
-            Level1.LoadContent();
+            menu = new Menu();
+            GameInfo.entityManager.AddEntity(menu);
+            //Level1.LoadContent();
 
         }
 

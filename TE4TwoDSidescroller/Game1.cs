@@ -9,7 +9,6 @@ namespace TE4TwoDSidescroller
     {
         //SoundInput soundInput;
 
-       
         public Game1()
         {
             //soundInput = new SoundInput();
@@ -22,8 +21,8 @@ namespace TE4TwoDSidescroller
             GameInfo.screenManager = new ScreenManager();
             
 
+
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
             Window.AllowUserResizing = true;
 
         }
@@ -35,15 +34,16 @@ namespace TE4TwoDSidescroller
             GameInfo.screenManager.Resolution(1);
             GameInfo.creationManager.Initialize();
             base.Initialize();
+            
         }
 
         protected override void LoadContent()
         {
-            
-
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
-            GameInfo.creationManager.Initialize();
 
+            Menu.ContentLoad(Content);
+            GameInfo.creationManager.Initialize();
+            
             //ej rätt GraphicsDevice ska vara graphics.GraphicsDevice
             
 
@@ -57,7 +57,7 @@ namespace TE4TwoDSidescroller
             GameInfo.collisionManager.CollisionUpdate();
 
            
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)||Entity.wantExit)
             {
                 Exit();
             }

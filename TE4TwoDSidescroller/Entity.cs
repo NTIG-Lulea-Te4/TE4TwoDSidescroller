@@ -28,6 +28,7 @@ namespace TE4TwoDSidescroller
         public bool isPlayer;
         private bool isGrounded;
         public bool isFloor;
+        public static bool wantExit;
 
         public float increasingGravity;
         public float amplifiedYForce;
