@@ -30,21 +30,21 @@ namespace TE4TwoDSidescroller
             attackTimer += gameTime.ElapsedGameTime.Milliseconds;
             jumpTimer += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (/*Knight.movementDirection.Length() <= trackingDistance.Length() &&*/
-                Knight.knightPosition.X + spacingBetweenEntities < GameInfo.player1Position.X)
-            {
+            //if (Knight.movementDirection.Length() <= trackingDistance.Length() &&
+            //    Knight.knightPosition.X + spacingBetweenEntities < GameInfo.player1Position.X)
+            //{
 
-                character.MoveRight();
+            //    character.MoveRight();
 
-            }
+            //}
 
-            if (/*Knight.movementDirection.Length() <= trackingDistance.Length() &&*/
-                Knight.knightPosition.X - spacingBetweenEntities > GameInfo.player1Position.X)
-            {
+            //if (Knight.movementDirection.Length() <= trackingDistance.Length() &&
+            //    Knight.knightPosition.X - spacingBetweenEntities > GameInfo.player1Position.X)
+            //{
 
-                character.MoveLeft();
+            //    character.MoveLeft();
 
-            }
+            //}
 
             //if (Knight.knightPosition.Y > GameInfo.player1Position.Y)
             //{

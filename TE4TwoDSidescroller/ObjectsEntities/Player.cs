@@ -22,7 +22,7 @@ namespace TE4TwoDSidescroller
         Health health;
 
         private Rectangle playerSourceRectangle;
-        private Vector2 playerPosition;
+        private Vector2 playerPosition;                                                                                                                                                                                                                                       
         private Vector2 playerVelocity;
 
         private Rectangle detectionHitBox;
