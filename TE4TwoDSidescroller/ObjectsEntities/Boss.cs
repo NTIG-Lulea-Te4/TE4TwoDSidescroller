@@ -64,11 +64,13 @@ namespace TE4TwoDSidescroller
             if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
+                SoundInput.SoundEffectPlayed(SoundInput.evilLaugh, 0.9f, 0.1f, 0.1f);
             }
 
             if (collider.tag == Tags.PlayerRangeAttack.ToString())
             {
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
+                SoundInput.SoundEffectPlayed(SoundInput.evilLaugh, 0.9f, 0.1f, 0.1f);
             }
         }
 
@@ -86,6 +88,7 @@ namespace TE4TwoDSidescroller
                 heavyAttackTimer = 0;
                 heavyAttacks.Add(new Vector2(GameInfo.player1Position.X, 0));
             }
+            SoundInput.SoundEffectPlayed(SoundInput.knigthWalk, 0.2f, 0.1f, 0.1f);
         }
 
         public override void Attack2()

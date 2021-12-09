@@ -100,7 +100,7 @@ namespace TE4TwoDSidescroller
                 if (currentMouse.LeftButton == ButtonState.Released && previosMouse.LeftButton == ButtonState.Pressed)
                 {
                     LevelTutorial.LoadContent();
-                    SoundInput.SongPlay(SoundInput.preBossMusic);
+                   // SoundInput.SongPlay(SoundInput.preBossMusic);
                     GameInfo.entityManager.RemoveEntity(this.uniqeId);
                 }
             }

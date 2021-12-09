@@ -299,12 +299,14 @@ namespace TE4TwoDSidescroller
             if (collider.tag == Tags.Floor.ToString())
             {
                 IsGrounded = true;
+                
             }
 
             if (collider.tag == Tags.KnightAttack.ToString())
             {
                 currentHealth = health.TakeDamage(currentHealth, Knight.knightDamage, this);
                 hasTakenDamage = true;
+                SoundInput.SoundEffectPlayed(SoundInput.evilLaugh , 0.9f, 0.1f, 0.1f);
             }
 
         }
@@ -353,11 +355,12 @@ namespace TE4TwoDSidescroller
         {
             moveSpeed = walkSpeed;
         }
-
+       
         public override void Jump(GameTime gameTime)
         {
             movementVector.Y -= moveSpeed + 1;
             IsGrounded = false;
+            
         }
 
         public override void Attack1()

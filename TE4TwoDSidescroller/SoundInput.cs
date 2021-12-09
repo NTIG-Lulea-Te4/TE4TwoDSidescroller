@@ -199,9 +199,9 @@ namespace TE4TwoDSidescroller
 
         public static void SoundEffectPlayed(SoundEffect fileBeingPlayed, float fileVolume, float filePitch, float filePan)
         {
-     
+            
             fileBeingPlayed.Play(volume: fileVolume, pitch: filePitch, pan: filePan);
-
+           
         }
 
         public static void SongPlay(Song songFileBeingPlayed)

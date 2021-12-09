@@ -48,6 +48,7 @@ namespace TE4TwoDSidescroller
         {
 
             attackDuration += gameTime.ElapsedGameTime.Milliseconds;
+            SoundInput.SoundEffectPlayed(SoundInput.knigthSwosh, 0.9f, 0.1f, 0.1f);
 
             if (attackDuration > 250)
             {
