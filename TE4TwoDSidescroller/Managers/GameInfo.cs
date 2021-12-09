@@ -27,8 +27,7 @@ namespace TE4TwoDSidescroller
         static public VisionManager visionManager;
         static public GameInformationSystem gameInformationSystem; 
         static public GameTime gameTime;
-        static public int playerOneCurrentHealth;
-       
+        static public Vector2 bossPosition;
 
         
 

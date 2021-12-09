@@ -29,7 +29,8 @@ namespace TE4TwoDSidescroller
 
             isActive = true;
             hasCollider = true;
-            tag = Tags.PlayerAttack.ToString();
+            tag = Tags.PlayerRangeAttack.ToString();
+
             if (GameInfo.player1IsFacingRight)
             {
 
@@ -52,7 +53,7 @@ namespace TE4TwoDSidescroller
 
             animation = new Animation(playerAttackTexture, 4);
             animation.isLooping = true;
-            animation.FramePerSecond = 5;
+            animation.FramePerSecond = 8;
 
         }
 
@@ -67,6 +68,12 @@ namespace TE4TwoDSidescroller
                 playerAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
 
+        }
+
+        public override void HasCollidedWith(Entity collider)
+        {
+
+            GameInfo.entityManager.RemoveEntity(this.uniqeId);
         }
 
         public void Animate()
@@ -97,7 +104,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            //GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
+            GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
             animation.Draw(gameTime);
         }
     }

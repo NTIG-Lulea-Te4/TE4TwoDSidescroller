@@ -13,15 +13,17 @@ namespace TE4TwoDSidescroller
     class Platform : Entity
     {
         Texture2D myTexture;
-        Vector2 floorPosition;
+        Vector2 myPosition;
 
-        public Platform()
+        public Platform(Vector2 floorPosition, int xSize, int Ysize)
         {
-
-            LevelTutorial.LoadContent();
-
-            floorPosition = new Vector2(0, 700);
-            collisionBox = new Rectangle((int)floorPosition.X, (int)floorPosition.Y, 1280, 20);
+            tag = Tags.Floor.ToString();
+            isActive = true;
+            hasCollider = true;
+            collisionBox = new Rectangle();
+            myPosition = floorPosition;
+           
+            collisionBox = new Rectangle((int)floorPosition.X, (int)floorPosition.Y, xSize, Ysize);
             myTexture = new Texture2D
                 (GameInfo.graphicsDevice.GraphicsDevice, collisionBox.Width, collisionBox.Height);
             Color[] data = new Color[collisionBox.Width * collisionBox.Height];
@@ -46,6 +48,13 @@ namespace TE4TwoDSidescroller
             myTexture.SetData(data);
 
         }
+        public override void Draw(GameTime gameTime)
+        {
 
+
+            GameInfo.spriteBatch.Draw(myTexture, myPosition, Color.White);
+
+
+        }
     }
 }

@@ -20,10 +20,10 @@ namespace TE4TwoDSidescroller
             Entity background;
             Entity playerEntity;
             Entity floor;
-            
-            Entity tutorialGoal;
-           
             Entity camera;
+
+            Entity Farmer;
+            Entity levelGoal;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -34,12 +34,17 @@ namespace TE4TwoDSidescroller
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
 
-            tutorialGoal = new TutorialGoal();
-            GameInfo.entityManager.AddEntity(tutorialGoal);
-
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
+            Entity knight = new Knight();
+            GameInfo.entityManager.AddEntity(knight);
+
+            Farmer = new Farmer(500, 610);
+            GameInfo.entityManager.AddEntity(Farmer);
+
+            levelGoal = new LevelGoals(1);
+            GameInfo.entityManager.AddEntity(levelGoal);
         }
 
         public static void RemoveContent()

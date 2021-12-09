@@ -13,10 +13,11 @@ namespace TE4TwoDSidescroller
         #region Variables/Fields
         public Texture2D currentTexture;
         private Texture2D playerRunRight;
-        private Texture2D playerRunLeft;
         private Texture2D playerIdle;
         private Texture2D playerJump;
-        private Texture2D playerJumpFlip;
+        private Texture2D playerOuch;
+
+        Health health;
 
         private Rectangle playerSourceRectangle;
         private Vector2 playerPosition;
@@ -37,8 +38,7 @@ namespace TE4TwoDSidescroller
        
 
         bool isWalkingRight;
-        bool isWalkingLeft;
-        bool isJumping;
+        bool hasTakenDamage;
 
         public static int playerDamage;
 
@@ -49,6 +49,8 @@ namespace TE4TwoDSidescroller
 
             tag = Tags.Player.ToString();
             characterInput = new PlayerInput(this);
+
+            health = new Health();
 
             playerSourceRectangle = new Rectangle(0, 0, 67, 96); // 256 * 96 - 64/67
 
@@ -136,6 +138,14 @@ namespace TE4TwoDSidescroller
             {
                 playerRunRight = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
+
+            string path4 = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/MainCharacters/" + "ShadowOuchAnim.png";
+            using (Stream textureStream = new FileStream(path4, FileMode.Open))
+            {
+                playerOuch = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
         }
 
         public void PlayerDictionary()
@@ -165,6 +175,7 @@ namespace TE4TwoDSidescroller
             Animation flipIdle = new Animation(playerIdle, 4);
             flipIdle.isLooping = true;
             flipIdle.FramePerSecond = 5;
+            flipIdle.spriteEffects = SpriteEffects.FlipHorizontally;
             animations.Add("flipIdle", flipIdle);
 
             Animation jump = new Animation(playerJump, 21);
@@ -178,6 +189,16 @@ namespace TE4TwoDSidescroller
             flipJump.spriteEffects = SpriteEffects.FlipHorizontally;
             animations.Add("flipJump", flipJump);
 
+            Animation ouch = new Animation(playerOuch, 3);
+            ouch.isLooping = true;
+            ouch.FramePerSecond = 10;
+            animations.Add("ouch", ouch);
+
+            Animation flipOuch = new Animation(playerOuch, 3);
+            flipOuch.isLooping = false;
+            flipOuch.FramePerSecond = 8;
+            flipOuch.spriteEffects = SpriteEffects.FlipHorizontally;
+            animations.Add("flipOuch", flipOuch);
         }
 
         public void Animate()
@@ -189,20 +210,44 @@ namespace TE4TwoDSidescroller
             Animation tempFlipIdle;
             Animation tempJump;
             Animation tempFlipJump;
+            Animation tempOuch;
+            Animation tempFlipOuch;
 
             animations.TryGetValue("base", out tempBase);
             animations.TryGetValue("idle", out tempIdle);
             animations.TryGetValue("flipIdle", out tempFlipIdle);
             animations.TryGetValue("jump", out tempJump);
+            animations.TryGetValue("ouch", out tempOuch);
+            animations.TryGetValue("flipOuch", out tempFlipOuch);
             animations.TryGetValue("flipJump", out tempFlipJump);
             animations.TryGetValue("runRight", out tempRunRight);
             animations.TryGetValue("runLeft", out tempRunLeft);
 
             animation = tempBase;
-            if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && !isWalkingLeft)
+
+            if (hasTakenDamage && movementVector.X >= 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
+
+                animation = tempOuch;
+                hasTakenDamage = false;
+            }
+
+            else if (hasTakenDamage && movementVector.X <= 0)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempFlipOuch;
+                hasTakenDamage = false;
+            }
+
+            else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && isWalkingRight)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+                 
                 animation = tempIdle;
 
             }
@@ -211,13 +256,14 @@ namespace TE4TwoDSidescroller
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
-                animation = tempFlipIdle;
 
+                animation = tempFlipIdle;
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
                 tempFlipJump.frameIndex = 0;
+
                 animation = tempJump;
 
             }
@@ -225,25 +271,26 @@ namespace TE4TwoDSidescroller
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X <= 0))
             {
                 tempJump.frameIndex = 0;
+
                 animation = tempFlipJump;
             }
 
-            else if (isWalkingRight && movementVector.Y == 0)
+            else if (movementVector.Y == 0 && movementVector.X >= 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
+
                 animation = tempRunRight;
 
-                isWalkingRight = false;
             }
 
-            else if (isWalkingLeft && movementVector.Y == 0)
+            else if (movementVector.Y == 0 && movementVector.X <= 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
+
                 animation = tempRunLeft;
 
-                isWalkingLeft = false;
             }
         }
 
@@ -252,6 +299,12 @@ namespace TE4TwoDSidescroller
             if (collider.tag == Tags.Floor.ToString())
             {
                 IsGrounded = true;
+            }
+
+            if (collider.tag == Tags.KnightAttack.ToString())
+            {
+                currentHealth = health.TakeDamage(currentHealth, Knight.knightDamage, this);
+                hasTakenDamage = true;
             }
 
         }
@@ -264,27 +317,29 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
         }
 
-        public override void MoveUp()
-        {
-            movementVector.Y -= moveSpeed;
-            //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
-        }
+        //public override void MoveUp()
+        //{
+        //    movementVector.Y -= moveSpeed;
+        //    //Modife later to implant accelartion and friction. (acceleration - friction * movementVector.Y)
+        //}
 
-        public override void MoveDown()
-        {
-            movementVector.Y += moveSpeed;
-        }
+        //public override void MoveDown()
+        //{
+        //    movementVector.Y += moveSpeed;
+        //}
 
         public override void MoveLeft()
         {
             movementVector.X -= moveSpeed;
-            isWalkingLeft = true;
+
+            isWalkingRight = false;
             isFacingRight = false;
         }
 
         public override void MoveRight()
         {
             movementVector.X += moveSpeed;
+
             isWalkingRight = true;
             isFacingRight = true;
         }
@@ -305,11 +360,6 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
         }
 
-        public override void DoubleJump()
-        {
-            //Use the flag for IsGrounded to nullify gravity and let another Jump runs
-        }
-
         public override void Attack1()
         {
 
@@ -323,6 +373,8 @@ namespace TE4TwoDSidescroller
         }
 
         #endregion
+
+
 
         public override void Update(GameTime gameTime)
         {

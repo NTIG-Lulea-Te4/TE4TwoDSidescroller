@@ -16,12 +16,17 @@ namespace TE4TwoDSidescroller
         public enum Tags
         {
             Player,
-            Knight,
-            KnghtAttack,
-            PlayerAttack,
+            PlayerMeleeAttack,
             PlayerRangeAttack,
+            Knight,
+            KnightAttack,
+            Priest,
+            PriestAttack,
             Floor,
-            FinishLine
+            FinishLine,
+            Boss,
+            BossAttack1,
+            BossAttack2
 
         }
 

@@ -4,14 +4,16 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class Level2
+    class LevelBoss
     {
 
-        public Level2()
+        public LevelBoss()
         {
 
 
+
         }
+
 
         public static void LoadContent()
         {
@@ -22,10 +24,7 @@ namespace TE4TwoDSidescroller
             Entity camera;
 
             Entity levelGoal;
-
-            Entity farmerOne;
-            Entity farmerTwo;
-            Entity platform;
+            Entity boss;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -39,26 +38,20 @@ namespace TE4TwoDSidescroller
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
-            farmerOne = new Farmer(500, 610);
-            GameInfo.entityManager.AddEntity(farmerOne);
-
-            platform = new Platform(new Microsoft.Xna.Framework.Vector2(400, 350), 200, 40);
-            GameInfo.entityManager.AddEntity(platform);
-
-            farmerTwo = new Farmer(400, 250);
-            GameInfo.entityManager.AddEntity(farmerTwo);
-
-            levelGoal = new LevelGoals(2);
+            levelGoal = new LevelGoals(5);
             GameInfo.entityManager.AddEntity(levelGoal);
 
+            boss = new Boss();
+            GameInfo.entityManager.AddEntity(boss);
+
         }
+
+
         public static void RemoveContent()
         {
 
             GameInfo.entityManager.RemoveAllEntities();
 
-
         }
-
     }
 }
