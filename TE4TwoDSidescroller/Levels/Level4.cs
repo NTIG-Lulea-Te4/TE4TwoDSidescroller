@@ -22,7 +22,18 @@ namespace TE4TwoDSidescroller
             Entity floor;
             Entity camera;
 
+            Entity platform;
+            Entity platformTwo;
+            Entity platformThree;
+            Entity platformFour;
+            Entity platformFive;
+            Entity platformSix;
+            Entity platformSeven;
+            Entity platformEight;
+
             Entity levelGoal;
+
+
             Entity knight;
 
             background = new Background();
@@ -36,6 +47,30 @@ namespace TE4TwoDSidescroller
 
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
+
+            platform = new Platform(new Microsoft.Xna.Framework.Vector2(400, 350), 200, 40);
+            GameInfo.entityManager.AddEntity(platform);
+
+            platformTwo = new Platform(new Microsoft.Xna.Framework.Vector2(800, 550), 400, 40);
+            GameInfo.entityManager.AddEntity(platformTwo);
+
+            platformThree = new Platform(new Microsoft.Xna.Framework.Vector2(1350, 500), 200, 40);
+            GameInfo.entityManager.AddEntity(platformThree);
+
+            platformFour = new Platform(new Microsoft.Xna.Framework.Vector2(1800, 300), 200, 40);
+            GameInfo.entityManager.AddEntity(platformFour);
+
+            platformFive = new Platform(new Microsoft.Xna.Framework.Vector2(2400, 100), 20, 600);
+            GameInfo.entityManager.AddEntity(platformFive);
+
+            platformSix = new Platform(new Microsoft.Xna.Framework.Vector2(2400, 200), 350, 40);
+            GameInfo.entityManager.AddEntity(platformSix);
+
+            platformSeven = new Platform(new Microsoft.Xna.Framework.Vector2(2800, 550), 800, 30);
+            GameInfo.entityManager.AddEntity(platformSeven);
+
+            platformEight = new Platform(new Microsoft.Xna.Framework.Vector2(3600, 350), 400, 30);
+            GameInfo.entityManager.AddEntity(platformEight);
 
             levelGoal = new LevelGoals(4);
             GameInfo.entityManager.AddEntity(levelGoal);
