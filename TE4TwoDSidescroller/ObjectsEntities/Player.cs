@@ -290,7 +290,7 @@ namespace TE4TwoDSidescroller
 
             if (collider.tag == Tags.KnghtAttack.ToString())
             {
-                health.TakeDamage(currentHealth, Knight.knightDamage, this);
+                currentHealth = health.TakeDamage(currentHealth, Knight.knightDamage, this);
                 hasTakenDamage = true;
             }
 

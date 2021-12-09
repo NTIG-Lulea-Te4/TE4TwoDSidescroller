@@ -64,7 +64,7 @@ namespace TE4TwoDSidescroller
             hasCollided = false;
 
             movementSpeed = 0.5f;
-            maxHealth = 10;
+            maxHealth = 1000;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
@@ -223,7 +223,15 @@ namespace TE4TwoDSidescroller
             knightDictionary.TryGetValue("walkLeft", out tempWalkLeft);
 
             animation = tempBase;
-            if (movementVector.Y == 0 && movementVector.X >= 0)
+            if (hasTakenDamage)
+            {
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempOuch;
+            }
+
+            else if (movementVector.Y == 0 && movementVector.X >= 0)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
@@ -262,13 +270,6 @@ namespace TE4TwoDSidescroller
                 animation = tempBase;
             }
 
-            else if (hasTakenDamage)
-            {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
-                animation = tempOuch;
-            }
         }
 
         public override void HasCollidedWith(Entity collider)
@@ -284,7 +285,7 @@ namespace TE4TwoDSidescroller
             {
                 hasCollided = true;
                 hasTakenDamage = true;
-                health.TakeDamage(currentHealth, Player.playerDamage, this);
+                currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
             else
             {
