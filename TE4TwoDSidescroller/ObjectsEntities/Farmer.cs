@@ -15,7 +15,7 @@ namespace TE4TwoDSidescroller
 
 
         Health health;
-        Texture2D myTexture;
+        Texture2D farmerIdle;
         Vector2 myPosition;
         Rectangle sourceRectangle;
         int frames;
@@ -39,19 +39,20 @@ namespace TE4TwoDSidescroller
             myPosition = new Vector2(myPosition1, myPosition2);
 
             string currentPath = 
-            Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+ "/Content/Pngs/Enemies" + "/FarmerIdlePic.png";
+            Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+            + "/Content/Pngs/Enemies" + "/FarmerIdlePic.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
 
-                myTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+                farmerIdle = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
 
             }
 
-            sourceRectangle = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
+            sourceRectangle = new Rectangle(0, 0, farmerIdle.Width, farmerIdle.Height);
             myPosition = new Vector2(myPosition1, myPosition2);
             
-            collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width, myTexture.Height);
+            collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, farmerIdle.Width, farmerIdle.Height);
             health = new Health();
         }
 
@@ -59,7 +60,7 @@ namespace TE4TwoDSidescroller
         public override void HasCollidedWith(Entity collider)
         {
 
-            if (collider.tag == Tags.PlayerAttack.ToString())
+            if (collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
                 health.TakeDamage(currentHealth, Player.playerDamage, this);
 
@@ -160,7 +161,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(myTexture, myPosition, sourceRectangle , Color.White);
+            GameInfo.spriteBatch.Draw(farmerIdle, myPosition, sourceRectangle , Color.White);
 
         }
 
