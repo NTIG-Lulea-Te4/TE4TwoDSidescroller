@@ -27,8 +27,9 @@ namespace TE4TwoDSidescroller
             heavyAttackTimer = 0;
             health = new Health();
             tag = Tags.Boss.ToString();
-            collisionBox = new Rectangle(0, 0, 50, 70);
+            collisionBox = new Rectangle(0, 0, 64, 96);
             attack1 = new Vector2(0, 3);
+            float attack1Dmg = 10f;
 
             LoadTextrue2D();
         }
@@ -74,7 +75,7 @@ namespace TE4TwoDSidescroller
         public override void Attack1()
         {
             tag = Tags.BossAttack1.ToString();
-            collisionBox = new Rectangle((int) attack1.X, (int) attack1.Y, 50, 50);
+            collisionBox = new Rectangle((int) attack1.X, (int) attack1.Y, 64, 96);
             for (int i = 0; i < heavyAttacks.Count; i++)
             {
                 heavyAttacks[i] = heavyAttacks[i] + attack1;
