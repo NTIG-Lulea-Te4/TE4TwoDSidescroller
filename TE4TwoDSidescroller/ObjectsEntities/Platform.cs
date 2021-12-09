@@ -52,7 +52,7 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(myTexture, myPosition, collisionBox, Color.White, 0f, new Vector2(), new Vector2(), SpriteEffects.None, 0.01f);
+            GameInfo.spriteBatch.Draw(myTexture, myPosition, Color.White);
 
 
         }

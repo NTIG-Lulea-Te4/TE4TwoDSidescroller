@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TE4TwoDSidescroller.Levels
+namespace TE4TwoDSidescroller
 {
     class LevelBoss
     {
@@ -15,13 +15,15 @@ namespace TE4TwoDSidescroller.Levels
         }
 
 
-        public void LoadContent()
+        public static void LoadContent()
         {
 
             Entity background;
             Entity playerEntity;
             Entity floor;
             Entity camera;
+
+            Entity levelGoal;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -35,13 +37,16 @@ namespace TE4TwoDSidescroller.Levels
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
+            levelGoal = new LevelGoals(5);
+            GameInfo.entityManager.AddEntity(levelGoal);
+
         }
 
 
-        public void RemoveContent()
+        public static void RemoveContent()
         {
 
-
+            GameInfo.entityManager.RemoveAllEntities();
 
         }
     }
