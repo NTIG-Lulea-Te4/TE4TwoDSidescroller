@@ -67,7 +67,7 @@ namespace TE4TwoDSidescroller
         protected override void Draw(GameTime gameTime)
         {
 
-            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.CornflowerBlue);
+            GameInfo.graphicsDevice.GraphicsDevice.Clear(Color.Black);
             GameInfo.spriteBatch.Begin();
 
             GameInfo.entityManager.Draw(gameTime);

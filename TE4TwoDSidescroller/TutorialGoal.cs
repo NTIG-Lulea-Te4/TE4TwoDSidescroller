@@ -111,7 +111,7 @@ namespace TE4TwoDSidescroller
 
         public override void HasCollidedWith(Entity collider)
         {
-            if (collider.isPlayer)
+            if (collider.tag == Tags.Player.ToString())
             {
                 tutorialFinished = true;
             }
