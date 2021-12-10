@@ -11,29 +11,29 @@ namespace TE4TwoDSidescroller
         Viewport viewport;
 
 
-        int Xsize;
-        int Ysize;
+        int xSize;
+        int ySize;
 
-        int Xposition;
-        int Yposition;
+        int xPosition;
+        int yPosition;
 
         public VisionManager()
         {
-            Xsize = 1280;
-            Ysize = 720;
+            xSize = 1280;
+            ySize = 720;
 
         }
 
         public override void Update(GameTime gameTime)
         {
 
-            Xposition = (int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width / 2;
-            Yposition = (int)GameInfo.player1Position.Y - GameInfo.Player1TextureSize.Height / 2;
+            xPosition = (int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width / 2;
+            yPosition = (int)GameInfo.player1Position.Y - GameInfo.Player1TextureSize.Height / 2;
             viewport = new Viewport
-                (-Xposition + Xsize / 2,
-                -Yposition + Ysize / 2,
-                Xposition + Xsize,
-                Yposition + Ysize);
+                (-xPosition + xSize / 2,
+                -yPosition + ySize / 2,
+                xPosition + xSize,
+                yPosition + ySize);
             GameInfo.graphicsDevice.GraphicsDevice.Viewport = viewport;
             GameInfo.viewportPosition.X = -viewport.X;
             GameInfo.viewportPosition.Y = -viewport.Y;
