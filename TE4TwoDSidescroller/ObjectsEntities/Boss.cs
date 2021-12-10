@@ -23,14 +23,13 @@ namespace TE4TwoDSidescroller
         public Boss()
         {
             bossPosition = new Vector2(1150, 600);
-            currentHealth = maxHealth;
             heavyAttacks = new List<Vector2>();
             heavyAttackTimer = 0;
             health = new Health();
             maxHealth = 2000;
             currentHealth = maxHealth;
             tag = Tags.Boss.ToString();
-            collisionBox = new Rectangle(0, 0, 64, 96);
+            collisionBox = new Rectangle(1150, 600, 64, 96);
             attack1 = new Vector2(0, 3);
             attack1Dmg = 10f;
 
