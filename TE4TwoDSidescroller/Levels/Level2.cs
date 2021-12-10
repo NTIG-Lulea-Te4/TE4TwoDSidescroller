@@ -76,7 +76,7 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.AddEntity(platformEight);
 
             farmerOne = new Farmer(500, 610);
-            GameInfo.entityManager.AddEntity(farmer);
+            GameInfo.entityManager.AddEntity(farmerOne);
 
             farmerTwo = new Farmer(1000, 610);
             GameInfo.entityManager.AddEntity(farmerTwo);
