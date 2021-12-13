@@ -7,7 +7,7 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class PriestAttack : Priest
+    class PriestAttack : Entity
     {
 
         int attackWidth;
@@ -16,11 +16,11 @@ namespace TE4TwoDSidescroller
         Texture2D priestAttackTexture;
         Vector2 projectileDirection;
 
-        public PriestAttack()
+        public PriestAttack(Character character)
         {
 
             projectileDirection = new Vector2();
-            projectileDirection = distanceBetweenPlayerAndPriest;
+            projectileDirection = character.movementDirection;
 
             attackWidth = 40;
             attackHeight = 20;
@@ -31,19 +31,19 @@ namespace TE4TwoDSidescroller
             hasCollider = true;
             tag = Tags.PriestAttack.ToString();
 
-            if (!priestIsFacingRight)
+            if (!Priest.priestIsFacingRight)
             {
 
-                collisionBox = new Rectangle((int)priestPosition.X + sourceRectangle.Width,
-                    (int)priestPosition.Y + sourceRectangle.Height / 2,
+                collisionBox = new Rectangle((int)character.position.X + Priest.sourceRectangle.Width,
+                    (int)character.position.Y + Priest.sourceRectangle.Height / 2,
                     attackWidth, attackHeight);
 
 
             }
             else
             {
-                collisionBox = new Rectangle((int)priestPosition.X - sourceRectangle.Width,
-                    (int)priestPosition.Y + sourceRectangle.Height / 2,
+                collisionBox = new Rectangle((int)character.position.X - Priest.sourceRectangle.Width,
+                    (int)character.position.Y + Priest.sourceRectangle.Height / 2,
                     attackWidth, attackHeight);
 
                 movementSpeed = movementSpeed * -1;

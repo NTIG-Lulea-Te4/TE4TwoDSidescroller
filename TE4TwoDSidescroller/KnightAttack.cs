@@ -7,7 +7,7 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class KnightAttack : Knight
+    class KnightAttack : Entity
     {
         Texture2D knightAttackTexture;
 
@@ -15,7 +15,7 @@ namespace TE4TwoDSidescroller
         int attackHeight;
         float attackDuration;
 
-        public KnightAttack()
+        public KnightAttack(Character character) 
         {
 
             attackWidth = 60;
@@ -24,19 +24,21 @@ namespace TE4TwoDSidescroller
             isActive = true;
             hasCollider = true;
             tag = Tags.KnightAttack.ToString();
-            if (knightIsFacingRight)
+            if (Knight.knightIsFacingRight)
             {
 
-                collisionBox = new Rectangle((int)knightPosition.X + sourceRectangle.Width,
-                    (int)knightPosition.Y + sourceRectangle.Height / 2,
+                collisionBox = new Rectangle((int)character.position.X + Knight.sourceRectangle.Width,
+                    (int)character.position.Y + Knight.sourceRectangle.Height / 2,
                     attackWidth, attackHeight);
 
             }
             else
             {
-                collisionBox = new Rectangle((int)knightPosition.X - sourceRectangle.Width,
-                    (int)knightPosition.Y + sourceRectangle.Height / 2,
+
+                collisionBox = new Rectangle((int)character.position.X - Knight.sourceRectangle.Width,
+                    (int)character.position.Y + Knight.sourceRectangle.Height / 2,
                     attackWidth, attackHeight);
+
             }
 
 

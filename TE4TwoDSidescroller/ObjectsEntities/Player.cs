@@ -82,7 +82,7 @@ namespace TE4TwoDSidescroller
             PlayerDictionary();
             Animate();
 
-            maxHealth = 150;
+            maxHealth = 1000;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
@@ -309,6 +309,19 @@ namespace TE4TwoDSidescroller
                 hasTakenDamage = true;
             }
 
+            if (collider.tag == Tags.DeathZone.ToString())
+            {
+
+                currentHealth = health.TakeDamage(currentHealth, 9999, this);
+
+            }
+
+            if (collider.tag == Tags.PriestAttack.ToString())
+            {
+                currentHealth = health.TakeDamage(currentHealth, Priest.priestDamage, this);
+                hasTakenDamage = true;
+            }
+
         }
 
         #region Input
@@ -409,6 +422,8 @@ namespace TE4TwoDSidescroller
             
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
+
+            
 
             #region Harry's Code
             manaTick++;

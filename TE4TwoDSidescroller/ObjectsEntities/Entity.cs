@@ -24,6 +24,7 @@ namespace TE4TwoDSidescroller
             PriestAttack,
             Floor,
             FinishLine,
+            DeathZone,
             Boss,
             BossAttack1,
             BossAttack2

@@ -14,9 +14,9 @@ namespace TE4TwoDSidescroller
         GameInformationSystem gameInfoSystem;
 
         private Texture2D priestTexture;
-        protected Rectangle sourceRectangle;
-        static public Vector2 distanceBetweenPlayerAndPriest;
-        static public Vector2 priestPosition;
+        public static Rectangle sourceRectangle;
+        //static public Vector2 distanceBetweenPlayerAndPriest;
+        //static public Vector2 priestPosition;
         protected Vector2 priestOrigin;
         protected Vector2 priestVelocity;
         protected Vector2 priestScale;
@@ -25,7 +25,9 @@ namespace TE4TwoDSidescroller
         protected Vector2 priestRunningDistance; 
 
         private Health health;
-        public bool priestIsFacingRight;
+        public static bool priestIsFacingRight;
+
+        public static int priestDamage;
 
         public Priest()
         {
@@ -45,13 +47,14 @@ namespace TE4TwoDSidescroller
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
+            priestDamage = 10;
             health = new Health();
 
             gameInfoSystem = new GameInformationSystem();
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
-            priestPosition = new Vector2(500, 500);
-            distanceBetweenPlayerAndPriest = new Vector2();
+            position = new Vector2(500, 500);
+            movementDirection = new Vector2();
             priestVelocity = new Vector2(0, 0);
             priestRunningDistance = new Vector2(200, 200);
 
@@ -127,8 +130,8 @@ namespace TE4TwoDSidescroller
         public override void Attack1()
         {
 
-            GameInfo.creationManager.InitializePriestAttack();
-
+            Entity priestAttack = new PriestAttack(this);
+            GameInfo.entityManager.AddEntity(priestAttack);
         }
 
         #endregion
@@ -137,15 +140,15 @@ namespace TE4TwoDSidescroller
         {
 
 
-            distanceBetweenPlayerAndPriest = GameInfo.player1Position - priestPosition;
+            movementDirection = GameInfo.player1Position - position;
 
             priestVelocity = new Vector2(0, 0);
             priestJumpHeight = 0;
 
-            priestPosition += movementVector;
+            position += movementVector;
 
-            collisionBox.X = (int)priestPosition.X;
-            collisionBox.Y = (int)priestPosition.Y;
+            collisionBox.X = (int)position.X;
+            collisionBox.Y = (int)position.Y;
 
             base.Update(gameTime);
 
@@ -167,7 +170,7 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(priestTexture, priestPosition, sourceRectangle,
+            GameInfo.spriteBatch.Draw(priestTexture, position, sourceRectangle,
                 Color.White, priestRotation, priestOrigin, priestScale,
                 SpriteEffects.None, 0f);
 

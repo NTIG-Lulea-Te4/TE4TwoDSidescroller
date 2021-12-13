@@ -17,7 +17,7 @@ namespace TE4TwoDSidescroller
         {
 
             escapeDistance = new Vector2(400, 400);
-            attackRadius = new Vector2(700, 700);
+            attackRadius = new Vector2(600, 600);
 
             attackTimer = 0;
             jumpTimer = 0;
@@ -31,24 +31,24 @@ namespace TE4TwoDSidescroller
 
             attackTimer += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (Priest.distanceBetweenPlayerAndPriest.Length() <= escapeDistance.Length() &&
-                Priest.priestPosition.X  > GameInfo.player1Position.X)
+            if (character.movementDirection.Length() <= escapeDistance.Length() &&
+                character.position.X > GameInfo.player1Position.X)
             {
 
                 character.MoveRight();
 
             }
 
-            if (Priest.distanceBetweenPlayerAndPriest.Length() <= escapeDistance.Length() &&
-               Priest.priestPosition.X < GameInfo.player1Position.X)
+            if (character.movementDirection.Length() <= escapeDistance.Length() &&
+               character.position.X < GameInfo.player1Position.X)
             {
 
                 character.MoveLeft();
 
             }
 
-            if (Priest.distanceBetweenPlayerAndPriest.Length() <= attackRadius.Length()
-                && attackTimer > 1500)
+            if (character.movementDirection.Length() <= attackRadius.Length()
+                && attackTimer > 2500)
             {
 
                 character.Attack1();

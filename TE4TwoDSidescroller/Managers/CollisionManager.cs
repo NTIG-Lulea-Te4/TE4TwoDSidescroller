@@ -62,15 +62,18 @@ namespace TE4TwoDSidescroller
 
             // i = Y
             // j = X
+            Color firstColor;
+            Color secondColor;
+
             for (int i = top; i < bottom; i++)
             {
                 for (int j = left; j < right; j++)
                 {
 
-                    Color firstColor = firstTargetColorData[(j - firstTargetRectangle.Left) + 
+                    firstColor = firstTargetColorData[(j - firstTargetRectangle.Left) + 
                         (i - firstTargetRectangle.Top)/* * firstTargetRectangle.Width*/];
 
-                    Color secondColor = secondTargetColorData[(j - secondTargetRectangle.Left) +
+                    secondColor = secondTargetColorData[(j - secondTargetRectangle.Left) +
                         (i - secondTargetRectangle.Top)/* * secondTargetRectangle.Width*/];
 
 
