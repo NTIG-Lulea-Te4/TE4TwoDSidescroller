@@ -8,6 +8,7 @@ namespace TE4TwoDSidescroller
     public class Game1 : Game
     {
         //SoundInput soundInput;
+
         public Game1()
         {
             //soundInput = new SoundInput();
@@ -18,26 +19,34 @@ namespace TE4TwoDSidescroller
             GameInfo.creationManager = new CreationManager();
             GameInfo.gameInformationSystem = new GameInformationSystem();
             GameInfo.screenManager = new ScreenManager();
+            
+
 
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
             Window.AllowUserResizing = true;
 
         }
 
         protected override void Initialize()
         {
+            IsMouseVisible = true;
+
             GameInfo.screenManager.Resolution(1);
             GameInfo.creationManager.Initialize();
             base.Initialize();
+            
         }
 
         protected override void LoadContent()
         {
-            
-
             GameInfo.spriteBatch = new SpriteBatch(GameInfo.graphicsDevice.GraphicsDevice);
+
+            Menu.ContentLoad(Content);
+            SoundInput.ContentLoad(Content);
             GameInfo.creationManager.Initialize();
+            
+            //ej rätt GraphicsDevice ska vara graphics.GraphicsDevice
+            
 
         }
 
@@ -47,8 +56,9 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.Update(gameTime);
 
             GameInfo.collisionManager.CollisionUpdate();
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            
+           
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)||Entity.wantExit)
             {
                 Exit();
             }
@@ -62,6 +72,7 @@ namespace TE4TwoDSidescroller
             GameInfo.spriteBatch.Begin();
 
             GameInfo.entityManager.Draw(gameTime);
+            
 
             GameInfo.spriteBatch.End();
             base.Draw(gameTime);

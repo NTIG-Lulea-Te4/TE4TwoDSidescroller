@@ -37,6 +37,7 @@ namespace TE4TwoDSidescroller
 
         float deltaTime;
         float time;
+       
 
         bool isWalkingRight;
         bool isWalkingLeft;
@@ -84,6 +85,7 @@ namespace TE4TwoDSidescroller
 
             maxHealth = 1000;
             currentHealth = maxHealth;
+            
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
@@ -407,6 +409,7 @@ namespace TE4TwoDSidescroller
             GameInfo.player1Position = playerPosition;
             GameInfo.Player1TextureSize = playerSourceRectangle;
             GameInfo.player1IsFacingRight = isFacingRight;
+            GameInfo.playerOneCurrentHealth = currentHealth;
 
             base.Update(gameTime);
 

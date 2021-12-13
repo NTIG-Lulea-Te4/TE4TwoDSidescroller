@@ -29,7 +29,7 @@ namespace TE4TwoDSidescroller
         {
 
             floorPosition = new Vector2(0, 700);
-            collisionBox = new Rectangle((int)floorPosition.X, (int)floorPosition.Y, 1280, 40);
+            collisionBox = new Rectangle((int)floorPosition.X, (int)floorPosition.Y, 4000, 40);
             myTexture = new Texture2D
                 (GameInfo.graphicsDevice.GraphicsDevice, collisionBox.Width, collisionBox.Height);
             Color[] data = new Color[collisionBox.Width * collisionBox.Height];

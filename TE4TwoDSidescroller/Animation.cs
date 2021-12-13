@@ -129,6 +129,21 @@ namespace TE4TwoDSidescroller
 
         public void Draw(GameTime gameTime)
         {
+            //timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //if (timeElapsed > timeToUpdate)
+            //{
+            //    timeElapsed -= timeToUpdate;
+
+            //    if (frameIndex < rectangles.Length - 1)
+            //    {
+            //        frameIndex++;
+            //    }
+            //    else if (isLooping)
+            //    {
+            //        frameIndex = 0;
+            //    }
+            //}
+
             GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, spriteEffects, 0f);
         }
 
