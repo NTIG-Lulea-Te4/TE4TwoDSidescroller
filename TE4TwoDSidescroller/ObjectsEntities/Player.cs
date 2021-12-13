@@ -83,10 +83,10 @@ namespace TE4TwoDSidescroller
             PlayerDictionary();
             Animate();
 
-            maxHealth = 1000;
+            maxHealth = 200;
             currentHealth = maxHealth;
             
-            mana = 100;
+            mana = 200;
             manaCheck = mana;
             manaTick = 0;
             playerDamage = 10;
