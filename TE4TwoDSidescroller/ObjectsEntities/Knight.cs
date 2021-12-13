@@ -23,10 +23,9 @@ namespace TE4TwoDSidescroller
         private Texture2D knightIdle;
         private Texture2D knightAttack;
 
-        private Texture2D knightTexture;
-        protected Rectangle sourceRectangle;
-        public static Vector2 movementDirection;
-        public static Vector2 knightPosition;
+        public static Rectangle sourceRectangle;
+        
+        //public  Vector2 knightPosition;
         private Vector2 knightOrigin;
         private Vector2 knightVelocity;
         private Vector2 knightScale;
@@ -37,6 +36,8 @@ namespace TE4TwoDSidescroller
 
         private Health health;
 
+        
+        public static bool knightIsFacingRight;
         bool isWalkingRight;
         bool hasTakenDamage;
         bool isAttacking;
@@ -54,8 +55,9 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
             isActive = true;
             hasCollider = true;
-            isFacingRight = true;
+            knightIsFacingRight = true;
 
+             
 
             movementSpeed = 0.3f;
             maxHealth = 1000;
@@ -68,7 +70,7 @@ namespace TE4TwoDSidescroller
             gameInfoSystem = new GameInformationSystem();
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
-            knightPosition = new Vector2(500, 0);
+            position = new Vector2(500, 500);
             movementDirection = new Vector2();
             knightVelocity = new Vector2(0, 0);
 
@@ -240,7 +242,7 @@ namespace TE4TwoDSidescroller
                 hasTakenDamage = false;
             }
 
-            else if (isAttacking && knightPosition.X <= GameInfo.player1Position.X)
+            else if (isAttacking && position.X <= GameInfo.player1Position.X)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
@@ -249,7 +251,7 @@ namespace TE4TwoDSidescroller
                 isAttacking = false;
             }
 
-            else if (isAttacking && knightPosition.X >= GameInfo.player1Position.X)
+            else if (isAttacking && position.X >= GameInfo.player1Position.X)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
@@ -329,30 +331,37 @@ namespace TE4TwoDSidescroller
         public override void MoveRight()
         {
             movementVector.X += movementSpeed;
+            knightIsFacingRight = true;
+
+
             isWalkingRight = true;
-            isFacingRight = true;
+            
         }
 
         public override void MoveLeft()
         {
             movementVector.X -= movementSpeed;
+            knightIsFacingRight = false;
+
+
             isWalkingRight = false;
-            isFacingRight = false;
+            
         }
 
-        public override void Jump(GameTime gameTime)
-        {
-            if (IsGrounded)
-            {
-                IsGrounded = false;
-                movementVector.Y -= movementSpeed * 50;
-            }
-        }
+        //public override void Jump(GameTime gameTime)
+        //{
+        //    if (IsGrounded)
+        //    {
+        //        IsGrounded = false;
+        //        movementVector.Y -= movementSpeed * 50;
+        //    }
+        //}
 
 
         public override void Attack1()
         {
-            GameInfo.creationManager.InitializeKnightAttack();
+            Entity knightAttack = new KnightAttack(this);
+            GameInfo.entityManager.AddEntity(knightAttack);
             isAttacking = true;
         }
 
@@ -389,18 +398,17 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
-            movementDirection = GameInfo.player1Position - knightPosition;
+
+            movementDirection = GameInfo.player1Position - position;
 
             knightVelocity = new Vector2(0, 0);
+            position += movementVector;
 
-            knightPosition += movementVector;
             KnightAnimation();
 
-            animation.position = knightPosition;
+            animation.position = position;
             animation.Update(gameTime);
 
-            collisionBox.X = (int)knightPosition.X;
-            collisionBox.Y = (int)knightPosition.Y;
 
             base.Update(gameTime);
 
@@ -412,6 +420,11 @@ namespace TE4TwoDSidescroller
             knightVelocity.Y += increasingGravity - knightJumpHeight;
 
             movementVector += knightVelocity;
+
+            collisionBox.X = (int)position.X;
+            collisionBox.Y = (int)position.Y;
+
+
         }
 
         public override void Draw(GameTime gameTime)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TE4TwoDSidescroller.Levels;
 
 namespace TE4TwoDSidescroller
 {
@@ -38,6 +39,9 @@ namespace TE4TwoDSidescroller
             Entity platformSeven;
             Entity platformEight;
 
+
+            Entity deathZone = new DeathZone();
+            GameInfo.entityManager.AddEntity(deathZone);
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
