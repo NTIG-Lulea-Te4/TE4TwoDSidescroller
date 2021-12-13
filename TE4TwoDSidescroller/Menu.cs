@@ -25,6 +25,7 @@ namespace TE4TwoDSidescroller
         Vector2 titleTextPosition;
 
         Texture2D buttons;
+        Texture2D backGround;
         static SpriteFont font;
         static SpriteFont titleFont;
 
@@ -69,11 +70,21 @@ namespace TE4TwoDSidescroller
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "redBox.jpg";
+             + "/Content/Pngs/" + "ButtonTwo.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
                 buttons = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+
+
+            string secondtPath = Path.GetDirectoryName(
+             System.Reflection.Assembly.GetExecutingAssembly().Location)
+             + "/Content/Pngs/" + "TheHell.jpg";
+
+            using (Stream textureStream = new FileStream(secondtPath, FileMode.Open))
+            {
+                backGround = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
 
         }
@@ -136,6 +147,7 @@ namespace TE4TwoDSidescroller
                 quitColour = Color.Gray;
             }
 
+            GameInfo.spriteBatch.Draw(backGround, buttonHolder, Color.White);
             GameInfo.spriteBatch.Draw(buttons, startButton, startColour);
             GameInfo.spriteBatch.Draw(buttons, quitButton, quitColour);
 
