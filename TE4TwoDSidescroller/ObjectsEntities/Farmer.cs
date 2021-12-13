@@ -35,6 +35,8 @@ namespace TE4TwoDSidescroller
             movementSpeed = 2;
             jumpHeight = 3;
 
+
+
             hasCollider = true;
             isActive = true;
 
@@ -247,10 +249,14 @@ namespace TE4TwoDSidescroller
                 manaTick = 0;
             }
 
+
+
             myPosition += movementVector;
             FarmerDictionary();
 
             animation.position = myPosition;
+
+            position = myPosition;
 
             animation.Update(gameTime);
             base.Update(gameTime);

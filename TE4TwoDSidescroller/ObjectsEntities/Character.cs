@@ -16,69 +16,20 @@ namespace TE4TwoDSidescroller
 
         public VisionManager visionManager;
 
-        //public AnimationManager animationManager;
-
-        public Dictionary<string, EntityAnimation> entityAnimation;
 
         public Dictionary<string, Animation> animations;
 
-        //public Vector2 characterPosition;
-
-        //public Texture2D characterTexture;
 
         
 
         public Character()
         {
             
+            
+
         }
 
 
-        //public Vector2 CharacterPosition
-        //{
-        //    get
-        //    {
-        //        return characterPosition;
-        //    }
-        //    set
-        //    {
-        //        characterPosition = value;
-
-        //        if (animationManager != null)
-        //        {
-        //            animationManager.Position = characterPosition;
-        //        }
-        //    }
-        //}
-
-        //public Character(Dictionary<string, Animation> newAnimations)
-        //{
-        //    animations = newAnimations;
-        //    animationManager = new AnimationManager(animations.First().Value); //first animation to pass will be the First/default one
-        //}
-
-        //public virtual void SetPlayerAnimation()
-        //{
-        //    if (movementVector.X > 0)
-        //    {
-        //        animationManager.Play(animations["RunRight"]);
-        //    }
-
-        //    else if (movementVector.X < 0)
-        //    {
-        //        animationManager.Play(animations["RunLeft"]);
-        //    }
-
-        //    else if (movementVector.Y > 0)
-        //    {
-        //        animationManager.Play(animations["RunDown"]);
-        //    }
-
-        //    else if (movementVector.Y < 0)
-        //    {
-        //        animationManager.Play(animations["RunUp"]);
-        //    }
-        //}
 
         #region Movement
 

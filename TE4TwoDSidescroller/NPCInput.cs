@@ -12,6 +12,7 @@ namespace TE4TwoDSidescroller
 
         protected bool moveRight;
         protected float startPosition;
+        protected float endPosition;
         //public Vector2 startPoint (100, 200);
         //public float npcSpeed = 0.2f;
 
@@ -20,8 +21,8 @@ namespace TE4TwoDSidescroller
             : base(character)
         {
             moveRight = true;
-            character.position.X = startPosition;
-
+            startPosition = 0;
+            endPosition = 0;
 
         }
 
@@ -35,7 +36,14 @@ namespace TE4TwoDSidescroller
 
         public virtual void Patrol()
         {
-            
+
+            if (startPosition == 0 || endPosition == 0)
+            {
+                startPosition = character.position.X;
+                endPosition = character.position.X + 200;
+
+            }
+
 
             if (moveRight)
             {
@@ -49,14 +57,18 @@ namespace TE4TwoDSidescroller
             }
 
 
-            if (character.position.X >= startPosition + 100 || character.position.X < startPosition)
+            if (character.position.X > endPosition)
             {
-                moveRight = !moveRight;
+                moveRight = false;
             }
-
+            if (character.position.X < startPosition)
+            {
+                moveRight = true;
+            }
 
         }
 
 
     }
 }
+
