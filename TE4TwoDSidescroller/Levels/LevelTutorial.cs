@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using TE4TwoDSidescroller.Levels;
 
 namespace TE4TwoDSidescroller
 {
@@ -25,6 +25,9 @@ namespace TE4TwoDSidescroller
             Entity camera;
             Entity tutorialGoal;
             Entity healthBar;
+
+            Entity deathZone = new DeathZone();
+            GameInfo.entityManager.AddEntity(deathZone);
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);

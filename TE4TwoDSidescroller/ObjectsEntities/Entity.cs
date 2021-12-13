@@ -24,6 +24,7 @@ namespace TE4TwoDSidescroller
             PriestAttack,
             Floor,
             FinishLine,
+            DeathZone,
             Boss,
             BossAttack1,
             BossAttack2
@@ -31,7 +32,7 @@ namespace TE4TwoDSidescroller
         }
 
         public string tag;
-        public bool isFacingRight;
+        
 
         public int uniqeId;
         public bool isActive;

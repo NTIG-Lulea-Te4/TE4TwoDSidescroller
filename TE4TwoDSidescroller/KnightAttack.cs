@@ -7,7 +7,7 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class KnightAttack : Knight
+    class KnightAttack : Entity
     {
         Texture2D knightAttackTexture;
 
@@ -15,28 +15,30 @@ namespace TE4TwoDSidescroller
         int attackHeight;
         float attackDuration;
 
-        public KnightAttack()
+        public KnightAttack(Character character) 
         {
 
-            attackWidth = 40;
-            attackHeight = 20;
+            attackWidth = 60;
+            attackHeight = 40;
 
             isActive = true;
             hasCollider = true;
             tag = Tags.KnightAttack.ToString();
-            if (isFacingRight)
+            if (Knight.knightIsFacingRight)
             {
 
-                collisionBox = new Rectangle((int)knightPosition.X + sourceRectangle.Width,
-                    (int)knightPosition.Y + sourceRectangle.Height / 2,
+                collisionBox = new Rectangle((int)character.position.X + Knight.sourceRectangle.Width,
+                    (int)character.position.Y + Knight.sourceRectangle.Height / 2,
                     attackWidth, attackHeight);
 
             }
             else
             {
-                collisionBox = new Rectangle((int)knightPosition.X - sourceRectangle.Width,
-                    (int)knightPosition.Y + sourceRectangle.Height / 2,
+
+                collisionBox = new Rectangle((int)character.position.X - Knight.sourceRectangle.Width,
+                    (int)character.position.Y + Knight.sourceRectangle.Height / 2,
                     attackWidth, attackHeight);
+
             }
 
 
@@ -63,7 +65,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(knightAttackTexture, collisionBox, Color.White);
+            //GameInfo.spriteBatch.Draw(knightAttackTexture, collisionBox, Color.White);
 
 
         }
