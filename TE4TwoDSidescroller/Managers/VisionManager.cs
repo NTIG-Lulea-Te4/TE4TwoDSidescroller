@@ -28,7 +28,7 @@ namespace TE4TwoDSidescroller
                 (int)-position.Y + ySize / 2,
                 xSize + (int)position.X, ySize);
 
-            viewport.Width = (int)MathHelper.Clamp(viewport.Width, 0, 4280);
+
 
             viewport.X = MathHelper.Clamp(viewport.X, -3000, 0);
             viewport.Y = MathHelper.Clamp(viewport.Y, 0, 0);

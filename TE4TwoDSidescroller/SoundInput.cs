@@ -169,15 +169,15 @@ namespace TE4TwoDSidescroller
         public static void ContentLoad(ContentManager content)
         {
 
-            knigthWalk = content.Load<SoundEffect>("Audio/ChainmailWalk");
-            mainCharacterJump = content.Load<SoundEffect>("Audio/ShadowJump");
-            swordSwoosh = content.Load<SoundEffect>("Audio/swoosh");
-            evilLaugh = content.Load<SoundEffect>("Audio/EvilLaugh");
-            startFireBall = content.Load<SoundEffect>("Audio/Fireball");
-            activeFireBall = content.Load<SoundEffect>("Audio/FireballFire");
-            knigthSwosh = content.Load<SoundEffect>("Audio/KnightSwordSwoosh");
-            preBossMusic = content.Load<Song>("Audio/PreBossLevelMusic");
-            ominousMusic = content.Load<Song>("Audio/CreepyBGMusic");
+            //knigthWalk = content.Load<SoundEffect>("Audio/ChainmailWalk");
+            //mainCharacterJump = content.Load<SoundEffect>("Audio/ShadowJump");
+            //swordSwoosh = content.Load<SoundEffect>("Audio/swoosh");
+            //evilLaugh = content.Load<SoundEffect>("Audio/EvilLaugh");
+            //startFireBall = content.Load<SoundEffect>("Audio/Fireball");
+            //activeFireBall = content.Load<SoundEffect>("Audio/FireballFire");
+            //knigthSwosh = content.Load<SoundEffect>("Audio/KnightSwordSwoosh");
+            //preBossMusic = content.Load<Song>("Audio/PreBossLevelMusic");
+            //ominousMusic = content.Load<Song>("Audio/CreepyBGMusic");
 
         }
 

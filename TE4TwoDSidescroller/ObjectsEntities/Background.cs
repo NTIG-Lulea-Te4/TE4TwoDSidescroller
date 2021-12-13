@@ -25,7 +25,7 @@ namespace TE4TwoDSidescroller
 
         public Background()
         {
-            backgroundSpeed = 0.02f;
+            backgroundSpeed = 0.03f;
             scale = 1.1f;
             layer = 0.0f;
             rotation = 0f;
