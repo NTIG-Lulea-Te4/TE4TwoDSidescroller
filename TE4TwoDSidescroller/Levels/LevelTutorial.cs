@@ -24,7 +24,7 @@ namespace TE4TwoDSidescroller
             Entity floor;
             Entity camera;
             Entity tutorialGoal;
-            HealthBar menu;
+            Entity healthBar;
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -41,8 +41,8 @@ namespace TE4TwoDSidescroller
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
 
-            menu = new HealthBar();
-            GameInfo.entityManager.AddEntity(menu);
+            healthBar = new HealthBar();
+            GameInfo.entityManager.AddEntity(healthBar);
 
 
         }

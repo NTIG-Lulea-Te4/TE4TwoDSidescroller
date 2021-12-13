@@ -16,12 +16,12 @@ namespace TE4TwoDSidescroller
         //och uppdatera med rektangelns
 
         Rectangle healthBar;
-        Rectangle healthBarFont;
+        Rectangle healthBarBackground;
 
         Vector2 healtBarPosition;
-        Vector2 healtBarFontPosition;
+        Vector2 healtBarBackgroundPosition;
 
-        Texture2D healthBarFontTexture;
+        Texture2D healthBarBackgroundTexture;
         Texture2D healthBarTexture;
         
 
@@ -44,8 +44,8 @@ namespace TE4TwoDSidescroller
 
             healtBarPosition.X = -50;
             healtBarPosition.Y = -50;
-            healtBarFontPosition.X = -45;
-            healtBarFontPosition.Y = -45;
+            healtBarBackgroundPosition.X = -45;
+            healtBarBackgroundPosition.Y = -45;
 
             // healthBarTexture = content.Load<Texture2D>("Pngs/healthBar.png");
 
@@ -57,13 +57,13 @@ namespace TE4TwoDSidescroller
           using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
           {
 
-                healthBarFontTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+                healthBarBackgroundTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
 
           }
 
             string secondPath =
             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
-            + "/Content/Pngs/" + "PurpleBox.png";
+            + "/Content/Pngs/" + "redBox.jpg";
 
             using (Stream textureStream = new FileStream(secondPath, FileMode.Open))
             {
@@ -72,9 +72,9 @@ namespace TE4TwoDSidescroller
 
             }
             #endregion
-
+            
             healthBar = new Rectangle((int)healtBarPosition.X, (int)healtBarPosition.Y, GameInfo.playerOneCurrentHealth * 2 , 50);
-            healthBarFont = new Rectangle((int)healtBarFontPosition.X, (int)healtBarFontPosition.Y, GameInfo.playerOneCurrentHealth * 2 + 10, 60);
+            healthBarBackground = new Rectangle((int)healtBarBackgroundPosition.X, (int)healtBarBackgroundPosition.Y, GameInfo.playerOneCurrentHealth * 2 + 10, 60);
         }
 
        
@@ -82,15 +82,19 @@ namespace TE4TwoDSidescroller
         public override void Update(GameTime gameTime)
         {
 
-            healthBar.Width = GameInfo.playerOneCurrentHealth * 2; 
-           
+            healthBar.Width = GameInfo.playerOneCurrentHealth * 2;
+
+            if (healthBarBackground.Width <= 10)
+            {
+                healthBarBackground.Width = GameInfo.playerOneCurrentHealth * 2 + 10;
+            }
             
         }
 
         public override void Draw(GameTime gameTime)
         {
 
-            GameInfo.spriteBatch.Draw(healthBarFontTexture, GameInfo.viewportPosition, healthBarFont, Color.White, rotation, healtBarFontPosition, scale, SpriteEffects.None, layer);
+            GameInfo.spriteBatch.Draw(healthBarBackgroundTexture, GameInfo.viewportPosition, healthBarBackground, Color.White, rotation, healtBarBackgroundPosition, scale, SpriteEffects.None, layer);
             GameInfo.spriteBatch.Draw(healthBarTexture, GameInfo.viewportPosition, healthBar, Color.White, rotation, healtBarPosition, scale, SpriteEffects.None, layerTwo);
 
         }
