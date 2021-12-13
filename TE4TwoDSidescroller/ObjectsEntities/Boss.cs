@@ -72,6 +72,14 @@ namespace TE4TwoDSidescroller
             {
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
+                 
+        }
+        public void Collection()
+        {
+            //if (collider.tag == Tags.Player.ToString())
+            //{
+            //    heavyAttacks = null;
+            //}
         }
 
         public override void Attack1()
@@ -108,6 +116,7 @@ namespace TE4TwoDSidescroller
             heavyAttackTimer += gameTime.ElapsedGameTime.TotalSeconds;
             //// *base.Update(gameTime);  
             Attack1();
+            Collection();
         }
 
         public override void Draw(GameTime gameTime)
