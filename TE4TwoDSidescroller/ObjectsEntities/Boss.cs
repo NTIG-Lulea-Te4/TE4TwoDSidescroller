@@ -10,32 +10,38 @@ namespace TE4TwoDSidescroller
 {
     class Boss : Character
     {
+        #region variable
         private Texture2D bossTexture;
         private Texture2D heavyAttackTexture;
         Vector2 bossPosition;
         Health health;
         List<Vector2> heavyAttacks;
         double heavyAttackTimer;
-        Vector2 attack1;
+        Vector2 Velocity;
         static float attack1Dmg;
-
+        private Rectangle bossSourceRectangle;
+        private Rectangle attackRectangel;
+        
+        //public SpriteFont font;
+        #endregion
 
         public Boss()
         {
-            bossPosition = new Vector2(1150, 600);
+            bossPosition = new Vector2(1250, 600);
             heavyAttacks = new List<Vector2>();
             heavyAttackTimer = 0;
             health = new Health();
             maxHealth = 2000;
             currentHealth = maxHealth;
             tag = Tags.Boss.ToString();
-            collisionBox = new Rectangle(1150, 600, 64, 96);
-            attack1 = new Vector2(0, 3);
+            bossSourceRectangle = new Rectangle(0, 0, 64, 96);
+            //attackRectangel = new Rectangle(0, 0, heavyAttack.Width, attackRectangel.Height);
+            Velocity = new Vector2(0, 5);
             attack1Dmg = 10f;
 
             LoadTextrue2D();
         }
-
+        #region LoadTextrue
         public void LoadTextrue2D()
         {
             string currentPath =
@@ -58,8 +64,11 @@ namespace TE4TwoDSidescroller
             }
 
 
-        }
 
+        }
+        #endregion
+
+        #region Collider
         public override void HasCollidedWith(Entity collider)
         {
 
@@ -72,8 +81,14 @@ namespace TE4TwoDSidescroller
             {
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
             }
-                 
+
+            if (collider.tag == Tags.Player.ToString())
+            {
+                
+            }
+
         }
+        
         public void Collection()
         {
             //if (collider.tag == Tags.Player.ToString())
@@ -81,7 +96,8 @@ namespace TE4TwoDSidescroller
             //    heavyAttacks = null;
             //}
         }
-
+        #endregion
+        #region Attack
         public override void Attack1()
         {
             //tag = Tags.BossAttack1.ToString();
@@ -89,14 +105,15 @@ namespace TE4TwoDSidescroller
             if (GameInfo.player1Position.X - GameInfo.bossPosition.X < 500 && heavyAttackTimer > 2)
             {
                 heavyAttackTimer = 0;
-                heavyAttacks.Add(new Vector2(GameInfo.player1Position.X, 0));
+                heavyAttacks.Add(new Vector2(GameInfo.player1Position.X - GameInfo.Player1TextureSize.Width, 0));
             }
             for (int i = 0; i < heavyAttacks.Count; i++)
             {
-                heavyAttacks[i] = heavyAttacks[i] + attack1;
+                heavyAttacks[i] = heavyAttacks[i] + Velocity;
             }
 
-            collisionBox = new Rectangle((int)attack1.X, (int)attack1.Y, 64, 96);
+            //collisionBox = new Rectangle((int)Velocity.X, (int)Velocity.Y, 64, 96);
+            collisionBox = new Rectangle();
         }
 
         public override void Attack2()
@@ -109,7 +126,7 @@ namespace TE4TwoDSidescroller
         //{
 
         //}
-
+        #endregion 
         public override void Update(GameTime gameTime)
         {
 
@@ -125,6 +142,10 @@ namespace TE4TwoDSidescroller
             foreach (Vector2 heavyAttack in heavyAttacks)
             {
                 GameInfo.spriteBatch.Draw(heavyAttackTexture, heavyAttack, Color.White);
+            }
+            //if (attackRectangel.Intersects())
+            {
+
             }
 
         }

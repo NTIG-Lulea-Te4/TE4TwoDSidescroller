@@ -39,6 +39,7 @@ namespace TE4TwoDSidescroller
 
             Entity levelGoal;
 
+
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
 

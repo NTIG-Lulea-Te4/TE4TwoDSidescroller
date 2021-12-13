@@ -26,6 +26,9 @@ namespace TE4TwoDSidescroller
             Entity tutorialGoal;
             HealthBar menu;
 
+            Entity boss;
+
+
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
 
@@ -43,6 +46,10 @@ namespace TE4TwoDSidescroller
 
             menu = new HealthBar();
             GameInfo.entityManager.AddEntity(menu);
+
+            boss = new Boss();
+            GameInfo.entityManager.AddEntity(boss);
+
 
 
         }
