@@ -9,100 +9,48 @@ namespace TE4TwoDSidescroller
 {
     class BossAttack1 : Entity
     {
-
-        int attackWidth;
-        int attackHeight;
-        int movementSpeed;
-        Texture2D BossAttack1Texture;
-        Vector2 projectileDirection;
+        Texture2D heavyAttackTexture;
+        private int attackWidth;
+        private int attackHeigh;
+        private int attackSpeed;
 
         public BossAttack1(Character character)
         {
-
-            projectileDirection = new Vector2();
-            projectileDirection = character.movementDirection;
-
-            attackWidth = 40;
-            attackHeight = 20;
-
-            movementSpeed = 4;
-
+            tag = Tags.BossAttack.ToString();
             isActive = true;
             hasCollider = true;
-            tag = Tags.BossAttack1.ToString();
+            attackWidth = 80;
+            attackHeigh = 80;
+            attackSpeed = 5;
 
-
-
-            collisionBox = new Rectangle((int)GameInfo.player1Position.X, 0
-                ,
-                attackWidth, attackHeight);
-
-
-
-
-            LoadPriestTexture2D();
-
-
-
+            if (GameInfo.player1Position.X - GameInfo.bossPosition.X < 500)
+            {
+                collisionBox = new Rectangle((int)GameInfo.bossPosition.X,
+                (int)GameInfo.bossPosition.Y,
+                attackWidth, attackHeigh);
+            }
+            LoadTextrue();
         }
 
-        public void LoadPriestTexture2D()
+        public void LoadTextrue()
         {
-            string currentPath = Path.GetDirectoryName(
-             System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "Box.png";
+            string currentPath =
+             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs" + "/Box.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
-                BossAttack1Texture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+                heavyAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
-
         }
-
-        //public override void HasCollidedWith(Entity collider)
-        //{
-
-        //    GameInfo.entityManager.RemoveEntity(this.uniqeId);
-
-        //}
-        //public void Animate()
-        //{
-        //    if (GameInfo.player1IsFacingRight)
-        //    {
-        //        animation.spriteEffects = SpriteEffects.None;
-        //    }
-        //    else
-        //    {
-        //        animation.spriteEffects = SpriteEffects.FlipHorizontally;
-        //    }
-        //}
 
         public override void Update(GameTime gameTime)
         {
-            //projectileDirection.X += movementSpeed;
-            //projectileDirection.Y += movementSpeed;
-
-
-            collisionBox.Y += movementSpeed;
-            //collisionBox.Y += (int)projectileDirection.Y;
-
-            //Animate();
-
-            //animation.position.X = collisionBox.X;
-            //animation.position.Y = collisionBox.Y - 50;
-            //animation.Update(gameTime);
+            collisionBox.X += attackSpeed;
         }
 
         public override void Draw(GameTime gameTime)
         {
-
-            GameInfo.spriteBatch.Draw(BossAttack1Texture, collisionBox, Color.White);
-            //animation.Draw(gameTime);
+            GameInfo.spriteBatch.Draw(heavyAttackTexture, collisionBox, Color.White);
         }
     }
-
-
-
 }
-
-
