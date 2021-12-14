@@ -14,10 +14,7 @@ namespace TE4TwoDSidescroller
     {
         #region Variables/Fields
         public Texture2D currentTexture;
-        private Texture2D playerRunRight;
-        private Texture2D playerIdle;
-        private Texture2D playerJump;
-        private Texture2D playerOuch;
+
 
         Health health;
 
@@ -37,7 +34,6 @@ namespace TE4TwoDSidescroller
 
         float deltaTime;
         float time;
-       
 
         bool isWalkingRight;
         bool isWalkingLeft;
@@ -79,8 +75,6 @@ namespace TE4TwoDSidescroller
 
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
 
-            LoadPlayerTexture2D();
-            PlayerDictionary();
             Animate();
 
             maxHealth = 1000;
@@ -93,117 +87,6 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public Vector2 PlayerPosition
-        {
-            get
-            {
-                return playerPosition;
-            }
-            set
-            {
-                playerPosition = value;
-            }
-        }
-
-        public Texture2D CurrentTexture
-        {
-            get
-            {
-                return currentTexture;
-            }
-            set
-            {
-                currentTexture = value;
-            }
-        }
-
-        public void LoadPlayerTexture2D()
-        {
-            string path2 = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowIdleAnim.png";
-            using (Stream textureStream = new FileStream(path2, FileMode.Open))
-            {
-                playerIdle = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
-
-            string path3 = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowJumpAnim.png";
-            using (Stream textureStream = new FileStream(path3, FileMode.Open))
-            {
-                playerJump = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
-
-            string currentPath = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowRunRight.png";
-            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
-            {
-                playerRunRight = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
-
-            string path4 = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location)
-                + "/Content/Pngs/MainCharacters/" + "ShadowOuchAnim.png";
-            using (Stream textureStream = new FileStream(path4, FileMode.Open))
-            {
-                playerOuch = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
-            }
-        }
-
-        public void PlayerDictionary()
-        {
-            animations = new Dictionary<string, Animation>();
-
-            Animation baseAnimation = new Animation(playerIdle, 4);
-            baseAnimation.FramePerSecond = 4;
-            animations.Add("base", baseAnimation);
-
-            Animation runRight = new Animation(playerRunRight, 4);
-            runRight.isLooping = true;
-            runRight.FramePerSecond = 5;
-            animations.Add("runRight", runRight);
-
-            Animation runLeft = new Animation(playerRunRight, 4);
-            runLeft.isLooping = true;
-            runLeft.FramePerSecond = 5;
-            runLeft.spriteEffects = SpriteEffects.FlipHorizontally;
-            animations.Add("runLeft", runLeft);
-
-            Animation idle = new Animation(playerIdle, 4);
-            idle.isLooping = true;
-            idle.FramePerSecond = 5;
-            animations.Add("idle", idle);
-
-            Animation flipIdle = new Animation(playerIdle, 4);
-            flipIdle.isLooping = true;
-            flipIdle.FramePerSecond = 5;
-            flipIdle.spriteEffects = SpriteEffects.FlipHorizontally;
-            animations.Add("flipIdle", flipIdle);
-
-            Animation jump = new Animation(playerJump, 21);
-            jump.isLooping = true;
-            jump.FramePerSecond = 14;
-            animations.Add("jump", jump);
-
-            Animation flipJump = new Animation(playerJump, 21);
-            flipJump.isLooping = true;
-            flipJump.FramePerSecond = 14;
-            flipJump.spriteEffects = SpriteEffects.FlipHorizontally;
-            animations.Add("flipJump", flipJump);
-
-            Animation ouch = new Animation(playerOuch, 3);
-            ouch.isLooping = true;
-            ouch.FramePerSecond = 10;
-            animations.Add("ouch", ouch);
-
-            Animation flipOuch = new Animation(playerOuch, 3);
-            flipOuch.isLooping = false;
-            flipOuch.FramePerSecond = 8;
-            flipOuch.spriteEffects = SpriteEffects.FlipHorizontally;
-            animations.Add("flipOuch", flipOuch);
-        }
 
         public void Animate()
         {
@@ -217,33 +100,33 @@ namespace TE4TwoDSidescroller
             Animation tempOuch;
             Animation tempFlipOuch;
 
-            animations.TryGetValue("base", out tempBase);
-            animations.TryGetValue("idle", out tempIdle);
-            animations.TryGetValue("flipIdle", out tempFlipIdle);
-            animations.TryGetValue("jump", out tempJump);
-            animations.TryGetValue("ouch", out tempOuch);
-            animations.TryGetValue("flipOuch", out tempFlipOuch);
-            animations.TryGetValue("flipJump", out tempFlipJump);
-            animations.TryGetValue("runRight", out tempRunRight);
-            animations.TryGetValue("runLeft", out tempRunLeft);
+            animationManager.animations.TryGetValue("playerBase", out tempBase);
+            animationManager.animations.TryGetValue("playerIdle", out tempIdle);
+            animationManager.animations.TryGetValue("playerFlipIdle", out tempFlipIdle);
+            animationManager.animations.TryGetValue("playerJump", out tempJump);
+            animationManager.animations.TryGetValue("playerOuch", out tempOuch);
+            animationManager.animations.TryGetValue("playerFlipOuch", out tempFlipOuch);
+            animationManager.animations.TryGetValue("playerFlipJump", out tempFlipJump);
+            animationManager.animations.TryGetValue("playerRunRight", out tempRunRight);
+            animationManager.animations.TryGetValue("plyaerRunLeft", out tempRunLeft);
 
-            animation = tempBase;
+            //animation = tempBase;
 
-            if (hasTakenDamage && movementVector.X >= 0)
+            if (hasTakenDamage && movementVector.X >= 0 && isFacingRight)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
 
-                animation = tempOuch;
+                animationManager.animation = tempOuch;
                 hasTakenDamage = false;
             }
 
-            else if (hasTakenDamage && movementVector.X <= 0)
+            else if (hasTakenDamage && movementVector.X <= 0 && !isFacingRight)
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
 
-                animation = tempFlipOuch;
+                animationManager.animation = tempFlipOuch;
                 hasTakenDamage = false;
             }
 
@@ -251,8 +134,8 @@ namespace TE4TwoDSidescroller
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
-                 
-                animation = tempIdle;
+
+                animationManager.animation = tempIdle;
 
             }
 
@@ -261,14 +144,14 @@ namespace TE4TwoDSidescroller
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
 
-                animation = tempFlipIdle;
+                animationManager.animation = tempFlipIdle;
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
                 tempFlipJump.frameIndex = 0;
 
-                animation = tempJump;
+                animationManager.animation = tempJump;
 
             }
 
@@ -276,7 +159,7 @@ namespace TE4TwoDSidescroller
             {
                 tempJump.frameIndex = 0;
 
-                animation = tempFlipJump;
+                animationManager.animation = tempFlipJump;
             }
 
             else if (movementVector.Y == 0 && movementVector.X >= 0)
@@ -284,7 +167,7 @@ namespace TE4TwoDSidescroller
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
 
-                animation = tempRunRight;
+                animationManager.animation = tempRunRight;
 
             }
 
@@ -293,7 +176,7 @@ namespace TE4TwoDSidescroller
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
 
-                animation = tempRunLeft;
+                animationManager.animation = tempRunLeft;
 
             }
         }
@@ -391,8 +274,6 @@ namespace TE4TwoDSidescroller
 
         #endregion
 
-
-
         public override void Update(GameTime gameTime)
         {
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -403,8 +284,7 @@ namespace TE4TwoDSidescroller
 
             Animate();
 
-            animation.position = playerPosition;
-            animation.Update(gameTime);
+            animationManager.animation.position = playerPosition;
 
             GameInfo.player1Position = playerPosition;
             GameInfo.Player1TextureSize = playerSourceRectangle;
@@ -451,7 +331,7 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
             //GameInfo.spriteBatch.Draw(currentTexture, playerPosition, playerSourceRectangle, Color.White, playerRotation, playerOrigin, playerScale, SpriteEffects.None, 0.0f);
-            animation.Draw(gameTime);
+            animationManager.animation.Draw(gameTime);
         }
     }
 }
