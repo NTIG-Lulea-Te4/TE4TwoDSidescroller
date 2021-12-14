@@ -324,6 +324,11 @@ namespace TE4TwoDSidescroller
                 hasTakenDamage = true;
             }
 
+            if (collider.tag == Tags.BossAttack.ToString())
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+                hasTakenDamage = true;
+            }
         }
 
         #region Input

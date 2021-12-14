@@ -25,6 +25,7 @@ namespace TE4TwoDSidescroller
             Entity camera;
             Entity tutorialGoal;
             HealthBar menu;
+            Boss boss;
 
             Entity deathZone = new DeathZone();
             GameInfo.entityManager.AddEntity(deathZone);
@@ -47,6 +48,8 @@ namespace TE4TwoDSidescroller
             menu = new HealthBar();
             GameInfo.entityManager.AddEntity(menu);
 
+            boss = new Boss();
+            GameInfo.entityManager.AddEntity(boss);
 
         }
 
