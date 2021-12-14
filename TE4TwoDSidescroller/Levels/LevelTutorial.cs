@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using TE4TwoDSidescroller.Levels;
 
 namespace TE4TwoDSidescroller
 {
@@ -23,8 +23,11 @@ namespace TE4TwoDSidescroller
             Entity playerEntity;
             Entity floor;
             Entity camera;
-            Entity knight;
             Entity tutorialGoal;
+            HealthBar menu;
+
+            Entity deathZone = new DeathZone();
+            GameInfo.entityManager.AddEntity(deathZone);
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -38,11 +41,12 @@ namespace TE4TwoDSidescroller
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
-            knight = new Knight();
-            GameInfo.entityManager.AddEntity(knight);
-
             tutorialGoal = new TutorialGoal();
             GameInfo.entityManager.AddEntity(tutorialGoal);
+
+            menu = new HealthBar();
+            GameInfo.entityManager.AddEntity(menu);
+
 
         }
 

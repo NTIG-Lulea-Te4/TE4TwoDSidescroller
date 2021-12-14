@@ -19,8 +19,8 @@ namespace TE4TwoDSidescroller
         public PlayerMelee()
         {
             //isPlayerAttack = true;
-            attackWidth = 40;
-            attackHeight = 20;
+            attackWidth = 60;
+            attackHeight = 40;
 
             isActive = true;
             hasCollider = true;

@@ -23,17 +23,22 @@ namespace TE4TwoDSidescroller
             Priest,
             PriestAttack,
             Floor,
-            FinishLine
+            FinishLine,
+            DeathZone,
+            Boss,
+            BossAttack1,
+            BossAttack2
 
         }
 
         public string tag;
-        public bool isFacingRight;
+        
 
         public int uniqeId;
         public bool isActive;
         public bool hasCollider;   
         private bool isGrounded;
+        public static bool wantExit;
 
 
         public float increasingGravity;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TE4TwoDSidescroller.Levels;
 
 namespace TE4TwoDSidescroller
 {
@@ -24,6 +25,10 @@ namespace TE4TwoDSidescroller
             Entity camera;
 
             Entity levelGoal;
+            Entity boss;
+
+            Entity deathZone = new DeathZone();
+            GameInfo.entityManager.AddEntity(deathZone);
 
             background = new Background();
             GameInfo.entityManager.AddEntity(background);
@@ -39,6 +44,9 @@ namespace TE4TwoDSidescroller
 
             levelGoal = new LevelGoals(5);
             GameInfo.entityManager.AddEntity(levelGoal);
+
+            boss = new Boss();
+            GameInfo.entityManager.AddEntity(boss);
 
         }
 

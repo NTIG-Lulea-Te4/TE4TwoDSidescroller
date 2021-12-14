@@ -38,7 +38,7 @@ namespace TE4TwoDSidescroller
                     (int)GameInfo.player1Position.Y + GameInfo.Player1TextureSize.Height / 2,
                     attackWidth, attackHeight);
 
-                
+
             }
             else
             {
@@ -97,6 +97,7 @@ namespace TE4TwoDSidescroller
 
             animation.position.X = collisionBox.X;
             animation.position.Y = collisionBox.Y -50;
+
             animation.Update(gameTime);
         }
 
@@ -107,4 +108,7 @@ namespace TE4TwoDSidescroller
             animation.Draw(gameTime);
         }
     }
+
 }
+
+

@@ -14,17 +14,20 @@ namespace TE4TwoDSidescroller
         GameInformationSystem gameInfoSystem;
 
         private Texture2D priestTexture;
-        private Rectangle sourceRectangle;
-        static public Vector2 movementDirection;
-        static public Vector2 priestPosition;
-        private Vector2 priestOrigin;
-        private Vector2 priestVelocity;
-        private Vector2 priestScale;
-        private float priestRotation;
-        private float priestJumpHeight;
+        public static Rectangle sourceRectangle;
+        //static public Vector2 distanceBetweenPlayerAndPriest;
+        //static public Vector2 priestPosition;
+        protected Vector2 priestOrigin;
+        protected Vector2 priestVelocity;
+        protected Vector2 priestScale;
+        protected float priestRotation;
+        protected float priestJumpHeight;
+        protected Vector2 priestRunningDistance; 
 
         private Health health;
+        public static bool priestIsFacingRight;
 
+        public static int priestDamage;
 
         public Priest()
         {
@@ -36,21 +39,24 @@ namespace TE4TwoDSidescroller
             IsGrounded = false;
             isActive = true;
             hasCollider = true;
+            priestIsFacingRight = false;
 
-            movementSpeed = 0.8f;
+            movementSpeed = 0.3f;
             maxHealth = 10;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
+            priestDamage = 10;
             health = new Health();
 
             gameInfoSystem = new GameInformationSystem();
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
-            priestPosition = new Vector2(300, 0);
+            position = new Vector2(500, 500);
             movementDirection = new Vector2();
             priestVelocity = new Vector2(0, 0);
+            priestRunningDistance = new Vector2(200, 200);
 
             priestOrigin = new Vector2(0, 0);
             priestScale = new Vector2(1, 1);
@@ -108,6 +114,7 @@ namespace TE4TwoDSidescroller
 
 
             movementVector.X += movementSpeed;
+            priestIsFacingRight = true;
 
         }
 
@@ -115,26 +122,16 @@ namespace TE4TwoDSidescroller
         {
 
             movementVector.X -= movementSpeed;
-
+            priestIsFacingRight = false;
         }
 
-        public override void Jump(GameTime gameTime)
-        {
-
-            if (IsGrounded)
-            {
-                IsGrounded = false;
-                movementVector.Y -= movementSpeed * 10;
-
-            }
-
-        }
 
 
         public override void Attack1()
         {
 
-
+            Entity priestAttack = new PriestAttack(this);
+            GameInfo.entityManager.AddEntity(priestAttack);
         }
 
         #endregion
@@ -143,15 +140,15 @@ namespace TE4TwoDSidescroller
         {
 
 
-            movementDirection = GameInfo.player1Position - priestPosition;
+            movementDirection = GameInfo.player1Position - position;
 
             priestVelocity = new Vector2(0, 0);
             priestJumpHeight = 0;
 
-            priestPosition += movementVector;
+            position += movementVector;
 
-            collisionBox.X = (int)priestPosition.X;
-            collisionBox.Y = (int)priestPosition.Y;
+            collisionBox.X = (int)position.X;
+            collisionBox.Y = (int)position.Y;
 
             base.Update(gameTime);
 
@@ -173,7 +170,7 @@ namespace TE4TwoDSidescroller
         {
 
 
-            GameInfo.spriteBatch.Draw(priestTexture, priestPosition, sourceRectangle,
+            GameInfo.spriteBatch.Draw(priestTexture, position, sourceRectangle,
                 Color.White, priestRotation, priestOrigin, priestScale,
                 SpriteEffects.None, 0f);
 

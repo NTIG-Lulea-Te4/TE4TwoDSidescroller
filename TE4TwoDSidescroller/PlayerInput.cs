@@ -163,11 +163,15 @@ namespace TE4TwoDSidescroller
             if (currentKeyboardState.IsKeyDown(lightAttackKey) && !previousKeyboardState.IsKeyDown(lightAttackKey))
             {
                 character.Attack1();
+                              
+                SoundInput.SoundEffectPlayed(SoundInput.swordSwoosh, 0.6f, 0.6f, 0.1f);
             }
 
             if (currentKeyboardState.IsKeyDown(heavyAttackKey) && !previousKeyboardState.IsKeyDown(heavyAttackKey))
             {
                 character.Attack2();
+
+                SoundInput.SoundEffectPlayed(SoundInput.startFireBall, 0.2f, 0.1f, 0.6f);
             }
 
             if (currentKeyboardState.IsKeyDown(specialAttackKey) && !previousKeyboardState.IsKeyDown(specialAttackKey))
