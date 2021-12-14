@@ -8,6 +8,8 @@ using System.IO;
 
 namespace TE4TwoDSidescroller
 {
+
+    //:D
     class Player : Character
     {
         #region Variables/Fields
@@ -20,7 +22,7 @@ namespace TE4TwoDSidescroller
         Health health;
 
         private Rectangle playerSourceRectangle;
-        private Vector2 playerPosition;
+        private Vector2 playerPosition;                                                                                                                                                                                                                                       
         private Vector2 playerVelocity;
 
         private Rectangle detectionHitBox;
@@ -38,6 +40,9 @@ namespace TE4TwoDSidescroller
        
 
         bool isWalkingRight;
+        bool isWalkingLeft;
+        bool isJumping;
+        public bool isFacingRight;
         bool hasTakenDamage;
 
         public static int playerDamage;
@@ -72,14 +77,13 @@ namespace TE4TwoDSidescroller
             isActive = true;
             isFacingRight = true;
 
-            detectionHitBox = new Rectangle(0, 0, 500, 500);
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
 
             LoadPlayerTexture2D();
             PlayerDictionary();
             Animate();
 
-            maxHealth = 150;
+            maxHealth = 1000;
             currentHealth = maxHealth;
             
             mana = 100;
@@ -307,6 +311,19 @@ namespace TE4TwoDSidescroller
                 hasTakenDamage = true;
             }
 
+            if (collider.tag == Tags.DeathZone.ToString())
+            {
+
+                currentHealth = health.TakeDamage(currentHealth, 9999, this);
+
+            }
+
+            if (collider.tag == Tags.PriestAttack.ToString())
+            {
+                currentHealth = health.TakeDamage(currentHealth, Priest.priestDamage, this);
+                hasTakenDamage = true;
+            }
+
         }
 
         #region Input
@@ -408,6 +425,8 @@ namespace TE4TwoDSidescroller
             
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
+
+            
 
             #region Harry's Code
             manaTick++;

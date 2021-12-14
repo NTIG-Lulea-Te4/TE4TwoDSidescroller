@@ -16,6 +16,8 @@ namespace TE4TwoDSidescroller
 
         public VisionManager visionManager;
 
+        public Vector2 movementDirection;
+
 
         public Dictionary<string, Animation> animations;
 
