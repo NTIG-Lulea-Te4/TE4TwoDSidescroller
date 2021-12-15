@@ -9,6 +9,7 @@ namespace TE4TwoDSidescroller
 {
     class Farmer : Character
     {
+        #region Variables/Fields
         Health health;
         Texture2D farmerIdle;
         Texture2D farmerAttack;
@@ -21,6 +22,18 @@ namespace TE4TwoDSidescroller
 
         public static int farmerDamage;
 
+        #region Animations
+        Animation tempIdle;
+        Animation tempWalkRight;
+        Animation tempWalkLeft;
+        Animation tempOuch;
+        Animation tempFlipOuch;
+        Animation tempAttack;
+        Animation tempFlipAttack;
+        #endregion
+
+        #endregion
+
         public Farmer(int myPosition1, int myPosition2)
         {
             characterInput = new FarmerInput(this);
@@ -32,11 +45,8 @@ namespace TE4TwoDSidescroller
             movementSpeed = 2;
             jumpHeight = 3;
 
-
-
             hasCollider = true;
             isActive = true;
-
 
             myPosition = new Vector2(myPosition1, myPosition2);
 
@@ -46,22 +56,13 @@ namespace TE4TwoDSidescroller
             collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, 64, 96);
             health = new Health();
 
+            FarmerDictionary();
 
             FarmerAnimation();
         }
 
-
-
-        public void FarmerAnimation()
+        private void FarmerDictionary()
         {
-            Animation tempIdle;
-            Animation tempWalkRight;
-            Animation tempWalkLeft;
-            Animation tempOuch;
-            Animation tempFlipOuch;
-            Animation tempAttack;
-            Animation tempFlipAttack;
- 
             animationManager.animations.TryGetValue("farmerIdle", out tempIdle);
             animationManager.animations.TryGetValue("farmerOuch", out tempOuch);
             animationManager.animations.TryGetValue("farmerFlipOuch", out tempFlipOuch);
@@ -69,6 +70,10 @@ namespace TE4TwoDSidescroller
             animationManager.animations.TryGetValue("farmerFlipAttack", out tempFlipAttack);
             animationManager.animations.TryGetValue("farmerWalkRight", out tempWalkRight);
             animationManager.animations.TryGetValue("farmerWalkLeft", out tempWalkLeft);
+        }
+
+        public void FarmerAnimation()
+        {
 
             if (hasTakenDamage && movementVector.X >= 0)
             {

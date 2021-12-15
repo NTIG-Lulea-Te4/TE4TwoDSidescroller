@@ -15,7 +15,6 @@ namespace TE4TwoDSidescroller
         #region Variables/Fields
         public Texture2D currentTexture;
 
-
         Health health;
 
         private Rectangle playerSourceRectangle;
@@ -42,6 +41,18 @@ namespace TE4TwoDSidescroller
         bool hasTakenDamage;
 
         public static int playerDamage;
+
+        #region Animations
+        Animation tempBase;
+        Animation tempRunRight;
+        Animation tempRunLeft;
+        Animation tempIdle;
+        Animation tempFlipIdle;
+        Animation tempJump;
+        Animation tempFlipJump;
+        Animation tempOuch;
+        Animation tempFlipOuch;
+        #endregion
 
         #endregion
 
@@ -76,6 +87,7 @@ namespace TE4TwoDSidescroller
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
 
             Animate();
+            PlayerDictionary();
 
             maxHealth = 1000;
             currentHealth = maxHealth;
@@ -87,19 +99,8 @@ namespace TE4TwoDSidescroller
 
         }
 
-
-        public void Animate()
+        private void PlayerDictionary()
         {
-            Animation tempBase;
-            Animation tempRunRight;
-            Animation tempRunLeft;
-            Animation tempIdle;
-            Animation tempFlipIdle;
-            Animation tempJump;
-            Animation tempFlipJump;
-            Animation tempOuch;
-            Animation tempFlipOuch;
-
             animationManager.animations.TryGetValue("playerBase", out tempBase);
             animationManager.animations.TryGetValue("playerIdle", out tempIdle);
             animationManager.animations.TryGetValue("playerFlipIdle", out tempFlipIdle);
@@ -109,75 +110,51 @@ namespace TE4TwoDSidescroller
             animationManager.animations.TryGetValue("playerFlipJump", out tempFlipJump);
             animationManager.animations.TryGetValue("playerRunRight", out tempRunRight);
             animationManager.animations.TryGetValue("plyaerRunLeft", out tempRunLeft);
+        }
 
-            //animation = tempBase;
+        public void Animate()
+        {
 
             if (hasTakenDamage && movementVector.X >= 0 && isFacingRight)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempOuch;
                 hasTakenDamage = false;
             }
 
             else if (hasTakenDamage && movementVector.X <= 0 && !isFacingRight)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempFlipOuch;
                 hasTakenDamage = false;
             }
 
             else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && isWalkingRight)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempIdle;
-
             }
 
             else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0 && !isWalkingRight)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempFlipIdle;
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempJump;
-
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X <= 0))
             {
-                tempJump.frameIndex = 0;
-
                 animationManager.animation = tempFlipJump;
             }
 
             else if (movementVector.Y == 0 && movementVector.X >= 0)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempRunRight;
-
             }
 
             else if (movementVector.Y == 0 && movementVector.X <= 0)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempRunLeft;
-
             }
         }
 

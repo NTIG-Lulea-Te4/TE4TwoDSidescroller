@@ -153,6 +153,8 @@ namespace TE4TwoDSidescroller
                 }
             }
 
+            frameIndex = 0;
+
             GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, spriteEffects, 0f);
         }
 

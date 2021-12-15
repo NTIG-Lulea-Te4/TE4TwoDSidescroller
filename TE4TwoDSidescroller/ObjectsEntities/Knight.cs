@@ -10,8 +10,7 @@ namespace TE4TwoDSidescroller
 {
     class Knight : Character
     {
-
-
+        #region Variables/Fields
         GameInformationSystem gameInfoSystem;
 
         private Texture2D knightWalk;
@@ -26,10 +25,8 @@ namespace TE4TwoDSidescroller
         private float knightJumpHeight;
         private Vector2 trackingDistance;
 
-
         private Health health;
 
-        
         public static bool knightIsFacingRight;
         bool isWalkingRight;
         bool hasTakenDamage;
@@ -37,10 +34,22 @@ namespace TE4TwoDSidescroller
 
         public static int knightDamage;
 
+        #region Animations
+        Animation tempWalkRight;
+        Animation tempWalkLeft;
+        Animation tempIdle;
+        Animation tempJump;
+        Animation tempFlipJump;
+        Animation tempOuch;
+        Animation tempFlipOuch;
+        Animation tempAttack;
+        Animation tempFlipAttack;
+        #endregion
+
+        #endregion
 
         public Knight()
         {
-
             characterInput = new KnightBehaviour(this);
 
             tag = Tags.Knight.ToString();
@@ -73,6 +82,7 @@ namespace TE4TwoDSidescroller
             
             collisionBox = new Rectangle(0, 0, 64, 96);
 
+            KnightDictionary();
             KnightAnimation();
 
             colorData = new Color[knightWalk.Width * knightWalk.Height];
@@ -82,20 +92,8 @@ namespace TE4TwoDSidescroller
 
         }
 
-
-
-        public void KnightAnimation()
+        private void KnightDictionary()
         {
-            Animation tempWalkRight;
-            Animation tempWalkLeft;
-            Animation tempIdle;
-            Animation tempJump;
-            Animation tempFlipJump;
-            Animation tempOuch;
-            Animation tempFlipOuch;
-            Animation tempAttack;
-            Animation tempFlipAttack;
-
             animationManager.animations.TryGetValue("kngihtIdle", out tempIdle);
             animationManager.animations.TryGetValue("knightJump", out tempJump);
             animationManager.animations.TryGetValue("knightFlipJump", out tempFlipJump);
@@ -105,79 +103,57 @@ namespace TE4TwoDSidescroller
             animationManager.animations.TryGetValue("knightFlipAttack", out tempFlipAttack);
             animationManager.animations.TryGetValue("knightWalkRight", out tempWalkRight);
             animationManager.animations.TryGetValue("knightWalkLeft", out tempWalkLeft);
+        }
 
+
+        public void KnightAnimation()
+        {
             if (hasTakenDamage && movementVector.X >= 0)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempOuch;
                 hasTakenDamage = false;
             }
 
             else if (hasTakenDamage && movementVector.X <= 0)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempFlipOuch;
                 hasTakenDamage = false;
             }
 
             else if (isAttacking && position.X <= GameInfo.player1Position.X)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempAttack;
                 isAttacking = false;
             }
 
             else if (isAttacking && position.X >= GameInfo.player1Position.X)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempFlipAttack;
                 isAttacking = false;
             }
 
             else if (movementVector.Y == 0 && movementVector.X >= 0)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempWalkRight;
             }
 
             else if (movementVector.Y == 0 && movementVector.X <= 0)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempWalkLeft;
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempJump;
-
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X <= 0))
             {
-                tempJump.frameIndex = 0;
-
                 animationManager.animation = tempFlipJump;
             }
 
             else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
             {
-                tempJump.frameIndex = 0;
-                tempFlipJump.frameIndex = 0;
-
                 animationManager.animation = tempIdle;
             }
 
