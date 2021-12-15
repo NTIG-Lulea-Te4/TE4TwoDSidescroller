@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TE4TwoDSidescroller
 {
@@ -29,6 +29,12 @@ namespace TE4TwoDSidescroller
         private Texture2D farmerWalk;
         private Texture2D farmerOuch;
 
+        private Texture2D godIdle;
+        private Texture2D godOuch;
+        private Texture2D godFirstAttack;
+        private Texture2D godSecondAttack;
+        private Texture2D bigRockTexture;
+
         AnimationManager()
         {
             animations = new Dictionary<string, Animation>();
@@ -38,6 +44,8 @@ namespace TE4TwoDSidescroller
             LoadKnightTexture2D();
 
             LoadFarmerTexture2D();
+
+            LoadGodTexture2D();
         }
 
         public void LoadPlayerTexture2D()
@@ -199,6 +207,54 @@ namespace TE4TwoDSidescroller
 
                 Animation farmerFlipOuch = new Animation(farmerOuch, 3, 10, true, SpriteEffects.FlipHorizontally);
                 animations.Add("farmerFlipOuch", farmerFlipOuch);
+            }
+        }
+
+        public void LoadGodTexture2D()
+        {
+            string bossPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/Enemies" + "/GodIdlePic.png";
+            using (Stream textureStream = new FileStream(bossPath, FileMode.Open))
+            {
+                godIdle = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+
+                Animation tempGodIdle = new Animation(godIdle, 1, 1, true, SpriteEffects.None);
+                animations.Add("godIdle", tempGodIdle);
+            }
+
+            string bossPath1 = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/Enemies" + "/GodOuchAnim.png";
+            using (Stream textureStream = new FileStream(bossPath1, FileMode.Open))
+            {
+                godOuch = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+
+                Animation tempGodOuch = new Animation(godOuch, 3, 8, true, SpriteEffects.None);
+                animations.Add("godOuch", tempGodOuch);
+            }
+
+            string bossPath2 = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/Enemies" + "/GodAttackAnim.png";
+            using (Stream textureStream = new FileStream(bossPath2, FileMode.Open))
+            {
+                godFirstAttack = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+
+                Animation tempGodFirstAttack = new Animation(godFirstAttack, 4, 5, true, SpriteEffects.None);
+                animations.Add("godFirstAttack", tempGodFirstAttack);
+            }
+
+            string bossPath3 = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/Enemies" + "/GodAttackAnimTwo.png";
+            using (Stream textureStream = new FileStream(bossPath3, FileMode.Open))
+            {
+                godSecondAttack = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+
+                Animation tempGodSecondAttack = new Animation(godSecondAttack, 4, 5, true, SpriteEffects.None);
+                animations.Add("godSecondAttack", tempGodSecondAttack);
+            }
+
+            string rockPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/Enemies" + "/BigRock.png";
+            using (Stream textureStream = new FileStream(rockPath, FileMode.Open))
+            {
+                bigRockTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+
+                Animation tempBigRockTexture = new Animation(bigRockTexture, 4, 5, true, SpriteEffects.None);
+                animations.Add("bigRock", tempBigRockTexture);
             }
         }
     }

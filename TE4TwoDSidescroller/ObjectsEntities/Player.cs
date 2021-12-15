@@ -173,9 +173,7 @@ namespace TE4TwoDSidescroller
 
             if (collider.tag == Tags.DeathZone.ToString())
             {
-
                 currentHealth = health.TakeDamage(currentHealth, 9999, this);
-
             }
 
             if (collider.tag == Tags.PriestAttack.ToString())
@@ -183,7 +181,6 @@ namespace TE4TwoDSidescroller
                 currentHealth = health.TakeDamage(currentHealth, Priest.priestDamage, this);
                 hasTakenDamage = true;
             }
-
         }
 
         #region Input
@@ -282,8 +279,6 @@ namespace TE4TwoDSidescroller
             
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
-
-            
 
             #region Harry's Code
             manaTick++;

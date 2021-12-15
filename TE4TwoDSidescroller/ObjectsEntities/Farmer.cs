@@ -11,14 +11,19 @@ namespace TE4TwoDSidescroller
     {
         #region Variables/Fields
         Health health;
+
+        NPCInput nPCInput;
+
         Texture2D farmerIdle;
         Texture2D farmerAttack;
         Texture2D farmerWalk;
         Texture2D farmerOuch;
+
         Vector2 myPosition;
         Rectangle sourceRectangle;
         bool hasTakenDamage;
         bool isAttacking;
+        bool isLookingRight;
 
         public static int farmerDamage;
 
@@ -47,8 +52,6 @@ namespace TE4TwoDSidescroller
 
             hasCollider = true;
             isActive = true;
-
-            myPosition = new Vector2(myPosition1, myPosition2);
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
             myPosition = new Vector2(myPosition1, myPosition2);
@@ -137,16 +140,14 @@ namespace TE4TwoDSidescroller
 
         public override void MoveRight()
         {
-
             myPosition.X += movementSpeed;
-
+            isLookingRight = true;
         }
 
         public override void MoveLeft()
         {
-
             myPosition.X -= movementSpeed;
-
+            isLookingRight = false;
         }
 
         public override void Attack1( )
