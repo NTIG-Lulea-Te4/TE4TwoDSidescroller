@@ -11,24 +11,23 @@ namespace TE4TwoDSidescroller
     {
         Texture2D heavyAttackTexture;
         private int attackWidth;
-        private int attackHeigh;
+        private int attackHeight;
         private int attackSpeed;
+        public static bool damage1;
 
         public BossAttack1(Character character)
         {
-            tag = Tags.BossAttack.ToString();
-            isActive = true;
+            tag = Tags.BossAttack1.ToString();
             hasCollider = true;
-            attackWidth = 80;
-            attackHeigh = 80;
+            attackWidth = 50;
+            attackHeight = 50;
             attackSpeed = 5;
+            damage1 = false;
 
-            if (GameInfo.player1Position.X - GameInfo.bossPosition.X < 500)
-            {
-                collisionBox = new Rectangle((int)GameInfo.bossPosition.X,
-                (int)GameInfo.bossPosition.Y,
-                attackWidth, attackHeigh);
-            }
+
+            collisionBox = new Rectangle((int)GameInfo.bossPosition.X, (int)GameInfo.bossPosition.Y,
+            attackWidth, attackHeight);
+
             LoadTextrue();
         }
 
@@ -43,9 +42,18 @@ namespace TE4TwoDSidescroller
             }
         }
 
+        public override void HasCollidedWith(Entity collider)
+        {
+            if (collider.tag == Tags.Player.ToString())
+            {    
+                GameInfo.entityManager.RemoveEntity(this.uniqeId);
+                damage1 = true;
+            }
+        }   
+
         public override void Update(GameTime gameTime)
         {
-            collisionBox.X += attackSpeed;
+            collisionBox.X -= attackSpeed;
         }
 
         public override void Draw(GameTime gameTime)
