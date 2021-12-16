@@ -18,11 +18,6 @@ namespace TE4TwoDSidescroller
         double heavyAttackTimer;
         Vector2 attack1;
 
-        Animation tempIdle;
-        Animation tempOuch;
-        Animation tempFirstAttack;
-        Animation tempSecondAttack;
-        Animation tempBigRockAnimation;
 
         public Boss()
         {
@@ -42,8 +37,6 @@ namespace TE4TwoDSidescroller
             bossAttack1dmg = 50;
 >>>>>>> parent of 1400a7f (a)
             LoadTextrue2D();
-
-            GodDictionary();
         }
 
         public void LoadTextrue2D()
@@ -70,20 +63,6 @@ namespace TE4TwoDSidescroller
 
         }
 
-        private void GodDictionary()
-        {
-            animationManager.animations.TryGetValue("godIdle", out tempIdle);
-            animationManager.animations.TryGetValue("godOuch", out tempOuch);
-            animationManager.animations.TryGetValue("godFirstAttack", out tempFirstAttack);
-            animationManager.animations.TryGetValue("godSecondAttack", out tempSecondAttack);
-            animationManager.animations.TryGetValue("bigRock", out tempBigRockAnimation);
-        }
-
-        private void GodAnimation()
-        {
-
-        }
-
         public override void HasCollidedWith(Entity collider)
         {
 
@@ -101,7 +80,7 @@ namespace TE4TwoDSidescroller
         public override void Attack1()
         {
             tag = Tags.BossAttack1.ToString();
-            collisionBox = new Rectangle((int) attack1.X, (int) attack1.Y, 64, 96);
+            collisionBox = new Rectangle((int)attack1.X, (int)attack1.Y, 64, 96);
             for (int i = 0; i < heavyAttacks.Count; i++)
             {
                 heavyAttacks[i] = heavyAttacks[i] + attack1;
@@ -135,8 +114,6 @@ namespace TE4TwoDSidescroller
 
         public override void Draw(GameTime gameTime)
         {
-            //animationManager.animation.Draw(gameTime);
-
             GameInfo.spriteBatch.Draw(bossTexture, bossPosition, Color.White);
             foreach (Vector2 heavyAttack in heavyAttacks)
             {

@@ -90,8 +90,16 @@ namespace TE4TwoDSidescroller
 
         public float timeElapsed;
         public bool isLooping;
-        private int framePerSecond;
         private float timeToUpdate; //frameSpeed
+        public int FramePerSecond
+        {
+            set
+            {
+                timeToUpdate = (1f / value);
+
+            }
+        }
+
         protected Texture2D currentTexture;
         public Vector2 position;
         public Vector2 origin;
@@ -101,28 +109,11 @@ namespace TE4TwoDSidescroller
         protected Rectangle[] rectangles;
         public int frameIndex;
 
-        public int FramePerSecond
-        {
-            get
-            {
-                return framePerSecond;
-
-            }
-            set
-            {
-                timeToUpdate = (1f / value);
-
-            }
-        }
-
-        public Animation(Texture2D texture, int frames, int framePerSecond, bool isLooping, SpriteEffects spriteEffects)
+        public Animation(Texture2D texture, int frames)
         {
             currentTexture = texture;
             int width = texture.Width / frames;
             rectangles = new Rectangle[frames];
-            framePerSecond = FramePerSecond;
-            spriteEffects = this.spriteEffects;
-            isLooping = this.isLooping;
 
             for (int currentFrame = 0; currentFrame < frames; currentFrame++)
             {
@@ -138,6 +129,26 @@ namespace TE4TwoDSidescroller
 
         public void Draw(GameTime gameTime)
         {
+            //timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //if (timeElapsed > timeToUpdate)
+            //{
+            //    timeElapsed -= timeToUpdate;
+
+            //    if (frameIndex < rectangles.Length - 1)
+            //    {
+            //        frameIndex++;
+            //    }
+            //    else if (isLooping)
+            //    {
+            //        frameIndex = 0;
+            //    }
+            //}
+
+            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, spriteEffects, 0f);
+        }
+
+        public void Update(GameTime gameTime)
+        {
             timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > timeToUpdate)
             {
@@ -152,13 +163,12 @@ namespace TE4TwoDSidescroller
                     frameIndex = 0;
                 }
             }
-
-            frameIndex = 0;
-
-            GameInfo.spriteBatch.Draw(currentTexture, position, rectangles[frameIndex], Color.White, rotation, origin, scale, spriteEffects, 0f);
         }
 
         #endregion
 
+        #region newest code
+
+        #endregion
     }
 }
