@@ -7,28 +7,27 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class BossAttack : Entity
+    class BossAttack1 : Entity
     {
         Texture2D heavyAttackTexture;
         private int attackWidth;
-        private int attackHeigh;
+        private int attackHeight;
         private int attackSpeed;
-        public static bool damage;
-             
-        public BossAttack(Character character)
-        {
-            tag = Tags.BossAttack.ToString();
-            hasCollider = true;
-            attackWidth = 80;
-            attackHeigh = 80;
-            attackSpeed = 5;
-            damage = false;
+        public static bool damage1;
 
-        
-            collisionBox = new Rectangle((int)GameInfo.player1Position.X,
-            0,
-            attackWidth, attackHeigh);
-            
+        public BossAttack1(Character character)
+        {
+            tag = Tags.BossAttack1.ToString();
+            hasCollider = true;
+            attackWidth = 50;
+            attackHeight = 50;
+            attackSpeed = 5;
+            damage1 = false;
+
+
+            collisionBox = new Rectangle((int)GameInfo.bossPosition.X, (int)GameInfo.bossPosition.Y,
+            attackWidth, attackHeight);
+
             LoadTextrue();
         }
 
@@ -42,28 +41,19 @@ namespace TE4TwoDSidescroller
                 heavyAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
         }
+
         public override void HasCollidedWith(Entity collider)
         {
             if (collider.tag == Tags.Player.ToString())
-            {
+            {    
                 GameInfo.entityManager.RemoveEntity(this.uniqeId);
-                damage = true;
+                damage1 = true;
             }
-        }
-
-        //public override void HasCollidedWith(Entity collider)
-        //{
-        //    if (collider.tag == Tags.Player.ToString())
-        //    {
-        //        currentHealth = Player.health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
-        //        hasTakenDamage = true;
-        //        GameInfo.entityManager.RemoveEntity(this.uniqeId);
-        //    }
-        //}
+        }   
 
         public override void Update(GameTime gameTime)
         {
-            collisionBox.Y += attackSpeed;
+            collisionBox.X -= attackSpeed;
         }
 
         public override void Draw(GameTime gameTime)
