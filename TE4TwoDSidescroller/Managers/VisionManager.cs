@@ -3,42 +3,43 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 namespace TE4TwoDSidescroller
 {
     public class VisionManager : Entity
     {
         Viewport viewport;
-
-
-        int Xsize;
-        int Ysize;
-
-        int Xposition;
-        int Yposition;
-
+        int xSize;
+        int ySize;
+        Vector2 position;
         public VisionManager()
         {
-            Xsize = 1280;
-            Ysize = 720;
-
+            xSize = 1280;
+            ySize = 720;
+            viewport = new Viewport();
         }
 
         public override void Update(GameTime gameTime)
         {
 
-            Xposition = (int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width / 2;
-            Yposition = (int)GameInfo.player1Position.Y - GameInfo.Player1TextureSize.Height / 2;
+            position.X = (int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width / 2;
+            position.Y = (int)GameInfo.player1Position.Y - GameInfo.Player1TextureSize.Height / 2;
             viewport = new Viewport
-                (-Xposition + Xsize / 2,
-                -Yposition + Ysize / 2,
-                Xposition + Xsize,
-                Yposition + Ysize);
+                ((int)-position.X + xSize / 2,
+                (int)-position.Y + ySize / 2,
+                xSize + (int)position.X, ySize);
+
+            viewport.Width = (int)MathHelper.Clamp(viewport.Width, 0, 4280);
+
+            viewport.X = MathHelper.Clamp(viewport.X, -3000, 0);
+            viewport.Y = MathHelper.Clamp(viewport.Y, 0, 0);
+            //clamp före slutgiltiga positionen
+
+
             GameInfo.graphicsDevice.GraphicsDevice.Viewport = viewport;
             GameInfo.viewportPosition.X = -viewport.X;
             GameInfo.viewportPosition.Y = -viewport.Y;
 
-
+            
 
 
         }
