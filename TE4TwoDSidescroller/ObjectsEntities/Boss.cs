@@ -107,14 +107,16 @@ namespace TE4TwoDSidescroller
             base.Update(gameTime);
         }
 
-      
+
         public override void Draw(GameTime gameTime)
         {
             GameInfo.spriteBatch.Draw(bossTexture, bossPosition, Color.White);
+
             //if (font != null)
             //{
-            //    GameInfo.spriteBatch.DrawString(font, text, new Vector2(200, 500), Color.White) ;
+            //    GameInfo.spriteBatch.DrawString(font, text, new Vector2(200, 500), Color.White);
             //}
+
         }
     }
 }

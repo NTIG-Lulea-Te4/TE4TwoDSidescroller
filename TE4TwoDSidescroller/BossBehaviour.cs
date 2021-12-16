@@ -10,16 +10,11 @@ namespace TE4TwoDSidescroller
     class BossBehaviour : CharacterInput
     {
         double heavyAttackTimer;
-        //static SpriteFont font;
 
         public BossBehaviour(Character character) : base(character)
         {
             heavyAttackTimer = 0;
         }
-        //public static void ContentLoad(ContentManager content)
-        //{
-        //    font = content.Load<SpriteFont>("Fonts/Arial16");
-        //}
         public override void Update(GameTime gameTime)
         {
             heavyAttackTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
