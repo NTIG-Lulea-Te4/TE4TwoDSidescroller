@@ -35,7 +35,7 @@ namespace TE4TwoDSidescroller
             maxHealth = 100;
             currentHealth = maxHealth;
             tag = Tags.Boss.ToString();
-            bossAttackdmg = 10;
+            bossAttackdmg = 100;
             bossAttack1dmg = 50;
             LoadTextrue2D();
             collisionBox = new Rectangle((int)bossPosition.X, (int)bossPosition.Y,

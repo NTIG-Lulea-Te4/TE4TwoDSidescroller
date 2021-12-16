@@ -11,12 +11,12 @@ namespace TE4TwoDSidescroller
     {
         static SpriteFont font;
         private string text;
-        
+
         public LastlvlText()
         {
             text = "ae2";
 
-           
+
         }
         public static void ContentLoad(ContentManager content)
         {
