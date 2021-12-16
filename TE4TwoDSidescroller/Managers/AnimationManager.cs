@@ -37,6 +37,12 @@ namespace TE4TwoDSidescroller
 
         public AnimationManager()
         {
+
+
+        }
+
+        public void Initialize()
+        {
             animations = new Dictionary<string, Animation>();
 
             LoadPlayerTexture2D();

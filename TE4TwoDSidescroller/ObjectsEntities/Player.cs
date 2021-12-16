@@ -114,7 +114,7 @@ namespace TE4TwoDSidescroller
 
         public void Animate()
         {
-
+            animationManager.animation = tempBase;
             if (hasTakenDamage && movementVector.X >= 0 && isFacingRight)
             {
                 animationManager.animation = tempOuch;

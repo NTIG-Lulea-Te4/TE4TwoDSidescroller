@@ -30,7 +30,6 @@ namespace TE4TwoDSidescroller
         protected override void Initialize()
         {
             IsMouseVisible = true;
-            GameInfo.animationManager.LoadPlayerTexture2D();
             GameInfo.screenManager.Resolution(1);
             GameInfo.creationManager.Initialize();
             base.Initialize();
@@ -44,7 +43,7 @@ namespace TE4TwoDSidescroller
             Menu.ContentLoad(Content);
             SoundInput.ContentLoad(Content);
             GameInfo.creationManager.Initialize();
-            
+            GameInfo.animationManager.Initialize();
             //ej rätt GraphicsDevice ska vara graphics.GraphicsDevice
             
 
