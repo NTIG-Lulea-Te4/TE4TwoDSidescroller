@@ -44,7 +44,9 @@ namespace TE4TwoDSidescroller
 
             LoadTexture2D();
 
-            animation = new Animation(playerAttackTexture, 4, 8, true, SpriteEffects.None);
+            animation = new Animation(playerAttackTexture, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 8;
 
         }
 
@@ -110,7 +112,8 @@ namespace TE4TwoDSidescroller
             Animate();
 
             animation.position.X = collisionBox.X;
-            animation.position.Y = collisionBox.Y -50;
+            animation.position.Y = collisionBox.Y - 50;
+            animation.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)

@@ -19,13 +19,14 @@ namespace TE4TwoDSidescroller
         float scale;
         float rotation;
         float backgroundSpeed;
+        Vector2 backgroundPosition;
         
 
         
 
         public Background()
         {
-            backgroundSpeed = 0.02f;
+            backgroundSpeed = 0.01f;
             scale = 1.1f;
             layer = 0.0f;
             rotation = 0f;
@@ -44,13 +45,12 @@ namespace TE4TwoDSidescroller
             
             sourceRectangle = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
             
-                
         }
 
         public override void Update(GameTime gameTime)
         {
-            
-
+            //sourceRectangle.X = playerCoordinatesX * (int)backgroundSpeed * (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            //sourceRectangle.Y = playerCoordinatesY * (int)backgroundSpeed * (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
 
@@ -58,7 +58,7 @@ namespace TE4TwoDSidescroller
         {
 
             GameInfo.spriteBatch.Draw
-                (myTexture, new Vector2(GameInfo.viewportPosition.X - GameInfo.viewportPosition.X * backgroundSpeed, GameInfo.viewportPosition.Y - GameInfo.viewportPosition.Y * backgroundSpeed), sourceRectangle, Color.White, rotation, position, scale, SpriteEffects.None, layer);
+                (myTexture, GameInfo.viewportPosition, sourceRectangle, Color.White, rotation, position, scale, SpriteEffects.None, layer);
 
 
         }

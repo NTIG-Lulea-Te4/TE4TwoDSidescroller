@@ -10,10 +10,18 @@ namespace TE4TwoDSidescroller
 {
     class Knight : Character
     {
-        #region Variables/Fields
+
+
         GameInformationSystem gameInfoSystem;
 
+        Animation animation;
+        Dictionary<string, Animation> knightDictionary;
+
         private Texture2D knightWalk;
+        private Texture2D knightJump;
+        private Texture2D knightOuch;
+        private Texture2D knightIdle;
+        private Texture2D knightAttack;
 
         public static Rectangle sourceRectangle;
         
@@ -25,8 +33,10 @@ namespace TE4TwoDSidescroller
         private float knightJumpHeight;
         private Vector2 trackingDistance;
 
+
         private Health health;
 
+        
         public static bool knightIsFacingRight;
         bool isWalkingRight;
         bool hasTakenDamage;
@@ -34,22 +44,10 @@ namespace TE4TwoDSidescroller
 
         public static int knightDamage;
 
-        #region Animations
-        Animation tempWalkRight;
-        Animation tempWalkLeft;
-        Animation tempIdle;
-        Animation tempJump;
-        Animation tempFlipJump;
-        Animation tempOuch;
-        Animation tempFlipOuch;
-        Animation tempAttack;
-        Animation tempFlipAttack;
-        #endregion
-
-        #endregion
 
         public Knight(float spawnPositionX,float spawnPositionY)
         {
+
             characterInput = new KnightBehaviour(this);
 
             tag = Tags.Knight.ToString();
@@ -84,7 +82,10 @@ namespace TE4TwoDSidescroller
             knightRotation = 0;
             trackingDistance = new Vector2(300, 300);
             
+
             collisionBox = new Rectangle(0, 0, 64, 96);
+
+            LoadTexture2D();
 
             KnightDictionary();
             KnightAnimation();
@@ -93,71 +94,210 @@ namespace TE4TwoDSidescroller
             knightWalk.GetData(colorData);
 
 
+
         }
 
-        private void KnightDictionary()
+        public void LoadTexture2D()
         {
-            animationManager.animations.TryGetValue("kngihtIdle", out tempIdle);
-            animationManager.animations.TryGetValue("knightJump", out tempJump);
-            animationManager.animations.TryGetValue("knightFlipJump", out tempFlipJump);
-            animationManager.animations.TryGetValue("knightOuch", out tempOuch);
-            animationManager.animations.TryGetValue("knightFlipOuch", out tempFlipOuch);
-            animationManager.animations.TryGetValue("knightAttack", out tempAttack);
-            animationManager.animations.TryGetValue("knightFlipAttack", out tempFlipAttack);
-            animationManager.animations.TryGetValue("knightWalkRight", out tempWalkRight);
-            animationManager.animations.TryGetValue("knightWalkLeft", out tempWalkLeft);
+            string currentPath = Path.GetDirectoryName(
+             System.Reflection.Assembly.GetExecutingAssembly().Location)
+             + "/Content/Pngs/Enemies/" + "KnightWalkAnim.png";
+
+            using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
+            {
+                knightWalk = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+
+            string Path4 = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/Enemies/" + "KnightJumpAnim.png";
+
+            using (Stream textureStream = new FileStream(Path4, FileMode.Open))
+            {
+                knightJump = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+
+            string Path1 = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/Enemies/" + "KnightAttackAnim.png";
+
+            using (Stream textureStream = new FileStream(Path1, FileMode.Open))
+            {
+                knightAttack = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+
+            string Path2 = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/Enemies/" + "KnightIdlePic.png";
+
+            using (Stream textureStream = new FileStream(Path2, FileMode.Open))
+            {
+                knightIdle = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+
+            string Path3 = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location)
+                + "/Content/Pngs/Enemies/" + "KnightOuchAnim.png";
+
+            using (Stream textureStream = new FileStream(Path3, FileMode.Open))
+            {
+                knightOuch = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+
         }
 
+        public void KnightDictionary()
+        {
+            knightDictionary = new Dictionary<string, Animation>();
+
+            Animation baseAnimation = new Animation(knightIdle, 1);
+            baseAnimation.isLooping = true;
+            baseAnimation.FramePerSecond = 1;
+            knightDictionary.Add("base", baseAnimation);
+
+            Animation walkRight = new Animation(knightWalk, 4);
+            walkRight.isLooping = true;
+            walkRight.FramePerSecond = 5;
+            knightDictionary.Add("walkRight", walkRight);
+
+            Animation walkLeft = new Animation(knightWalk, 4);
+            walkLeft.isLooping = true;
+            walkLeft.FramePerSecond = 5;
+            walkLeft.spriteEffects = SpriteEffects.FlipHorizontally;
+            knightDictionary.Add("walkLeft", walkLeft);
+
+            Animation jump = new Animation(knightJump, 10);
+            jump.isLooping = true;
+            jump.FramePerSecond = 7;
+            knightDictionary.Add("jump", jump);
+
+            Animation flipJump = new Animation(knightJump, 10);
+            flipJump.isLooping = true;
+            flipJump.FramePerSecond = 7;
+            flipJump.spriteEffects = SpriteEffects.FlipHorizontally;
+            knightDictionary.Add("flipJump", flipJump);
+
+            Animation attack = new Animation(knightAttack, 4);
+            attack.isLooping = true;
+            attack.FramePerSecond = 5;
+            knightDictionary.Add("attack", attack);
+
+            Animation flipAttack = new Animation(knightAttack, 4);
+            flipAttack.isLooping = true;
+            flipAttack.FramePerSecond = 1;
+            flipAttack.spriteEffects = SpriteEffects.FlipHorizontally;
+            knightDictionary.Add("flipAttack", flipAttack);
+
+            Animation ouch = new Animation(knightOuch, 3);
+            ouch.isLooping = true;
+            ouch.FramePerSecond = 1;
+            knightDictionary.Add("ouch", ouch);
+
+            Animation flipOuch = new Animation(knightOuch, 3);
+            flipOuch.isLooping = true;
+            flipOuch.FramePerSecond = 10;
+            flipOuch.spriteEffects = SpriteEffects.FlipHorizontally;
+            knightDictionary.Add("flipOuch", flipOuch);
+        }
 
         public void KnightAnimation()
         {
+            Animation tempBase;
+            Animation tempWalkRight;
+            Animation tempWalkLeft;
+            Animation tempIdle;
+            Animation tempJump;
+            Animation tempFlipJump;
+            Animation tempOuch;
+            Animation tempFlipOuch;
+            Animation tempAttack;
+            Animation tempFlipAttack;
+
+            knightDictionary.TryGetValue("base", out tempBase);
+            knightDictionary.TryGetValue("idle", out tempIdle);
+            knightDictionary.TryGetValue("jump", out tempJump);
+            knightDictionary.TryGetValue("ouch", out tempOuch);
+            knightDictionary.TryGetValue("flipOuch", out tempFlipOuch);
+            knightDictionary.TryGetValue("flipJump", out tempFlipJump);
+            knightDictionary.TryGetValue("attack", out tempAttack);
+            knightDictionary.TryGetValue("flipAttack", out tempFlipAttack);
+            knightDictionary.TryGetValue("walkRight", out tempWalkRight);
+            knightDictionary.TryGetValue("walkLeft", out tempWalkLeft);
+
+            animation = tempBase;
             if (hasTakenDamage && movementVector.X >= 0)
             {
-                animationManager.animation = tempOuch;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempOuch;
                 hasTakenDamage = false;
             }
 
             else if (hasTakenDamage && movementVector.X <= 0)
             {
-                animationManager.animation = tempFlipOuch;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempFlipOuch;
                 hasTakenDamage = false;
             }
 
             else if (isAttacking && position.X <= GameInfo.player1Position.X)
             {
-                animationManager.animation = tempAttack;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempAttack;
                 isAttacking = false;
             }
 
             else if (isAttacking && position.X >= GameInfo.player1Position.X)
             {
-                animationManager.animation = tempFlipAttack;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempFlipAttack;
                 isAttacking = false;
             }
 
             else if (movementVector.Y == 0 && movementVector.X >= 0)
             {
-                animationManager.animation = tempWalkRight;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempWalkRight;
             }
 
             else if (movementVector.Y == 0 && movementVector.X <= 0)
             {
-                animationManager.animation = tempWalkLeft;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempWalkLeft;
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X >= 0))
             {
-                animationManager.animation = tempJump;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempJump;
+
             }
 
             else if (!IsGrounded && (movementVector.Y != 0 && movementVector.X <= 0))
             {
-                animationManager.animation = tempFlipJump;
+                tempJump.frameIndex = 0;
+
+                animation = tempFlipJump;
             }
 
             else if (IsGrounded && movementVector.Y == 0 && movementVector.X == 0)
             {
-                animationManager.animation = tempIdle;
+                tempJump.frameIndex = 0;
+                tempFlipJump.frameIndex = 0;
+
+                animation = tempBase;
             }
 
         }
@@ -276,7 +416,9 @@ namespace TE4TwoDSidescroller
 
             KnightAnimation();
 
-            animationManager.animation.position = position;
+            animation.position = position;
+            animation.Update(gameTime);
+
 
             base.Update(gameTime);
 
@@ -302,7 +444,7 @@ namespace TE4TwoDSidescroller
             //    Color.White, knightRotation, knightOrigin, knightScale,
             //    SpriteEffects.None, 0f);
 
-            animationManager.animation.Draw(gameTime);
+            animation.Draw(gameTime);
 
             // base.Draw(gameTime);
         }
