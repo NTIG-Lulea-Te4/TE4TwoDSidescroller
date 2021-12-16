@@ -89,7 +89,7 @@ namespace TE4TwoDSidescroller
             Animate();
             PlayerDictionary();
 
-            maxHealth = 1000;
+            maxHealth = 500;
             currentHealth = maxHealth;
             
             mana = 100;
@@ -180,6 +180,39 @@ namespace TE4TwoDSidescroller
             {
                 currentHealth = health.TakeDamage(currentHealth, Priest.priestDamage, this);
                 hasTakenDamage = true;
+            }
+
+            #region collison
+            // Problemet är att det funkar liksom "OnCollisionStay" i unity,
+            //så hälsan minskar några gånger när det kolliderar en gång
+
+            //if (collider.tag == Tags.BossAttack.ToString())
+            //{
+            //    currentHealth = health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
+            //    hasTakenDamage = true;
+
+            //    //GameInfo.entityManager.RemoveEntity();
+            //}
+            //if (collider.tag == Tags.BossAttack1.ToString())
+            //{
+            //    currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+            //    hasTakenDamage = true;
+            //    //GameInfo.entityManager.RemoveEntity();
+
+            //}
+            #endregion
+
+            if (BossAttack.damage == true)
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
+                hasTakenDamage = true;
+                BossAttack.damage = false;
+            }
+            if (BossAttack1.damage1 == true)
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+                hasTakenDamage = true;
+                BossAttack1.damage1 = false;
             }
         }
 
