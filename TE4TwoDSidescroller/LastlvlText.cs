@@ -33,7 +33,7 @@ namespace TE4TwoDSidescroller
             text5 = "Go back while you can";
             text6 = "I will kill you, as you wish";
             timer = 0;
-            textposition = new Vector2(GameInfo.player1Position.X + 200, 500);
+            textposition = new Vector2( 200, 500);
             color = Color.White;
         }
 
