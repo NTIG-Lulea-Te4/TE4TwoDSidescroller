@@ -51,7 +51,9 @@ namespace TE4TwoDSidescroller
 
             LoadTexture2D();
 
-            animation = new Animation(playerAttackTexture, 4, 8, true, SpriteEffects.None);
+            animation = new Animation(playerAttackTexture, 4);
+            animation.isLooping = true;
+            animation.FramePerSecond = 8;
 
         }
 
