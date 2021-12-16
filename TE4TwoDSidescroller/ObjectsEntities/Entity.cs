@@ -35,15 +35,19 @@ namespace TE4TwoDSidescroller
         
 
         public int uniqeId;
+
+
         public bool isActive;
         public bool hasCollider;   
         private bool isGrounded;
+        public bool canTakeDamage;
         public static bool wantExit;
 
 
         public float increasingGravity;
         public float amplifiedYForce;
 
+        protected float invincibilityDuration;
         protected int currentHealth;
         protected int manaCheck;
         protected int maxHealth;

@@ -16,6 +16,7 @@ namespace TE4TwoDSidescroller
         int attackHeight;
         float attackDuration;
 
+
         public PlayerMelee()
         {
             //isPlayerAttack = true;
@@ -25,6 +26,7 @@ namespace TE4TwoDSidescroller
             isActive = true;
             hasCollider = true;
             tag = Tags.PlayerMeleeAttack.ToString();
+
             if (GameInfo.player1IsFacingRight)
             {
 
@@ -83,6 +85,19 @@ namespace TE4TwoDSidescroller
             }
         }
 
+        public override void HasCollidedWith(Entity collider)
+        {
+
+            if (collider.tag == Tags.Knight.ToString())
+            {
+
+                //GameInfo.entityManager.RemoveEntity(this.uniqeId);
+
+            }
+
+        }
+
+
         public override void Update(GameTime gameTime)
         {
 
@@ -97,7 +112,7 @@ namespace TE4TwoDSidescroller
             Animate();
 
             animation.position.X = collisionBox.X;
-            animation.position.Y = collisionBox.Y -50;
+            animation.position.Y = collisionBox.Y - 50;
             animation.Update(gameTime);
         }
 

@@ -24,7 +24,6 @@ namespace TE4TwoDSidescroller
             Entity camera;
 
             Entity levelGoal;
-            Entity knight;
 
             Entity deathZone = new DeathZone();
             GameInfo.entityManager.AddEntity(deathZone);
@@ -44,8 +43,7 @@ namespace TE4TwoDSidescroller
             levelGoal = new LevelGoals(4);
             GameInfo.entityManager.AddEntity(levelGoal);
 
-            knight = new Knight();
-            GameInfo.entityManager.AddEntity(knight);
+            
 
         }
 

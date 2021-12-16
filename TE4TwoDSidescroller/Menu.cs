@@ -77,7 +77,7 @@ namespace TE4TwoDSidescroller
 
         public static void ContentLoad(ContentManager content)
         {
-            font = content.Load<SpriteFont>("Fonts/Arial16");
+            //font = content.Load<SpriteFont>("Fonts/Arial16");
         }
 
         //fixa så att rektanglarna deaktiveras efter att spelet börjar
@@ -136,29 +136,29 @@ namespace TE4TwoDSidescroller
             GameInfo.spriteBatch.Draw(buttons, quitButton, quitColour);
 
             //rita ut texten här
-            if (!string.IsNullOrEmpty(startText))
-            {
-                #region textPosition
-                startTextPosition.X = (startButton.X + (startButton.Width / 2) - (font.MeasureString(startText).X / 2));
-                startTextPosition.Y = (startButton.Y + (startButton.Height / 2) - (font.MeasureString(startText).X / 2));
+            //if (!string.IsNullOrEmpty(startText))
+            //{
+            //    #region textPosition
+            //    startTextPosition.X = (startButton.X + (startButton.Width / 2) - (font.MeasureString(startText).X / 2));
+            //    startTextPosition.Y = (startButton.Y + (startButton.Height / 2) - (font.MeasureString(startText).X / 2));
 
 
-                quitTextPosition.X = (quitButton.X + (quitButton.Width / 2) - (font.MeasureString(quitText).X / 2));
-                quitTextPosition.Y = (quitButton.Y + (quitButton.Height / 2) - (font.MeasureString(quitText).X / 2));
+            //    quitTextPosition.X = (quitButton.X + (quitButton.Width / 2) - (font.MeasureString(quitText).X / 2));
+            //    quitTextPosition.Y = (quitButton.Y + (quitButton.Height / 2) - (font.MeasureString(quitText).X / 2));
                 
-                titleTextPosition.X = (buttonHolder.X + (buttonHolder.Width / 2 - 25) - (font.MeasureString(quitText).X / 2));
-                titleTextPosition.Y = (buttonHolder.Y + (buttonHolder.Height / 6) - (font.MeasureString(quitText).X / 2));
+            //    titleTextPosition.X = (buttonHolder.X + (buttonHolder.Width / 2 - 25) - (font.MeasureString(quitText).X / 2));
+            //    titleTextPosition.Y = (buttonHolder.Y + (buttonHolder.Height / 6) - (font.MeasureString(quitText).X / 2));
              
-                #endregion
-                if (font != null)
-                {
+            //    #endregion
+            //    if (font != null)
+            //    {
 
-                     GameInfo.spriteBatch.DrawString(font, startText, startTextPosition, textColor);
-                     GameInfo.spriteBatch.DrawString(font, quitText, quitTextPosition, textColor);
-                     GameInfo.spriteBatch.DrawString(font, titleText, titleTextPosition, textColor);
+            //         GameInfo.spriteBatch.DrawString(font, startText, startTextPosition, textColor);
+            //         GameInfo.spriteBatch.DrawString(font, quitText, quitTextPosition, textColor);
+            //         GameInfo.spriteBatch.DrawString(font, titleText, titleTextPosition, textColor);
 
-                }
-            }
+            //    }
+            //}
         }
     }
 }

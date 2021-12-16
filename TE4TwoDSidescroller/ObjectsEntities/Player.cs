@@ -303,6 +303,11 @@ namespace TE4TwoDSidescroller
             if (collider.tag == Tags.Floor.ToString())
             {
                 IsGrounded = true;
+
+            }
+            else
+            {
+                IsGrounded = false;                    
             }
 
             if (collider.tag == Tags.KnightAttack.ToString())
@@ -374,7 +379,7 @@ namespace TE4TwoDSidescroller
         public override void Jump(GameTime gameTime)
         {
             movementVector.Y -= moveSpeed + 1;
-            IsGrounded = false;
+            //IsGrounded = false;
         }
 
         public override void Attack1()
@@ -418,8 +423,6 @@ namespace TE4TwoDSidescroller
                 increasingGravity += GameInfo.gameInformationSystem.gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
 
-            detectionHitBox.X = (int)playerPosition.X;
-            detectionHitBox.Y = (int)playerPosition.Y;
             collisionBox.X = (int)playerPosition.X;
             collisionBox.Y = (int)playerPosition.Y;
             

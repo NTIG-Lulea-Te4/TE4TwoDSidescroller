@@ -47,6 +47,12 @@ namespace TE4TwoDSidescroller
             menu = new HealthBar();
             GameInfo.entityManager.AddEntity(menu);
 
+            Entity knight = new Knight(500, 500);
+            GameInfo.entityManager.AddEntity(knight);
+
+            Entity knight2 = new Knight(900, 500);
+            GameInfo.entityManager.AddEntity(knight2);
+
 
         }
 

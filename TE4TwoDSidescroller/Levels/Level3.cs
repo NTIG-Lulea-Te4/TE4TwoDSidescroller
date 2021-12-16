@@ -47,7 +47,7 @@ namespace TE4TwoDSidescroller
             floor = new Floor();
             GameInfo.entityManager.AddEntity(floor);
 
-            knight = new Knight();
+            knight = new Knight(500, 500);
             GameInfo.entityManager.AddEntity(knight);
 
             camera = new VisionManager();

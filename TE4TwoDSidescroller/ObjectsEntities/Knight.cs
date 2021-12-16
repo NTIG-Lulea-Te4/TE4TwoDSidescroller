@@ -45,7 +45,7 @@ namespace TE4TwoDSidescroller
         public static int knightDamage;
 
 
-        public Knight()
+        public Knight(float spawnPositionX,float spawnPositionY)
         {
 
             characterInput = new KnightBehaviour(this);
@@ -56,21 +56,23 @@ namespace TE4TwoDSidescroller
             isActive = true;
             hasCollider = true;
             knightIsFacingRight = true;
+            canTakeDamage = true;
 
              
 
-            movementSpeed = 0.3f;
-            maxHealth = 1000;
+            movementSpeed = 0.7f;
+            maxHealth = 20;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
             health = new Health();
+            knightDamage = 0;
 
             gameInfoSystem = new GameInformationSystem();
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
-            position = new Vector2(500, 500);
+            position = new Vector2(spawnPositionX, spawnPositionY);
             movementDirection = new Vector2();
             knightVelocity = new Vector2(0, 0);
 
@@ -91,7 +93,6 @@ namespace TE4TwoDSidescroller
             colorData = new Color[knightWalk.Width * knightWalk.Height];
             knightWalk.GetData(colorData);
 
-            knightDamage = 5;
 
 
         }
@@ -310,11 +311,13 @@ namespace TE4TwoDSidescroller
 
             }
 
-            if (collider.tag == Tags.PlayerMeleeAttack.ToString())
+            if (canTakeDamage && collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
 
                 hasTakenDamage = true;
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
+                canTakeDamage = false;
+
             }
 
             if (collider.tag == Tags.PlayerRangeAttack.ToString())
@@ -398,6 +401,13 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
+            invincibilityDuration += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (invincibilityDuration >= 5000)
+            {
+                canTakeDamage = true;
+                invincibilityDuration = 0;
+            }
 
             movementDirection = GameInfo.player1Position - position;
 
