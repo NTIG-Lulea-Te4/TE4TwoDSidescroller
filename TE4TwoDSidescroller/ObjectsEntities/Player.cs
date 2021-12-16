@@ -181,6 +181,15 @@ namespace TE4TwoDSidescroller
                 currentHealth = health.TakeDamage(currentHealth, Priest.priestDamage, this);
                 hasTakenDamage = true;
             }
+<<<<<<< HEAD
+=======
+
+            if (collider.tag == Tags.BossAttack.ToString())
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+                hasTakenDamage = true;
+            }
+>>>>>>> parent of d90306e (Damage and attack fixed)
         }
 
         #region Input
