@@ -40,10 +40,7 @@ namespace TE4TwoDSidescroller
             LoadTextrue2D();
             collisionBox = new Rectangle((int)bossPosition.X, (int)bossPosition.Y,
                                           bossTexture.Width, bossTexture.Height);
-            //bossSourceRectangle = new Rectangle(0, 0, 64, 96);
-            //bossScale = new Vector2(1, 1);
             hasCollider = true;
-            text = "ada";
         }
 
         #region LoadTextrue
@@ -96,11 +93,6 @@ namespace TE4TwoDSidescroller
             GameInfo.entityManager.AddEntity(BossAttack1);
         }
 
-        //public static void ContentLoad(ContentManager content)
-        //{
-        //    font = content.Load<SpriteFont>("Fonts/Arial16");
-        //}
-
         public override void Update(GameTime gameTime)
         {
             GameInfo.bossPosition = bossPosition;
@@ -111,12 +103,6 @@ namespace TE4TwoDSidescroller
         public override void Draw(GameTime gameTime)
         {
             GameInfo.spriteBatch.Draw(bossTexture, bossPosition, Color.White);
-
-            //if (font != null)
-            //{
-            //    GameInfo.spriteBatch.DrawString(font, text, new Vector2(200, 500), Color.White);
-            //}
-
         }
     }
 }
