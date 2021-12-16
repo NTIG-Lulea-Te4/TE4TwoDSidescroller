@@ -43,6 +43,7 @@ namespace TE4TwoDSidescroller
 
             Menu.ContentLoad(Content);
             SoundInput.ContentLoad(Content);
+            LastlvlText.ContentLoad(Content);
             GameInfo.creationManager.Initialize();
             
             //ej rätt GraphicsDevice ska vara graphics.GraphicsDevice
