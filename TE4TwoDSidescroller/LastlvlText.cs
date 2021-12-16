@@ -21,6 +21,7 @@ namespace TE4TwoDSidescroller
         private string text7;
         private float timer;
         private Vector2 textposition;
+        Color color;
 
         public LastlvlText()
         {
@@ -35,6 +36,7 @@ namespace TE4TwoDSidescroller
             text7 = "";
             timer = 0;
             textposition = new Vector2(200, 500);
+            color = Color.Green;
 
 
         }
@@ -110,7 +112,7 @@ namespace TE4TwoDSidescroller
 
             if (font != null)
             {
-                GameInfo.spriteBatch.DrawString(font, text, textposition, Color.White);
+                GameInfo.spriteBatch.DrawString(font, text, textposition, color);
             }
 
         }
