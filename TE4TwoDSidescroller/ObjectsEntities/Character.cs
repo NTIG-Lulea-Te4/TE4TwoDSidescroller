@@ -20,8 +20,6 @@ namespace TE4TwoDSidescroller
 
         public Character()
         {
-            Animation tempIdle;
-            animationManager.animations.TryGetValue("playerIdle", out tempIdle);
 
 
         }

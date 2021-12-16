@@ -20,6 +20,7 @@ namespace TE4TwoDSidescroller
         static public EntityManagear entityManager;
         static public ScreenManager screenManager;
         static public CreationManager creationManager;
+        public static AnimationManager animationManager;
         static public Vector2 player1Position;
         static public Rectangle Player1TextureSize;
         static public bool player1IsFacingRight;

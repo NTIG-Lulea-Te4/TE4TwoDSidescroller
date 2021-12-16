@@ -35,7 +35,7 @@ namespace TE4TwoDSidescroller
         private Texture2D godSecondAttack;
         private Texture2D bigRockTexture;
 
-        AnimationManager()
+        public AnimationManager()
         {
             animations = new Dictionary<string, Animation>();
 
