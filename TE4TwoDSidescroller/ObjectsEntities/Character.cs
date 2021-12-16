@@ -12,26 +12,19 @@ namespace TE4TwoDSidescroller
     {
         public CharacterInput characterInput;
 
-        public Animation animation;
+        public AnimationManager animationManager;
 
         public VisionManager visionManager;
 
         public Vector2 movementDirection;
 
-
-        public Dictionary<string, Animation> animations;
-
-
-
-
         public Character()
         {
-
+            Animation tempIdle;
+            animationManager.animations.TryGetValue("playerIdle", out tempIdle);
 
 
         }
-
-
 
         #region Movement
 
@@ -178,28 +171,9 @@ namespace TE4TwoDSidescroller
 
         }
 
-        //public virtual void Draw(SpriteBatch spriteBatch)
-        //{
-        //    if (characterTexture != null)
-        //    {
-        //        spriteBatch.Draw(characterTexture, characterPosition, Color.White);
-        //    }
-        //    else if (animationManager != null)
-        //    {
-        //        animationManager.Draw(spriteBatch);
-        //    }
-        //    else throw new Exception("You got Fed!");
-        //}
 
         public override void Update(GameTime gameTime)
         {
-
-
-
-
-            //SetPlayerAnimation();
-
-            //animationManager.Update(gameTime);
 
             movementVector = Vector2.Zero;
             characterInput.Update(gameTime);

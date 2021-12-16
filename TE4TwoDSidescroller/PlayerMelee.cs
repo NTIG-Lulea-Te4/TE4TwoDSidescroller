@@ -28,8 +28,8 @@ namespace TE4TwoDSidescroller
             if (GameInfo.player1IsFacingRight)
             {
 
-                collisionBox = new Rectangle((int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width, 
-                    (int)GameInfo.player1Position.Y + GameInfo.Player1TextureSize.Height / 2, 
+                collisionBox = new Rectangle((int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width,
+                    (int)GameInfo.player1Position.Y + GameInfo.Player1TextureSize.Height / 2,
                     attackWidth, attackHeight);
 
             }
@@ -42,9 +42,7 @@ namespace TE4TwoDSidescroller
 
             LoadTexture2D();
 
-            animation = new Animation(playerAttackTexture, 4);
-            animation.isLooping = true;
-            animation.FramePerSecond = 8;
+            animation = new Animation(playerAttackTexture, 4, 8, true, SpriteEffects.None);
 
         }
 
@@ -97,7 +95,7 @@ namespace TE4TwoDSidescroller
             Animate();
 
             animation.position.X = collisionBox.X;
-            animation.position.Y = collisionBox.Y -50;
+            animation.position.Y = collisionBox.Y - 50;
         }
 
         public override void Draw(GameTime gameTime)
@@ -105,7 +103,7 @@ namespace TE4TwoDSidescroller
 
             //GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
             animation.Draw(gameTime);
-            
+
         }
     }
 }

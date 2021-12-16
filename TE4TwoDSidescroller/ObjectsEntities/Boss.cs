@@ -18,6 +18,11 @@ namespace TE4TwoDSidescroller
         double heavyAttackTimer;
         Vector2 attack1;
 
+        Animation tempIdle;
+        Animation tempOuch;
+        Animation tempFirstAttack;
+        Animation tempSecondAttack;
+        Animation tempBigRockAnimation;
 
         public Boss()
         {
@@ -32,6 +37,8 @@ namespace TE4TwoDSidescroller
             float attack1Dmg = 10f;
 
             LoadTextrue2D();
+
+            GodDictionary();
         }
 
         public void LoadTextrue2D()
@@ -55,6 +62,20 @@ namespace TE4TwoDSidescroller
 
             }
 
+
+        }
+
+        private void GodDictionary()
+        {
+            animationManager.animations.TryGetValue("godIdle", out tempIdle);
+            animationManager.animations.TryGetValue("godOuch", out tempOuch);
+            animationManager.animations.TryGetValue("godFirstAttack", out tempFirstAttack);
+            animationManager.animations.TryGetValue("godSecondAttack", out tempSecondAttack);
+            animationManager.animations.TryGetValue("bigRock", out tempBigRockAnimation);
+        }
+
+        private void GodAnimation()
+        {
 
         }
 
@@ -109,6 +130,8 @@ namespace TE4TwoDSidescroller
 
         public override void Draw(GameTime gameTime)
         {
+            //animationManager.animation.Draw(gameTime);
+
             GameInfo.spriteBatch.Draw(bossTexture, bossPosition, Color.White);
             foreach (Vector2 heavyAttack in heavyAttacks)
             {
