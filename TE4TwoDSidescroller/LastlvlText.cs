@@ -18,7 +18,6 @@ namespace TE4TwoDSidescroller
         private string text4;
         private string text5;
         private string text6;
-        private string text7;
         private float timer;
         private Vector2 textposition;
         Color color;
@@ -32,15 +31,11 @@ namespace TE4TwoDSidescroller
             text3 = "Who are you";
             text4 = "How dare you to challange me";
             text5 = "Go back while you can";
-            text6 = "I will kill you, as what you wish";
-            text7 = "";
+            text6 = "I will kill you, as you wish";
             timer = 0;
-            textposition = new Vector2(200, 500);
-            color = Color.Green;
-
-
+            textposition = new Vector2( 200, 500);
+            color = Color.White;
         }
-
 
         public static void ContentLoad(ContentManager content)
         {
@@ -65,7 +60,8 @@ namespace TE4TwoDSidescroller
             }
             if (timer > 9)
             {
-                textposition = new Vector2(500, 500);
+                color = Color.Red;
+                textposition = new Vector2(GameInfo.player1Position.X+300, 500);
                 text = text3;
             }
             if (timer > 12)
@@ -76,37 +72,18 @@ namespace TE4TwoDSidescroller
             {
                 text = text5;
             }
-            //if (timer > 18)
-            //{
-            //    text = "";
-            //}
-            if (timer > 21 || GameInfo.bossPosition.X - GameInfo.player1Position.X < 500)
+
+            if (GameInfo.bossPosition.X - GameInfo.player1Position.X < 1000)
             {
-                timer = 22;
-                textposition = new Vector2(700, 500);
                 text = text6;
-            }
-            //if (timer > 21)
-            //{
-            //    textposition = new Vector2(700, 500);
-            //    text = text6;
-            //}
-            //if (GameInfo.bossPosition.X - GameInfo.player1Position.X < 500)
-            //{
-            //    timer = 25;
-            //    text = text6;
-            //}
-            //if (timer > 21)
-            //{
-            //    text = text7;
-            //}
-            if (timer > 25)
-            {
-                text = "";
+                if (timer > 24)
+                {
+                    text = "";
+                }
             }
         }
-            
-        
+
+
         public override void Draw(GameTime gameTime)
         {
 

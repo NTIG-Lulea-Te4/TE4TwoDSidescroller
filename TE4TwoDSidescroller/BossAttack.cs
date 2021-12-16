@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace TE4TwoDSidescroller
         private int attackHeigh;
         private int attackSpeed;
         public static bool damage;
-             
+
         public BossAttack(Character character)
         {
             tag = Tags.BossAttack.ToString();
@@ -24,11 +24,11 @@ namespace TE4TwoDSidescroller
             attackSpeed = 5;
             damage = false;
 
-        
+
             collisionBox = new Rectangle((int)GameInfo.player1Position.X,
             0,
             attackWidth, attackHeigh);
-            
+
             LoadTextrue();
         }
 
@@ -50,16 +50,6 @@ namespace TE4TwoDSidescroller
                 damage = true;
             }
         }
-
-        //public override void HasCollidedWith(Entity collider)
-        //{
-        //    if (collider.tag == Tags.Player.ToString())
-        //    {
-        //        currentHealth = Player.health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
-        //        hasTakenDamage = true;
-        //        GameInfo.entityManager.RemoveEntity(this.uniqeId);
-        //    }
-        //}
 
         public override void Update(GameTime gameTime)
         {

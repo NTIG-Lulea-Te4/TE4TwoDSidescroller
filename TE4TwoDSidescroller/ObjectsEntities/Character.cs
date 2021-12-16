@@ -22,12 +22,12 @@ namespace TE4TwoDSidescroller
         public Dictionary<string, Animation> animations;
 
 
-        
+
 
         public Character()
         {
-            
-            
+
+
 
         }
 

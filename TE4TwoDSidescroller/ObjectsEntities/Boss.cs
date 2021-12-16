@@ -20,22 +20,18 @@ namespace TE4TwoDSidescroller
         public static int bossAttackdmg;
         public static int bossAttack1dmg;
         bool hasTakenDamage;
-        //private Rectangle bossSourceRectangle;
-        //protected Vector2 bossOrgin;
-        //protected Vector2 bossScale;
-        //public SpriteFont font;
         #endregion
 
         public Boss()
         {
 
             characterInput = new BossBehaviour(this);
-            bossPosition = new Vector2(1250, 600);
+            bossPosition = new Vector2(3250, 600);
             health = new Health();
             maxHealth = 100;
             currentHealth = maxHealth;
             tag = Tags.Boss.ToString();
-            bossAttackdmg = 100;
+            bossAttackdmg = 70;
             bossAttack1dmg = 50;
             LoadTextrue2D();
             collisionBox = new Rectangle((int)bossPosition.X, (int)bossPosition.Y,
@@ -72,12 +68,6 @@ namespace TE4TwoDSidescroller
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
                 hasTakenDamage = true;
             }
-
-            //if (collider.tag == Tags.Player.ToString())
-            //{
-            //    GameInfo.entityManager.RemoveEntity(this.uniqeId);
-            //}
-
         }
         #endregion
 

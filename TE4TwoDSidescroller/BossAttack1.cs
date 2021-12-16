@@ -45,11 +45,11 @@ namespace TE4TwoDSidescroller
         public override void HasCollidedWith(Entity collider)
         {
             if (collider.tag == Tags.Player.ToString())
-            {    
+            {
                 GameInfo.entityManager.RemoveEntity(this.uniqeId);
                 damage1 = true;
             }
-        }   
+        }
 
         public override void Update(GameTime gameTime)
         {

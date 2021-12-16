@@ -45,7 +45,7 @@ namespace TE4TwoDSidescroller
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
             myPosition = new Vector2(myPosition1, myPosition2);
-            
+
             collisionBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, 64, 96);
             health = new Health();
 
@@ -144,7 +144,7 @@ namespace TE4TwoDSidescroller
             Animation tempFlipOuch;
             Animation tempAttack;
             Animation tempFlipAttack;
- 
+
             farmerDictionary.TryGetValue("idle", out tempIdle);
             farmerDictionary.TryGetValue("ouch", out tempOuch);
             farmerDictionary.TryGetValue("flipOuch", out tempFlipOuch);
@@ -228,7 +228,7 @@ namespace TE4TwoDSidescroller
 
         }
 
-        public override void Attack1( )
+        public override void Attack1()
         {
 
 

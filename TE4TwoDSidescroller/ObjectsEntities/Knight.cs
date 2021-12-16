@@ -24,7 +24,7 @@ namespace TE4TwoDSidescroller
         private Texture2D knightAttack;
 
         public static Rectangle sourceRectangle;
-        
+
         //public  Vector2 knightPosition;
         private Vector2 knightOrigin;
         private Vector2 knightVelocity;
@@ -36,7 +36,7 @@ namespace TE4TwoDSidescroller
 
         private Health health;
 
-        
+
         public static bool knightIsFacingRight;
         bool isWalkingRight;
         bool hasTakenDamage;
@@ -57,7 +57,7 @@ namespace TE4TwoDSidescroller
             hasCollider = true;
             knightIsFacingRight = true;
 
-             
+
 
             movementSpeed = 0.3f;
             maxHealth = 1000;
@@ -79,7 +79,7 @@ namespace TE4TwoDSidescroller
             movementVector = new Vector2(0, 0);
             knightRotation = 0;
             trackingDistance = new Vector2(300, 300);
-            
+
 
             collisionBox = new Rectangle(0, 0, 64, 96);
 
@@ -335,7 +335,7 @@ namespace TE4TwoDSidescroller
 
 
             isWalkingRight = true;
-            
+
         }
 
         public override void MoveLeft()
@@ -345,7 +345,7 @@ namespace TE4TwoDSidescroller
 
 
             isWalkingRight = false;
-            
+
         }
 
         //public override void Jump(GameTime gameTime)

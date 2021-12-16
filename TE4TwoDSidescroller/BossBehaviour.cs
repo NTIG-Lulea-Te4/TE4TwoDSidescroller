@@ -19,13 +19,13 @@ namespace TE4TwoDSidescroller
         {
             heavyAttackTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (GameInfo.bossPosition.X - GameInfo.player1Position.X < 500 && heavyAttackTimer > 2)
+            if (GameInfo.bossPosition.X - GameInfo.player1Position.X < 1000 && heavyAttackTimer > 2)
             {
                 heavyAttackTimer = 0;
                 character.Attack1();
                 character.Attack2();
             }
-            if ( heavyAttackTimer > 2)
+            if (GameInfo.bossPosition.X - GameInfo.player1Position.X > 1000 && heavyAttackTimer > 2)
             {
                 heavyAttackTimer = 0;
                 character.Attack2();

@@ -49,9 +49,11 @@ namespace TE4TwoDSidescroller
             boss = new Boss();
             GameInfo.entityManager.AddEntity(boss);
 
+            boss = new Boss();
+            GameInfo.entityManager.AddEntity(boss);
+
             lastlvlText = new LastlvlText();
             GameInfo.entityManager.AddEntity(lastlvlText);
-
         }
 
 
