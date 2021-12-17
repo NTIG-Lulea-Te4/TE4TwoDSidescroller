@@ -218,13 +218,24 @@ namespace TE4TwoDSidescroller
         {
 
             myPosition.X += movementSpeed;
+            if (SoundInput.soundEffectknigthWalkInstance.State != Microsoft.Xna.Framework.Audio.SoundState.Playing)
+            {
 
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.2f, -1f, 0.1f);
+
+            }
         }
 
         public override void MoveLeft()
         {
 
             myPosition.X -= movementSpeed;
+            if (SoundInput.soundEffectknigthWalkInstance.State != Microsoft.Xna.Framework.Audio.SoundState.Playing)
+            {
+
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.2f, -1f, 0.1f);
+
+            }
 
         }
 

@@ -363,6 +363,7 @@ namespace TE4TwoDSidescroller
             Entity knightAttack = new KnightAttack(this);
             GameInfo.entityManager.AddEntity(knightAttack);
             isAttacking = true;
+           
         }
 
         #endregion

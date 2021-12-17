@@ -83,7 +83,7 @@ namespace TE4TwoDSidescroller
         {
 
             healthBar.Width = GameInfo.playerOneCurrentHealth * 2;
-
+    
             if (healthBarBackground.Width <= 10)
             {
                 healthBarBackground.Width = GameInfo.playerOneCurrentHealth * 2 + 10;

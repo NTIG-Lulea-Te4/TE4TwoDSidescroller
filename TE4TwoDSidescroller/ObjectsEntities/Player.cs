@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -310,7 +311,17 @@ namespace TE4TwoDSidescroller
             {
                 currentHealth = health.TakeDamage(currentHealth, Knight.knightDamage, this);
                 hasTakenDamage = true;
-                SoundInput.SoundEffectPlayed(SoundInput.evilLaugh , 0.9f, 0.1f, 0.1f);
+                GameInfo.playerOneCurrentHealth = currentHealth;
+                
+                //SoundInput.SoundEffectInstance(SoundInput.evilLaugh, 0.9f, 0.1f, 0.1f);
+                
+                if(SoundInput.soundEffectevilLaughInstance.State != SoundState.Playing)
+                {
+                    
+                    SoundInput.SoundEffectInstance(SoundInput.soundEffectevilLaughInstance, 0.9f, 0.1f, 0.1f);
+
+                }
+                //SoundInput.SoundEffectPlayed(SoundInput.evilLaugh , 0.9f, 0.1f, 0.1f);
             }
 
             if (collider.tag == Tags.DeathZone.ToString())
@@ -324,6 +335,7 @@ namespace TE4TwoDSidescroller
             {
                 currentHealth = health.TakeDamage(currentHealth, Priest.priestDamage, this);
                 hasTakenDamage = true;
+                GameInfo.playerOneCurrentHealth = currentHealth;
             }
 
         }
@@ -353,6 +365,12 @@ namespace TE4TwoDSidescroller
 
             isWalkingRight = false;
             isFacingRight = false;
+            if (SoundInput.soundEffectknigthWalkInstance.State != SoundState.Playing && IsGrounded == true)
+            {
+
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.3f, 0.1f, 0.1f);
+
+            }
         }
 
         public override void MoveRight()
@@ -361,6 +379,12 @@ namespace TE4TwoDSidescroller
 
             isWalkingRight = true;
             isFacingRight = true;
+            if (SoundInput.soundEffectknigthWalkInstance.State != SoundState.Playing && IsGrounded == true)
+            {
+
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.3f, 0.1f, 0.1f);
+
+            }
         }
 
         public override void Run()
@@ -376,15 +400,27 @@ namespace TE4TwoDSidescroller
         public override void Jump(GameTime gameTime)
         {
             movementVector.Y -= moveSpeed + 1;
+            if(SoundInput.soundEffectmainCharacterJumpInstance.State != SoundState.Playing && IsGrounded == true)
+            {
+
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectmainCharacterJumpInstance, 1f, 0.1f, 0.1f);
+
+            }
             IsGrounded = false;
             
+
         }
 
         public override void Attack1()
         {
 
             GameInfo.creationManager.InitializePlayerMeleeAttack();
+            if (SoundInput.soundEffectswordSwooshInstance.State != Microsoft.Xna.Framework.Audio.SoundState.Playing)
+            {
 
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectswordSwooshInstance, 0.9f, 0.1f, 0.1f);
+
+            }
         }
 
         public override void Attack2()
