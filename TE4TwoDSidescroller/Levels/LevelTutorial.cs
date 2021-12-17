@@ -25,6 +25,7 @@ namespace TE4TwoDSidescroller
             Entity camera;
             Entity tutorialGoal;
             HealthBar menu;
+ 
 
             Entity deathZone = new DeathZone();
             GameInfo.entityManager.AddEntity(deathZone);
@@ -46,14 +47,6 @@ namespace TE4TwoDSidescroller
 
             menu = new HealthBar();
             GameInfo.entityManager.AddEntity(menu);
-
-            Entity knight = new Knight(500, 500);
-            GameInfo.entityManager.AddEntity(knight);
-
-            Entity knight2 = new Knight(900, 500);
-            GameInfo.entityManager.AddEntity(knight2);
-
-
         }
 
         public override void Update(GameTime gameTime)

@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,7 +23,7 @@ namespace TE4TwoDSidescroller
         Health health;
 
         private Rectangle playerSourceRectangle;
-        private Vector2 playerPosition;                                                                                                                                                                                                                                       
+        private Vector2 playerPosition;
         private Vector2 playerVelocity;
 
         private Rectangle detectionHitBox;
@@ -38,6 +39,7 @@ namespace TE4TwoDSidescroller
         float deltaTime;
         float time;
        
+
 
         bool isWalkingRight;
         bool isWalkingLeft;
@@ -90,10 +92,10 @@ namespace TE4TwoDSidescroller
             PlayerDictionary();
             Animate();
 
-            maxHealth = 1000;
+            maxHealth = 200;
             currentHealth = maxHealth;
             
-            mana = 100;
+            mana = 200;
             manaCheck = mana;
             manaTick = 0;
             playerDamage = 10;
@@ -259,6 +261,7 @@ namespace TE4TwoDSidescroller
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
                  
+
                 animation = tempIdle;
 
             }
@@ -384,6 +387,17 @@ namespace TE4TwoDSidescroller
             {
                 currentHealth = health.TakeDamage(currentHealth, Knight.knightDamage, this);
                 hasTakenDamage = true;
+                GameInfo.playerOneCurrentHealth = currentHealth;
+                
+                //SoundInput.SoundEffectInstance(SoundInput.evilLaugh, 0.9f, 0.1f, 0.1f);
+                
+                if(SoundInput.soundEffectevilLaughInstance.State != SoundState.Playing)
+                {
+                    
+                    SoundInput.SoundEffectInstance(SoundInput.soundEffectevilLaughInstance, 0.9f, 0.1f, 0.1f);
+
+                }
+                //SoundInput.SoundEffectPlayed(SoundInput.evilLaugh , 0.9f, 0.1f, 0.1f);
             }
 
             if (collider.tag == Tags.DeathZone.ToString())
@@ -397,6 +411,40 @@ namespace TE4TwoDSidescroller
             {
                 currentHealth = health.TakeDamage(currentHealth, Priest.priestDamage, this);
                 hasTakenDamage = true;
+                GameInfo.playerOneCurrentHealth = currentHealth;
+            }
+
+            #region collison
+            // Problemet är att det funkar liksom "OnCollisionStay" i unity,
+            //så hälsan minskar några gånger när det kolliderar en gång
+
+            //if (collider.tag == Tags.BossAttack.ToString())
+            //{
+            //    currentHealth = health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
+            //    hasTakenDamage = true;
+
+            //    //GameInfo.entityManager.RemoveEntity();
+            //}
+            //if (collider.tag == Tags.BossAttack1.ToString())
+            //{
+            //    currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+            //    hasTakenDamage = true;
+            //    //GameInfo.entityManager.RemoveEntity();
+
+            //}
+            #endregion
+
+            if (BossAttack.damage == true)
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
+                hasTakenDamage = true;
+                BossAttack.damage = false;
+            }
+            if (BossAttack1.damage1 == true)
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+                hasTakenDamage = true;
+                BossAttack1.damage1 = false;
             }
 
         }
@@ -426,6 +474,12 @@ namespace TE4TwoDSidescroller
 
             isWalkingRight = false;
             isFacingRight = false;
+            if (SoundInput.soundEffectknigthWalkInstance.State != SoundState.Playing && IsGrounded == true)
+            {
+
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.3f, 0.1f, 0.1f);
+
+            }
         }
 
         public override void MoveRight()
@@ -434,6 +488,12 @@ namespace TE4TwoDSidescroller
 
             isWalkingRight = true;
             isFacingRight = true;
+            if (SoundInput.soundEffectknigthWalkInstance.State != SoundState.Playing && IsGrounded == true)
+            {
+
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.3f, 0.1f, 0.1f);
+
+            }
         }
 
         public override void Run()
@@ -445,18 +505,31 @@ namespace TE4TwoDSidescroller
         {
             moveSpeed = walkSpeed;
         }
-
+       
         public override void Jump(GameTime gameTime)
         {
             movementVector.Y -= moveSpeed + 1;
-            //IsGrounded = false;
+            if(SoundInput.soundEffectmainCharacterJumpInstance.State != SoundState.Playing && IsGrounded == true)
+            {
+
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectmainCharacterJumpInstance, 1f, 0.1f, 0.1f);
+
+            }
+            IsGrounded = false;
+            
+
         }
 
         public override void Attack1()
         {
 
             GameInfo.creationManager.InitializePlayerMeleeAttack();
+            if (SoundInput.soundEffectswordSwooshInstance.State != Microsoft.Xna.Framework.Audio.SoundState.Playing)
+            {
 
+                SoundInput.SoundEffectInstance(SoundInput.soundEffectswordSwooshInstance, 0.9f, 0.1f, 0.1f);
+
+            }
         }
 
         public override void Attack2()
@@ -496,7 +569,7 @@ namespace TE4TwoDSidescroller
 
             collisionBox.X = (int)playerPosition.X;
             collisionBox.Y = (int)playerPosition.Y;
-            
+
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
 
@@ -511,6 +584,7 @@ namespace TE4TwoDSidescroller
             {
                 movementVector.Y = 0;
             }
+
 
             #region Harry's Code
             manaTick++;

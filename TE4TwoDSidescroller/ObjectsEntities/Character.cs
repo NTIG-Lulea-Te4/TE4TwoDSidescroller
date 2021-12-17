@@ -24,10 +24,11 @@ namespace TE4TwoDSidescroller
 
         
 
+
         public Character()
         {
-            
-            
+
+
 
         }
 

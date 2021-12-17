@@ -25,7 +25,9 @@ namespace TE4TwoDSidescroller
         Vector2 titleTextPosition;
 
         Texture2D buttons;
+        Texture2D backGround;
         static SpriteFont font;
+        static SpriteFont titleFont;
 
         bool isStartHovering;
         bool isQuitHovering;
@@ -38,6 +40,7 @@ namespace TE4TwoDSidescroller
         string quitText;
         string titleText;
         Color textColor;
+        Color titleTextColor;
 
         public Menu()
         {
@@ -46,8 +49,8 @@ namespace TE4TwoDSidescroller
             buttonWidth = 200;
 
             buttonHolder = new Rectangle(0,0,GameInfo.graphicsDevice.PreferredBackBufferWidth, GameInfo.graphicsDevice.PreferredBackBufferHeight);
-            startButton = new Rectangle(buttonHolder.Width/2 - buttonWidth / 2, 300, buttonWidth, buttonsHeigth);
-            quitButton = new Rectangle(buttonHolder.Width/2 - buttonWidth / 2, 500, buttonWidth, buttonsHeigth);
+            startButton = new Rectangle(buttonHolder.Width/2 - buttonWidth / 2, buttonHolder.Height/2 -50, buttonWidth, buttonsHeigth);
+            quitButton = new Rectangle(buttonHolder.Width/2 - buttonWidth / 2, buttonHolder.Height / 2 + 100, buttonWidth, buttonsHeigth);
 
             wantExit = false;
 
@@ -55,7 +58,8 @@ namespace TE4TwoDSidescroller
             quitText = "quit";
             titleText = "MediEvil";
            
-            textColor = Color.Red;
+            textColor = Color.Goldenrod;
+            titleTextColor = Color.DarkRed;
 
             LoadTexture2D();
             
@@ -66,18 +70,29 @@ namespace TE4TwoDSidescroller
         {
             string currentPath = Path.GetDirectoryName(
              System.Reflection.Assembly.GetExecutingAssembly().Location)
-             + "/Content/Pngs/" + "PurpleBox.png";
+             + "/Content/Pngs/" + "ButtonTwo.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
                 buttons = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
 
+
+            string secondtPath = Path.GetDirectoryName(
+             System.Reflection.Assembly.GetExecutingAssembly().Location)
+             + "/Content/Pngs/" + "TheHell.jpg";
+
+            using (Stream textureStream = new FileStream(secondtPath, FileMode.Open))
+            {
+                backGround = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
+            }
+
         }
 
         public static void ContentLoad(ContentManager content)
         {
-            //font = content.Load<SpriteFont>("Fonts/Arial16");
+            font = content.Load<SpriteFont>("Fonts/Arial16");
+            titleFont = content.Load<SpriteFont>("Fonts/Arial32");
         }
 
         //fixa så att rektanglarna deaktiveras efter att spelet börjar
@@ -100,8 +115,8 @@ namespace TE4TwoDSidescroller
                 if (currentMouse.LeftButton == ButtonState.Released && previosMouse.LeftButton == ButtonState.Pressed)
                 {
                     LevelTutorial.LoadContent();
-                    SoundInput.SongPlay(SoundInput.preBossMusic);
-                    GameInfo.entityManager.RemoveEntity(this.uniqeId);
+                    GameInfo.entityManager.RemoveEntity(this.uniqeId); 
+                    SoundInput.SongPlay(SoundInput.preBossMusicInstance, 1f, 0.1f, 0f);
                 }
             }
             if (GameInfo.collisionManager.RectangleCollision(mouseCheck, quitButton))
@@ -132,33 +147,34 @@ namespace TE4TwoDSidescroller
                 quitColour = Color.Gray;
             }
 
+            GameInfo.spriteBatch.Draw(backGround, buttonHolder, Color.White);
             GameInfo.spriteBatch.Draw(buttons, startButton, startColour);
             GameInfo.spriteBatch.Draw(buttons, quitButton, quitColour);
 
             //rita ut texten här
-            //if (!string.IsNullOrEmpty(startText))
-            //{
-            //    #region textPosition
-            //    startTextPosition.X = (startButton.X + (startButton.Width / 2) - (font.MeasureString(startText).X / 2));
-            //    startTextPosition.Y = (startButton.Y + (startButton.Height / 2) - (font.MeasureString(startText).X / 2));
+            if (!string.IsNullOrEmpty(startText))
+            {
+                #region textPosition
+                startTextPosition.X = (startButton.X + (startButton.Width / 2) - (font.MeasureString(startText).X / 2));
+                startTextPosition.Y = (startButton.Y + (startButton.Height / 2) - (font.MeasureString(startText).X / 2));
 
 
-            //    quitTextPosition.X = (quitButton.X + (quitButton.Width / 2) - (font.MeasureString(quitText).X / 2));
-            //    quitTextPosition.Y = (quitButton.Y + (quitButton.Height / 2) - (font.MeasureString(quitText).X / 2));
+                quitTextPosition.X = (quitButton.X + (quitButton.Width / 2) - (font.MeasureString(quitText).X / 2));
+                quitTextPosition.Y = (quitButton.Y + (quitButton.Height / 2) - (font.MeasureString(quitText).X / 2));
                 
-            //    titleTextPosition.X = (buttonHolder.X + (buttonHolder.Width / 2 - 25) - (font.MeasureString(quitText).X / 2));
-            //    titleTextPosition.Y = (buttonHolder.Y + (buttonHolder.Height / 6) - (font.MeasureString(quitText).X / 2));
+                titleTextPosition.X = (buttonHolder.X + (buttonHolder.Width / 2 - 45) - (font.MeasureString(titleText).X / 2));
+                titleTextPosition.Y = (buttonHolder.Y + (buttonHolder.Height / 6) - (font.MeasureString(titleText).X / 2));
              
-            //    #endregion
-            //    if (font != null)
-            //    {
+                #endregion
+                if (font != null)
+                {
 
-            //         GameInfo.spriteBatch.DrawString(font, startText, startTextPosition, textColor);
-            //         GameInfo.spriteBatch.DrawString(font, quitText, quitTextPosition, textColor);
-            //         GameInfo.spriteBatch.DrawString(font, titleText, titleTextPosition, textColor);
+                     GameInfo.spriteBatch.DrawString(font, startText, startTextPosition, textColor);
+                     GameInfo.spriteBatch.DrawString(font, quitText, quitTextPosition, textColor);
+                     GameInfo.spriteBatch.DrawString(titleFont, titleText, titleTextPosition, titleTextColor);
 
-            //    }
-            //}
+                }
+            }
         }
     }
 }

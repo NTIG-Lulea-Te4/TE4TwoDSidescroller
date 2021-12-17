@@ -50,6 +50,7 @@ namespace TE4TwoDSidescroller
         {
 
             attackDuration += gameTime.ElapsedGameTime.Milliseconds;
+            
 
             if (attackDuration > 250)
             {
