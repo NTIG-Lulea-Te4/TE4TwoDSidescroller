@@ -363,12 +363,14 @@ namespace TE4TwoDSidescroller
                 currentHealth = health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
                 hasTakenDamage = true;
                 BossAttack.damage = false;
+                GameInfo.playerOneCurrentHealth = currentHealth;
             }
             if (BossAttack1.damage1 == true)
             {
                 currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
                 hasTakenDamage = true;
                 BossAttack1.damage1 = false;
+                GameInfo.playerOneCurrentHealth = currentHealth;
             }
         }
 
