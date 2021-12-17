@@ -34,7 +34,7 @@ namespace TE4TwoDSidescroller
             characterInput = new BossBehaviour(this);
             bossPosition = new Vector2(3250, 410);
             health = new Health();
-            maxHealth = 100;
+            maxHealth = 300;
             currentHealth = maxHealth;
             tag = Tags.Boss.ToString();
             bossAttackdmg = 70;
@@ -43,7 +43,7 @@ namespace TE4TwoDSidescroller
             BossDictionary();
             Animate();
             collisionBox = new Rectangle((int)bossPosition.X, (int)bossPosition.Y,
-                                          bossIdle.Width, bossIdle.Height);
+                                          bossIdle.Width *2, bossIdle.Height *3);
             hasCollider = true;
         }
 
@@ -137,7 +137,6 @@ namespace TE4TwoDSidescroller
 
             animation = tempAttackOne;
 
-            //if (!hasTakenDamage && )
         }
 
 

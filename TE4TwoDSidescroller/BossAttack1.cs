@@ -34,7 +34,7 @@ namespace TE4TwoDSidescroller
         public void LoadTextrue()
         {
             string currentPath =
-             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs" + "/Box.png";
+             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs" + "/redBox.jpg";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
