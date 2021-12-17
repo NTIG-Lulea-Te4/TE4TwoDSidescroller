@@ -54,8 +54,8 @@ namespace TE4TwoDSidescroller
 
             wantExit = false;
 
-            startText = "start";
-            quitText = "quit";
+            startText = "Start";
+            quitText = "Quit";
             titleText = "MediEvil";
            
             textColor = Color.Goldenrod;

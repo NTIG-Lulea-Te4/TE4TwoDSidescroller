@@ -25,7 +25,7 @@ namespace TE4TwoDSidescroller
             damage1 = false;
 
 
-            collisionBox = new Rectangle((int)GameInfo.bossPosition.X, (int)GameInfo.bossPosition.Y,
+            collisionBox = new Rectangle((int)GameInfo.bossPosition.X, (int)GameInfo.bossPosition.Y +190,
             attackWidth, attackHeight);
 
             LoadTextrue();
