@@ -34,7 +34,7 @@ namespace TE4TwoDSidescroller
             characterInput = new BossBehaviour(this);
             bossPosition = new Vector2(3250, 410);
             health = new Health();
-            maxHealth = 300;
+            maxHealth = 500;
             currentHealth = maxHealth;
             tag = Tags.Boss.ToString();
             bossAttackdmg = 70;
