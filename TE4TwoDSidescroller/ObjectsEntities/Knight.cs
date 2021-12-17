@@ -56,7 +56,7 @@ namespace TE4TwoDSidescroller
             isActive = true;
             hasCollider = true;
             knightIsFacingRight = true;
-            canTakeDamage = true;
+            
 
              
 
@@ -401,13 +401,7 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
-            invincibilityDuration += gameTime.ElapsedGameTime.Milliseconds;
-
-            if (invincibilityDuration >= 5000)
-            {
-                canTakeDamage = true;
-                invincibilityDuration = 0;
-            }
+            InvincibilityFrames(gameTime);
 
             movementDirection = GameInfo.player1Position - position;
 

@@ -43,12 +43,10 @@ namespace TE4TwoDSidescroller
             levelGoal = new LevelGoals(4);
             GameInfo.entityManager.AddEntity(levelGoal);
 
-<<<<<<< HEAD
-            knight = new Knight(500, 500);
+
+            Entity knight = new Knight(500, 500);
             GameInfo.entityManager.AddEntity(knight);
-=======
-            
->>>>>>> parent of bf22805 (Merge branch 'master' into William)
+
 
         }
 

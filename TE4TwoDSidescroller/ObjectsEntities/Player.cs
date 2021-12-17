@@ -45,6 +45,11 @@ namespace TE4TwoDSidescroller
         public bool isFacingRight;
         bool hasTakenDamage;
 
+        bool rightSideCollision;
+        bool leftSideCollision;
+        bool topSideCollision;
+        bool bottomSidecollison;
+
         public static int playerDamage;
 
         #endregion
@@ -76,6 +81,7 @@ namespace TE4TwoDSidescroller
             hasCollider = true;
             isActive = true;
             isFacingRight = true;
+
 
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
             
@@ -301,6 +307,59 @@ namespace TE4TwoDSidescroller
 
         public override void HasCollidedWith(Entity collider)
         {
+            if (collider.tag == Tags.Platform.ToString())
+            {
+                #region Right
+                if (collisionBox.Left + movementVector.X < collider.collisionBox.Right &&
+                    collisionBox.Right > collider.collisionBox.Right)
+                {
+                    rightSideCollision = true;
+                }
+                else
+                {
+                    rightSideCollision = false;
+                }
+
+                #endregion
+
+                #region Left 
+                if (collisionBox.Right + movementVector.X > collider.collisionBox.Left &&
+                    collisionBox.Left < collider.collisionBox.Left)
+                {
+                    leftSideCollision = true;
+                }
+                else
+                {
+                    leftSideCollision = false;
+                }
+
+                #endregion
+
+                #region Top
+                //if (collisionBox.Bottom + movementVector.Y > collider.collisionBox.Top &&
+                //    collisionBox.Top < collider.collisionBox.Top)
+                //{
+                //    topSideCollision = true;
+                //}
+                //else
+                //{
+                //    topSideCollision = false;
+                //}
+                #endregion
+
+                #region Bottom
+                //if (collisionBox.Top + movementVector.Y < collider.collisionBox.Bottom &&
+                //    collisionBox.Bottom > collider.collisionBox.Bottom)
+                //{
+                //    bottomSidecollison = true;
+                //}
+                //else
+                //{
+                //    bottomSidecollison = false;
+                //}
+
+                #endregion
+            }
             if (collider.tag == Tags.Floor.ToString())
             {
                 IsGrounded = true;
@@ -404,6 +463,7 @@ namespace TE4TwoDSidescroller
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
+
             playerVelocity = new Vector2(0, 0);
             playerPosition += movementVector;
 
@@ -430,7 +490,17 @@ namespace TE4TwoDSidescroller
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
 
-            
+            if ((movementVector.X > 0 && leftSideCollision) ||
+                (movementVector.X < 0 && rightSideCollision))
+            {
+                movementVector.X = 0;
+            }
+
+            if ((movementVector.Y > 0 && topSideCollision) ||
+                (movementVector.Y < 0 && bottomSidecollison))
+            {
+                movementVector.Y = 0;
+            }
 
             #region Harry's Code
             manaTick++;

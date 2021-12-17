@@ -18,7 +18,7 @@ namespace TE4TwoDSidescroller
         double heavyAttackTimer;
         Vector2 attack1;
 
-<<<<<<< HEAD
+
         int bossAttackdmg;
         int bossAttack1dmg;
 
@@ -28,8 +28,7 @@ namespace TE4TwoDSidescroller
         Animation tempFirstAttack;
         Animation tempSecondAttack;
         Animation tempBigRockAnimation;
-=======
->>>>>>> parent of bf22805 (Merge branch 'master' into William)
+
 
         public Boss()
         {
@@ -39,21 +38,16 @@ namespace TE4TwoDSidescroller
             heavyAttackTimer = 0;
             health = new Health();
             tag = Tags.Boss.ToString();
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of bf22805 (Merge branch 'master' into William)
+
             collisionBox = new Rectangle(0, 0, 64, 96);
             attack1 = new Vector2(0, 3);
             float attack1Dmg = 10f;
 
-<<<<<<< HEAD
+
 
             bossAttackdmg = 10;
             bossAttack1dmg = 50;
-
-=======
->>>>>>> parent of bf22805 (Merge branch 'master' into William)
             LoadTextrue2D();
         }
 

@@ -23,6 +23,7 @@ namespace TE4TwoDSidescroller
             Priest,
             PriestAttack,
             Floor,
+            Platform,
             FinishLine,
             DeathZone,
             Boss,
@@ -88,6 +89,19 @@ namespace TE4TwoDSidescroller
                     increasingGravity = 0;
                 }
             }
+        }
+
+        public void InvincibilityFrames(GameTime gameTime)
+        {
+
+            invincibilityDuration += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (invincibilityDuration >= 5000)
+            {
+                canTakeDamage = true;
+                invincibilityDuration = 0;
+            }
+
         }
 
         //update och draw
