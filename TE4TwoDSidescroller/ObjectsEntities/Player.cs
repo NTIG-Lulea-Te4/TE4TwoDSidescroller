@@ -309,35 +309,42 @@ namespace TE4TwoDSidescroller
         {
             if (collider.tag == Tags.Platform.ToString())
             {
+
                 #region Right
-                if (collisionBox.Left + movementVector.X < collider.collisionBox.Right &&
-                    collisionBox.Right > collider.collisionBox.Right)
-                {
-                    rightSideCollision = true;
-                }
-                else
-                {
-                    rightSideCollision = false;
-                }
+                //if (collisionBox.Left + movementVector.X < collider.collisionBox.Right &&
+                //    collisionBox.Right > collider.collisionBox.Right &&
+                //    collisionBox.Bottom > collider.collisionBox.Top &&
+                //    collisionBox.Top < collider.collisionBox.Bottom)
+                //{
+                //    rightSideCollision = true;
+                //}
+                //else
+                //{
+                //    rightSideCollision = false;
+                //}
 
                 #endregion
 
                 #region Left 
-                if (collisionBox.Right + movementVector.X > collider.collisionBox.Left &&
-                    collisionBox.Left < collider.collisionBox.Left)
-                {
-                    leftSideCollision = true;
-                }
-                else
-                {
-                    leftSideCollision = false;
-                }
+                //if (collisionBox.Right + movementVector.X > collider.collisionBox.Left &&
+                //    collisionBox.Left < collider.collisionBox.Left &&
+                //    collisionBox.Bottom > collider.collisionBox.Top &&
+                //    collisionBox.Top < collider.collisionBox.Bottom)
+                //{
+                //    leftSideCollision = true;
+                //}
+                //else
+                //{
+                //    leftSideCollision = false;
+                //}
 
                 #endregion
 
                 #region Top
                 //if (collisionBox.Bottom + movementVector.Y > collider.collisionBox.Top &&
-                //    collisionBox.Top < collider.collisionBox.Top)
+                //    collisionBox.Top < collider.collisionBox.Top &&
+                //    collisionBox.Right > collider.collisionBox.Left &&
+                //    collisionBox.Left < collider.collisionBox.Right)
                 //{
                 //    topSideCollision = true;
                 //}
@@ -349,7 +356,9 @@ namespace TE4TwoDSidescroller
 
                 #region Bottom
                 //if (collisionBox.Top + movementVector.Y < collider.collisionBox.Bottom &&
-                //    collisionBox.Bottom > collider.collisionBox.Bottom)
+                //    collisionBox.Bottom > collider.collisionBox.Bottom &&
+                //    collisionBox.Right > collider.collisionBox.Left &&
+                //    collisionBox.Left < collider.collisionBox.Right)
                 //{
                 //    bottomSidecollison = true;
                 //}
@@ -359,6 +368,7 @@ namespace TE4TwoDSidescroller
                 //}
 
                 #endregion
+
             }
             if (collider.tag == Tags.Floor.ToString())
             {
