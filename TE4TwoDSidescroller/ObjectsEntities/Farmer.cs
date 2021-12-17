@@ -269,6 +269,8 @@ namespace TE4TwoDSidescroller
 
             position = myPosition;
 
+            collisionBox.X = (int)position.X;
+
             animation.Update(gameTime);
             base.Update(gameTime);
         }

@@ -99,16 +99,10 @@ namespace TE4TwoDSidescroller
         {
             Entity stepEntity = GameInfo.entityManager.firstEntity;
             Entity secondStepEntity = null;
-            Entity floorEntity = null;
             //Entity tempEntity;
 
             while (stepEntity != null)
             {
-
-                if (stepEntity.tag == "Floor")
-                {
-                    floorEntity = stepEntity;
-                }
 
                 if (stepEntity.isActive && stepEntity.hasCollider)
                 {
@@ -132,16 +126,6 @@ namespace TE4TwoDSidescroller
 
                     }
 
-                }
-
-                if (floorEntity != null)
-                {
-
-                    if (RectangleCollision(stepEntity.collisionBox, floorEntity.collisionBox))
-                    {
-                        stepEntity.HasCollidedWith(floorEntity);
-                        floorEntity.HasCollidedWith(stepEntity);
-                    }
                 }
 
                 stepEntity = stepEntity.nextEntity;

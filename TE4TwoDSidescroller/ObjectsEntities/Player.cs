@@ -38,7 +38,7 @@ namespace TE4TwoDSidescroller
 
         float deltaTime;
         float time;
-       
+
 
 
         bool isWalkingRight;
@@ -86,7 +86,7 @@ namespace TE4TwoDSidescroller
 
 
             collisionBox = new Rectangle(0, 0, playerSourceRectangle.Width, playerSourceRectangle.Height);
-            
+
 
             LoadPlayerTexture2D();
             PlayerDictionary();
@@ -94,7 +94,7 @@ namespace TE4TwoDSidescroller
 
             maxHealth = 200;
             currentHealth = maxHealth;
-            
+
             mana = 200;
             manaCheck = mana;
             manaTick = 0;
@@ -260,7 +260,7 @@ namespace TE4TwoDSidescroller
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
-                 
+
 
                 animation = tempIdle;
 
@@ -310,77 +310,65 @@ namespace TE4TwoDSidescroller
 
         public override void HasCollidedWith(Entity collider)
         {
-            if (collider.tag == Tags.Platform.ToString())
+
+            if (collider.tag != Tags.KnightAttack.ToString() && 
+                collider.tag != Tags.PlayerMeleeAttack.ToString() &&
+                collider.tag != Tags.PriestAttack.ToString() &&
+                collider.tag != Tags.BossAttack.ToString() &&
+                collider.tag != Tags.BossAttack1.ToString())
             {
 
-                #region Right
-                //if (collisionBox.Left + movementVector.X < collider.collisionBox.Right &&
-                //    collisionBox.Right > collider.collisionBox.Right &&
-                //    collisionBox.Bottom > collider.collisionBox.Top &&
-                //    collisionBox.Top < collider.collisionBox.Bottom)
-                //{
-                //    rightSideCollision = true;
-                //}
-                //else
-                //{
-                //    rightSideCollision = false;
-                //}
+            #region Right
+            if (collisionBox.Left + movementVector.X < collider.collisionBox.Right &&
+                collisionBox.Right > collider.collisionBox.Right &&
+                collisionBox.Bottom > collider.collisionBox.Top &&
+                collisionBox.Top < collider.collisionBox.Bottom)
+            {
+                rightSideCollision = true;
+            }
 
-                #endregion
+            #endregion
 
-                #region Left 
-                //if (collisionBox.Right + movementVector.X > collider.collisionBox.Left &&
-                //    collisionBox.Left < collider.collisionBox.Left &&
-                //    collisionBox.Bottom > collider.collisionBox.Top &&
-                //    collisionBox.Top < collider.collisionBox.Bottom)
-                //{
-                //    leftSideCollision = true;
-                //}
-                //else
-                //{
-                //    leftSideCollision = false;
-                //}
+            #region Left 
+            if (collisionBox.Right + movementVector.X > collider.collisionBox.Left &&
+                collisionBox.Left < collider.collisionBox.Left &&
+                collisionBox.Bottom > collider.collisionBox.Top &&
+                collisionBox.Top < collider.collisionBox.Bottom)
+            {
+                leftSideCollision = true;
+            }
 
-                #endregion
+            #endregion
 
-                #region Top
-                //if (collisionBox.Bottom + movementVector.Y > collider.collisionBox.Top &&
-                //    collisionBox.Top < collider.collisionBox.Top &&
-                //    collisionBox.Right > collider.collisionBox.Left &&
-                //    collisionBox.Left < collider.collisionBox.Right)
-                //{
-                //    topSideCollision = true;
-                //}
-                //else
-                //{
-                //    topSideCollision = false;
-                //}
-                #endregion
+            #region Top
+            if (collisionBox.Bottom + movementVector.Y > collider.collisionBox.Top &&
+                collisionBox.Top < collider.collisionBox.Top &&
+                collisionBox.Right > collider.collisionBox.Left &&
+                collisionBox.Left < collider.collisionBox.Right)
+            {
+                topSideCollision = true;
+            }
 
-                #region Bottom
-                //if (collisionBox.Top + movementVector.Y < collider.collisionBox.Bottom &&
-                //    collisionBox.Bottom > collider.collisionBox.Bottom &&
-                //    collisionBox.Right > collider.collisionBox.Left &&
-                //    collisionBox.Left < collider.collisionBox.Right)
-                //{
-                //    bottomSidecollison = true;
-                //}
-                //else
-                //{
-                //    bottomSidecollison = false;
-                //}
+            #endregion
 
-                #endregion
+            #region Bottom
+            if (collisionBox.Top + movementVector.Y < collider.collisionBox.Bottom &&
+                collisionBox.Bottom > collider.collisionBox.Bottom &&
+                collisionBox.Right > collider.collisionBox.Left &&
+                collisionBox.Left < collider.collisionBox.Right)
+            {
+                bottomSidecollison = true;
+            }
+
+
+            #endregion
 
             }
-            if (collider.tag == Tags.Floor.ToString())
+
+            if (topSideCollision)
             {
                 IsGrounded = true;
 
-            }
-            else
-            {
-                IsGrounded = false;                    
             }
 
             if (collider.tag == Tags.KnightAttack.ToString())
@@ -388,12 +376,12 @@ namespace TE4TwoDSidescroller
                 currentHealth = health.TakeDamage(currentHealth, Knight.knightDamage, this);
                 hasTakenDamage = true;
                 GameInfo.playerOneCurrentHealth = currentHealth;
-                
+
                 //SoundInput.SoundEffectInstance(SoundInput.evilLaugh, 0.9f, 0.1f, 0.1f);
-                
-                if(SoundInput.soundEffectevilLaughInstance.State != SoundState.Playing)
+
+                if (SoundInput.soundEffectevilLaughInstance.State != SoundState.Playing)
                 {
-                    
+
                     SoundInput.SoundEffectInstance(SoundInput.soundEffectevilLaughInstance, 0.9f, 0.1f, 0.1f);
 
                 }
@@ -505,18 +493,18 @@ namespace TE4TwoDSidescroller
         {
             moveSpeed = walkSpeed;
         }
-       
+
         public override void Jump(GameTime gameTime)
         {
             movementVector.Y -= moveSpeed + 1;
-            if(SoundInput.soundEffectmainCharacterJumpInstance.State != SoundState.Playing && IsGrounded == true)
+            if (SoundInput.soundEffectmainCharacterJumpInstance.State != SoundState.Playing && IsGrounded == true)
             {
 
                 SoundInput.SoundEffectInstance(SoundInput.soundEffectmainCharacterJumpInstance, 1f, 0.1f, 0.1f);
 
             }
             IsGrounded = false;
-            
+
 
         }
 
@@ -585,6 +573,12 @@ namespace TE4TwoDSidescroller
                 movementVector.Y = 0;
             }
 
+            leftSideCollision = false;
+            rightSideCollision = false;
+            topSideCollision = false;
+            bottomSidecollison = false;
+
+            IsGrounded = false;
 
             #region Harry's Code
             manaTick++;
