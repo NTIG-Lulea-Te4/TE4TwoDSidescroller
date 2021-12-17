@@ -23,7 +23,7 @@ namespace TE4TwoDSidescroller
         Health health;
 
         private Rectangle playerSourceRectangle;
-        private Vector2 playerPosition;                                                                                                                                                                                                                                       
+        private Vector2 playerPosition;
         private Vector2 playerVelocity;
 
         private Rectangle detectionHitBox;
@@ -38,7 +38,7 @@ namespace TE4TwoDSidescroller
 
         float deltaTime;
         float time;
-       
+
 
         bool isWalkingRight;
         bool isWalkingLeft;
@@ -252,7 +252,7 @@ namespace TE4TwoDSidescroller
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
-                 
+
                 animation = tempIdle;
 
             }
@@ -338,6 +338,38 @@ namespace TE4TwoDSidescroller
                 GameInfo.playerOneCurrentHealth = currentHealth;
             }
 
+            #region collison
+            // Problemet är att det funkar liksom "OnCollisionStay" i unity,
+            //så hälsan minskar några gånger när det kolliderar en gång
+
+            //if (collider.tag == Tags.BossAttack.ToString())
+            //{
+            //    currentHealth = health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
+            //    hasTakenDamage = true;
+
+            //    //GameInfo.entityManager.RemoveEntity();
+            //}
+            //if (collider.tag == Tags.BossAttack1.ToString())
+            //{
+            //    currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+            //    hasTakenDamage = true;
+            //    //GameInfo.entityManager.RemoveEntity();
+
+            //}
+            #endregion
+
+            if (BossAttack.damage == true)
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttackdmg, this);
+                hasTakenDamage = true;
+                BossAttack.damage = false;
+            }
+            if (BossAttack1.damage1 == true)
+            {
+                currentHealth = health.TakeDamage(currentHealth, Boss.bossAttack1dmg, this);
+                hasTakenDamage = true;
+                BossAttack1.damage1 = false;
+            }
         }
 
         #region Input
@@ -461,11 +493,11 @@ namespace TE4TwoDSidescroller
             detectionHitBox.Y = (int)playerPosition.Y;
             collisionBox.X = (int)playerPosition.X;
             collisionBox.Y = (int)playerPosition.Y;
-            
+
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
 
-            
+
 
             #region Harry's Code
             manaTick++;

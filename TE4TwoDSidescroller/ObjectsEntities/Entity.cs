@@ -26,8 +26,8 @@ namespace TE4TwoDSidescroller
             FinishLine,
             DeathZone,
             Boss,
-            BossAttack1,
-            BossAttack2
+            BossAttack,
+            BossAttack1
 
         }
 

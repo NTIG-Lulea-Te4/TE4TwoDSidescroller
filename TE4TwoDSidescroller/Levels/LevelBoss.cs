@@ -26,6 +26,7 @@ namespace TE4TwoDSidescroller
 
             Entity levelGoal;
             Entity boss;
+            Entity lastlvlText;
 
             Entity deathZone = new DeathZone();
             GameInfo.entityManager.AddEntity(deathZone);
@@ -51,6 +52,8 @@ namespace TE4TwoDSidescroller
             healthBar = new HealthBar();
             GameInfo.entityManager.AddEntity(healthBar);
 
+            lastlvlText = new LastlvlText();
+            GameInfo.entityManager.AddEntity(lastlvlText);
         }
 
 
