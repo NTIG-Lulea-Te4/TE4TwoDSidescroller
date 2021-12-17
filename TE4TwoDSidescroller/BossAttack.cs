@@ -10,6 +10,7 @@ namespace TE4TwoDSidescroller
     class BossAttack : Entity
     {
         Texture2D heavyAttackTexture;
+        Rectangle heavyAttackSourcRectangle;
         private int attackWidth;
         private int attackHeigh;
         private int attackSpeed;
@@ -29,13 +30,14 @@ namespace TE4TwoDSidescroller
             0,
             attackWidth, attackHeigh);
 
+            heavyAttackSourcRectangle = new Rectangle(0, 0, 64, 96);
             LoadTextrue();
         }
 
         public void LoadTextrue()
         {
             string currentPath =
-             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs" + "/Box.png";
+             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/Enemies" + "/BigRock.png";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
@@ -58,7 +60,8 @@ namespace TE4TwoDSidescroller
 
         public override void Draw(GameTime gameTime)
         {
-            GameInfo.spriteBatch.Draw(heavyAttackTexture, collisionBox, Color.White);
+            //GameInfo.spriteBatch.Draw(heavyAttackTexture, collisionBox, Color.White);
+            GameInfo.spriteBatch.Draw(heavyAttackTexture, collisionBox, heavyAttackSourcRectangle, Color.White);
         }
     }
 }
