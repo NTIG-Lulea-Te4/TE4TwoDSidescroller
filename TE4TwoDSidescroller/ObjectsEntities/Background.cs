@@ -58,7 +58,7 @@ namespace TE4TwoDSidescroller
         {
 
             GameInfo.spriteBatch.Draw
-                (myTexture, GameInfo.viewportPosition, sourceRectangle, Color.White, rotation, position, scale, SpriteEffects.None, layer);
+                (myTexture, new Vector2(GameInfo.viewportPosition.X - GameInfo.viewportPosition.X * backgroundSpeed, GameInfo.viewportPosition.Y - GameInfo.viewportPosition.Y * backgroundSpeed), sourceRectangle, Color.White, rotation, position, scale, SpriteEffects.None, layer);
 
 
         }
