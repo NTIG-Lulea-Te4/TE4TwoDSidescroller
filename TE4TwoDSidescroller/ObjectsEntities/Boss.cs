@@ -27,15 +27,15 @@ namespace TE4TwoDSidescroller
             heavyAttackTimer = 0;
             health = new Health();
             tag = Tags.Boss.ToString();
-<<<<<<< HEAD
+
             collisionBox = new Rectangle(0, 0, 64, 96);
             attack1 = new Vector2(0, 3);
             float attack1Dmg = 10f;
 
-=======
-            bossAttackdmg = 10;
-            bossAttack1dmg = 50;
->>>>>>> parent of 1400a7f (a)
+
+            //bossAttackdmg = 10;
+            //bossAttack1dmg = 50;
+
             LoadTextrue2D();
         }
 
