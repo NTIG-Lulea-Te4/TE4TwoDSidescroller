@@ -97,12 +97,14 @@ namespace TE4TwoDSidescroller
 
             animation.position.X = collisionBox.X;
             animation.position.Y = collisionBox.Y -50;
+
+            animation.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
 
-            //GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
+            GameInfo.spriteBatch.Draw(playerAttackTexture, collisionBox, Color.White);
             animation.Draw(gameTime);
         }
     }

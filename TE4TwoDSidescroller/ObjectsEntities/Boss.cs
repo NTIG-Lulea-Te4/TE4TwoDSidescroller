@@ -27,15 +27,21 @@ namespace TE4TwoDSidescroller
             heavyAttackTimer = 0;
             health = new Health();
             tag = Tags.Boss.ToString();
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 2da7263 (Merge branch 'master' into Måns)
             collisionBox = new Rectangle(0, 0, 64, 96);
             attack1 = new Vector2(0, 3);
             float attack1Dmg = 10f;
 
+<<<<<<< HEAD
 
             //bossAttackdmg = 10;
             //bossAttack1dmg = 50;
 
+=======
+>>>>>>> parent of 2da7263 (Merge branch 'master' into Måns)
             LoadTextrue2D();
         }
 
@@ -80,7 +86,7 @@ namespace TE4TwoDSidescroller
         public override void Attack1()
         {
             tag = Tags.BossAttack1.ToString();
-            collisionBox = new Rectangle((int)attack1.X, (int)attack1.Y, 64, 96);
+            collisionBox = new Rectangle((int) attack1.X, (int) attack1.Y, 64, 96);
             for (int i = 0; i < heavyAttacks.Count; i++)
             {
                 heavyAttacks[i] = heavyAttacks[i] + attack1;
