@@ -23,11 +23,12 @@ namespace TE4TwoDSidescroller
             Priest,
             PriestAttack,
             Floor,
+            Platform,
             FinishLine,
             DeathZone,
             Boss,
-            BossAttack1,
-            BossAttack2
+            BossAttack,
+            BossAttack1
 
         }
 
@@ -35,15 +36,19 @@ namespace TE4TwoDSidescroller
         
 
         public int uniqeId;
+
+
         public bool isActive;
         public bool hasCollider;   
         private bool isGrounded;
+        public bool canTakeDamage;
         public static bool wantExit;
 
 
         public float increasingGravity;
         public float amplifiedYForce;
 
+        protected float invincibilityDuration;
         protected int currentHealth;
         protected int manaCheck;
         protected int maxHealth;
@@ -84,6 +89,19 @@ namespace TE4TwoDSidescroller
                     increasingGravity = 0;
                 }
             }
+        }
+
+        public void InvincibilityFrames(GameTime gameTime)
+        {
+
+            invincibilityDuration += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (invincibilityDuration >= 5000)
+            {
+                canTakeDamage = true;
+                invincibilityDuration = 0;
+            }
+
         }
 
         //update och draw

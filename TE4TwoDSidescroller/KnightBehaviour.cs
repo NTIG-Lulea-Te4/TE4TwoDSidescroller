@@ -35,7 +35,12 @@ namespace TE4TwoDSidescroller
             {
 
                 character.MoveRight();
-                
+                if (SoundInput.soundEffectknigthWalkInstance.State != Microsoft.Xna.Framework.Audio.SoundState.Playing)
+                {
+
+                    SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.2f, 0.1f, 0.1f);
+
+                }
             }
 
             if (character.movementDirection.Length() <= trackingDistance.Length() &&
@@ -43,7 +48,12 @@ namespace TE4TwoDSidescroller
             {
 
                 character.MoveLeft();
+                if (SoundInput.soundEffectknigthWalkInstance.State != Microsoft.Xna.Framework.Audio.SoundState.Playing)
+                {
 
+                    SoundInput.SoundEffectInstance(SoundInput.soundEffectknigthWalkInstance, 0.2f, 0.1f, 0.1f);
+
+                }
             }
 
             if (character.position.Y > GameInfo.player1Position.Y)
@@ -57,7 +67,12 @@ namespace TE4TwoDSidescroller
             if (character.movementDirection.Length() <= trackingDistance.Length() - 250
                 && attackTimer > 2000)
             {
+                if (SoundInput.soundEffectswordSwooshInstance.State != Microsoft.Xna.Framework.Audio.SoundState.Playing)
+                {
 
+                    SoundInput.SoundEffectInstance(SoundInput.soundEffectswordSwooshInstance, 0.9f, 0.1f, 0.1f);
+
+                }
                 character.Attack1();
 
                 attackTimer = 0;

@@ -128,10 +128,7 @@ namespace TE4TwoDSidescroller
 
                 }
 
-
-
                 stepEntity = stepEntity.nextEntity;
-
 
             }
 

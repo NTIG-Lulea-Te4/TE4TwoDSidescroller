@@ -16,7 +16,7 @@ namespace TE4TwoDSidescroller
 
         public static void LoadContent()
         {
-
+            Entity healthBar;
             Entity background;
             Entity playerEntity;
             Entity floor;
@@ -26,10 +26,6 @@ namespace TE4TwoDSidescroller
 
             Entity farmerOne;
             Entity farmerTwo;
-            Entity farmerThree;
-            Entity farmerFour;
-            Entity farmerFive;
-
             Entity platform;
             Entity platformTwo;
             Entity platformThree;
@@ -55,6 +51,9 @@ namespace TE4TwoDSidescroller
             camera = new VisionManager();
             GameInfo.entityManager.AddEntity(camera);
 
+            farmerOne = new Farmer(500, 610);
+            GameInfo.entityManager.AddEntity(farmerOne);
+
             platform = new Platform(new Microsoft.Xna.Framework.Vector2(400, 350), 200, 40);
             GameInfo.entityManager.AddEntity(platform);
 
@@ -79,23 +78,14 @@ namespace TE4TwoDSidescroller
             platformEight = new Platform(new Microsoft.Xna.Framework.Vector2(3600, 350), 400, 30);
             GameInfo.entityManager.AddEntity(platformEight);
 
-            farmerOne = new Farmer(500, 610);
-            GameInfo.entityManager.AddEntity(farmerOne);
-
-            farmerTwo = new Farmer(1000, 610);
+            farmerTwo = new Farmer(400, 250);
             GameInfo.entityManager.AddEntity(farmerTwo);
-
-            farmerThree = new Farmer(1800, 200);
-            GameInfo.entityManager.AddEntity(farmerThree);
-
-            farmerFour = new Farmer(2000, 610);
-            GameInfo.entityManager.AddEntity(farmerFour);
-
-            farmerFive = new Farmer(2500, 610);
-            GameInfo.entityManager.AddEntity(farmerFive);
 
             levelGoal = new LevelGoals(2);
             GameInfo.entityManager.AddEntity(levelGoal);
+
+            healthBar = new HealthBar();
+            GameInfo.entityManager.AddEntity(healthBar);
 
         }
         public static void RemoveContent()

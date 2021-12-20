@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -7,61 +7,58 @@ using System.Text;
 
 namespace TE4TwoDSidescroller
 {
-    class BossAttack : Entity
+    class BossAttack1 : Entity
     {
         Texture2D heavyAttackTexture;
-        Rectangle heavyAttackSourcRectangle;
         private int attackWidth;
-        private int attackHeigh;
+        private int attackHeight;
         private int attackSpeed;
-        public static bool damage;
+        public static bool damage1;
 
-        public BossAttack(Character character)
+        public BossAttack1(Character character)
         {
-            tag = Tags.BossAttack.ToString();
+            tag = Tags.BossAttack1.ToString();
             hasCollider = true;
-            attackWidth = 80;
-            attackHeigh = 80;
+            attackWidth = 50;
+            attackHeight = 50;
             attackSpeed = 5;
-            damage = false;
+            damage1 = false;
 
 
-            collisionBox = new Rectangle((int)GameInfo.player1Position.X,
-            0,
-            attackWidth, attackHeigh);
+            collisionBox = new Rectangle((int)GameInfo.bossPosition.X, (int)GameInfo.bossPosition.Y +190,
+            attackWidth, attackHeight);
 
-            heavyAttackSourcRectangle = new Rectangle(0, 0, 64, 96);
             LoadTextrue();
         }
 
         public void LoadTextrue()
         {
             string currentPath =
-             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs/Enemies" + "/BigRock.png";
+             Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Content/Pngs" + "/redBox.jpg";
 
             using (Stream textureStream = new FileStream(currentPath, FileMode.Open))
             {
                 heavyAttackTexture = Texture2D.FromStream(GameInfo.graphicsDevice.GraphicsDevice, textureStream);
             }
         }
+
         public override void HasCollidedWith(Entity collider)
         {
             if (collider.tag == Tags.Player.ToString())
             {
                 GameInfo.entityManager.RemoveEntity(this.uniqeId);
-                damage = true;
+                damage1 = true;
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            collisionBox.Y += attackSpeed;
+            collisionBox.X -= attackSpeed;
         }
 
         public override void Draw(GameTime gameTime)
         {
-            //GameInfo.spriteBatch.Draw(heavyAttackTexture, collisionBox, Color.White);
-            GameInfo.spriteBatch.Draw(heavyAttackTexture, collisionBox, heavyAttackSourcRectangle, Color.White);
+            GameInfo.spriteBatch.Draw(heavyAttackTexture, collisionBox, Color.White);
         }
     }
 }

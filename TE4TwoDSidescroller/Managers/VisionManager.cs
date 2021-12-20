@@ -3,26 +3,32 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 namespace TE4TwoDSidescroller
 {
     public class VisionManager : Entity
     {
         Viewport viewport;
-        int xSize;
-        int ySize;
-        Vector2 position;
+
+
+        int Xsize;
+        int Ysize;
+
+        int Xposition;
+        int Yposition;
+
         public VisionManager()
         {
-            xSize = 1280;
-            ySize = 720;
-            viewport = new Viewport();
+            Xsize = 1280;
+            Ysize = 720;
+
         }
 
         public override void Update(GameTime gameTime)
         {
 
-            position.X = (int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width / 2;
-            position.Y = (int)GameInfo.player1Position.Y - GameInfo.Player1TextureSize.Height / 2;
+            Xposition = (int)GameInfo.player1Position.X + GameInfo.Player1TextureSize.Width / 2;
+            Yposition = (int)GameInfo.player1Position.Y - GameInfo.Player1TextureSize.Height / 2;
             viewport = new Viewport
                 ((int)-position.X + xSize / 2,
                 (int)-position.Y + ySize / 2,
@@ -39,7 +45,7 @@ namespace TE4TwoDSidescroller
             GameInfo.viewportPosition.X = -viewport.X;
             GameInfo.viewportPosition.Y = -viewport.Y;
 
-            
+
 
 
         }

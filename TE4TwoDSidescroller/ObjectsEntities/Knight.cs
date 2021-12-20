@@ -24,7 +24,7 @@ namespace TE4TwoDSidescroller
         private Texture2D knightAttack;
 
         public static Rectangle sourceRectangle;
-        
+
         //public  Vector2 knightPosition;
         private Vector2 knightOrigin;
         private Vector2 knightVelocity;
@@ -36,7 +36,6 @@ namespace TE4TwoDSidescroller
 
         private Health health;
 
-        
         public static bool knightIsFacingRight;
         bool isWalkingRight;
         bool hasTakenDamage;
@@ -45,7 +44,7 @@ namespace TE4TwoDSidescroller
         public static int knightDamage;
 
 
-        public Knight()
+        public Knight(float spawnPositionX,float spawnPositionY)
         {
 
             characterInput = new KnightBehaviour(this);
@@ -56,21 +55,23 @@ namespace TE4TwoDSidescroller
             isActive = true;
             hasCollider = true;
             knightIsFacingRight = true;
+            
 
              
 
-            movementSpeed = 0.3f;
-            maxHealth = 1000;
+            movementSpeed = 0.7f;
+            maxHealth = 20;
             currentHealth = maxHealth;
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
             health = new Health();
+            knightDamage = 0;
 
             gameInfoSystem = new GameInformationSystem();
 
             sourceRectangle = new Rectangle(0, 0, 64, 96);
-            position = new Vector2(500, 500);
+            position = new Vector2(spawnPositionX, spawnPositionY);
             movementDirection = new Vector2();
             knightVelocity = new Vector2(0, 0);
 
@@ -79,7 +80,6 @@ namespace TE4TwoDSidescroller
             movementVector = new Vector2(0, 0);
             knightRotation = 0;
             trackingDistance = new Vector2(300, 300);
-            
 
             collisionBox = new Rectangle(0, 0, 64, 96);
 
@@ -91,7 +91,7 @@ namespace TE4TwoDSidescroller
             colorData = new Color[knightWalk.Width * knightWalk.Height];
             knightWalk.GetData(colorData);
 
-            knightDamage = 5;
+
 
 
         }
@@ -310,11 +310,13 @@ namespace TE4TwoDSidescroller
 
             }
 
-            if (collider.tag == Tags.PlayerMeleeAttack.ToString())
+            if (canTakeDamage && collider.tag == Tags.PlayerMeleeAttack.ToString())
             {
 
                 hasTakenDamage = true;
                 currentHealth = health.TakeDamage(currentHealth, Player.playerDamage, this);
+                canTakeDamage = false;
+
             }
 
             if (collider.tag == Tags.PlayerRangeAttack.ToString())
@@ -335,7 +337,7 @@ namespace TE4TwoDSidescroller
 
 
             isWalkingRight = true;
-            
+
         }
 
         public override void MoveLeft()
@@ -345,7 +347,7 @@ namespace TE4TwoDSidescroller
 
 
             isWalkingRight = false;
-            
+
         }
 
         //public override void Jump(GameTime gameTime)
@@ -363,6 +365,7 @@ namespace TE4TwoDSidescroller
             Entity knightAttack = new KnightAttack(this);
             GameInfo.entityManager.AddEntity(knightAttack);
             isAttacking = true;
+           
         }
 
         #endregion
@@ -398,6 +401,7 @@ namespace TE4TwoDSidescroller
             //}
             #endregion
 
+            InvincibilityFrames(gameTime);
 
             movementDirection = GameInfo.player1Position - position;
 

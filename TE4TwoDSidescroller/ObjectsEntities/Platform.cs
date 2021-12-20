@@ -17,7 +17,7 @@ namespace TE4TwoDSidescroller
 
         public Platform(Vector2 floorPosition, int xSize, int Ysize)
         {
-            tag = Tags.Floor.ToString();
+            tag = Tags.Platform.ToString();
             isActive = true;
             hasCollider = true;
             collisionBox = new Rectangle();
