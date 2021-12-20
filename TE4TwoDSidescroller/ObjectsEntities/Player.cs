@@ -22,7 +22,7 @@ namespace TE4TwoDSidescroller
         Health health;
 
         private Rectangle playerSourceRectangle;
-        private Vector2 playerPosition;                                                                                                                                                                                                                                       
+        private Vector2 playerPosition;
         private Vector2 playerVelocity;
 
         private Rectangle detectionHitBox;
@@ -37,7 +37,7 @@ namespace TE4TwoDSidescroller
 
         float deltaTime;
         float time;
-       
+
 
         bool isWalkingRight;
         bool isWalkingLeft;
@@ -85,7 +85,7 @@ namespace TE4TwoDSidescroller
 
             maxHealth = 1000;
             currentHealth = maxHealth;
-            
+
             mana = 100;
             manaCheck = mana;
             manaTick = 0;
@@ -251,7 +251,7 @@ namespace TE4TwoDSidescroller
             {
                 tempJump.frameIndex = 0;
                 tempFlipJump.frameIndex = 0;
-                 
+
                 animation = tempIdle;
 
             }
@@ -422,11 +422,11 @@ namespace TE4TwoDSidescroller
             detectionHitBox.Y = (int)playerPosition.Y;
             collisionBox.X = (int)playerPosition.X;
             collisionBox.Y = (int)playerPosition.Y;
-            
+
             playerVelocity.Y += increasingGravity;
             movementVector += playerVelocity;
 
-            
+
 
             #region Harry's Code
             manaTick++;

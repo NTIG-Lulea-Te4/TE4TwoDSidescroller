@@ -9,7 +9,6 @@ namespace TE4TwoDSidescroller
 {
     class NPCInput : CharacterInput
     {
-
         protected bool moveRight;
         protected float startPosition;
         protected float endPosition;
@@ -30,7 +29,7 @@ namespace TE4TwoDSidescroller
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            //base.Update(gameTime);
 
         }
 
@@ -60,10 +59,12 @@ namespace TE4TwoDSidescroller
             if (character.position.X > endPosition)
             {
                 moveRight = false;
+
             }
             if (character.position.X < startPosition)
             {
                 moveRight = true;
+
             }
 
         }

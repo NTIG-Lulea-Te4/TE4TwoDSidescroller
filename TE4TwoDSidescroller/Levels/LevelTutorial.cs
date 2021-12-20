@@ -47,7 +47,6 @@ namespace TE4TwoDSidescroller
             menu = new HealthBar();
             GameInfo.entityManager.AddEntity(menu);
 
-
         }
 
         public override void Update(GameTime gameTime)
