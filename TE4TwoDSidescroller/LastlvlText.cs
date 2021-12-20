@@ -26,7 +26,7 @@ namespace TE4TwoDSidescroller
         {
             text = "";
             text0 = "its the boss, so be carefull champion of hell";
-            text1 = "he called Bjarne and he will bully u till u die";
+            text1 = "he called Bjarne and he will teach u till u die";
             text2 = "kill him and we will be free";
             text3 = "Who are you";
             text4 = "How dare you to challange me";
