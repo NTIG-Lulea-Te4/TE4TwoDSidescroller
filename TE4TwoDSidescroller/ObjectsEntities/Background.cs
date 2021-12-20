@@ -26,7 +26,7 @@ namespace TE4TwoDSidescroller
 
         public Background()
         {
-            backgroundSpeed = 0.01f;
+            backgroundSpeed = 0.03f;
             scale = 1.1f;
             layer = 0.0f;
             rotation = 0f;
@@ -58,7 +58,7 @@ namespace TE4TwoDSidescroller
         {
 
             GameInfo.spriteBatch.Draw
-                (myTexture, GameInfo.viewportPosition, sourceRectangle, Color.White, rotation, position, scale, SpriteEffects.None, layer);
+                (myTexture, new Vector2(GameInfo.viewportPosition.X - GameInfo.viewportPosition.X * backgroundSpeed, GameInfo.viewportPosition.Y - GameInfo.viewportPosition.Y * backgroundSpeed), sourceRectangle, Color.White, rotation, position, scale, SpriteEffects.None, layer);
 
 
         }
